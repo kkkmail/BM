@@ -16,7 +16,22 @@
 (* You should have received a copy of the GNU General Public License along with this program. *)
 (* If not, see <http://www.gnu.org/licenses/>. *)
 (* ============================================== *)
-Options[BerremanCommon] = {BerremanCommonVersion -> 6.03, UseEulerAngles -> False, CalculateBoundarySolution -> False, CalculateDelta -> False, OutputPPPMultiplier -> 0, UseSolveInSolutionNew -> False, SwapEigenValues -> True, AddOnEigenValuesSort -> 1, UseNumericEigenValues -> True, PrintCommonDebugInfo -> False, PrintCommonDebugInfoLevel -> 0, CalculateBeta0and90 -> False, UseQuietSolve -> False};
+Options[BerremanCommon] =
+    {
+      BerremanCommonVersion -> 6.03,
+      UseEulerAngles -> False,
+      CalculateBoundarySolution -> False,
+      CalculateDelta -> False,
+      OutputPPPMultiplier -> 0,
+      UseSolveInSolutionNew -> False,
+      SwapEigenValues -> True,
+      AddOnEigenValuesSort -> 1,
+      UseNumericEigenValues -> True,
+      PrintCommonDebugInfo -> False,
+      PrintCommonDebugInfoLevel -> 0,
+      CalculateBeta0and90 -> False,
+      UseQuietSolve -> False
+    };
 (* ============================================== *)
 SubstanceIdx = 0;
 (* ============================================== *)
@@ -133,14 +148,32 @@ RotationAnglesQ[angles_] := Module[{retVal},
   Return[retVal];
 ];
 (* ============================================== *)
+(* tensor must be either a 3x3 matrix of a function. *)
+(* If it a function, then we cannot validate it. *)
 OpticalTensorQ[tensor_] := Module[{retVal},
   retVal = False;
 
-  If[MatrixQ[tensor],
+  If[Head[tensor] === Head[{}],
     (
-      retVal = If[Length[tensor] == 3 && Length[tensor[[1]]] == 3, True, False, False];
+      If[MatrixQ[tensor],
+        (
+          retVal = If[Length[tensor] == 3 && Length[tensor[[1]]] == 3, True, False, False];
+        )
+      ];
+    ),
+    (
+      If[Head[tensor] === Symbol,
+        (
+          retVal = True;
+        ),
+        (
+          retVal = False;
+        )
+      ];
     )
   ];
+
+
 
   Return[retVal];
 ];
