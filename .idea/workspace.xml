@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/BerremanDirect.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanDirect.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/FieldIO.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldIO.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,7 +22,7 @@
     <favorites_list name="BM" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.32706514">
+    <splitter split-orientation="horizontal" split-proportion="0.23572868">
       <split-first>
         <leaf>
           <file leaf-file-name="BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m" pinned="false" current-in-tab="true">
@@ -50,8 +53,8 @@
           <file leaf-file-name="BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="613">
-                  <caret line="107" column="19" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="19" />
+                <state relative-caret-position="282">
+                  <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
                   <folding>
                     <element signature="e#1175#1241#0" />
                     <element signature="e#1593#2024#0" />
@@ -60,11 +63,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
+          <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="321">
+                  <caret line="461" column="4" lean-forward="true" selection-start-line="461" selection-start-column="4" selection-end-line="461" selection-end-column="4" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="376">
-                  <caret line="166" column="24" selection-start-line="166" selection-start-column="24" selection-end-line="166" selection-end-column="24" />
+                <state relative-caret-position="219">
+                  <caret line="1148" column="10" selection-start-line="1148" selection-end-line="1148" selection-end-column="10" />
                   <folding>
                     <element signature="e#1256#1631#0" />
                     <element signature="e#2222#2715#0" />
@@ -92,6 +104,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>PerformAllCalculations::Calculating</find>
+      <find>CreateFilm</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -106,11 +124,11 @@
         <option value="$PROJECT_DIR$/Kernel/OpticalElements.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModel.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" />
-        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
+        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
       </list>
     </option>
   </component>
@@ -534,19 +552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="90" column="21" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
-          <folding>
-            <element signature="e#1548#2568#0" />
-            <element signature="e#15758#15769#0" expanded="true" />
-            <element signature="e#15792#15800#0" expanded="true" />
-            <element signature="e#15823#15829#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -566,8 +571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
-          <caret line="107" column="19" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="19" />
+        <state relative-caret-position="282">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
           <folding>
             <element signature="e#1175#1241#0" />
             <element signature="e#1593#2024#0" />
@@ -577,8 +582,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="166" column="24" selection-start-line="166" selection-start-column="24" selection-end-line="166" selection-end-column="24" />
+        <state relative-caret-position="219">
+          <caret line="1148" column="10" selection-start-line="1148" selection-end-line="1148" selection-end-column="10" />
           <folding>
             <element signature="e#1256#1631#0" />
             <element signature="e#2222#2715#0" />
@@ -589,6 +594,13 @@
             <element signature="e#51239#51245#0" expanded="true" />
             <element signature="e#53685#53692#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="461" column="4" lean-forward="true" selection-start-line="461" selection-start-column="4" selection-end-line="461" selection-end-column="4" />
         </state>
       </provider>
     </entry>

@@ -429,6 +429,7 @@ VarListAddLayer[VarList_, LayerAngleInfo : {{_, _, _, _, _}, {_, _, _, _, _}, {_
   Return[VarList];
 ];
 (* ============================================== *)
+calcNewWarnCount = 0;
 (*CalcNew returns {{Media,VarList,FuncList,FuncNameList,Description},{OptionsList},{{},{},0}}*)
 (*Calc[[1]]={Media,VarList,FuncList,FuncNameList,Description},Calc[[2]]={Options},Calc[[3]]={inpt,outpt,runtime}*)
 (*Media=See BerremanCommon for details*)
@@ -443,11 +444,11 @@ CalcNew[Media_, VarList_, FuncList_, Description_ : "", opts___] := Module[{retv
   FuncDescList = GetFuncDescList[FuncList, opts];
 
   (*
-Print["CalcNew::len = ", len];
-Print["CalcNew::FuncList = ", FuncList];
-Print["CalcNew::FuncNameListHlp = ", FuncNameListHlp];
-Print["CalcNew::FuncDescList = ", FuncDescList];
-*)
+  Print["CalcNew::len = ", len];
+  Print["CalcNew::FuncList = ", FuncList];
+  Print["CalcNew::FuncNameListHlp = ", FuncNameListHlp];
+  Print["CalcNew::FuncDescList = ", FuncDescList];
+  *)
 
   Do[
   (* Print["i = ", i]; *)
@@ -461,8 +462,16 @@ Print["CalcNew::FuncDescList = ", FuncDescList];
   ];
   optrul = Flatten[{uanz, opts}];
   retval = {{Media, VarList, FuncList, FuncNameListHlp, Description, FuncDescList}, optrul, {{}, {}, 0, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}}};
-  (* Print["retval = ", retval]; *)
-  CalcPrintTimeEstimate[retval];
+  (* Print["CalcNew::retval = ", retval]; *)
+
+  If[calcNewWarnCount = 0,
+    (
+      calcNewWarnCount = 1;
+      Print["CalcNew::TODO 20180505 - Cannot successfully call CalcPrintTimeEstimate if function is supplied instead of eps / mu / rho."];
+    )
+  ];
+
+  (* CalcPrintTimeEstimate[retval]; *)
   (*Ok We should not do that but we do to take care of nOut for semiinfinite media (in the next version,may be...)*)(*n2-retval[[1,1,2]];*)(*nOut-retval[[1,1,5]];*)
   (* Print["CalcNew::end"]; *)
   Return[retval];
@@ -1640,55 +1649,61 @@ If[Abs[Det[kMatr]] > 10^-7 || Abs[kMatr[[1, 1]]] > 10^-3 || Abs[kMatr[[2, 2]]] >
 Return[strFileName];
 ];
 (* ============================================== *)
-PerformAllCalculations[layeredSystem_?LayeredSystemQ, funcList_, description_, rawOpts___] := Module[{opts, media, vars, extraOptions, optsFinal, performCalc, plotFigures, calc, coll, plotOpts, plotOpts2D, reqBetaLst, ii, reqBeta},
+PerformAllCalculations[layeredSystem_?LayeredSystemQ, funcList_, description_, rawOpts___] :=
+    Module[{opts, media, vars, extraOptions, optsFinal, performCalc, plotFigures, calc, coll, plotOpts, plotOpts2D, reqBetaLst, ii, reqBeta},
 
-(* Print["PerformAllCalculations::Starting..."]; *)
+    (* Print["PerformAllCalculations::Starting..."]; *)
 
-  opts = ProcessOptions[rawOpts];
-  media = LayeredSystemGetMedia[layeredSystem];
-  vars = LayeredSystemGetVarList[layeredSystem];
-  extraOptions = LayeredSystemGetExtraOptions[layeredSystem];
+      opts = ProcessOptions[rawOpts];
+      media = LayeredSystemGetMedia[layeredSystem];
+      vars = LayeredSystemGetVarList[layeredSystem];
+      extraOptions = LayeredSystemGetExtraOptions[layeredSystem];
 
-  performCalc = BDPerformCalculations /. opts /. Options[BerremanDirect];
-  plotFigures = BDPlotFigures /. opts /. Options[BerremanDirect];
+      performCalc = BDPerformCalculations /. opts /. Options[BerremanDirect];
+      plotFigures = BDPlotFigures /. opts /. Options[BerremanDirect];
 
 
-  reqBetaLst = Table[RequiresCalculateBeta0and90 /. Options[funcList[[ii]]] /. Options[FieldAlgebra], {ii, 1, Length[funcList]}];
+      reqBetaLst = Table[RequiresCalculateBeta0and90 /. Options[funcList[[ii]]] /. Options[FieldAlgebra], {ii, 1, Length[funcList]}];
 
-  reqBeta = Apply[Or, reqBetaLst];
+      reqBeta = Apply[Or, reqBetaLst];
 
-  optsFinal = Join[{CalculateBeta0and90 -> reqBeta }, extraOptions, opts];
+      optsFinal = Join[{CalculateBeta0and90 -> reqBeta }, extraOptions, opts];
 
-  (* Print["PerformAllCalculations::optsFinal = ", optsFinal]; *)
+      (* Print["PerformAllCalculations::optsFinal = ", optsFinal]; *)
 
-  If[performCalc,
-    (
-      Print["PerformAllCalculations::Calculating..."];
-      calc = CalcNew[media, vars, funcList, description, optsFinal];
-      Print[GetRotationInfo[calc]];
-      Print[strSeparator];
+      If[performCalc,
+        (
+          Print["PerformAllCalculations::Calculating..."];
 
-      coll = CalcCollectionNew[OutDir, BaseFileName, "No Description so far."];
-      CalcCollectionAddCalc[coll, calc];
-      CalcCollectionPerform[coll];
-      CalcCollectionSave[coll, True];
-      CalcCollectionSave[coll];
-      PrintTimeUsed[];
-    )
-  ];
+          Print["PerformAllCalculations::media = ", media];
+          Print["PerformAllCalculations::vars = ", vars];
+          Print["PerformAllCalculations::funcList = ", funcList];
 
-  If[plotFigures,
-    (
-      Print["PerformAllCalculations::Plotting figures..."];
-      plotOpts = PlotOptions3D /. opts /. Options[BerremanDirect];
-      CalcPlot3D[calc, True, plotOpts];
-      plotOpts2D = PlotOptions2D /. opts /. Options[BerremanDirect];
-      CalcPlot[calc, plotOpts2D];
+          calc = CalcNew[media, vars, funcList, description, optsFinal];
+          Print[GetRotationInfo[calc]];
+          Print[strSeparator];
 
-      PrintTimeUsed[];
-    )
-  ];
+          coll = CalcCollectionNew[OutDir, BaseFileName, "No Description so far."];
+          CalcCollectionAddCalc[coll, calc];
+          CalcCollectionPerform[coll];
+          CalcCollectionSave[coll, True];
+          CalcCollectionSave[coll];
+          PrintTimeUsed[];
+        )
+      ];
 
-  Return[coll];
-];
+      If[plotFigures,
+        (
+          Print["PerformAllCalculations::Plotting figures..."];
+          plotOpts = PlotOptions3D /. opts /. Options[BerremanDirect];
+          CalcPlot3D[calc, True, plotOpts];
+          plotOpts2D = PlotOptions2D /. opts /. Options[BerremanDirect];
+          CalcPlot[calc, plotOpts2D];
+
+          PrintTimeUsed[];
+        )
+      ];
+
+      Return[coll];
+    ];
 (* ============================================== *)

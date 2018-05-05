@@ -173,8 +173,6 @@ OpticalTensorQ[tensor_] := Module[{retVal},
     )
   ];
 
-
-
   Return[retVal];
 ];
 (* ============================================== *)

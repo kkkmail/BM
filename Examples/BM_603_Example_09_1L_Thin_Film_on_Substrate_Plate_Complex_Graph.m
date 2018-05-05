@@ -41,6 +41,7 @@ opts =
 (* ============================================== *)
 (* FuncList={EpsComponent[1,1,1,1],{EpsComponent[1,1,2,2],EpsComponent[1,1,3,3]},{EltEG[1],EltEG[2],EltEG[3],EltEG[4]},{XitEGDegree[1],XitEGDegree[2],XitEGDegree[3],XitEGDegree[4]},{IFull,TFull},RFull,{Ix,Tx},{Iy,Ty},{Rx,Ry},{Eli,Elr,Elt},{XiiDegree, XirDegree,XitDegree},{Sin2Xii,Sin2Xir,Sin2Xit}}; *)
 
+(*
 FuncList =
     {
       EpsComponent[1, 1, 1, 1],
@@ -63,6 +64,12 @@ FuncList =
       {Rx, Ry},
       {Tx, Ty}
     };
+*)
+
+FuncList =
+    {
+      Rx
+    };
 (* ============================================== *)
 systemDescription = "TODO - FIX: One Layer biaxial thin film on slighlty absorbing substrate plate.";
 Print["!!! For absorbing plate I > R + T !!!"];
@@ -73,7 +80,7 @@ nUpper = 1;
 lambda = {400, 800, 100, "λ", nm};
 fita = {60, 60, 5, "ϕ", Degree};
 beta = {0, 0, 45, "β", Degree};
-gamm = {0, 0, 30, "γ", Degree};
+gamma = {0, 0, 30, "γ", Degree};
 ellipt = {0, 1, 0.25, "e"};
 fi = {0, 0, 1, "φ", Degree};
 
@@ -105,7 +112,9 @@ rotationAnglesLayer1 = {fiLayer1, thetaLayer1, psiLayer1};
 epsLayer1 = EpsilonFromN[1.50, 2.00, 1.75];
 Print["epsLayer1 = ", epsLayer1 // MatrixForm];
 
-layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1];
+layer1Simple = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1];
+layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsFunc];
+
 (* ============================================== *)
 Print["Оптические параметры толстой пластинки"];
 Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness"];
