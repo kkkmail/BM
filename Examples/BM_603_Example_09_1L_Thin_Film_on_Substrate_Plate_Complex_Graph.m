@@ -1,10 +1,11 @@
 (* ============================================== *)
 ClearAll["Global`*"];
 (* ============================================== *)
-PathList = {"C:\\GitHub\\BM\\Kernel\\"};
-BaseDir = "C:\\GitHub\\BM\\Kernel\\";
-BaseFileName = "Example_09";
+BaseDir = "C:\\GitHub\\BM\\";
+PathList = {BaseDir <> "Kernel\\"};
 OutDir = BaseDir <> "Calc\\";
+(* ============================================== *)
+BaseFileName = "Example_09";
 (* ============================================== *)
 useParallelTbl = False;
 Get["BerremanInit.m", Path -> PathList];
@@ -13,7 +14,7 @@ InitializeBM[PathList, useParallelTbl];
 opts =
     {
       BDPlotFigures -> True,
-      UseEulerAngles -> True,
+      UseEulerAngles -> False,
       NoOfAveragingPoints -> 3
     };
 (* ============================================== *)
