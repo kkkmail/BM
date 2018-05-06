@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Examples/BM_503_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_503_Example_10_Multiple_Calculations.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_504_Example_01_Snell_Law__Au.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_504_Example_04_Snell_Law_For_Anisotropic_Media.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_600_Example_00_MuellerMatrix.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_01_Snell_Law.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_02_Snell_Law_For_Thick_Plate.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_04_Snell_Law_For_Anisotropic_Media_v2.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_06_1L_Thin_Film.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_06a_1L_Thin_Film_OptActivity.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_06b_1L_Thin_Film__BN.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_602_Example_07_1L_Thin_Film_On_Absorbing_Substrate_Plate.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
-    </list>
+    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -120,7 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-15" />
     <option name="y" value="-15" />
     <option name="width" value="3868" />
@@ -379,7 +361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1547" height="843" extended-state="0" />
+    <frame x="-6" y="-6" width="1549" height="796" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -394,7 +376,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25319007" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25285044" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
