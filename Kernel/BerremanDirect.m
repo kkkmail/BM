@@ -30,7 +30,7 @@ Options[BerremanDirect] =
       BerremanDirectVersion -> 6.03,
       RotateAll -> True,
       ConsecutiveRotation -> True,
-      PrintTimeEstimate -> True,
+      PrintTimeEstimate -> False,
       PrintCalculationProgress -> False,
       PrintCalculationDetails -> False,
       UseThickLastLayer -> False,
@@ -641,7 +641,7 @@ Print["CalcPlotFunc::isNumericN = ", isNumericN];
 
   SetAttributes[FuncPlot, NumericFunction];
 
-  plotOptsStr = "{" <> ToString[InputForm[pltOptsRaw]] <> ", FrameLabel -> {" <> ToString[InputForm[xName]] <> ", " <> yName <> "}, Compiled -> False, PlotRange -> All, LabelStyle -> {FontFamily -> \"Courier\", FontSize -> 18, FontWeight -> \"Bold\"}, ImageSize -> 640, Frame -> True, GridLines -> Automatic, PlotStyle -> {{Thickness[0.005]}, {Thickness[0.005], Dashing[Large]}, {Thickness[0.005], Dashing[Medium]}, {Thickness[0.005], Dashing[Small]}, {Thickness[0.005], Dashing[Tiny]}, {Thickness[0.005], Dashing[{0.09, 0.01}]}, {Thickness[0.005], Dashing[{0.07, 0.03}]}}}";
+  plotOptsStr = "{" <> ToString[InputForm[pltOptsRaw]] <> ", FrameLabel -> {" <> ToString[InputForm[xName]] <> ", " <> yName <> "}, PlotRange -> All, LabelStyle -> {FontFamily -> \"Courier\", FontSize -> 18, FontWeight -> \"Bold\"}, ImageSize -> 640, Frame -> True, GridLines -> Automatic, PlotStyle -> {{Thickness[0.005]}, {Thickness[0.005], Dashing[Large]}, {Thickness[0.005], Dashing[Medium]}, {Thickness[0.005], Dashing[Small]}, {Thickness[0.005], Dashing[Tiny]}, {Thickness[0.005], Dashing[{0.09, 0.01}]}, {Thickness[0.005], Dashing[{0.07, 0.03}]}}}";
 
   fStr = ToString[Table["FuncPlot[xVar," <> ToString[nn] <> "]", {nn, 1, nnVarMax}]];
 
@@ -847,7 +847,7 @@ plt3Dtype=ToString[(Plot3DType /. (Options[funcName] /.clcOpts)) /. Options[Berr
         Print[RevolutionPlot3D[N[f[xVar, yVar]], {xVar, xStart, xEnd}, {yVar, yStart, yEnd}, Evaluate[plotOpts]]];
         ,
         If[usePltLbl === True,
-          plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, Compiled -> False, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0(* ,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, Compiled -> False, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0 (*,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}
+          plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0(* ,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0 (*,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}
         ];
 
         If[$VersionNumber >= 10, plotOpts = Join[plotOpts, {PlotTheme -> {"Classic", "ClassicLights"}}]];
@@ -855,13 +855,6 @@ plt3Dtype=ToString[(Plot3DType /. (Options[funcName] /.clcOpts)) /. Options[Berr
         (* Print["CalcPlot3D::plotOpts = ", plotOpts]; *)
         Print[Plot3D[MyApproximateFunc[xVar, yVar], {xVar, xStart, xEnd}, {yVar, yStart, yEnd}, Evaluate[plotOpts]]];
       ];
-
-      (*
-If[usePltLbl===True,
-plotOpts={pltOptsRaw,AxesLabel\[Rule]{xName,yName,""},PlotLabel\[Rule]zName,Compiled\[Rule]False,LabelStyle\[Rule]BDPLTTEXTOPTS,ImageSize\[Rule]BDIMAGESIZE,Mesh \[Rule] meshVar,MaxRecursion\[Rule]0 ,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling },plotOpts={pltOptsRaw,AxesLabel\[Rule]{xName,yName,zName},Compiled\[Rule]False,LabelStyle\[Rule]BDPLTTEXTOPTS,ImageSize\[Rule]BDIMAGESIZE,Mesh \[Rule] meshVar,MaxRecursion\[Rule]0 ,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling }
-];
-Print[Plot3D[N[f[xVarr,yVarr]],{xVarr,xStart,xEnd},{yVarr,yStart,yEnd},Evaluate[plotOpts]]];
-*)
 
       (*
 Print["CalcGridArr = ", CalcGridArr // MatrixForm];
@@ -913,7 +906,7 @@ CalcPlot3DFunc[Calc_, Func_, FuncName_, SwapXY_, pltOptsRaw___] := Module[{f, xV
     Return[retval];
   ];
 
-  If[usePltLbl === True, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, Compiled -> False, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, Compiled -> False, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}];
+  If[usePltLbl === True, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}];
 
   If[$VersionNumber >= 10, plotOpts = Join[plotOpts, {PlotTheme -> {"Classic", "ClassicLights"}}]];
 
@@ -952,7 +945,7 @@ CalcFuncPlotFunc[CalcFunc_, xVarLst : {_, _, _}, Func_, FuncName_, pltOptsRaw___
 
   (*Print["f[xStart] = ",f[xStart]];*)
 
-  plotOpts = {pltOptsRaw, FrameLabel -> {xName, yName}, Compiled -> False, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Frame -> True, GridLines -> Automatic};
+  plotOpts = {pltOptsRaw, FrameLabel -> {xName, yName}, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Frame -> True, GridLines -> Automatic};
   Print[Plot[f[xVar], {xVar, xStart, xEnd}, Evaluate[plotOpts]]];
 ];
 (* ============================================== *)
@@ -997,7 +990,7 @@ CalcFuncPlot3DFunc[CalcFunc_, xVarLst : {_, _, _}, yVarLst : {_, _, _}, Func_, F
 
   (*Print["f[xStart,yStart] = ",f[xStart,yStart]];*)
 
-  If[usePltLbl === True, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, Compiled -> False, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, Compiled -> False, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}];
+  If[usePltLbl === True, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, PlotRange -> All, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE}];
   Print[Plot3D[f[xVar, yVar], {xVar, xStart, xEnd}, {yVar, yStart, yEnd}, Evaluate[plotOpts]]];
 ];
 (* ============================================== *)
@@ -1673,11 +1666,11 @@ PerformAllCalculations[layeredSystem_?LayeredSystemQ, funcList_, description_, r
 
       If[performCalc,
         (
-          Print["PerformAllCalculations::Calculating..."];
+          (* Print["PerformAllCalculations::Calculating..."]; *)
 
-          Print["PerformAllCalculations::media = ", media];
+          (* Print["PerformAllCalculations::media = ", media];
           Print["PerformAllCalculations::vars = ", vars];
-          Print["PerformAllCalculations::funcList = ", funcList];
+          Print["PerformAllCalculations::funcList = ", funcList]; *)
 
           calc = CalcNew[media, vars, funcList, description, optsFinal];
           Print[GetRotationInfo[calc]];

@@ -323,7 +323,7 @@ ModelPlot3D[model_, SwapXY_, pltOptsRaw___] := Module[{FuncList, FuncNameList, l
         Print[RevolutionPlot3D[N[f[xVar, yVar]], {xVar, xStart, xEnd}, {yVar, yStart, yEnd}, Evaluate[plotOpts]]];
         ,
         If[usePltLbl === True,
-          plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, Compiled -> False, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0(* ,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, Compiled -> False, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0 (*,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}
+          plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, ""}, PlotLabel -> zName, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0(* ,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}, plotOpts = {pltOptsRaw, AxesLabel -> {xName, yName, zName}, LabelStyle -> BDPLTTEXTOPTS, ImageSize -> BDIMAGESIZE, Mesh -> meshVar, MaxRecursion -> 0 (*,ColorFunction\[Rule]colorFunc,ColorFunctionScaling \[Rule] colorFuncScaling *)}
         ];
         (* Print["ModelPlot3D::plotOpts = ", plotOpts]; *)
 

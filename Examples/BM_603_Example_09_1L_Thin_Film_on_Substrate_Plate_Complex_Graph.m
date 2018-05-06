@@ -10,42 +10,18 @@ useParallelTbl = False;
 Get["BerremanInit.m", Path -> PathList];
 InitializeBM[PathList, useParallelTbl];
 (* ============================================== *)
-(*
-opts =
-    {
-      UseThickLastLayer -> False,
-      PrintTimeEstimate -> False,
-      RotateAll -> True,
-      NoOfAveragingPoints -> 3,
-      TransmittedAnalyzerAngle -> 0 Degree,
-      TransmittedAnalyzerParallelAmplitude -> 1,
-      TransmittedAnalyzerCrossedAmplitude -> 0,
-      ReflectedAnalyzerAngle -> 0 Degree,
-      ReflectedAnalyzerParallelAmplitude -> 1,
-      ReflectedAnalyzerCrossedAmplitude -> 0,
-      AnalyzerAngleAbsoluteValue -> False,
-      AbsoluteAzimuth -> False,
-      PrintCalculationProgress -> False,
-      PrintFunctionDebugInfo -> False,
-      PrintCommonDebugInfo -> False,
-      PrintCommonDebugInfoLevel -> 4,
-      ChopTolerance -> 10^-5
-    };
-*)
-
 opts =
     {
       BDPlotFigures -> True,
-      UseEulerAngles -> False
+      UseEulerAngles -> True,
+      NoOfAveragingPoints -> 3
     };
 (* ============================================== *)
-(* FuncList={EpsComponent[1,1,1,1],{EpsComponent[1,1,2,2],EpsComponent[1,1,3,3]},{EltEG[1],EltEG[2],EltEG[3],EltEG[4]},{XitEGDegree[1],XitEGDegree[2],XitEGDegree[3],XitEGDegree[4]},{IFull,TFull},RFull,{Ix,Tx},{Iy,Ty},{Rx,Ry},{Eli,Elr,Elt},{XiiDegree, XirDegree,XitDegree},{Sin2Xii,Sin2Xir,Sin2Xit}}; *)
 
-(*
 FuncList =
     {
       EpsComponent[1, 1, 1, 1],
-      {EpsComponent[1, 1, 2, 2], EpsComponent[1, 1, 3, 3]}
+      {EpsComponent[1, 1, 2, 2], EpsComponent[1, 1, 3, 3]},
       StokesVectorR[1],
       StokesVectorR[2],
       StokesVectorR[3],
@@ -64,14 +40,8 @@ FuncList =
       {Rx, Ry},
       {Tx, Ty}
     };
-*)
-
-FuncList =
-    {
-      Rx
-    };
 (* ============================================== *)
-systemDescription = "TODO - FIX: One Layer biaxial thin film on slighlty absorbing substrate plate.";
+systemDescription = "One Layer biaxial thin film on slightly absorbing thick substrate plate - dispersion calculations.";
 Print["!!! For absorbing plate I > R + T !!!"];
 (* ============================================== *)
 Print["Параметры падающего света..."];
@@ -87,45 +57,69 @@ fi = {0, 0, 1, "φ", Degree};
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];
 (* ============================================== *)
-kcoeff = 2.5;
-lambdaNullcoeff = 100 nm;
-(* ============================================== *)
-epsFunc[lamd_] := Module[{nVal, epsRet},
-  nVal = Sqrt[1 + kcoeff * lamd^2 / (lamd^2 - lambdaNullcoeff^2)];
-  epsRet = EpsilonFromN[nVal];
-  Return[N[epsRet]];
-];
-
-If[useParallelTbl == True,
-  Print["Distributing definitions for parallel calculations..."];
-  DistributeDefinitions[epsFunc, kcoeff, lambdaNullcoeff];
-];
-(* ============================================== *)
 Print["Оптические параметры первого тонкого слоя."];
 thicknessLayer1 = {75, 75, 10, "h", nm};
+
+kCoeff11 = 2.5;
+lambdaNullCoeff11 = 100 nm;
+
+kCoeff12 = 2.4;
+lambdaNullCoeff12 = 120 nm;
+
+kCoeff13 = 2.3;
+lambdaNullCoeff13 = 140 nm;
+
+epsFunc1[lamd_] := Module[{nVal1, nVal2, nVal3, epsRet},
+  nVal1 = Sqrt[1 + kCoeff11 * lamd^2 / (lamd^2 - lambdaNullCoeff11^2)];
+  nVal2 = Sqrt[1 + kCoeff12 * lamd^2 / (lamd^2 - lambdaNullCoeff12^2)];
+  nVal3 = Sqrt[1 + kCoeff13 * lamd^2 / (lamd^2 - lambdaNullCoeff13^2)];
+  epsRet = EpsilonFromN[nVal1, nVal2, nVal3];
+  Return[N[epsRet]];
+];
 
 fiLayer1 = {0, 0, 30, Subscript["φ", "1"], Degree};
 thetaLayer1 = {0, 0, 30, Subscript["θ", "1"], Degree};
 psiLayer1 = {0, 0, 30, Subscript["ψ", "1"], Degree};
 rotationAnglesLayer1 = {fiLayer1, thetaLayer1, psiLayer1};
 
-epsLayer1 = EpsilonFromN[1.50, 2.00, 1.75];
-Print["epsLayer1 = ", epsLayer1 // MatrixForm];
-
-layer1Simple = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1];
-layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsFunc];
-
+layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsFunc1];
 (* ============================================== *)
 Print["Оптические параметры толстой пластинки"];
 Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness"];
-nSubstr = 1.5;
-kSubstr = 3 * 10^-6;
 thickness = 1 mm;
-thickPlate = CreateThickPlateFromN[thickness, nSubstr + I * kSubstr];
+
+kCoeffT1 = 2.5;
+lambdaNullCoeffT1 = 100 nm;
+
+kCoeffT2 = 2.6;
+lambdaNullCoeffT2 = 90 nm;
+
+kCoeffT3 = 2.7;
+lambdaNullCoeffT3 = 70 nm;
+
+epsFuncT[lamd_] := Module[{nVal1, nVal2, nVal3, epsRet},
+  nVal1 = Sqrt[1 + kCoeffT1 * lamd^2 / (lamd^2 - lambdaNullCoeffT1^2)];
+  nVal2 = Sqrt[1 + kCoeffT2 * lamd^2 / (lamd^2 - lambdaNullCoeffT2^2)];
+  nVal3 = Sqrt[1 + kCoeffT3 * lamd^2 / (lamd^2 - lambdaNullCoeffT3^2)];
+  epsRet = EpsilonFromN[nVal1, nVal2, nVal3];
+  Return[N[epsRet]];
+];
+
+fiThickPlate = {0, 0, 30, Subscript["φ", "t"], Degree};
+thetaThickPlate = {0, 0, 30, Subscript["θ", "t"], Degree};
+psiThickPlate = {0, 0, 30, Subscript["ψ", "t"], Degree};
+rotationAnglesThickPlate = {fiThickPlate, thetaThickPlate, psiThickPlate};
+
+thickPlate = CreateThickPlate[thickness, rotationAnglesThickPlate, epsFuncT];
 (* ============================================== *)
 Print["Оптические параметры нижней среды..."];
 nLower = 1;
 lowerMedia = CreateSemiInfiniteMediaFromN[nLower];
+(* ============================================== *)
+If[useParallelTbl == True,
+  Print["Distributing definitions for parallel calculations..."];
+  DistributeDefinitions[epsFunc1, epsFuncT];
+];
 (* ============================================== *)
 Print["Создаем оптическую систему..."];
 layeredSystem = CreateLayeredSystem[incidentLight, gamma, layer1, thickPlate, lowerMedia];

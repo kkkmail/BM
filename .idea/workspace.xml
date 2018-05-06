@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanDirect.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanDirect.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/FieldIO.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldIO.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/OpticalModel.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalModel.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +21,7 @@
     <favorites_list name="BM" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.23572868">
+    <splitter split-orientation="horizontal" split-proportion="0.2572196">
       <split-first>
         <leaf>
           <file leaf-file-name="BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m" pinned="false" current-in-tab="true">
@@ -50,24 +49,29 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="false">
+          <file leaf-file-name="BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="282">
-                  <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-                  <folding>
-                    <element signature="e#1175#1241#0" />
-                    <element signature="e#1593#2024#0" />
-                  </folding>
+                <state relative-caret-position="415">
+                  <caret line="93" column="15" lean-forward="true" selection-start-line="93" selection-start-column="15" selection-end-line="93" selection-end-column="15" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="true">
+          <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="321">
-                  <caret line="461" column="4" lean-forward="true" selection-start-line="461" selection-start-column="4" selection-end-line="461" selection-end-column="4" />
+                <state relative-caret-position="238">
+                  <caret line="41" column="48" lean-forward="true" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="OpticalModel.m" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Kernel/OpticalModel.m">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="119">
+                  <caret line="7" column="52" lean-forward="true" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
                 </state>
               </provider>
             </entry>
@@ -106,8 +110,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PerformAllCalculations::Calculating</find>
       <find>CreateFilm</find>
+      <find>PerformAllCalculations::Calculating</find>
+      <find>Compiled</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,13 +127,13 @@
         <option value="$PROJECT_DIR$/Kernel/FieldIO.m" />
         <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalElements.m" />
-        <option value="$PROJECT_DIR$/Kernel/OpticalModel.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
+        <option value="$PROJECT_DIR$/Kernel/OpticalModel.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
       </list>
     </option>
   </component>
@@ -538,13 +543,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalModel.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="54" lean-forward="true" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/OpticalModelFunctions.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-85">
@@ -569,17 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-          <folding>
-            <element signature="e#1175#1241#0" />
-            <element signature="e#1593#2024#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -597,10 +584,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalModel.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="52" lean-forward="true" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="461" column="4" lean-forward="true" selection-start-line="461" selection-start-column="4" selection-end-line="461" selection-end-column="4" />
+        <state relative-caret-position="238">
+          <caret line="41" column="48" lean-forward="true" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="93" column="15" lean-forward="true" selection-start-line="93" selection-start-column="15" selection-end-line="93" selection-end-column="15" />
         </state>
       </provider>
     </entry>
