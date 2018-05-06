@@ -38,7 +38,7 @@ FuncList =
       {Tx, Ty}
     };
 (* ============================================== *)
-systemDescription = "One Layer biaxial thin film on slighlty absorbing substrate plate.";
+systemDescription = "Two Layer biaxial thin film on slightly absorbing thick substrate plate.";
 Print["!!! For absorbing plate I > R + T !!!"];
 (* ============================================== *)
 Print["Параметры падающего света..."];
@@ -69,7 +69,9 @@ layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1];
 Print["Оптические параметры второго тонкого слоя."];
 thicknessLayer2 = {100, 100, 10, "h", nm};
 
-fiLayer2 = {0, 0, 30, Subscript["φ", "2"], Degree};thetaLayer2 = {0, 0, 30, Subscript["θ", "2"], Degree};psiLayer2 = {0, 0, 30, Subscript["ψ", "2"], Degree};
+fiLayer2 = {0, 0, 30, Subscript["φ", "2"], Degree};
+thetaLayer2 = {0, 0, 30, Subscript["θ", "2"], Degree};
+psiLayer2 = {0, 0, 30, Subscript["ψ", "2"], Degree};
 rotationAnglesLayer2 = {fiLayer2, thetaLayer2, psiLayer2};
 
 epsLayer2 = EpsilonFromN[1.75, 1.50, 2.00];
@@ -83,9 +85,9 @@ layer2 = CreateFilm[thicknessLayer2, rotationAnglesLayer2, epsLayer2, muLayer2, 
 (* ============================================== *)
 Print["Оптические параметры толстой пластинки"];
 Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness"];
+thickness = 1 mm;
 nSubstr = 1.5;
 kSubstr = 3 * 10^-6;
-thickness = 1 mm;
 thickPlate = CreateThickPlateFromN[thickness, nSubstr + I * kSubstr];
 (* ============================================== *)
 Print["Оптические параметры нижней среды..."];

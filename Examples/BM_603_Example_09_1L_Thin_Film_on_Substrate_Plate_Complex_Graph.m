@@ -129,37 +129,3 @@ OutputLayeredSystem[layeredSystem];
 Print["Производим вычисления для различных значений параметров...."];
 allCalc = PerformAllCalculations[layeredSystem, FuncList, systemDescription, opts];
 (* ============================================== *)
-
-(*
-Film = FilmNew[];
-(* ============================================== *)
-VarListAddLayer[VarList, {fi1, theta1, psi1, thk1}];FilmAddLayer[Film, FilmLayerNew[0, epsFunc]];
-(* ============================================== *)
-EpsSubstr = EpsilonFromN[n2];
-Media = MediaNew[n1, n2, gamm, Film, "Nothing", nOut, h2, EpsSubstr];
-*)
-(* ============================================== *)
-(*
-OutputCopyright[];
-time1 = SessionTime[];
-
-Calc = CalcNew[Media, VarList, FuncList, "One Layer biaxial thin film on slighlty absorbing substrate plate.", opts];
-coll = CalcCollectionNew[OutDir, BaseFileName, "No Description so far."];
-CalcCollectionAddCalc[coll, Calc];
-CalcCollectionPerform[coll];
-CalcCollectionSave[coll, True];
-CalcCollectionSave[coll];
-
-time2 = SessionTime[]; timeused = time2 - time1; Print["Time used: ", timeused];
-
-plotOpts = {PlotPoints -> 25, Method -> {PlotDivision -> 3}, PlotRange -> All};
-plotOpts3D = {PlotPoints -> 25, PlotRange -> All};
-
-Print["Plotting epsFunc ..."];
-Plot[epsFunc[lamb nm][[1, 1]], {lamb, 400, 800}, Frame -> True, GridLines -> Automatic, PlotStyle -> {Thickness[0.005]}]
-
-Print["Plotting figures..."];
-CalcPlot[Calc, plotOpts];
-CalcPlot3D[Calc, False, plotOpts3D];
-time3 = SessionTime[]; timeused = time3 - time2; Print["Time used: ", timeused];timeusedT = time3 - time1;Print["Total time used: ", timeusedT];
-*)

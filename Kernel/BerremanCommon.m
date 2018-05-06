@@ -276,10 +276,29 @@ EulerFi[fi_, psi_, alpha_] := ArcCos[(Cos[fi] * Sin[alpha] - Cos[alpha] * Sin[fi
 EulerTheta[fi_, psi_, alpha_] := ArcCos[Cos[alpha] * Cos[psi]];
 EulerPsi[fi_, psi_, alpha_] := -(ArcCos[(Cos[psi] * Sin[alpha]) / Sqrt[Cos[psi]^2 * Sin[alpha]^2 + Sin[psi]^2]] * Sign[psi]);
 (* ============================================== *)
-RotationNew[fi_, theta_, psi_, opts___] := Module[{useEA, retval}, useEA = TrueQ[UseEulerAngles /. Flatten[{opts}] /. Flatten[{Options[BerremanCommon]}]];
-If[useEA === True, retval = {RotationMatrix3D[fi, theta, psi], Transpose[RotationMatrix3D[fi, theta, psi]], {fi, theta, psi}, {UseEulerAngles -> useEA}}, retval = {RM[fi, theta, psi], RMT[fi, theta, psi], {fi, theta, psi}, {UseEulerAngles -> useEA}}];
-Return[retval];
-];
+RotationNew[fi_, theta_, psi_, opts___] :=
+    Module[{useEA, retval},
+      useEA = TrueQ[UseEulerAngles /. Flatten[{opts}] /. Flatten[{Options[BerremanCommon]}]];
+
+      If[useEA === True,
+        retval =
+            {
+              RotationMatrix3D[fi, theta, psi],
+              Transpose[RotationMatrix3D[fi, theta, psi]],
+              {fi, theta, psi},
+              {UseEulerAngles -> useEA}
+            },
+        retval =
+            {
+              RM[fi, theta, psi],
+              RMT[fi, theta, psi],
+              {fi, theta, psi},
+              {UseEulerAngles -> useEA}
+            }
+      ];
+      
+      Return[retval];
+    ];
 (* ============================================== *)
 (*The order of rotations is VERY important!!! (RMT.ee.RM)*)
 Transform[ee_, rotn_] := Module[{}, Return[(rotn[[2]].ee.rotn[[1]])];];
