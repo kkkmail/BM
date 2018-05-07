@@ -38,7 +38,7 @@ FuncList =
       {Tx, Ty}
     };
 (* ============================================== *)
-systemDescription = "One Layer biaxial thin film on slightly thick absorbing substrate plate.";
+systemDescription = "One Layer biaxial thin film on slightly absorbing thick substrate plate.";
 Print["!!! For absorbing plate I > R + T !!!"];
 (* ============================================== *)
 Print["Параметры падающего света..."];

@@ -27,6 +27,8 @@ FuncList =
       Ty
     };
 (*==============================================*)
+systemDescription = "One Layer biaxial thin film on slightly absorbing thick substrate plate.";
+(*==============================================*)
 Print["Параметры падающего света..."];
 nUpper = 1;
 
@@ -42,9 +44,9 @@ OutputIncidentRayInfo[incidentLight];
 Print["Оптические параметры первого тонкого слоя."];
 thicknessLayer1 = {75, 75, 10, "h", nm};
 
-fiLayer1 = {-11, -11, 15, Subscript["φ", "1"], Degree};
-thetaLayer1 = {17, 17, 35, Subscript["θ", "1"], Degree};
-psiLayer1 = {17, 17, 35, Subscript["ψ", "1"], Degree};
+fiLayer1 = {7, 7, 1, Subscript["φ", "1"], Degree};
+thetaLayer1 = {-11, -11, 1, Subscript["θ", "1"], Degree};
+psiLayer1 = {17, 17, 1, Subscript["ψ", "1"], Degree};
 rotationAnglesLayer1 = {fiLayer1, thetaLayer1, psiLayer1};
 
 epsLayer1 = EpsilonFromN[1.50, 1.75, 1.65];
@@ -52,30 +54,15 @@ Print["epsLayer1 = ", epsLayer1 // MatrixForm];
 
 layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1];
 
-rotn = RotationNew[fiLayer1[[1]] Degree, thetaLayer1[[1]] Degree, psiLayer1[[1]] Degree, opts[[1]]];
+rotn = RotationNew[fiLayer1[[1]] Degree, thetaLayer1[[1]] Degree, psiLayer1[[1]] Degree, opts];
 eeExact1 = N[Transform[epsLayer1, rotn]];
 Print["eeExact1 = ", eeExact1 // MatrixForm];
-(* ============================================== *)
-(*
-Print["Оптические параметры второго тонкого слоя."];
-thicknessLayer2 = {100, 100, 10, "h", nm};
-
-fiLayer2 = {0, 0, 30, Subscript["φ", "2"], Degree};
-thetaLayer2 = {0, 0, 30, Subscript["θ", "2"], Degree};
-psiLayer2 = {0, 0, 30, Subscript["ψ", "2"], Degree};
-rotationAnglesLayer2 = {fiLayer2, thetaLayer2, psiLayer2};
-
-epsLayer2 = EpsilonFromN[1.75, 1.50, 2.00];
-Print["epsLayer2 = ", epsLayer2 // MatrixForm];
-
-layer2 = CreateFilm[thicknessLayer2, rotationAnglesLayer2, epsLayer2];
-*)
 (* ============================================== *)
 Print["Оптические параметры толстой пластинки"];
 Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness"];
 thickness = 1 mm;
 nSubstr = 1.52;
-kSubstr = 0 * 3 * 10^-6;
+kSubstr = 3 * 10^-6;
 thickPlate = CreateThickPlateFromN[thickness, nSubstr + I * kSubstr];
 (* ============================================== *)
 Print["Оптические параметры нижней среды..."];
@@ -84,7 +71,6 @@ lowerMedia = CreateSemiInfiniteMediaFromN[nLower];
 (* ============================================== *)
 Print["Создаем оптическую систему..."];
 layeredSystem = CreateLayeredSystem[incidentLight, gamma, layer1, thickPlate, lowerMedia];
-(* layeredSystem = CreateLayeredSystem[incidentLight, gamma, layer1, layer2, thickPlate, lowerMedia]; *)
 OutputLayeredSystem[layeredSystem];
 (* ============================================== *)
 Print["Производим вычисления для различных значений параметров...."];

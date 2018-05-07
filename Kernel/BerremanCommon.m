@@ -296,7 +296,7 @@ RotationNew[fi_, theta_, psi_, opts___] :=
               {UseEulerAngles -> useEA}
             }
       ];
-      
+
       Return[retval];
     ];
 (* ============================================== *)
@@ -1299,124 +1299,117 @@ LayeredSystemGetMedia[subst_] := If[LayeredSystemQ[subst], ObjectGetContent[subs
 LayeredSystemGetVarList[subst_] := If[LayeredSystemQ[subst], ObjectGetContent[subst][[2]], Indeterminate, Indeterminate];
 LayeredSystemGetExtraOptions[subst_] := If[LayeredSystemQ[subst], ObjectGetContent[subst][[3]], Indeterminate, Indeterminate];
 (* ============================================== *)
-CreateLayeredSystem[incidentRay_?IncidentRayQ, gamma_?VariableQ, mediaSequence__?SubstanceQ] := Module[{layers, media, film, len, ii, incidentLight, maxFilmLen, useThickPlate, thickPlate, thickness, eps, mu, rho, layer, sys, varList, lambda, fita, beta, amplitude, ellipt, nUpper, fi, theta, psi, fi1, theta1, psi1, thk1, layerSubstance, lowerSubstance, epsLower, muLower, roLower, eValLower, nLower, nOut, epsSubstr, muSubstr, roSubstr, eValSubstr, nSubstr, extraOptions},
+CreateLayeredSystem[incidentRay_?IncidentRayQ, gamma_?VariableQ, mediaSequence__?SubstanceQ] :=
+    Module[{layers, media, film, len, ii, incidentLight, maxFilmLen, useThickPlate, thickPlate, thickness, eps, mu, rho, layer, sys, varList, lambda, fita, beta, amplitude, ellipt, nUpper, fi, theta, psi, fi1, theta1, psi1, thk1, layerSubstance, lowerSubstance, epsLower, muLower, roLower, eValLower, nLower, nOut, epsSubstr, muSubstr, roSubstr, eValSubstr, nSubstr, extraOptions},
 
-  layers = {mediaSequence};
+      layers = {mediaSequence};
 
-  (* Print["CreateLayeredSystem::layers = ", layers]; *)
+      (* Print["CreateLayeredSystem::layers = ", layers]; *)
 
-  If[!ValidateLayeredMedia[layers],
-    (
-      Print["CreateLayeredSystem::Invalid media."];
-      Return[Indeterminate];
-    )
-  ];
-
-  extraOptions = {};
-  incidentLight = IncidentRayGetLight[incidentRay];
-  lambda = IncidentLightLambda[incidentLight];
-  fita = IncidentLightFita[incidentLight];
-  beta = IncidentLightBeta[incidentLight];
-  amplitude = IncidentLighAmplitude[incidentLight];
-  ellipt = IncidentLightEllipticity[incidentLight];
-  nUpper = IncidentLighRefrIndex[incidentLight];
-
-  len = Length[layers];
-  useThickPlate = False;
-  maxFilmLen = len - 1;
-
-  lowerSubstance = layers[[len]];
-
-  (* Print["CreateLayeredSystem::lowerSubstance = ", lowerSubstance]; *)
-
-  {fi, theta, psi} = SubstanceGetRotationAngles[lowerSubstance];
-  epsLower = SubstanceGetEpsilon[lowerSubstance];
-  muLower = SubstanceGetMu[lowerSubstance];
-  roLower = SubstanceGetRho[lowerSubstance];
-  eValLower = Eigenvalues[epsLower . muLower];
-  nLower = Sqrt[eValLower[[1]]];
-
-  (* Print["CreateLayeredSystem::eValLower = ", eValLower // MatrixForm, ", nLower = ", nLower]; *)
-
-  If[len >= 2,
-    (
-      If[ThickPlateQ[layers[[len - 1]]],
+      If[!ValidateLayeredMedia[layers],
         (
-          useThickPlate = True;
-          thickPlate = layers[[len - 1]];
-          maxFilmLen--;
+          Print["CreateLayeredSystem::Invalid media."];
+          Return[Indeterminate];
         )
       ];
-    )
-  ];
 
-  film = FilmNew[];
+      extraOptions = {};
+      incidentLight = IncidentRayGetLight[incidentRay];
+      lambda = IncidentLightLambda[incidentLight];
+      fita = IncidentLightFita[incidentLight];
+      beta = IncidentLightBeta[incidentLight];
+      amplitude = IncidentLighAmplitude[incidentLight];
+      ellipt = IncidentLightEllipticity[incidentLight];
+      nUpper = IncidentLighRefrIndex[incidentLight];
 
-  (*
-Print["CreateLayeredSystem::lambda = ", lambda, ", fita = ", fita, ", beta = ", beta, ", gamma = ", gamma, ", ellipt = ", ellipt, ", fi = ", fi, ", theta = ", theta, ", psi = ", psi];
-*)
+      len = Length[layers];
+      useThickPlate = False;
+      maxFilmLen = len - 1;
 
-  varList = VarListNew[{lambda, fita, beta, gamma, ellipt}, {fi, theta, psi}];
+      lowerSubstance = layers[[len]];
 
-  Do[
-    (
-    (* Print["CreateLayeredSystem::ii = ", ii]; *)
+      (* Print["CreateLayeredSystem::lowerSubstance = ", lowerSubstance]; *)
 
-      layer = layers[[ii]];
-      layerSubstance = ObjectGetContent[layer];
+      {fi, theta, psi} = SubstanceGetRotationAngles[lowerSubstance];
+      epsLower = SubstanceGetEpsilon[lowerSubstance];
+      muLower = SubstanceGetMu[lowerSubstance];
+      roLower = SubstanceGetRho[lowerSubstance];
+      eValLower = Eigenvalues[epsLower . muLower];
+      nLower = Sqrt[eValLower[[1]]];
 
-      (*
-Print["CreateLayeredSystem::layer = ", layer];
-Print["CreateLayeredSystem::layerSubstance = ", layerSubstance];
-*)
+      (* Print["CreateLayeredSystem::eValLower = ", eValLower // MatrixForm, ", nLower = ", nLower]; *)
 
-      thickness = 0;
+      If[len >= 2,
+        (
+          If[ThickPlateQ[layers[[len - 1]]],
+            (
+              useThickPlate = True;
+              thickPlate = layers[[len - 1]];
+              maxFilmLen--;
+            )
+          ];
+        )
+      ];
 
-      eps = SubstanceGetEpsilon[layer];
-      mu = SubstanceGetMu[layer];
-      rho = SubstanceGetRho[layer];
+      film = FilmNew[];
 
-      {fi1, theta1, psi1} = SubstanceGetRotationAngles[layer];
-      thk1 = SubstanceGetThickness[layer];
+      (* Print["CreateLayeredSystem::lambda = ", lambda, ", fita = ", fita, ", beta = ", beta, ", gamma = ", gamma, ", ellipt = ", ellipt, ", fi = ", fi, ", theta = ", theta, ", psi = ", psi]; *)
 
-      (*
-Print["CreateLayeredSystem::eps = ", eps // MatrixForm, ", mu = ", mu// MatrixForm, ", rho = ", rho// MatrixForm,", fi1 = ", fi1, ", theta1 = ", theta1, ", psi1 = ", psi1, ", thk1 = ", thk1];
-Print["..."];
-*)
+      varList = VarListNew[{lambda, fita, beta, gamma, ellipt}, {fi, theta, psi}];
 
-      VarListAddLayer[varList, {fi1, theta1, psi1, thk1}];
-      FilmAddLayer[film, FilmLayerNew[thickness, eps, mu, rho]];
-    ), {ii, 1, maxFilmLen}
-  ];
+      Do[
+        (
+        (* Print["CreateLayeredSystem::ii = ", ii]; *)
 
-  If[!useThickPlate,
-    (
-      nOut = 1;
-      thickness = 0;
-      media = MediaNew[nUpper, nLower, gamma, film, "Layered System", nOut, thickness, epsLower, muLower, roLower];
-      extraOptions = Join[extraOptions, {UseThickLastLayer -> False}];
-    ),
-    (
-      epsSubstr = SubstanceGetEpsilon[thickPlate];
-      muSubstr = SubstanceGetMu[thickPlate];
-      roSubstr = SubstanceGetRho[thickPlate];
-      thickness = SubstanceGetThickness[thickPlate];
+          layer = layers[[ii]];
+          layerSubstance = ObjectGetContent[layer];
 
-      eValSubstr = Eigenvalues[epsSubstr . muSubstr];
-      nSubstr = Sqrt[eValSubstr[[1]]];
+          (* Print["CreateLayeredSystem::layer = ", layer]; *)
+          (* Print["CreateLayeredSystem::layerSubstance = ", layerSubstance]; *)
 
-      (*
-Print["CreateLayeredSystem::eValSubstr = ", eValSubstr // MatrixForm, ", nSubstr = ", nSubstr];
-*)
+          thickness = 0;
 
-      media = MediaNew[nUpper, nSubstr, gamma, film, "", nLower, thickness, epsSubstr, muSubstr, roSubstr];
-      extraOptions = Join[extraOptions, {UseThickLastLayer -> True}];
-    )
-  ];
+          eps = SubstanceGetEpsilon[layer];
+          mu = SubstanceGetMu[layer];
+          rho = SubstanceGetRho[layer];
 
-  sys = {LayeredSystemClassName, {media, varList, extraOptions}};
-  Return[sys];
-];
+          {fi1, theta1, psi1} = SubstanceGetRotationAngles[layer];
+          thk1 = SubstanceGetThickness[layer];
+
+          (* Print["CreateLayeredSystem::eps = ", eps // MatrixForm, ", mu = ", mu// MatrixForm, ", rho = ", rho// MatrixForm,", fi1 = ", fi1, ", theta1 = ", theta1, ", psi1 = ", psi1, ", thk1 = ", thk1]; *)
+          (* Print["..."]; *)
+
+          VarListAddLayer[varList, {fi1, theta1, psi1, thk1}];
+          FilmAddLayer[film, FilmLayerNew[thickness, eps, mu, rho]];
+        ), {ii, 1, maxFilmLen}
+      ];
+
+      If[!useThickPlate,
+        (
+          nOut = 1;
+          thickness = 0;
+          media = MediaNew[nUpper, nLower, gamma, film, "Layered System", nOut, thickness, epsLower, muLower, roLower];
+          extraOptions = Join[extraOptions, {UseThickLastLayer -> False}];
+        ),
+        (
+          epsSubstr = SubstanceGetEpsilon[thickPlate];
+          muSubstr = SubstanceGetMu[thickPlate];
+          roSubstr = SubstanceGetRho[thickPlate];
+          thickness = SubstanceGetThickness[thickPlate];
+
+          eValSubstr = Eigenvalues[epsSubstr . muSubstr];
+          nSubstr = Sqrt[eValSubstr[[1]]];
+
+          (* Print["CreateLayeredSystem::eValSubstr = ", eValSubstr // MatrixForm, ", nSubstr = ", nSubstr]; *)
+
+          media = MediaNew[nUpper, nSubstr, gamma, film, "", nLower, thickness, epsSubstr, muSubstr, roSubstr];
+          extraOptions = Join[extraOptions, {UseThickLastLayer -> True}];
+        )
+      ];
+
+      sys = {LayeredSystemClassName, {media, varList, extraOptions}};
+      Return[sys];
+    ];
 (* ============================================== *)
 CreateLayeredSystem[___] := Module[{},
   Print["CreateLayeredSystem::Invalid parameters."];
