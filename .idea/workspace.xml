@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/Calc/Example_09_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_09_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/BerremanDirect.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanDirect.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,31 +26,34 @@
       <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="506" selection-start-line="506" selection-end-line="506" />
+            <state relative-caret-position="541">
+              <caret line="1553" column="52" selection-start-line="1553" selection-start-column="52" selection-end-line="1553" selection-end-column="52" />
               <folding>
                 <element signature="e#1260#1719#0" />
                 <element signature="e#2310#2803#0" />
                 <element signature="e#2884#3368#0" />
-                <element signature="e#4077#4468#0" />
-                <element signature="e#4551#4734#0" />
-                <element signature="e#6174#6679#0" />
                 <element signature="e#9700#10292#0" />
+                <element signature="e#28475#44601#0" />
                 <element signature="e#59013#59982#0" />
                 <element signature="e#60565#64763#0" />
-                <element signature="e#64846#65040#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
+            <state relative-caret-position="494">
+              <caret line="1768" lean-forward="true" selection-start-line="1768" selection-end-line="1768" />
               <folding>
                 <element signature="e#1552#2777#0" />
+                <element signature="e#5666#10045#0" />
+                <element signature="e#10123#11019#0" />
+                <element signature="e#11100#11642#0" />
+                <element signature="e#11990#12211#0" />
+                <element signature="e#12814#15199#0" />
+                <element signature="e#15526#16350#0" />
               </folding>
             </state>
           </provider>
@@ -71,21 +74,20 @@
       <file leaf-file-name="BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="71" column="48" lean-forward="true" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
+            <state relative-caret-position="289">
+              <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
               <folding>
-                <element signature="e#528#626#0" />
                 <element signature="e#697#1129#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+            <state relative-caret-position="300">
+              <caret line="63" column="81" lean-forward="true" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -111,8 +113,19 @@
       <find>ThickPlateQ</find>
       <find>muMstandard</find>
       <find>CreateSubstanceFromN</find>
-      <find>Head</find>
       <find>MMM</find>
+      <find>Transform</find>
+      <find>Head</find>
+      <find>Re[</find>
+      <find>SolutionSumNew</find>
+      <find>SolutionAverageNew</find>
+      <find>SSMakeDownStep</find>
+      <find>MediaLowerEpsilon</find>
+      <find>MediaNew</find>
+      <find>MakeFirst</find>
+      <find>TransformMedia</find>
+      <find>GetSolAvg</find>
+      <find>MediaFlip</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -128,7 +141,6 @@
         <option value="$PROJECT_DIR$/Kernel/OpticalElements.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModel.m" />
-        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
         <option value="$PROJECT_DIR$/Examples/BM_504_Example_04_Snell_Law_For_Anisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_504_Example_01_Snell_Law__Au.m" />
         <option value="$PROJECT_DIR$/Examples/BM_503_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" />
@@ -160,9 +172,10 @@
         <option value="$PROJECT_DIR$/Kernel/Dispersion.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
+        <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
-        <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
+        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
       </list>
     </option>
   </component>
@@ -392,13 +405,10 @@
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />
             <element signature="e#2884#3368#0" />
-            <element signature="e#4077#4468#0" />
-            <element signature="e#4551#4734#0" />
-            <element signature="e#6174#6679#0" />
             <element signature="e#9700#10292#0" />
+            <element signature="e#28475#44601#0" />
             <element signature="e#59013#59982#0" />
             <element signature="e#60565#64763#0" />
-            <element signature="e#64846#65040#0" />
           </folding>
         </state>
       </provider>
@@ -439,13 +449,10 @@
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />
             <element signature="e#2884#3368#0" />
-            <element signature="e#4077#4468#0" />
-            <element signature="e#4551#4734#0" />
-            <element signature="e#6174#6679#0" />
             <element signature="e#9700#10292#0" />
+            <element signature="e#28475#44601#0" />
             <element signature="e#59013#59982#0" />
             <element signature="e#60565#64763#0" />
-            <element signature="e#64846#65040#0" />
           </folding>
         </state>
       </provider>
@@ -668,17 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="71" column="48" lean-forward="true" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
-          <folding>
-            <element signature="e#528#626#0" />
-            <element signature="e#697#1129#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
@@ -689,39 +685,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
+        <state relative-caret-position="300">
+          <caret line="63" column="81" lean-forward="true" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding>
-            <element signature="e#1552#2777#0" />
+            <element signature="e#697#1129#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="506" selection-start-line="506" selection-end-line="506" />
+        <state relative-caret-position="541">
+          <caret line="1553" column="52" selection-start-line="1553" selection-start-column="52" selection-end-line="1553" selection-end-column="52" />
           <folding>
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />
             <element signature="e#2884#3368#0" />
-            <element signature="e#4077#4468#0" />
-            <element signature="e#4551#4734#0" />
-            <element signature="e#6174#6679#0" />
             <element signature="e#9700#10292#0" />
+            <element signature="e#28475#44601#0" />
             <element signature="e#59013#59982#0" />
             <element signature="e#60565#64763#0" />
-            <element signature="e#64846#65040#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+        <state relative-caret-position="494">
+          <caret line="1768" lean-forward="true" selection-start-line="1768" selection-end-line="1768" />
+          <folding>
+            <element signature="e#1552#2777#0" />
+            <element signature="e#5666#10045#0" />
+            <element signature="e#10123#11019#0" />
+            <element signature="e#11100#11642#0" />
+            <element signature="e#11990#12211#0" />
+            <element signature="e#12814#15199#0" />
+            <element signature="e#15526#16350#0" />
+          </folding>
         </state>
       </provider>
     </entry>

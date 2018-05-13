@@ -15,7 +15,9 @@ opts =
     {
       BDPlotFigures -> True,
       UseEulerAngles -> False,
-      NoOfAveragingPoints -> 3
+      NoOfAveragingPoints -> 3 (* ,
+      PrintCommonDebugInfo -> True,
+      PrintCommonDebugInfoLevel -> PCDILEVELALL *)
     };
 (* ============================================== *)
 
