@@ -62,20 +62,28 @@ Print["Оптические параметры толстой пластинки
 Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness"];
 thickness = 1 mm;
 
-epsFuncT[lamd_] := Module[{nVal1, nVal2, nVal3, epsRet},
-  nVal1 = refrIndex$La3Ga5SiO14$Ordinary[lamd];
-  nVal2 = refrIndex$La3Ga5SiO14$Ordinary[lamd];
-  nVal3 = refrIndex$La3Ga5SiO14$ExtraOrdinary[lamd];
+epsFuncT[lambda_] := Module[{nVal1, nVal2, nVal3, epsRet},
+  nVal1 = refrIndex$La3Ga5SiO14$Ordinary[lambda];
+  nVal2 = refrIndex$La3Ga5SiO14$Ordinary[lambda];
+  nVal3 = refrIndex$La3Ga5SiO14$ExtraOrdinary[lambda];
   epsRet = EpsilonFromN[nVal1, nVal2, nVal3];
   Return[N[epsRet]];
 ];
+
+muT := DiagonalMatrix[1, 1, 1];
+
+rhoFuncT[lambda_] := Module[{nVal1, nVal2, nVal3, rhoRet},
+  rhoRetDiagonalMatrix[g11$La3Ga5SiO14[lambda], 0, g33$La3Ga5SiO14[lambda]];
+  Return[N[rhoRet]];
+];
+
 
 fiThickPlate = {0, 0, 30, Subscript["φ", "t"], Degree};
 thetaThickPlate = {0, 0, 30, Subscript["θ", "t"], Degree};
 psiThickPlate = {0, 0, 30, Subscript["ψ", "t"], Degree};
 rotationAnglesThickPlate = {fiThickPlate, thetaThickPlate, psiThickPlate};
 
-thickPlate = CreateThickPlate[thickness, rotationAnglesThickPlate, epsFuncT];
+thickPlate = CreateThickPlate[thickness, rotationAnglesThickPlate, epsFuncT, muT, rhoFuncT];
 (* ============================================== *)
 Print["Оптические параметры нижней среды..."];
 nLower = 1;

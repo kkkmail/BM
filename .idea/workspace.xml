@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanInit.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanInit.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optical Materials/Langasit.m" beforeDir="false" afterPath="$PROJECT_DIR$/Optical Materials/Langasit.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_09_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_09_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +20,7 @@
     <favorites_list name="BM" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.35479543">
+    <splitter split-orientation="horizontal" split-proportion="0.54761904">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
@@ -67,8 +67,8 @@
           <file leaf-file-name="BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="351">
-                  <caret line="71" column="17" selection-start-line="71" selection-end-line="71" selection-end-column="17" />
+                <state relative-caret-position="385">
+                  <caret line="85" column="90" selection-start-line="85" selection-start-column="90" selection-end-line="85" selection-end-column="90" />
                   <folding>
                     <element signature="e#697#1129#0" />
                   </folding>
@@ -89,16 +89,16 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="false">
+          <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="606">
-                  <caret line="53" column="52" lean-forward="true" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
+                <state relative-caret-position="504">
+                  <caret line="50" column="15" selection-start-line="50" selection-end-line="50" selection-end-column="15" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="BerremanInit.m" pinned="false" current-in-tab="true">
+          <file leaf-file-name="BerremanInit.m" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="510">
@@ -172,11 +172,11 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Inv_000_Direct.m" />
         <option value="$PROJECT_DIR$/Examples/BM_405_Inv_003_Direct.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Inv_000_Solution.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Optical Materials/Langasit.m" />
         <option value="$PROJECT_DIR$/Kernel/Dispersion.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
       </list>
     </option>
   </component>
@@ -348,7 +348,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27431256" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12676056" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -673,16 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="71" column="17" selection-start-line="71" selection-end-line="71" selection-end-column="17" />
-          <folding>
-            <element signature="e#697#1129#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/Dispersion.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -697,17 +687,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="53" column="52" lean-forward="true" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="94" column="24" selection-start-line="94" selection-start-column="24" selection-end-line="94" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="50" column="15" selection-start-line="50" selection-end-line="50" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="85" column="90" selection-start-line="85" selection-start-column="90" selection-end-line="85" selection-end-column="90" />
+          <folding>
+            <element signature="e#697#1129#0" />
+          </folding>
         </state>
       </provider>
     </entry>
