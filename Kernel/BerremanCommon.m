@@ -148,7 +148,7 @@ RotationAnglesQ[angles_] := Module[{retVal},
   Return[retVal];
 ];
 (* ============================================== *)
-(* tensor must be either a 3x3 matrix of a function. *)
+(* tensor must be either a 3x3 matrix or a function. *)
 (* If it a function, then we cannot validate it. *)
 OpticalTensorQ[tensor_] := Module[{retVal},
   retVal = False;
@@ -233,7 +233,6 @@ PrintTimeUsed[] := PrintTimeUsed[True];
 (* ============================================== *)
 II := IdentityMatrix[4];muMstandard := IdentityMatrix[3];roMstandard := I * DiagonalMatrix[{0, 0, 0}];rotMstandard := -I * DiagonalMatrix[{0, 0, 0}];
 (* ============================================== *)
-
 JoinRight[lst1_, lst2_] := Transpose[Join[Transpose[lst1], Transpose[lst2]]];
 JoinRight[lst1_, lst2_, lst3_] := Transpose[Join[Transpose[lst1], Transpose[lst2], Transpose[lst3]]];
 JoinRight[lst1_, lst2_, lst3_, lst4_] := Transpose[Join[Transpose[lst1], Transpose[lst2], Transpose[lst3], Transpose[lst4]]];
@@ -301,21 +300,39 @@ RotationNew[fi_, theta_, psi_, opts___] :=
     ];
 (* ============================================== *)
 (*The order of rotations is VERY important!!! (RMT.ee.RM)*)
-Transform[ee_, rotn_] := Module[{}, Return[(rotn[[2]].ee.rotn[[1]])];];
+Transform[ee_, rotn_] :=
+    Module[{},
+      Return[(rotn[[2]].ee.rotn[[1]])];
+    ];
 (* ============================================== *)
 PsiAngle[fita_, n1_, n2_] := Module[{}, Return[ArcSin[(n1 / n2) * Sin[fita]]];];
 (* ============================================== *)
 (* ============================================== *)
-FilmLayerNew[Thickness_, Epsilon_, mu_ : muMstandard, ro_ : roMstandard] := Module[{}, Return[{Thickness, Epsilon, mu, ro, Transpose[Conjugate[ro]], Epsilon, mu, ro, Transpose[Conjugate[ro]]}];];
+FilmLayerNew[Thickness_, Epsilon_, mu_ : muMstandard, ro_ : roMstandard] :=
+    Module[{},
+      Return[{Thickness, Epsilon, mu, ro, Transpose[Conjugate[ro]], Epsilon, mu, ro, Transpose[Conjugate[ro]]}];
+    ];
 
-FilmLayerTransform[layer_, rotn_, Reset_ : True] := Module[{layerTr}, If[Reset === True, layerTr = {layer[[1]], Transform[layer[[6]], rotn], Transform[layer[[7]], rotn], Transform[layer[[8]], rotn], Transform[layer[[9]], rotn], layer[[6]], layer[[7]], layer[[8]], layer[[9]]}, layerTr = {layer[[1]], Transform[layer[[2]], rotn], Transform[layer[[3]], rotn], Transform[layer[[4]], rotn], Transform[layer[[5]], rotn], layer[[6]], layer[[7]], layer[[8]], layer[[9]]}];
-Return[layerTr];
-];
+FilmLayerTransform[layer_, rotn_, Reset_ : True] :=
+    Module[{layerTr},
+      If[Reset === True, layerTr = {layer[[1]], Transform[layer[[6]], rotn], Transform[layer[[7]], rotn], Transform[layer[[8]], rotn], Transform[layer[[9]], rotn], layer[[6]], layer[[7]], layer[[8]], layer[[9]]}, layerTr = {layer[[1]], Transform[layer[[2]], rotn], Transform[layer[[3]], rotn], Transform[layer[[4]], rotn], Transform[layer[[5]], rotn], layer[[6]], layer[[7]], layer[[8]], layer[[9]]}];
+      Return[layerTr];
+    ];
 
-FilmLayerFlip[layer_] := Module[{flpLayer, rotn}, rotn = RotationNew[0, 0, Pi, UseEulerAngles -> False];
-flpLayer = {layer[[1]], Transform[layer[[2]], rotn], Transform[layer[[3]], rotn], Transform[layer[[4]], rotn], Transform[layer[[5]], rotn], Transform[layer[[6]], rotn], Transform[layer[[7]], rotn], Transform[layer[[8]], rotn], Transform[layer[[9]], rotn]};
-Return[flpLayer];
-];
+FilmLayerFlip[layer_] :=
+    Module[{flpLayer, rotn},
+      rotn = RotationNew[0, 0, Pi, UseEulerAngles -> False];
+      flpLayer =
+          {
+            layer[[1]],
+            Transform[layer[[2]], rotn],
+            Transform[layer[[3]], rotn], Transform[layer[[4]], rotn],
+            Transform[layer[[5]], rotn], Transform[layer[[6]], rotn],
+            Transform[layer[[7]], rotn], Transform[layer[[8]], rotn],
+            Transform[layer[[9]], rotn]
+          };
+      Return[flpLayer];
+    ];
 (* ============================================== *)
 FilmLayerThickness[FilmLayer_] := Module[{}, Return[FilmLayer[[1]]];];
 FilmLayerEpsilon[FilmLayer_] := Module[{}, Return[FilmLayer[[2]]];];
@@ -330,53 +347,66 @@ FilmLayerRoTBase[FilmLayer_] := Module[{}, Return[FilmLayer[[9]]];];
 (* ============================================== *)
 FilmNew[] := Module[{}, Return[{}];];
 Attributes[FilmAddLayer] = {HoldFirst};
-FilmAddLayer[Film_, FilmLayer_] := Module[{}, Film = Append[Film, FilmLayer];Return[Film];];
-FilmLength[Film_] := Module[{}, Return[Length[Film]];];
+FilmAddLayer[Film_, FilmLayer_] :=
+    Module[{},
+      Film = Append[Film, FilmLayer];
+      Return[Film];
+    ];
 
-FilmTransformAll[Film_, rotn_, Reset_ : True] := Module[{len, filmTr}, len = FilmLength[Film];filmTr = FilmNew[];
-Do[filmTr = FilmAddLayer[filmTr, FilmLayerTransform[Film[[i]], rotn, Reset]], {i, 1, len}];
-Return[filmTr];
-];
+FilmLength[Film_] :=
+    Module[{},
+      Return[Length[Film]];
+    ];
+
+FilmTransformAll[Film_, rotn_, Reset_ : True] :=
+    Module[{len, filmTr},
+      len = FilmLength[Film];filmTr = FilmNew[];
+      Do[filmTr = FilmAddLayer[filmTr, FilmLayerTransform[Film[[i]], rotn, Reset]], {i, 1, len}];
+      Return[filmTr];
+    ];
 
 FilmItem[Film_, idx_] := Module[{}, Return[Film[[idx]]];];
 (* ============================================== *)
 (* ============================================== *)
 (* Media[[i]], 1-n1, 2-n2, 3-gamma, 4-Film, 5-Description, 6-nOut, 7-h2-thickness of the substrate, *)
 (* 8-epsilon2, 9-mu2, 10-ro2, 11-epsilon, 12-mu, 13-ro *)
-MediaNew[n1_, n2_, gamma_, Film_, Description_ : "", nOut_ : (-1), h2_ : 0, epsilon2_ : {}, mu2_ : muMstandard, ro2_ : roMstandard, epsilon_ : {}, mu_ : muMstandard, ro_ : roMstandard] := Module[{epsVal, eps2Val, retVal},
+MediaNew[n1_, n2_, gamma_, Film_, Description_ : "", nOut_ : (-1), h2_ : 0, epsilon2_ : {}, mu2_ : muMstandard, ro2_ : roMstandard, epsilon_ : {}, mu_ : muMstandard, ro_ : roMstandard] :=
+    Module[{epsVal, eps2Val, retVal},
 
-(*
-epsVal=If[Head[epsilon]===Head[{}]&&Length[epsilon]===0,EpsilonFromN[Re[n1]],epsilon];
-eps2Val=If[Head[epsilon2]===Head[{}]&&Length[epsilon2]===0,EpsilonFromN[Re[n2]],epsilon2];
-retVal={Re[n1],Re[n2],gamma,Film,ToString[Description],Re[nOut],h2,{epsVal,mu,ro,Transpose[Conjugate[ro]],eps2Val,mu2,ro2,Transpose[Conjugate[ro2]]}};
-*)
+    (*
+    epsVal=If[Head[epsilon]===Head[{}]&&Length[epsilon]===0,EpsilonFromN[Re[n1]],epsilon];
+    eps2Val=If[Head[epsilon2]===Head[{}]&&Length[epsilon2]===0,EpsilonFromN[Re[n2]],epsilon2];
+    retVal={Re[n1],Re[n2],gamma,Film,ToString[Description],Re[nOut],h2,{epsVal,mu,ro,Transpose[Conjugate[ro]],eps2Val,mu2,ro2,Transpose[Conjugate[ro2]]}};
+    *)
 
-  epsVal = If[Head[epsilon] === Head[{}] && Length[epsilon] === 0, EpsilonFromN[n1], epsilon];
-  eps2Val = If[Head[epsilon2] === Head[{}] && Length[epsilon2] === 0, EpsilonFromN[n2], epsilon2];
-  retVal = {n1, n2, gamma, Film, ToString[Description], nOut, h2, {epsVal, mu, ro, Transpose[Conjugate[ro]], eps2Val, mu2, ro2, Transpose[Conjugate[ro2]]}};
+      epsVal = If[Head[epsilon] === Head[{}] && Length[epsilon] === 0, EpsilonFromN[n1], epsilon];
+      eps2Val = If[Head[epsilon2] === Head[{}] && Length[epsilon2] === 0, EpsilonFromN[n2], epsilon2];
+      retVal = {n1, n2, gamma, Film, ToString[Description], nOut, h2, {epsVal, mu, ro, Transpose[Conjugate[ro]], eps2Val, mu2, ro2, Transpose[Conjugate[ro2]]}};
 
-  (*Print["eps2Val = ",eps2Val];*)
-  (* Print["MediaNew::retVal = ",retVal]; *)
+      (*Print["eps2Val = ",eps2Val];*)
+      (* Print["MediaNew::retVal = ",retVal]; *)
 
-  Return[retVal];
-];
+      Return[retVal];
+    ];
 (* ============================================== *)
-MediaFlip[Media_] := Module[{flpMedia, n1, n2, gamma, Film, Layer, flpFilm, len, Thickness, Epsilon, rotn, flpEps, nOut, Descr, h2}, n1 = MediaUpperRefractionIndex[Media];
-n2 = MediaLowerRefractionIndex[Media];
-gamma = MediaGamma[Media];
-Film = MediaFilm[Media];
-len = FilmLength[Film];
-flpFilm = FilmNew[];
-nOut = MediaOutRefractionIndex[Media];
-Descr = MediaDescription[Media];
-h2 = MediaSubstrateThickness[Media];
-rotn = RotationNew[0, 0, Pi, UseEulerAngles -> False];
-Do[Layer = FilmLayerFlip[Film[[len + 1 - i]]];
-FilmAddLayer[flpFilm, Layer], {i, len}];
-flpMedia = MediaNew[n2, n1, gamma, flpFilm, Descr, nOut, h2, Transform[MediaUpperEpsilon[Media], rotn], Transform[MediaUpperMu[Media], rotn], Transform[MediaUpperRo[Media], rotn], Transform[MediaLowerEpsilon[Media], rotn], Transform[MediaLowerMu[Media], rotn], Transform[MediaLowerRo[Media], rotn]];
-(*Print["!!! Check Media Flip !!!"];*)
-Return[flpMedia];
-];
+MediaFlip[Media_] :=
+    Module[{flpMedia, n1, n2, gamma, Film, Layer, flpFilm, len, Thickness, Epsilon, rotn, flpEps, nOut, Descr, h2},
+      n1 = MediaUpperRefractionIndex[Media];
+      n2 = MediaLowerRefractionIndex[Media];
+      gamma = MediaGamma[Media];
+      Film = MediaFilm[Media];
+      len = FilmLength[Film];
+      flpFilm = FilmNew[];
+      nOut = MediaOutRefractionIndex[Media];
+      Descr = MediaDescription[Media];
+      h2 = MediaSubstrateThickness[Media];
+      rotn = RotationNew[0, 0, Pi, UseEulerAngles -> False];
+      Do[Layer = FilmLayerFlip[Film[[len + 1 - i]]];
+      FilmAddLayer[flpFilm, Layer], {i, len}];
+      flpMedia = MediaNew[n2, n1, gamma, flpFilm, Descr, nOut, h2, Transform[MediaUpperEpsilon[Media], rotn], Transform[MediaUpperMu[Media], rotn], Transform[MediaUpperRo[Media], rotn], Transform[MediaLowerEpsilon[Media], rotn], Transform[MediaLowerMu[Media], rotn], Transform[MediaLowerRo[Media], rotn]];
+      (*Print["!!! Check Media Flip !!!"];*)
+      Return[flpMedia];
+    ];
 (* ============================================== *)
 MediaUpperRefractionIndex[Media_] := Module[{}, Return[Media[[1]]]];
 MediaLowerRefractionIndex[Media_] := Module[{}, Return[Media[[2]]]];
@@ -398,36 +428,41 @@ MediaLowerRo[Media_] := Module[{}, Return[Media[[8, 7]]]];
 MediaLowerRoT[Media_] := Module[{}, Return[Media[[8, 8]]]];
 (* ============================================== *)
 (* ============================================== *)
-IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] := Module[{EHI, ehField1, ehField2, ehField, iLight1, iLight2, ampl1, ampl2, ellp},
-  ellp = Max[Min[ellipticity, 1], -1];
-  ampl1 = Ampl / Sqrt[1 + ellp^2];
-  ampl2 = Ampl * ellp / Sqrt[1 + ellp^2];
+IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] :=
+    Module[{EHI, ehField1, ehField2, ehField, iLight1, iLight2, ampl1, ampl2, ellp},
+      ellp = Max[Min[ellipticity, 1], -1];
+      ampl1 = Ampl / Sqrt[1 + ellp^2];
+      ampl2 = Ampl * ellp / Sqrt[1 + ellp^2];
 
-  iLight1 = IncidentLightNew[lambda, fita, beta, n1, ampl1];
-  ehField1 = Table[iLight1[[4]][[iii]], {iii, 1, 6}];
+      iLight1 = IncidentLightNew[lambda, fita, beta, n1, ampl1];
+      ehField1 = Table[iLight1[[4]][[iii]], {iii, 1, 6}];
 
-  iLight2 = IncidentLightNew[lambda, fita, beta + Pi / 2, n1, ampl2];
-  ehField2 = Table[I * iLight2[[4]][[iii]], {iii, 1, 6}];
+      iLight2 = IncidentLightNew[lambda, fita, beta + Pi / 2, n1, ampl2];
+      ehField2 = Table[I * iLight2[[4]][[iii]], {iii, 1, 6}];
 
-  ehField = ehField1 + ehField2;
+      ehField = ehField1 + ehField2;
 
-  EHI = {ehField[[1]], ehField[[2]], ehField[[3]], ehField[[4]], ehField[[5]], ehField[[6]], True};
-  Return[{lambda, fita, beta, EHI, ellipticity, n1, Ampl}];
-];
+      EHI = {ehField[[1]], ehField[[2]], ehField[[3]], ehField[[4]], ehField[[5]], ehField[[6]], True};
+      Return[{lambda, fita, beta, EHI, ellipticity, n1, Ampl}];
+    ];
 
 
-IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_] := Module[{EHI}, EHI = {Ampl Cos[beta] Cos[fita], Ampl Sin[beta], -Ampl Cos[beta] Sin[fita], -Ampl n1 Cos[fita] Sin[beta], Ampl n1 Cos[beta], Ampl n1 Sin[beta] Sin[fita], True};
-Return[{lambda, fita, beta, EHI, 0, n1, Ampl}];
-];
+IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_] :=
+    Module[{EHI},
+      EHI = {Ampl Cos[beta] Cos[fita], Ampl Sin[beta], -Ampl Cos[beta] Sin[fita], -Ampl n1 Cos[fita] Sin[beta], Ampl n1 Cos[beta], Ampl n1 Sin[beta] Sin[fita], True};
+      Return[{lambda, fita, beta, EHI, 0, n1, Ampl}];
+    ];
 
-IncidentLightNew[lambda_, fita_, beta_, n1_] := Module[{retval},
-  retval = IncidentLightNew[lambda, fita, beta, n1, 1];
-  Return[retval];
-];
+IncidentLightNew[lambda_, fita_, beta_, n1_] :=
+    Module[{retval},
+      retval = IncidentLightNew[lambda, fita, beta, n1, 1];
+      Return[retval];
+    ];
 
-IncidentLightNew[lambda_, fita_, beta_, eh : {_, _, _, _, _, _, _}] := Module[{},
-  Return[{lambda, fita, beta, eh, 0, Indeterminate, Indeterminate}];
-];
+IncidentLightNew[lambda_, fita_, beta_, eh : {_, _, _, _, _, _, _}] :=
+    Module[{},
+      Return[{lambda, fita, beta, eh, 0, Indeterminate, Indeterminate}];
+    ];
 
 IncidentLightFlip[inclght_] := Module[{flpLght},
   flpLght = {inclght[[1]], inclght[[2]], inclght[[3]], EHFlip[inclght[[4]]], inclght[[5]], inclght[[6]]};
@@ -458,44 +493,49 @@ If[$VersionNumber < 10.0,
 ];
 
 (* ============================================== *)
-MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] := Module[{kx, MaxwellEq, EH, lst3, lst6, sol, xxxNoz, xNoz4, EH4, EH4f, EH4d, EH4df, Dl, Dld, MM, MMd, MMdInv, retval},
-(*Print["MMM"];Print["eps = ",MatrixForm[N[eps]]];
-Print["mu = ",MatrixForm[N[mu]]];Print["ro = ",MatrixForm[ro]];
-Print["rotr = ",MatrixForm[rotr]];*)
-  EH[x_, y_, z_] := Exp[I * kx * x] * {{Ex0[z]}, {Ey0[z]}, {Ez0[z]}, {Hx0[z]}, {Hy0[z]}, {Hz0[z]}};
-  (*Print["EH[x,y,z] = ",EH[x,y,z]];*)
-  MaxwellEq = (((I * (Exp[(-I * kx * x)] * ((2 * Pi * I / lambda) * M[eps, mu, ro, rotr].EH[x, y, z] + OFULL[EH][x, y, z]))))) /. x -> 0;
-  kx = (2 * Pi / lambda) * n1 * Sin[fita];
-  (*Print["kx = ",N[kx]];Print["n1 = ",N[n1]];
-Print["fita = ",N[fita]];
-Print["MaxwellEq = ",MatrixForm[Simplify[N[MaxwellEq]]]];*)
-  lst3 = CoefficientList[MaxwellEq[[3, 1]], {Ez0[z], Hz0[z]}];
-  lst6 = CoefficientList[MaxwellEq[[6, 1]], {Ez0[z], Hz0[z]}];
+MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] :=
+    Module[{kx, MaxwellEq, EH, lst3, lst6, sol, xxxNoz, xNoz4, EH4, EH4f, EH4d, EH4df, Dl, Dld, MM, MMd, MMdInv, retval},
+    (*
+    Print["MMM"];
+    Print["eps = ", MatrixForm[N[eps]]];
+    Print["mu = ", MatrixForm[N[mu]]];
+    Print["ro = ", MatrixForm[ro]];
+    Print["rotr = ", MatrixForm[rotr]];
+    *)
+      EH[x_, y_, z_] := Exp[I * kx * x] * {{Ex0[z]}, {Ey0[z]}, {Ez0[z]}, {Hx0[z]}, {Hy0[z]}, {Hz0[z]}};
+      (*Print["EH[x,y,z] = ",EH[x,y,z]];*)
+      MaxwellEq = (((I * (Exp[(-I * kx * x)] * ((2 * Pi * I / lambda) * M[eps, mu, ro, rotr].EH[x, y, z] + OFULL[EH][x, y, z]))))) /. x -> 0;
+      kx = (2 * Pi / lambda) * n1 * Sin[fita];
+      (*Print["kx = ",N[kx]];Print["n1 = ",N[n1]];
+    Print["fita = ",N[fita]];
+    Print["MaxwellEq = ",MatrixForm[Simplify[N[MaxwellEq]]]];*)
+      lst3 = CoefficientList[MaxwellEq[[3, 1]], {Ez0[z], Hz0[z]}];
+      lst6 = CoefficientList[MaxwellEq[[6, 1]], {Ez0[z], Hz0[z]}];
 
-  If[UseQuietSolveValue,
-    (
-      sol = (Quiet[Solve[{MaxwellEq[[3, 1]] == 0, MaxwellEq[[6, 1]] == 0}, {Ez0[z], Hz0[z]}]])[[1]];
-    ),
-    (
-      sol = (Solve[{MaxwellEq[[3, 1]] == 0, MaxwellEq[[6, 1]] == 0}, {Ez0[z], Hz0[z]}])[[1]];
-    )
-  ];
+      If[UseQuietSolveValue,
+        (
+          sol = (Quiet[Solve[{MaxwellEq[[3, 1]] == 0, MaxwellEq[[6, 1]] == 0}, {Ez0[z], Hz0[z]}]])[[1]];
+        ),
+        (
+          sol = (Solve[{MaxwellEq[[3, 1]] == 0, MaxwellEq[[6, 1]] == 0}, {Ez0[z], Hz0[z]}])[[1]];
+        )
+      ];
 
-  xxxNoz = MaxwellEq /. sol;
-  xNoz4 = {{xxxNoz[[1, 1]]}, {xxxNoz[[2, 1]]}, {xxxNoz[[4, 1]]}, {xxxNoz[[5, 1]]}};
-  EH4 = {{Ex0[z]}, {Hy0[z]}, {Ey0[z]}, {Hx0[z]}};
-  EH4f = {{Ex0[z]}, {Hy0[z]}, {Ey0[z]}, {-Hx0[z]}};
-  EH4d = {{Derivative[1][Ex0][z]}, {Derivative[1][Hy0][z]}, {Derivative[1][Ey0][z]}, {Derivative[1][Hx0][z]}};
-  EH4df = {{Derivative[1][Ex0][z]}, {Derivative[1][Hy0][z]}, {Derivative[1][Ey0][z]}, {-Derivative[1][Hx0][z]}};
-  Dl[q_, s_] := (-Coefficient[xNoz4[[q, 1]], EH4[[s, 1]]] * If[s == 4, -1, 1]);
-  Dld[q_, s_] := (Coefficient[xNoz4[[q, 1]], EH4d[[s, 1]]] * If[s == 4, -1, 1]);
-  MM = Table[Dl[i, j], {i, 4}, {j, 4}];
-  MMd = Table[Dld[i, j], {i, 4}, {j, 4}];
-  MMdInv = Inverse[MMd];
-  retval = {(MMdInv.MM) / (2 * Pi * I / lambda), sol};
-  (*Print["MMM retval = ",N[retval]];*)
-  Return[retval];
-];
+      xxxNoz = MaxwellEq /. sol;
+      xNoz4 = {{xxxNoz[[1, 1]]}, {xxxNoz[[2, 1]]}, {xxxNoz[[4, 1]]}, {xxxNoz[[5, 1]]}};
+      EH4 = {{Ex0[z]}, {Hy0[z]}, {Ey0[z]}, {Hx0[z]}};
+      EH4f = {{Ex0[z]}, {Hy0[z]}, {Ey0[z]}, {-Hx0[z]}};
+      EH4d = {{Derivative[1][Ex0][z]}, {Derivative[1][Hy0][z]}, {Derivative[1][Ey0][z]}, {Derivative[1][Hx0][z]}};
+      EH4df = {{Derivative[1][Ex0][z]}, {Derivative[1][Hy0][z]}, {Derivative[1][Ey0][z]}, {-Derivative[1][Hx0][z]}};
+      Dl[q_, s_] := (-Coefficient[xNoz4[[q, 1]], EH4[[s, 1]]] * If[s == 4, -1, 1]);
+      Dld[q_, s_] := (Coefficient[xNoz4[[q, 1]], EH4d[[s, 1]]] * If[s == 4, -1, 1]);
+      MM = Table[Dl[i, j], {i, 4}, {j, 4}];
+      MMd = Table[Dld[i, j], {i, 4}, {j, 4}];
+      MMdInv = Inverse[MMd];
+      retval = {(MMdInv.MM) / (2 * Pi * I / lambda), sol};
+      (*Print["MMM retval = ",N[retval]];*)
+      Return[retval];
+    ];
 (* ============================================== *)
 PPP[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_, h_] := Module[{pDet, retval, bCalcErr, dummy},
 (*Print["PPP Started."];

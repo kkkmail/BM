@@ -48,11 +48,11 @@ Print["!!! For absorbing plate I > R + T !!!"];
 Print["Параметры падающего света..."];
 nUpper = 1;
 
-lambda = {400, 800, 100, "λ", nm};
-fita = {60, 60, 5, "ϕ", Degree};
-beta = {0, 0, 45, "β", Degree};
+lambda = {200, 800, 100, "λ", nm};
+fita = {0, 0, 5, "ϕ", Degree};
+beta = {0, 90, 45, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
-ellipt = {0, 1, 0.25, "e"};
+ellipt = {0, 0, 0.25, "e"};
 fi = {0, 0, 1, "φ", Degree};
 
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
@@ -70,13 +70,12 @@ epsFuncT[lambda_] := Module[{nVal1, nVal2, nVal3, epsRet},
   Return[N[epsRet]];
 ];
 
-muT := DiagonalMatrix[1, 1, 1];
+muT := DiagonalMatrix[{1, 1, 1}];
 
 rhoFuncT[lambda_] := Module[{nVal1, nVal2, nVal3, rhoRet},
-  rhoRetDiagonalMatrix[g11$La3Ga5SiO14[lambda], 0, g33$La3Ga5SiO14[lambda]];
+  rhoRet = DiagonalMatrix[{g11$La3Ga5SiO14[lambda], 0, g33$La3Ga5SiO14[lambda]}];
   Return[N[rhoRet]];
 ];
-
 
 fiThickPlate = {0, 0, 30, Subscript["φ", "t"], Degree};
 thetaThickPlate = {0, 0, 30, Subscript["θ", "t"], Degree};
