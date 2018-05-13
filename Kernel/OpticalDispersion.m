@@ -31,7 +31,8 @@ gyration11Func[lambda_, refrIndAverageFunc_, a2Coeff_, a3Coeff_, lambda2Coeff_] 
 
 gyration33Func[lambda_, refrIndAverageFunc_, a1Coeff_, lambda1Coeff_] :=
     I * (lambda * refrIndAverageFunc[lambda] * a1Coeff / (lambda^2 - lambda1Coeff^2));
-
+(* ============================================== *)
+eps$Vacuum = IdentityMatrix[3];
 (* ============================================== *)
 (* La3Ga5SiO14 *)
 (* 0.4 mkm < lambda < 1.0 mkm *)
@@ -51,4 +52,26 @@ g11$La3Ga5SiO14[lambda_] :=
 g33$La3Ga5SiO14[lambda_] :=
     gyration33Func[lambda, refrIndex$La3Ga5SiO14$Average, 0.6072 * 10^-11, 0.198 mkm];
 
+eps$La3Ga5SiO14[lambda_] := Module[{nVal1, nVal2, nVal3, epsRet},
+  nVal1 = refrIndex$La3Ga5SiO14$Ordinary[lambda];
+  nVal2 = refrIndex$La3Ga5SiO14$Ordinary[lambda];
+  nVal3 = refrIndex$La3Ga5SiO14$ExtraOrdinary[lambda];
+  epsRet = EpsilonFromN[nVal1, nVal2, nVal3];
+  Return[N[epsRet]];
+];
+
+rho$La3Ga5SiO14[lambda_] := Module[{nVal1, nVal2, nVal3, rhoRet},
+  rhoRet = DiagonalMatrix[{g11$La3Ga5SiO14[lambda], 0, g33$La3Ga5SiO14[lambda]}];
+  Return[N[rhoRet]];
+];
+
+(* ============================================== *)
+(* Si *)
+refrIndex$Si[lambda_] := 3 + I * 0.2;
+
+eps$Si[lambda_] :=
+    Module[{epsRet},
+      epsRet = EpsilonFromN[refrIndex$Si[lambda]];
+      Return[N[epsRet]];
+    ];
 (* ============================================== *)

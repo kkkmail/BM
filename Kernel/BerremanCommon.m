@@ -231,7 +231,10 @@ PrintTimeUsed[showTime_?BooleanQ] := Module[{tEnd, now, diff, diffTot},
 
 PrintTimeUsed[] := PrintTimeUsed[True];
 (* ============================================== *)
-II := IdentityMatrix[4];muMstandard := IdentityMatrix[3];roMstandard := I * DiagonalMatrix[{0, 0, 0}];rotMstandard := -I * DiagonalMatrix[{0, 0, 0}];
+II := IdentityMatrix[4];
+muMstandard := IdentityMatrix[3];
+roMstandard := I * DiagonalMatrix[{0, 0, 0}];
+rotMstandard := -I * DiagonalMatrix[{0, 0, 0}];
 (* ============================================== *)
 JoinRight[lst1_, lst2_] := Transpose[Join[Transpose[lst1], Transpose[lst2]]];
 JoinRight[lst1_, lst2_, lst3_] := Transpose[Join[Transpose[lst1], Transpose[lst2], Transpose[lst3]]];
@@ -495,13 +498,13 @@ If[$VersionNumber < 10.0,
 (* ============================================== *)
 MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] :=
     Module[{kx, MaxwellEq, EH, lst3, lst6, sol, xxxNoz, xNoz4, EH4, EH4f, EH4d, EH4df, Dl, Dld, MM, MMd, MMdInv, retval},
-    (*
-    Print["MMM"];
-    Print["eps = ", MatrixForm[N[eps]]];
-    Print["mu = ", MatrixForm[N[mu]]];
-    Print["ro = ", MatrixForm[ro]];
-    Print["rotr = ", MatrixForm[rotr]];
-    *)
+
+      Print["MMM"];
+      Print["eps = ", MatrixForm[N[eps]]];
+      Print["mu = ", MatrixForm[N[mu]]];
+      Print["ro = ", MatrixForm[ro]];
+      Print["rotr = ", MatrixForm[rotr]];
+
       EH[x_, y_, z_] := Exp[I * kx * x] * {{Ex0[z]}, {Ey0[z]}, {Ez0[z]}, {Hx0[z]}, {Hy0[z]}, {Hz0[z]}};
       (*Print["EH[x,y,z] = ",EH[x,y,z]];*)
       MaxwellEq = (((I * (Exp[(-I * kx * x)] * ((2 * Pi * I / lambda) * M[eps, mu, ro, rotr].EH[x, y, z] + OFULL[EH][x, y, z]))))) /. x -> 0;
@@ -1157,8 +1160,11 @@ SolutionCombine[ehi : {_, _, _, _, _, _, _}, ehr : {_, _, _, _, _, _, _}, eht : 
 SolutionCombine[ehi : {_, _, _, _, _, _, _}, ehr : {_, _, _, _, _, _, _}, eht : {_, _, _, _, _, _, _}, ppp_, delta_, Media_, IncidentLight_, opts_, mmm11_, mmm21_, coeffTbl_, freeTbl_, egs1_, egs2_, solBeta0_, solBeta90_] := Module[{}, Return[{ehi, ehr, eht, ppp, delta, Media, IncidentLight, opts, mmm11, mmm21, coeffTbl, freeTbl, egs1, egs2, {solBeta0, solBeta90}}];
 ];
 (* ============================================== *)
-EHFlip[eh : {_, _, _, _, _, _, _}] := Module[{ehRet}, ehRet = {eh[[1]], -eh[[2]], -eh[[3]], eh[[4]], -eh[[5]], -eh[[6]], Not[eh[[7]]]};Return[ehRet];
-];
+EHFlip[eh : {_, _, _, _, _, _, _}] :=
+    Module[{ehRet},
+      ehRet = {eh[[1]], -eh[[2]], -eh[[3]], eh[[4]], -eh[[5]], -eh[[6]], Not[eh[[7]]]};
+      Return[ehRet];
+    ];
 (* ============================================== *)
 SubstanceGetThickness[subst_] := If[SubstanceQ[subst], ObjectGetContent[subst][[1]], Indeterminate, Indeterminate];
 SubstanceGetRotationAngles[subst_] := If[SubstanceQ[subst], ObjectGetContent[subst][[2]], Indeterminate, Indeterminate];
@@ -1168,69 +1174,97 @@ SubstanceGetRho[subst_] := If[SubstanceQ[subst], ObjectGetContent[subst][[5]], I
 (* ============================================== *)
 CreateSemiInfiniteMediaFromN[refrInd_] := CreateSubstanceFromN[SemiInfiniteMediaClassName, Infinity, refrInd];
 
-CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ] := Module[{subst},
-  subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, muMstandard, roMstandard];
-  Return[subst];
-];
+CreateSemiInfiniteMedia[epsilon_?OpticalTensorQ] :=
+    Module[{subst, fi, theta, psi, rotationAngles},
+      fi = {0, 0, 1, Subscript["φ", "l"], Degree};
+      theta = {0, 0, 1, Subscript["θ", "l"], Degree};
+      psi = {0, 0, 1, Subscript["ψ", "l"], Degree};
+      rotationAngles = {fi, theta, psi};
+      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, muMstandard, roMstandard];
+      Return[subst];
+    ];
 
-CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ, mu_?MatrixQ] := Module[{subst},
-  subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, mu, roMstandard];
-  Return[subst];
-];
+CreateSemiInfiniteMedia[rotationAngles_?OpticalTensorQ, epsilon_?MatrixQ] :=
+    Module[{subst},
+      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, muMstandard, roMstandard];
+      Return[subst];
+    ];
 
-CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ, mu_?MatrixQ, rho_?MatrixQ] := Module[{subst},
-  subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, mu, rho];
-  Return[subst];
-];
+CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ] :=
+    Module[{subst},
+      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, mu, roMstandard];
+      Return[subst];
+    ];
+
+CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] :=
+    Module[{subst},
+      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, mu, rho];
+      Return[subst];
+    ];
 (* ============================================== *)
-CreateSemiInfiniteMediaFromN[___] := Module[{},
-  Print["CreateSemiInfiniteMediaFromN::Invalid parameters."];
-  Print["Correct usage: CreateSemiInfiniteMediaFromN[refrInd_]"];
-  Abort[];
-];
+CreateSemiInfiniteMediaFromN[___] :=
+    Module[{},
+      Print["CreateSemiInfiniteMediaFromN::Invalid parameters."];
+      Print["Correct usage: CreateSemiInfiniteMediaFromN[refrInd_]"];
+      Abort[];
+    ];
 (* ============================================== *)
-CreateSemiInfiniteMedia[___] := Module[{},
-  Print["CreateSemiInfiniteMedia::Invalid parameters."];
-  Print["Correct usages:"];
-  Print["    CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ]"];
-  Print["    CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ, mu_?MatrixQ]"];
-  Print["    CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ, mu_?MatrixQ, rho_?MatrixQ]"];
-  Abort[];
-];
+CreateSemiInfiniteMedia[___] :=
+    Module[{},
+      Print["CreateSemiInfiniteMedia::Invalid parameters."];
+      Print["Correct usages:"];
+      Print["    CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ]"];
+      Print["    CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ, mu_?MatrixQ]"];
+      Print["    CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?MatrixQ, mu_?MatrixQ, rho_?MatrixQ]"];
+      Abort[];
+    ];
 (* ============================================== *)
-CreateSubstanceFromN[substanceType_?StringQ, thickness_, refrInd_] := Module[{subst, fi, theta, psi, rotationAngles, strIdx, eps},
-  strIdx = ToString[SubstanceIdx];
-  fi = {0, 0, 1, Subscript["\[CurlyPhi]", strIdx], Degree};theta = {0, 0, 1, Subscript["\[Theta]", strIdx], Degree};psi = {0, 0, 1, Subscript["\[Psi]", strIdx], Degree};
-  rotationAngles = {fi, theta, psi};
-  eps = EpsilonFromN[refrInd];
-  subst = CreateSubstance[substanceType, thickness, rotationAngles, eps, muMstandard, roMstandard];
-  Return[subst];
-] /; MemberQ[SubstanceClassList, substanceType];
+CreateSubstanceFromN[substanceType_?StringQ, thickness_, refrInd_] :=
+    Module[{subst, fi, theta, psi, rotationAngles, strIdx, eps},
+      strIdx = ToString[SubstanceIdx];
+      fi = {0, 0, 1, Subscript["\[CurlyPhi]", strIdx], Degree};
+      theta = {0, 0, 1, Subscript["\[Theta]", strIdx], Degree};
+      psi = {0, 0, 1, Subscript["\[Psi]", strIdx], Degree};
+      rotationAngles = {fi, theta, psi};
+      eps = EpsilonFromN[refrInd];
+      subst = CreateSubstance[substanceType, thickness, rotationAngles, eps, muMstandard, roMstandard];
+      Return[subst];
+    ] /; MemberQ[SubstanceClassList, substanceType];
 (* ============================================== *)
-CreateSubstanceFromN[___] := Module[{},
-  Print["CreateSubstanceFromN::Invalid parameters."];
-  Print["Correct usage: CreateSubstanceFromN[substanceType_?StringQ, thickness_, refrInd_] where MemberQ[SubstanceClassList, substanceType]."];
-  Abort[];
-];
+CreateSubstanceFromN[___] :=
+    Module[{},
+      Print["CreateSubstanceFromN::Invalid parameters."];
+      Print["Correct usage: CreateSubstanceFromN[substanceType_?StringQ, thickness_, refrInd_] where MemberQ[SubstanceClassList, substanceType]."];
+      Abort[];
+    ];
 (* ============================================== *)
-CreateSubstance[substanceType_?StringQ, thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] := Module[{subst},
-  subst = {substanceType, {thickness, rotationAngles, epsilon, mu, rho}};
-  SubstanceIdx++;
-  Return[subst];
-] /; MemberQ[SubstanceClassList, substanceType];
+CreateSubstance[substanceType_?StringQ, thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] :=
+    Module[{subst},
+      subst = {substanceType, {thickness, rotationAngles, epsilon, mu, rho}};
+      SubstanceIdx++;
+      Return[subst];
+    ] /; MemberQ[SubstanceClassList, substanceType];
 (* ============================================== *)
-CreateSubstance[___] := Module[{},
-  Print["CreateSubstance::Invalid parameters."];
-  Print["Correct usage: CreateSubstance[substanceType_?StringQ, thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] where MemberQ[SubstanceClassList, substanceType]."];
-  Abort[];
-];
+CreateSubstance[___] :=
+    Module[{},
+      Print["CreateSubstance::Invalid parameters."];
+      Print["Correct usage: CreateSubstance[substanceType_?StringQ, thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] where MemberQ[SubstanceClassList, substanceType]."];
+      Abort[];
+    ];
 (* ============================================== *)
 (* /;((!ListQ[thickness]) || (ListQ[thickness] && Length[thickness]\[Equal]5)); *)
 (* ============================================== *)
-CreateThickPlateFromN[thickness_, refrInd_] := CreateSubstanceFromN[ThickPlateClassName, thickness, refrInd];
-CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ] := CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, muMstandard, roMstandard];
-CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ] := CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, roMstandard];
-CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] := CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, rho];
+CreateThickPlateFromN[thickness_, refrInd_] :=
+    CreateSubstanceFromN[ThickPlateClassName, thickness, refrInd];
+
+CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ] :=
+    CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, muMstandard, roMstandard];
+
+CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ] :=
+    CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, roMstandard];
+
+CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] :=
+    CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, rho];
 (* ============================================== *)
 CreateThickPlateFromN[___] := Module[{},
   Print["CreateThickPlateFromN::Invalid parameters."];
@@ -1238,102 +1272,110 @@ CreateThickPlateFromN[___] := Module[{},
   Abort[];
 ];
 (* ============================================== *)
-CreateThickPlate[___] := Module[{},
-  Print["CreateThickPlate::Invalid parameters."];
-  Print["Correct usages:"];
-  Print["    CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ]"];
-  Print["    CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ]"];
-  Print["    CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ]"];
-  Abort[];
-];
+CreateThickPlate[___] :=
+    Module[{},
+      Print["CreateThickPlate::Invalid parameters."];
+      Print["Correct usages:"];
+      Print["    CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ]"];
+      Print["    CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ]"];
+      Print["    CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ]"];
+      Abort[];
+    ];
 (* ============================================== *)
 CreateFilmFromN[thickness_, refrInd_] := CreateSubstanceFromN[FilmClassName, thickness, refrInd];
 CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ] := CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, muMstandard, roMstandard];
 CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ] := CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, mu, roMstandard];
 CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] := CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, mu, rho];
 (* ============================================== *)
-CreateFilmFromN[___] := Module[{},
-  Print["CreateFilmFromN::Invalid parameters."];
-  Print["Correct usage: CreateFilmFromN[thickness_, refrInd_]"];
-  Abort[];
-];
+CreateFilmFromN[___] :=
+    Module[{},
+      Print["CreateFilmFromN::Invalid parameters."];
+      Print["Correct usage: CreateFilmFromN[thickness_, refrInd_]"];
+      Abort[];
+    ];
 (* ============================================== *)
-CreateFilm[___] := Module[{},
-  Print["CreateFilm::Invalid parameters."];
-  Print["Correct usages:"];
-  Print["    CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ]"];
-  Print["    CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ]"];
-  Print["    CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ]"];
-  Abort[];
-];
+CreateFilm[___] :=
+    Module[{},
+      Print["CreateFilm::Invalid parameters."];
+      Print["Correct usages:"];
+      Print["    CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ]"];
+      Print["    CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ]"];
+      Print["    CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ]"];
+      Abort[];
+    ];
 (* ============================================== *)
-CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ] := CreateIncidentRay[nUpper, lambda, fita, {0, 0, 90, "\[Beta]", Degree}];
+CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ] :=
+    CreateIncidentRay[nUpper, lambda, fita, {0, 0, 90, "\[Beta]", Degree}];
 
-CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ] := CreateIncidentRay[nUpper, lambda, fita, beta, {0, 0, 1, "e"}];
+CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ] :=
+    CreateIncidentRay[nUpper, lambda, fita, beta, {0, 0, 1, "e"}];
 
-CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ, ellipt_?VariableQ] := Module[{light, incidentLight, amplitude},
-  amplitude = 1;
-  incidentLight = IncidentLightNew[lambda, fita, beta, nUpper, amplitude, ellipt];
-  light = {IncidentRayClassName, {incidentLight}};
-  Return[light];
-];
+CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ, ellipt_?VariableQ] :=
+    Module[{light, incidentLight, amplitude},
+      amplitude = 1;
+      incidentLight = IncidentLightNew[lambda, fita, beta, nUpper, amplitude, ellipt];
+      light = {IncidentRayClassName, {incidentLight}};
+      Return[light];
+    ];
 (* ============================================== *)
-CreateIncidentRay[___] := Module[{},
-  Print["CreateIncidentRay::Invalid parameters."];
-  Print["Correct usages:"];
-  Print["    CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ]"];
-  Print["    CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ]"];
-  Print["    CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ, ellipt_?VariableQ]"];
-  Abort[];
-];
+CreateIncidentRay[___] :=
+    Module[{},
+      Print["CreateIncidentRay::Invalid parameters."];
+      Print["Correct usages:"];
+      Print["    CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ]"];
+      Print["    CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ]"];
+      Print["    CreateIncidentRay[nUpper_?NumericQ, lambda_?VariableQ, fita_?VariableQ, beta_?VariableQ, ellipt_?VariableQ]"];
+      Abort[];
+    ];
 (* ============================================== *)
 IncidentRayGetLight[ray_] := If[IncidentRayQ[ray], ObjectGetContent[ray][[1]], Indeterminate, Indeterminate];
 (* ============================================== *)
-ValidateLayeredMedia[layers_?SubstanceListQ] := Module[{retVal, len, ii},
-(* Print["ValidateLayeredMedia::Starting..."]; *)
-  retVal = False;
-  len = Length[layers];
+ValidateLayeredMedia[layers_?SubstanceListQ] :=
+    Module[{retVal, len, ii},
+    (* Print["ValidateLayeredMedia::Starting..."]; *)
+      retVal = False;
+      len = Length[layers];
 
-  (* The last "layer" must be semi-infinite media *)
-  If[!SemiInfiniteMediaQ[layers[[len]]],
-    (
-      Print["ValidateLayeredMedia::Last substance in the list must be semi-infinite media."];
-      Abort[];
-    )
-  ];
-
-  Do[
-    (
-      If[SemiInfiniteMediaQ[layers[[ii]]],
+      (* The last "layer" must be semi-infinite media *)
+      If[!SemiInfiniteMediaQ[layers[[len]]],
         (
-          Print["ValidateLayeredMedia::All substances except the last one must be either thin films or thick plate."];
+          Print["ValidateLayeredMedia::Last substance in the list must be semi-infinite media."];
           Abort[];
         )
       ];
-    ), {ii, 1, len - 1}
-  ];
 
-  Do[
-    (
-      If[ThickPlateQ[layers[[ii]]],
+      Do[
         (
-          Print["ValidateLayeredMedia::Thick plate must be next to the last \"layer\"."];
-          Abort[];
-        )
+          If[SemiInfiniteMediaQ[layers[[ii]]],
+            (
+              Print["ValidateLayeredMedia::All substances except the last one must be either thin films or thick plate."];
+              Abort[];
+            )
+          ];
+        ), {ii, 1, len - 1}
       ];
-    ), {ii, 1, len - 2}
-  ];
 
-  retVal = True;
+      Do[
+        (
+          If[ThickPlateQ[layers[[ii]]],
+            (
+              Print["ValidateLayeredMedia::Thick plate must be next to the last \"layer\"."];
+              Abort[];
+            )
+          ];
+        ), {ii, 1, len - 2}
+      ];
 
-  (*
-Print["ValidateLayeredMedia::retVal = ", retVal];
-Print["ValidateLayeredMedia::Completed."];
-*)
+      retVal = True;
 
-  Print["---"];
-  Return[retVal];
-];
+      (*
+      Print["ValidateLayeredMedia::retVal = ", retVal];
+      Print["ValidateLayeredMedia::Completed."];
+      *)
+
+      Print["---"];
+      Return[retVal];
+    ];
 (* ============================================== *)
 LayeredSystemGetMedia[subst_] := If[LayeredSystemQ[subst], ObjectGetContent[subst][[1]], Indeterminate, Indeterminate];
 LayeredSystemGetVarList[subst_] := If[LayeredSystemQ[subst], ObjectGetContent[subst][[2]], Indeterminate, Indeterminate];

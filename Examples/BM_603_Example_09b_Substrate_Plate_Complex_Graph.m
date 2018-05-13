@@ -42,7 +42,7 @@ FuncList =
       {Tx, Ty}
     };
 (* ============================================== *)
-systemDescription = "Uniaxial slightly absorbing thick substrate plate on Si - dispersion calculations.";
+systemDescription = "Uniaxial slightly absorbing thick substrate plate - dispersion calculations.";
 Print["!!! For absorbing plate I > R + T !!!"];
 (* ============================================== *)
 Print["Параметры падающего света..."];
@@ -69,8 +69,8 @@ rotationAnglesThickPlate = {fiThickPlate, thetaThickPlate, psiThickPlate};
 
 thickPlate = CreateThickPlate[thickness, rotationAnglesThickPlate, eps$La3Ga5SiO14, muMstandard, rho$La3Ga5SiO14];
 (* ============================================== *)
-Print["Оптические параметры нижней среды: vacuum."];
-lowerMedia = CreateSemiInfiniteMedia[eps$Vacuum];
+Print["Оптические параметры нижней среды: Si."];
+lowerMedia = CreateSemiInfiniteMedia[eps$Si];
 (* ============================================== *)
 Print["Создаем оптическую систему..."];
 layeredSystem = CreateLayeredSystem[incidentLight, gamma, thickPlate, lowerMedia];
