@@ -27,10 +27,10 @@ refrIndex[lambda_, kCoeff_, lambdaNull_, kAbsorption_, lambdaMidPoint_, lambdaHa
     Sqrt[refrIndexSquared[lambda, kCoeff, lambdaNull]] + I * absorptionCoeff[lambda, kAbsorption, lambdaMidPoint, lambdaHalfWidth];
 
 gyration11Func[lambda_, refrIndAverageFunc_, a2Coeff_, a3Coeff_, lambda2Coeff_] :=
-    lambda * refrIndAverageFunc[lambda] * ((a2Coeff / (lambda^2 - lambda2Coeff^2)) + (a3Coeff * lambda^2 / (lambda^2 - lambda2Coeff^2)^2));
+    I * (lambda * refrIndAverageFunc[lambda] * ((a2Coeff / (lambda^2 - lambda2Coeff^2)) + (a3Coeff * lambda^2 / (lambda^2 - lambda2Coeff^2)^2)));
 
 gyration33Func[lambda_, refrIndAverageFunc_, a1Coeff_, lambda1Coeff_] :=
-    lambda * refrIndAverageFunc[lambda] * a1Coeff / (lambda^2 - lambda1Coeff^2);
+    I * (lambda * refrIndAverageFunc[lambda] * a1Coeff / (lambda^2 - lambda1Coeff^2));
 
 (* ============================================== *)
 (* La3Ga5SiO14 *)
