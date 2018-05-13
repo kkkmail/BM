@@ -1,8 +1,23 @@
-(* La3Ga5SiO14 *)
-(* 0.4 mkm < lambda < 1.0 mkm *)
-
-mkm = 10^-6;
-
+(* ============================================== *)
+(* :Summary: This module defines various dispersion related functions. *)
+(* ============================================== *)
+(* :Author: Konstantin K. Konstantinov *)
+(* :Email: konstantin.k.konstantinov@gmail.com *)
+(* :License type: GPL v3 or any later version, see http://www.gnu.org/licenses/ *)
+(* :Copyright: K^3, 2001 - 2018 *)
+(* :Version: Revision: 6.03.001, Date: 2018/05/05 *)
+(* :Mathematica Version: 11.2 *)
+(* ============================================== *)
+(* This program is free software: you can redistribute it and/or modify it under the terms *)
+(* of the GNU General Public License as published by the Free Software Foundation, *)
+(* either version 3 of the License, or any later version. This program is distributed in the hope that  *)
+(* it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *)
+(* or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. *)
+(* You should have received a copy of the GNU General Public License along with this program. *)
+(* If not, see <http://www.gnu.org/licenses/>. *)
+(* ============================================== *)
+Options[OpticalDispersion] = {OpticalDispersionVersion -> 6.03};
+(* ============================================== *)
 refrIndexSquared[lambda_, kCoeff_, lambdaNull_] := 1 + kCoeff * lambda^2 / (lambda^2 - lambdaNull^2);
 sigmaAbsorption[lambdaMidPoint_, lambdaHalfWidth_] := (lambdaHalfWidth - lambdaMidPoint) / Log[2];
 absorptionCoeff[lambda_, kAbsorption_, lambdaMidPoint_, lambdaHalfWidth_] :=
@@ -16,6 +31,10 @@ gyration11Func[lambda_, refrIndAverageFunc_, a2Coeff_, a3Coeff_, lambda2Coeff_] 
 
 gyration33Func[lambda_, refrIndAverageFunc_, a1Coeff_, lambda1Coeff_] :=
     lambda * refrIndAverageFunc[lambda] * a1Coeff / (lambda^2 - lambda1Coeff^2);
+
+(* ============================================== *)
+(* La3Ga5SiO14 *)
+(* 0.4 mkm < lambda < 1.0 mkm *)
 
 refrIndex$La3Ga5SiO14$Ordinary[lambda_] :=
     refrIndex[lambda, 2.4981088, 0.12978841 mkm, 0.5 * 10^-4, 0.28 * mkm, 0.3 * mkm];
@@ -32,6 +51,4 @@ g11$La3Ga5SiO14[lambda_] :=
 g33$La3Ga5SiO14[lambda_] :=
     gyration33Func[lambda, refrIndex$La3Ga5SiO14$Average, 0.6072 * 10^-11, 0.198 mkm];
 
-Print[Plot[Re[refrIndex$La3Ga5SiO14$ExtraOrdinary[lmb mkm]] - Re[refrIndex$La3Ga5SiO14$Ordinary[lmb mkm]], {lmb, 0.25, 0.60}]];
-Print[Plot[{Re[refrIndex$La3Ga5SiO14$ExtraOrdinary[lmb mkm]], Re[refrIndex$La3Ga5SiO14$Ordinary[lmb mkm]]}, {lmb, 0.25, 0.60}]];
-Print[Plot[{10^5 * g11$La3Ga5SiO14[lmb mkm], 10^5 * g33$La3Ga5SiO14[lmb mkm]}, {lmb, 0.25, 0.60}]];
+(* ============================================== *)
