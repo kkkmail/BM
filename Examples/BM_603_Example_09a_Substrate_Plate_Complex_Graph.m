@@ -42,7 +42,7 @@ FuncList =
       {Tx, Ty}
     };
 (* ============================================== *)
-systemDescription = "Uniaxial slightly absorbing thick substrate plate on Si - dispersion calculations.";
+systemDescription = "Uniaxial slightly absorbing thick substrate plate (La3Ga5SiO14) - dispersion calculations.";
 Print["!!! For absorbing plate I > R + T !!!"];
 (* ============================================== *)
 Print["Параметры падающего света..."];
