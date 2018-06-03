@@ -18,6 +18,7 @@
 (* ============================================== *)
 Options[OpticalDispersion] = {OpticalDispersionVersion -> 6.03};
 (* ============================================== *)
+(* ============================================== *)
 refrIndexSquared[lambda_, kCoeff_, lambdaNull_] := 1 + kCoeff * lambda^2 / (lambda^2 - lambdaNull^2);
 sigmaAbsorption[lambdaMidPoint_, lambdaHalfWidth_] := (lambdaHalfWidth - lambdaMidPoint) / Log[2];
 absorptionCoeff[lambda_, kAbsorption_, lambdaMidPoint_, lambdaHalfWidth_] :=
@@ -32,7 +33,9 @@ gyration11Func[lambda_, refrIndAverageFunc_, a2Coeff_, a3Coeff_, lambda2Coeff_] 
 gyration33Func[lambda_, refrIndAverageFunc_, a1Coeff_, lambda1Coeff_] :=
     I * (lambda * refrIndAverageFunc[lambda] * a1Coeff / (lambda^2 - lambda1Coeff^2));
 (* ============================================== *)
+(* ============================================== *)
 eps$Vacuum = IdentityMatrix[3];
+(* ============================================== *)
 (* ============================================== *)
 (* La3Ga5SiO14 *)
 (* 0.4 mkm < lambda < 1.0 mkm *)
@@ -64,14 +67,48 @@ rho$La3Ga5SiO14[lambda_] := Module[{nVal1, nVal2, nVal3, rhoRet},
   rhoRet = DiagonalMatrix[{g11$La3Ga5SiO14[lambda], 0, g33$La3Ga5SiO14[lambda]}];
   Return[N[rhoRet]];
 ];
-
+(* ============================================== *)
 (* ============================================== *)
 (* Si *)
-refrIndex$Si[lambda_] := 3 + I * 0.2;
+
+(* Refraction Index *)
+L$Si[lambda_] := 1 / ((lambda / mkm)^2 - 0.028);
+
+A$Si = 3.41696;
+B$Si = 0.138497;
+C1$Si = 0.013924;
+D1$Si = -0.0000209;
+E1$Si = 0.000000148;
+
+n$Si[lambda_] := A$Si + B$Si * L$Si[lambda] + C1$Si * L$Si[lambda]^2 + D1$Si * (lambda / mkm)^2 + E1$Si * (lambda / mkm)^4;
+(* ============================================== *)
+(* Absorption Coefficient *)
+
+lambda1$Si = 0.3757 * mkm;
+kappa1$Si = 1.32;
+lambda2$Si = 0.589 * mkm;
+kappa2$Si = 0.030104;
+
+xi$Si[lambda_, Ko_, lambda0_, eps_] := Ko * (lambda / mkm)^2 / (eps + ((lambda / mkm)^2 - (lambda0 / mkm)^2)^2);
+
+sol$Si =
+    Solve[
+      {
+        xi$Si[lambda1$Si, Ko$Si, lambda0$Si, eps$Si] == kappa1$Si,
+        xi$Si[lambda2$Si, Ko$Si, lambda0$Si, eps$Si] == kappa2$Si
+      },
+      {Ko$Si, lambda0$Si}
+    ];
+
+xi$Si[lambda_, epsValue_] := ((xi$Si[lambda, Ko$Si, lambda0$Si, eps$Si] /. sol$Si[[2]]) /. {eps$Si -> epsValue});
+xi$Si[lambda_] := xi$Si[lambda, 10^-4];
+
+refrIndex$Si[lambda_] := n$Si[lambda] + I * xi$Si[lambda];
 
 eps$Si[lambda_] :=
     Module[{epsRet},
       epsRet = EpsilonFromN[refrIndex$Si[lambda]];
       Return[N[epsRet]];
     ];
+(* ============================================== *)
 (* ============================================== *)

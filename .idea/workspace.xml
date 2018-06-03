@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="" />
+    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disp_Si.nb" beforeDir="false" afterPath="$PROJECT_DIR$/disp_Si.nb" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,7 +40,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="524">
@@ -69,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1071">
-              <caret line="63" column="81" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="81" />
+            <state relative-caret-position="538">
+              <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
             </state>
           </provider>
         </entry>
@@ -158,26 +162,25 @@
         <option value="$PROJECT_DIR$/Kernel/Dispersion.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
-        <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
+        <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1835" />
     <option name="width" value="2000" />
-    <option name="height" value="2110" />
+    <option name="height" value="1970" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -199,6 +202,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -319,6 +323,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="796" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -332,18 +337,18 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18175721" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1898055" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Properties" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info id="Nl-Palette" order="2" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Properties" order="3" />
+      <window_info id="Nl-Palette" order="2" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -664,13 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="63" column="81" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -701,6 +699,13 @@
           <folding>
             <element signature="e#1552#2777#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
         </state>
       </provider>
     </entry>
