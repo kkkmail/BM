@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_09_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_09_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -51,7 +52,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="484">
@@ -75,8 +76,11 @@
       <file leaf-file-name="BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1241">
-              <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
+            <state relative-caret-position="420">
+              <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
+              <folding>
+                <element signature="e#790#1222#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,11 +88,23 @@
       <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1755">
-              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+            <state relative-caret-position="461">
+              <caret line="62" selection-start-line="62" selection-end-line="62" />
               <folding>
-                <element signature="e#3373#3634#0" />
                 <element signature="e#3665#3807#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BM_603_Example_01_Snell_Law.m" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="45" selection-start-line="45" selection-end-line="49" selection-end-column="27" />
+              <folding>
+                <element signature="e#528#594#0" />
+                <element signature="e#664#1004#0" />
               </folding>
             </state>
           </provider>
@@ -175,9 +191,9 @@
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
       </list>
     </option>
   </component>
@@ -349,7 +365,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13615024" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1750503" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -506,13 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="12" selection-start-line="14" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -690,28 +699,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1755">
-          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
-          <folding>
-            <element signature="e#3373#3634#0" />
-            <element signature="e#3665#3807#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -721,6 +712,37 @@
           <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
           <folding>
             <element signature="e#529#627#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
+          <folding>
+            <element signature="e#790#1222#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="e#3665#3807#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="45" selection-start-line="45" selection-end-line="49" selection-end-column="27" />
+          <folding>
+            <element signature="e#528#594#0" />
+            <element signature="e#664#1004#0" />
           </folding>
         </state>
       </provider>

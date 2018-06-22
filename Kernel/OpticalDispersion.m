@@ -58,8 +58,8 @@ g33$La3Ga5SiO14[lambda_] :=
 eps$La3Ga5SiO14[lambda_] :=
     Module[{nVal1, nVal2, nVal3, epsRet},
       nVal1 = refrIndex$La3Ga5SiO14$Ordinary[lambda];
-      nVal2 = refrIndex$La3Ga5SiO14$Ordinary[lambda];
-      nVal3 = refrIndex$La3Ga5SiO14$ExtraOrdinary[lambda];
+      nVal2 = refrIndex$La3Ga5SiO14$ExtraOrdinary[lambda];
+      nVal3 = refrIndex$La3Ga5SiO14$Ordinary[lambda];
       epsRet = EpsilonFromN[nVal1, nVal2, nVal3];
       Return[N[epsRet]];
     ];
