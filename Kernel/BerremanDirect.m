@@ -129,7 +129,7 @@ GetLastValue[var_?VectorQ] := var[[2]];
 (* ============================================== *)
 (* TODO - Check and replace Media[[4,...]] *)
 TransformMedia[Media_, varlist_, opts___] :=
-    Module[{rotnew, rotall, MediaTrf, FilmTrf, FilmHlp, fi, theta, psi, flmLen, gamm, rotgamm, consRot, n1, n2, nOut, Descr, h2, Film, len, rotn, lmbd, eps, mu, ro, eps1, mu1, ro1, eps2, mu2, ro2, epsVal, muVal, roVal, eps1Val, mu1Val, ro1Val, eps2Val, mu2Val, ro2Val, flm, flmLayer, pdi, pdil},
+    Module[{rotnew, rotall, MediaTrf, FilmTrf, FilmHlp, fi, theta, psi, flmLen, gamm, rotgamm, consRot, n1, n2, nOut, Descr, h2, Film, len, rotn, lmbd, eps, mu, ro, eps1, mu1, ro1, eps2, mu2, ro2, epsVal, muVal, roVal, eps1Val, mu1Val, ro1Val, eps2Val, mu2Val, ro2Val, flm, flmLayer, pdi, pdil, n2Val, eVal2},
       rotall = RotateAll /. opts /. Options[BerremanDirect];
       consRot = ConsecutiveRotation /. opts /. Options[BerremanDirect];
       gamm = VarListGetGamma[varlist];
@@ -149,7 +149,10 @@ TransformMedia[Media_, varlist_, opts___] :=
 
       If[pdi == True,
         Print["   "];
-        Print["TransformMedia::VarList = ", VarList];
+        Print["TransformMedia::varlist = ", varlist];
+        Print["TransformMedia::n1 = ", n1];
+        Print["TransformMedia::n2 = ", n2];
+        Print["TransformMedia::nOut = ", nOut];
       ];
 
       (*Print["n1: ",n1];*)
@@ -183,17 +186,31 @@ TransformMedia[Media_, varlist_, opts___] :=
       mu1Val = If[Head[mu1] === Head[{}], mu1, Apply[mu1, {lmbd}]];
       ro1Val = If[Head[ro1] === Head[{}], ro1, Apply[ro1, {lmbd}]];
 
+      eVal2 = Eigenvalues[eps2Val . mu2Val];
+      n2Val = Sqrt[eVal2[[1]]];
+
       If[pdi == True,
+        Print["   "];
+        Print["TransformMedia::eps1 = ", eps1 // MatrixForm];
+        Print["TransformMedia::mu1 = ", mu1 // MatrixForm];
+        Print["TransformMedia::ro1 = ", ro1 // MatrixForm];
         Print["   "];
         Print["TransformMedia::eps1Val = ", eps1Val // MatrixForm];
         Print["TransformMedia::mu1Val = ", mu1Val // MatrixForm];
         Print["TransformMedia::ro1Val = ", ro1Val // MatrixForm];
+        Print["   "];
+        Print["TransformMedia::eps2 = ", eps2 // MatrixForm];
+        Print["TransformMedia::mu2 = ", mu2 // MatrixForm];
+        Print["TransformMedia::ro2 = ", ro2 // MatrixForm];
+        Print["   "];
         Print["TransformMedia::eps2Val = ", eps2Val // MatrixForm];
         Print["TransformMedia::mu2Val = ", mu2Val // MatrixForm];
         Print["TransformMedia::ro2Val = ", ro2Val // MatrixForm];
+        Print["TransformMedia::eVal2 = ", eVal2 // MatrixForm];
+        Print["TransformMedia::n2Val = ", n2Val];
       ];
 
-      MediaTrf = MediaNew[n1, n2, gamm, FilmHlp, Descr, nOut, h2, eps2Val, mu2Val, ro2Val, eps1Val, mu1Val, ro1Val];
+      MediaTrf = MediaNew[n1, n2Val, gamm, FilmHlp, Descr, nOut, h2, eps2Val, mu2Val, ro2Val, eps1Val, mu1Val, ro1Val];
       (* Print["TransformMedia::MediaTrf = ",MediaTrf]; *)
 
       If[consRot === True,
@@ -228,7 +245,7 @@ TransformMedia[Media_, varlist_, opts___] :=
       (*rotn=RotationNew[gamm,0,0,opts];*)
 
       rotn = RotationNew[fi + gamm, theta, psi, opts];
-      MediaTrf = MediaNew[n1, n2, gamm, FilmTrf, Descr, nOut, h2, Transform[eps2Val, rotn], Transform[mu2Val, rotn], Transform[ro2Val, rotn], Transform[eps1Val, rotn], Transform[mu1Val, rotn], Transform[ro1Val, rotn]];
+      MediaTrf = MediaNew[n1, n2Val, gamm, FilmTrf, Descr, nOut, h2, Transform[eps2Val, rotn], Transform[mu2Val, rotn], Transform[ro2Val, rotn], Transform[eps1Val, rotn], Transform[mu1Val, rotn], Transform[ro1Val, rotn]];
 
       Do[
         MediaTrf[[4, i, 1]] = VarListGetThickness[varlist, i],

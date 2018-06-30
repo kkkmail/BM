@@ -271,7 +271,8 @@ EpsilonFromN[n1_, n2_, n3_] :=
 
 deltaZero = DiagonalMatrix[{0, 0, 0, 0}];
 (* ============================================== *)
-M[epsilon : {{_, _, _}, {_, _, _}, {_, _, _}}, mu : {{_, _, _}, {_, _, _}, {_, _, _}}, ro : {{_, _, _}, {_, _, _}, {_, _, _}}, rotr : {{_, _, _}, {_, _, _}, {_, _, _}}] := BlockMatrix[{{epsilon, ro}, {rotr, mu}}];
+M[epsilon : {{_, _, _}, {_, _, _}, {_, _, _}}, mu : {{_, _, _}, {_, _, _}, {_, _, _}}, ro : {{_, _, _}, {_, _, _}, {_, _, _}}, rotr : {{_, _, _}, {_, _, _}, {_, _, _}}] :=
+    BlockMatrix[{{epsilon, ro}, {rotr, mu}}];
 (* ============================================== *)
 (*Optiva Rotation 1-Fi (angle between crystal axis and deposition direction.)-rotation around z*)
 fRopt1[fi_] := RotationMatrix3D[fi, 0, 0];
@@ -474,7 +475,6 @@ IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] :=
       Return[{lambda, fita, beta, EHI, ellipticity, n1, Ampl}];
     ];
 
-
 IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_] :=
     Module[{EHI},
       EHI = {Ampl Cos[beta] Cos[fita], Ampl Sin[beta], -Ampl Cos[beta] Sin[fita], -Ampl n1 Cos[fita] Sin[beta], Ampl n1 Cos[beta], Ampl n1 Sin[beta] Sin[fita], True};
@@ -507,16 +507,26 @@ IncidentLightEllipticity[IncidentLight_] := IncidentLight[[5]];
 IncidentLighRefrIndex[IncidentLight_] := IncidentLight[[6]];
 IncidentLighAmplitude[IncidentLight_] := IncidentLight[[7]];
 (* ============================================== *)
-
 (* ============================================== *)
 If[$VersionNumber < 10.0,
   (
     Print["Mathematica version is ", $VersionNumber, " Assigning OFULL via AppendColumns."];
-    OFULL[f_][x_, y_, z_] := AppendColumns[Transpose[{Curl[{(f[x, y, z])[[4, 1]], (f[x, y, z])[[5, 1]], (f[x, y, z])[[6, 1]]}, Cartesian[x, y, z]]}], -Transpose[{Curl[{(f[x, y, z])[[1, 1]], (f[x, y, z])[[2, 1]], (f[x, y, z])[[3, 1]]}, Cartesian[x, y, z]]}]];
+    OFULL[f_][x_, y_, z_] :=
+        AppendColumns[
+          Transpose[{Curl[{(f[x, y, z])[[4, 1]], (f[x, y, z])[[5, 1]], (f[x, y, z])[[6, 1]]}, Cartesian[x, y, z]]}],
+          -Transpose[{Curl[{(f[x, y, z])[[1, 1]], (f[x, y, z])[[2, 1]], (f[x, y, z])[[3, 1]]}, Cartesian[x, y, z]]}]];
   ),
   (
     Print["Mathematica version is ", $VersionNumber, " Assigning OFULL via Join."];
-    OFULL[f_][x_, y_, z_] := Transpose[{Join[Curl[{(f[x, y, z])[[4, 1]], (f[x, y, z])[[5, 1]], (f[x, y, z])[[6, 1]]}, Cartesian[x, y, z]], -Curl[{(f[x, y, z])[[1, 1]], (f[x, y, z])[[2, 1]], (f[x, y, z])[[3, 1]]}, Cartesian[x, y, z]]]}];
+    OFULL[f_][x_, y_, z_] :=
+        Transpose[
+          {
+            Join[
+              Curl[{(f[x, y, z])[[4, 1]], (f[x, y, z])[[5, 1]], (f[x, y, z])[[6, 1]]}, Cartesian[x, y, z]],
+              -Curl[{(f[x, y, z])[[1, 1]], (f[x, y, z])[[2, 1]], (f[x, y, z])[[3, 1]]}, Cartesian[x, y, z]]
+            ]
+          }
+        ];
   )
 ];
 
@@ -530,13 +540,18 @@ MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] :=
     Print["ro = ", MatrixForm[ro]];
     Print["rotr = ", MatrixForm[rotr]];
     *)
+
       EH[x_, y_, z_] := Exp[I * kx * x] * {{Ex0[z]}, {Ey0[z]}, {Ez0[z]}, {Hx0[z]}, {Hy0[z]}, {Hz0[z]}};
       (*Print["EH[x,y,z] = ",EH[x,y,z]];*)
       MaxwellEq = (((I * (Exp[(-I * kx * x)] * ((2 * Pi * I / lambda) * M[eps, mu, ro, rotr].EH[x, y, z] + OFULL[EH][x, y, z]))))) /. x -> 0;
       kx = (2 * Pi / lambda) * n1 * Sin[fita];
-      (*Print["kx = ",N[kx]];Print["n1 = ",N[n1]];
-    Print["fita = ",N[fita]];
-    Print["MaxwellEq = ",MatrixForm[Simplify[N[MaxwellEq]]]];*)
+
+      (*
+      Print["kx = ",N[kx]];Print["n1 = ",N[n1]];
+      Print["fita = ",N[fita]];
+      Print["MaxwellEq = ",MatrixForm[Simplify[N[MaxwellEq]]]];
+      *)
+
       lst3 = CoefficientList[MaxwellEq[[3, 1]], {Ez0[z], Hz0[z]}];
       lst6 = CoefficientList[MaxwellEq[[6, 1]], {Ez0[z], Hz0[z]}];
 
