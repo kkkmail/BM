@@ -129,7 +129,7 @@ GetLastValue[var_?VectorQ] := var[[2]];
 (* ============================================== *)
 (* TODO - Check and replace Media[[4,...]] *)
 TransformMedia[Media_, varlist_, opts___] :=
-    Module[{rotnew, rotall, MediaTrf, FilmTrf, FilmHlp, fi, theta, psi, flmLen, gamm, rotgamm, consRot, n1, n2, nOut, Descr, h2, Film, len, rotn, lmbd, eps, mu, ro, eps1, mu1, ro1, eps2, mu2, ro2, epsVal, muVal, roVal, eps1Val, mu1Val, ro1Val, eps2Val, mu2Val, ro2Val, flm, flmLayer},
+    Module[{rotnew, rotall, MediaTrf, FilmTrf, FilmHlp, fi, theta, psi, flmLen, gamm, rotgamm, consRot, n1, n2, nOut, Descr, h2, Film, len, rotn, lmbd, eps, mu, ro, eps1, mu1, ro1, eps2, mu2, ro2, epsVal, muVal, roVal, eps1Val, mu1Val, ro1Val, eps2Val, mu2Val, ro2Val, flm, flmLayer, pdi, pdil},
       rotall = RotateAll /. opts /. Options[BerremanDirect];
       consRot = ConsecutiveRotation /. opts /. Options[BerremanDirect];
       gamm = VarListGetGamma[varlist];
@@ -143,6 +143,15 @@ TransformMedia[Media_, varlist_, opts___] :=
       nOut = MediaOutRefractionIndex[Media];
       Descr = MediaDescription[Media];
       h2 = MediaSubstrateThickness[Media];
+
+      pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
+      pdil = PrintCommonDebugInfoLevel /. opts /. Options[BerremanCommon];
+
+      If[pdi == True,
+        Print["   "];
+        Print["TransformMedia::VarList = ", VarList];
+      ];
+
       (*Print["n1: ",n1];*)
 
       FilmHlp = FilmNew[];
@@ -173,6 +182,16 @@ TransformMedia[Media_, varlist_, opts___] :=
       eps1Val = If[Head[eps1] === Head[{}], eps1, Apply[eps1, {lmbd}]];
       mu1Val = If[Head[mu1] === Head[{}], mu1, Apply[mu1, {lmbd}]];
       ro1Val = If[Head[ro1] === Head[{}], ro1, Apply[ro1, {lmbd}]];
+
+      If[pdi == True,
+        Print["   "];
+        Print["TransformMedia::eps1Val = ", eps1Val // MatrixForm];
+        Print["TransformMedia::mu1Val = ", mu1Val // MatrixForm];
+        Print["TransformMedia::ro1Val = ", ro1Val // MatrixForm];
+        Print["TransformMedia::eps2Val = ", eps2Val // MatrixForm];
+        Print["TransformMedia::mu2Val = ", mu2Val // MatrixForm];
+        Print["TransformMedia::ro2Val = ", ro2Val // MatrixForm];
+      ];
 
       MediaTrf = MediaNew[n1, n2, gamm, FilmHlp, Descr, nOut, h2, eps2Val, mu2Val, ro2Val, eps1Val, mu1Val, ro1Val];
       (* Print["TransformMedia::MediaTrf = ",MediaTrf]; *)
@@ -217,16 +236,25 @@ TransformMedia[Media_, varlist_, opts___] :=
       ];
       (*Print["MediaTrf[[3]] BEFORE RETURN: ",MediaTrf[[3]]];*)
 
-      (* Print["TransformMedia::Return MediaTrf = ", MediaTrf]; *)
+      If[pdi == True,
+        Print["   "];
+        Print["TransformMedia::MediaTrf = ", MediaTrf];
+        Print["   "];
+      ];
       Return[MediaTrf];
     ];
 (* ============================================== *)
 GetSol[Calc_, idx_] :=
     Module[{sol, Media, inclght, opts, MediaTrf, VarList, values, Ampl, pdi, pdil},
+      (* Print["GetSol::Starting..."]; *)
       Media = Calc[[1]][[1]];
       VarList = Calc[[1]][[2]];
       opts = Calc[[2]];
       values = GetValueList[VarList, idx];
+
+      Ampl = Amplitude /. opts /. Options[BerremanDirect];
+      MediaTrf = TransformMedia[Media, values, opts];
+      inclght = IncidentLightNew[values[[1]], values[[2]], values[[3]], MediaUpperRefractionIndex[Media], Ampl, values[[5]]];
 
       pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
       pdil = PrintCommonDebugInfoLevel /. opts /. Options[BerremanCommon];
@@ -234,16 +262,9 @@ GetSol[Calc_, idx_] :=
       If[pdi == True,
         Print["   "];
         Print["GetSol::VarList = ", VarList];
-        Print["GetSol::values = ", values, ", idx = ", idx];
-      ];
-
-      Ampl = Amplitude /. opts /. Options[BerremanDirect];
-      MediaTrf = TransformMedia[Media, values, opts];
-      inclght = IncidentLightNew[values[[1]], values[[2]], values[[3]], MediaUpperRefractionIndex[Media], Ampl, values[[5]]];
-
-      If[pdi == True,
-        Print["GetSol::inclght = ", inclght];
-        Print["GetSol::MediaTrf = ", MediaTrf];
+        Print["GetSol::values = ", N[values], ", idx = ", idx];
+        Print["GetSolAvg::inclght = ", N[inclght]];
+        Print["GetSolAvg::MediaTrf = ", N[MediaTrf]];
         Print["   "];
       ];
 
@@ -252,15 +273,29 @@ GetSol[Calc_, idx_] :=
     ];
 (* ============================================== *)
 GetSolAvg[Calc_, idx_] :=
-    Module[{sol, Media, inclght, opts, MediaTrf, VarList, values, Ampl, elpct},
+    Module[{sol, Media, inclght, opts, MediaTrf, VarList, values, Ampl, elpct, pdi, pdil},
+      (* Print["GetSolAvg::Starting..."]; *)
       Media = Calc[[1]][[1]];
       VarList = Calc[[1]][[2]];
       opts = Calc[[2]];
       values = GetValueList[VarList, idx];
       Ampl = Amplitude /. opts /. Options[BerremanDirect];
       MediaTrf = TransformMedia[Media, values, opts];
-      (* Print["GetSolAvg::MediaTrf = ", MediaTrf]; *)
+
+      pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
+      pdil = PrintCommonDebugInfoLevel /. opts /. Options[BerremanCommon];
+
       inclght = IncidentLightNew[values[[1]], values[[2]], values[[3]], MediaUpperRefractionIndex[Media], Ampl, values[[5]]];
+
+      If[pdi == True,
+        Print["   "];
+        Print["GetSolAvg::VarList = ", VarList];
+        Print["GetSolAvg::values = ", N[values], ", idx = ", idx];
+        Print["GetSolAvg::inclght = ", N[inclght]];
+        Print["GetSolAvg::MediaTrf = ", N[MediaTrf]];
+        Print["   "];
+      ];
+
       sol = Chop[SolutionAverageNew[MediaTrf, inclght, opts]];
       Return[sol];
     ];
@@ -1266,7 +1301,7 @@ SolAvgLambdaBoundaries[lambda_, fita_, n1_, n2_, LayerThickness_, opts___] :=
     ];
 (* ============================================== *)
 SolutionAverageNew[Media_, IncidentLight_, opts___] :=
-    Module[{retval, lmbbound, lmb, len, lmbstart, stp, optprc, lambda, fita, beta, gamm, n1, n2, LayerThickness, Film, flmLen, inclgth, avgtyp},
+    Module[{retval, lmbbound, lmb, len, lmbstart, stp, optprc, lambda, fita, beta, gamm, n1, n2, LayerThickness, Film, flmLen, inclgth, avgtyp, pdi, pdil},
       optprc = Flatten[{opts}];
       Film = MediaFilm[Media];
       flmLen = FilmLength[Film];
@@ -1275,6 +1310,16 @@ SolutionAverageNew[Media_, IncidentLight_, opts___] :=
       beta = IncidentLightBeta[IncidentLight];
       n1 = MediaUpperRefractionIndex[Media];
       avgtyp = AveragingType /. optprc /. Options[BerremanDirect];
+
+      pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
+      pdil = PrintCommonDebugInfoLevel /. opts /. Options[BerremanCommon];
+
+      If[pdi == True,
+        Print["   "];
+        Print["SolutionAverageNew::start ================================================="];
+        Print["SolutionAverageNew::IncidentLight = ", Chop[N[IncidentLight]]];
+        Print["SolutionAverageNew::Media = ", Chop[N[Media]]];
+      ];
 
       Which[avgtyp === BDAVGTYPESERIES,
         retval = SolutionSumNew[Media, IncidentLight, opts],
@@ -1295,7 +1340,7 @@ SolutionAverageNew[Media_, IncidentLight_, opts___] :=
     ];
 (* ============================================== *)
 SSMakeFirstStep[Media_, IncidentLight_, opts___] :=
-    Module[{retval, sol, solToAvg, inclNext, lambda, fita, n1, n2, ehZero, fita2, gamm, h2, PPPm, beta, pdi, pdil, utll},
+    Module[{retval, sol, solToAvg, inclNext, lambda, fita, n1, n2, ehZero, fita2, gamm, h2, PPPm, beta, pdi, pdil, utll, transmittedLight},
 
       utll = UseThickLastLayer /. opts /. Options[BerremanDirect];
       pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
@@ -1314,6 +1359,17 @@ SSMakeFirstStep[Media_, IncidentLight_, opts___] :=
       fita2 = ArcSin[n1 * Sin[fita] / n2];
       ehZero = {0, 0, 0, 0, 0, 0, True};
       beta = IncidentLightBeta[IncidentLight];
+
+      If[pdi == True && pdil >= PCDILEVELMEDIUM,
+        Print["SSMakeFirstStep::IncidentLight = ", IncidentLight];
+        Print["SSMakeFirstStep::lambda = ", Chop[N[lambda]]];
+        Print["SSMakeFirstStep::fita = ", Chop[N[fita]]];
+        Print["SSMakeFirstStep::n1 = ", Chop[N[n1]]];
+        Print["SSMakeFirstStep::n2 = ", Chop[N[n2]]];
+        Print["SSMakeFirstStep::fita2 = ", Chop[N[fita2]]];
+        Print["SSMakeFirstStep::beta = ", Chop[N[beta]]];
+      ];
+
       sol = SolutionNew[Media, IncidentLight, OutputPPPMultiplier -> 1, opts];
 
       If[!utll,
@@ -1329,12 +1385,13 @@ SSMakeFirstStep[Media_, IncidentLight_, opts___] :=
 
       (*Print["SSMakeFirstStep:solToAvg = ",solToAvg];*)
 
-      inclNext = IncidentLightNew[lambda, fita2, beta, GetSolTransmittedLight[sol]];
-
+      transmittedLight = GetSolTransmittedLight[sol];
+      inclNext = IncidentLightNew[lambda, fita2, beta, transmittedLight];
       retval = {solToAvg, inclNext};
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
       If[pdi == True && pdil >= PCDILEVELMEDIUM,
+        Print["SSMakeFirstStep::transmittedLight = ", Chop[N[transmittedLight]]];
         Print["SSMakeFirstStep::inclNext = ", Chop[N[inclNext]]];
         Print["SSMakeFirstStep::retval = ", Chop[N[retval]]];
       ];
