@@ -5,7 +5,7 @@
 (* :Email: konstantin.k.konstantinov@gmail.com *)
 (* :License type: GPL v3 or any later version, see http://www.gnu.org/licenses/ *)
 (* :Copyright: K^3, 2001 - 2018 *)
-(* :Version: Revision: 6.03.001, Date: 2018/05/05 *)
+(* :Version: Revision: 6.04.001, Date: 2018/07/02 *)
 (* :Mathematica Version: 11.2 *)
 (* ============================================== *)
 (* This program is free software: you can redistribute it and/or modify it under the terms *)
@@ -16,11 +16,15 @@
 (* You should have received a copy of the GNU General Public License along with this program. *)
 (* If not, see <http://www.gnu.org/licenses/>. *)
 (* ============================================== *)
-Options[OpticalDispersion] = {OpticalDispersionVersion -> 6.03};
+Options[OpticalDispersion] =
+    {
+      OpticalDispersionVersion -> 6.04
+    };
 (* ============================================== *)
 (* ============================================== *)
 refrIndexSquared[lambda_, kCoeff_, lambdaNull_] := 1 + kCoeff * lambda^2 / (lambda^2 - lambdaNull^2);
 sigmaAbsorption[lambdaMidPoint_, lambdaHalfWidth_] := (lambdaHalfWidth - lambdaMidPoint) / Log[2];
+
 absorptionCoeff[lambda_, kAbsorption_, lambdaMidPoint_, lambdaHalfWidth_] :=
     kAbsorption * Exp[-(lambda - lambdaMidPoint)^2 / sigmaAbsorption[lambdaMidPoint, lambdaHalfWidth]^2];
 

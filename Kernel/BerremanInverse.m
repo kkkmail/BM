@@ -1,8 +1,8 @@
 (* :Author: Konstantin K.Konstantinov *)
 (* :Summary: This module defines inverse task functionality for Berreman Method. *)
 (* :Copyright: K^3, 2001 - 2018 *)
-(* :Version: Revision: 6.03.001, Date: 2018/05/05 *)
-(* :Mathematica Version: 11.2 *)
+(* :Version: Revision: 6.04.001, Date: 2018/07/02 *)
+(* :Mathematica Version: 11.3 *)
 (*==============================================*)
 strUseAllOutputColumns = "ALL";
 BIIMTOLERANCE = 10^-20;
@@ -383,7 +383,6 @@ ProcessMinSolEps[Epsilon : {{_, _, _}, {_, _, _}, {_, _, _}}, InvSol_] :=
       retval = {epsRet, FiThetaPsi};
       Print["Epsilon = ", MatrixForm[Chop[epsRet]], ", n = ", MatrixForm[Chop[MatrixPower[epsRet, 1 / 2]]], ", Rotation angles = ", MatrixForm[N[Round[FiThetaPsi * angMult / Degree] / angMult]]];
       Return[retval];
-
     ];
 (*==============================================*)
 (*==============================================*)
@@ -427,7 +426,6 @@ InverseSolutionRunStdTransparent[InvSol_] :=
       retval[[4, 2]] = procEps[[2]];
       InvSol = retval;
       Return[retval];
-
     ];
 
 (*==============================================*)

@@ -5,7 +5,7 @@
 (* :Email: konstantin.k.konstantinov@gmail.com *)
 (* :License type: GPL v3 or any later version, see http://www.gnu.org/licenses/ *)
 (* :Copyright: K^3, 2001 - 2018 *)
-(* :Version: Revision: 6.03.001, Date: 2018/05/05 *)
+(* :Version: Revision: 6.04.001, Date: 2018/07/02 *)
 (* :Mathematica Version: 11.2 *)
 (* ============================================== *)
 (* This program is free software: you can redistribute it and/or modify it under the terms *)
@@ -23,11 +23,17 @@ BDAVGTYPESERIES = 100;
 BDAVGTYPESTD = BDAVGTYPESERIES;
 
 BDIMAGESIZE = 640;
-BDPLTTEXTOPTS = {FontFamily -> "Courier", FontSize -> 18, FontWeight -> "Bold"};
+
+BDPLTTEXTOPTS =
+    {
+      FontFamily -> "Courier",
+      FontSize -> 18,
+      FontWeight -> "Bold"
+    };
 (* ============================================== *)
 Options[BerremanDirect] =
     {
-      BerremanDirectVersion -> 6.03,
+      BerremanDirectVersion -> 6.04,
       RotateAll -> True,
       ConsecutiveRotation -> True,
       PrintTimeEstimate -> False,
@@ -65,11 +71,16 @@ Options[BerremanDirect] =
 (*AveragingType-Wavelength averaging:0-sum of two points/2,1-averaging by NoOfAveragingPoints& using AveragingPeriods,2-same as 1,but lambda is exactly as supplied*)
 (* ============================================== *)
 ListPoints[lst_, 1] :=
-    Module[{len}, len = Length[lst];Return[lst[[len]]]];
-ListPoints[lst_, i_Integer] := Module[{len},
-  len = Length[lst];
-  Return[lst[[len - i + 1]] * ListPoints[lst, i - 1]]
-];
+    Module[{len},
+      len = Length[lst];
+      Return[lst[[len]]];
+    ];
+
+ListPoints[lst_, i_Integer] :=
+    Module[{len},
+      len = Length[lst];
+      Return[lst[[len - i + 1]] * ListPoints[lst, i - 1]];
+    ];
 (* ============================================== *)
 ListPointsFull[lst_] :=
     Module[{retval, len},
@@ -84,7 +95,8 @@ GetQuotient[lst_, idx_Integer, 1] := Quotient[idx, lst[[1]]];
 GetMod[lst_, idx_Integer, 1] := Mod[idx, lst[[1]]];
 (* ============================================== *)
 GetMod[lst_, idx_Integer, i_Integer] := Mod[GetMod[lst, idx, i - 1], lst[[i]]];
-GetQuotient[lst_, idx_Integer, i_Integer] := If[i <= Length[lst], Quotient[GetMod[lst, idx, i - 1], lst[[i]]], GetMod[lst, idx, i - 1], 1];
+GetQuotient[lst_, idx_Integer, i_Integer] :=
+    If[i <= Length[lst], Quotient[GetMod[lst, idx, i - 1], lst[[i]]], GetMod[lst, idx, i - 1], 1];
 (* ============================================== *)
 GetIndexList[lst_, idx_Integer] :=
     Module[{retval, lsthlp, len},
@@ -94,8 +106,9 @@ GetIndexList[lst_, idx_Integer] :=
     ];
 (* ============================================== *)
 GetNumberOfPoints[v_] :=
-    Module[{retval}, retval = Round[If[Length[v] >= 3, 1 + If[v[[3]] != 0, ((v[[2]] - v[[1]]) / v[[3]]), 0, 0], 1, 1]];
-    Return[retval];
+    Module[{retval},
+      retval = Round[If[Length[v] >= 3, 1 + If[v[[3]] != 0, ((v[[2]] - v[[1]]) / v[[3]]), 0, 0], 1, 1]];
+      Return[retval];
     ];
 (* ============================================== *)
 GetValue[v_, i_, UseMultiplier_ : True] :=
@@ -263,7 +276,7 @@ TransformMedia[Media_, varlist_, opts___] :=
 (* ============================================== *)
 GetSol[Calc_, idx_] :=
     Module[{sol, Media, inclght, opts, MediaTrf, VarList, values, Ampl, pdi, pdil},
-      (* Print["GetSol::Starting..."]; *)
+    (* Print["GetSol::Starting..."]; *)
       Media = Calc[[1]][[1]];
       VarList = Calc[[1]][[2]];
       opts = Calc[[2]];
@@ -291,7 +304,7 @@ GetSol[Calc_, idx_] :=
 (* ============================================== *)
 GetSolAvg[Calc_, idx_] :=
     Module[{sol, Media, inclght, opts, MediaTrf, VarList, values, Ampl, elpct, pdi, pdil},
-      (* Print["GetSolAvg::Starting..."]; *)
+    (* Print["GetSolAvg::Starting..."]; *)
       Media = Calc[[1]][[1]];
       VarList = Calc[[1]][[2]];
       opts = Calc[[2]];
@@ -450,9 +463,9 @@ GetOutput[Calc_] :=
           retval = ParallelTable[GetFuncArr[Calc, idx], {idx, maxcnt}];
 
           (*
-    CalcArr=ParallelTable[Calc,{idx,maxcnt}];
-    retval=ParallelTable[GetFuncArr[CalcArr[[idx]],idx],{idx,maxcnt}];
-    *)
+          CalcArr=ParallelTable[Calc,{idx,maxcnt}];
+          retval=ParallelTable[GetFuncArr[CalcArr[[idx]],idx],{idx,maxcnt}];
+          *)
 
           Print["Parallel calculations completed."];
         )
@@ -466,16 +479,18 @@ VarListNew[IncidentLightInfo : {{_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _
     VarListNew[IncidentLightInfo, defaultCommonAnglesInfo];
 (* ============================================== *)
 VarListNew[IncidentLightInfo : {{_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}}, CommonAnglesInfo : {{_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}}] :=
-    Module[{retval}, retval = Join[IncidentLightInfo, {{0, 0, 1, "Ellipticity"}}, CommonAnglesInfo];
-    Return[retval];
+    Module[{retval},
+      retval = Join[IncidentLightInfo, {{0, 0, 1, "Ellipticity"}}, CommonAnglesInfo];
+      Return[retval];
     ];
 (* ============================================== *)
 VarListNew[IncidentLightInfo : {{_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _}}] :=
     VarListNew[IncidentLightInfo, defaultCommonAnglesInfo];
 (* ============================================== *)
 VarListNew[IncidentLightInfo : {{_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _}}, CommonAnglesInfo : {{_, _, _, _, _}, {_, _, _, _, _}, {_, _, _, _, _}}] :=
-    Module[{retval}, retval = Join[IncidentLightInfo, CommonAnglesInfo];
-    Return[retval];
+    Module[{retval},
+      retval = Join[IncidentLightInfo, CommonAnglesInfo];
+      Return[retval];
     ];
 (* ============================================== *)
 VarListLambdaIdx = 1;
@@ -730,11 +745,12 @@ CalcPlotFunc[Calc_, Func_, FuncName_, pltOptsRaw___] :=
       fStr = ToString[Table["FuncPlot[xVar," <> ToString[nn] <> "]", {nn, 1, nnVarMax}]];
 
       execStr = "Print[Plot[" <> fStr <> ",{xVar," <> ToString[xStart] <> "," <> ToString[xEnd] <> "}," <> plotOptsStr <> "]]";
+
       (*
-    Print["CalcPlotFunc::execStr = ",execStr];
-    Print["CalcPlotFunc::xStart = ",xStart];
-    Print["CalcPlotFunc::xEnd = ",xEnd];
-    *)
+      Print["CalcPlotFunc::execStr = ",execStr];
+      Print["CalcPlotFunc::xStart = ",xStart];
+      Print["CalcPlotFunc::xEnd = ",xEnd];
+      *)
 
       ToExpression[execStr];
     ];
@@ -1039,15 +1055,16 @@ CalcFuncPlotFunc[CalcFunc_, xVarLst : {_, _, _}, Func_, FuncName_, pltOptsRaw___
     ];
 (* ============================================== *)
 (* TODO::CalcFuncPlot3D does not work *)
-CalcFuncPlot3D[CalcFunc_, xVarLst : {_, _, _}, yVarLst : {_, _, _}, pltOptsRaw___] := Module[{FuncList, FuncNameList, len, Calc},
-(*Print["CalcFuncPlot3D"];*)
+CalcFuncPlot3D[CalcFunc_, xVarLst : {_, _, _}, yVarLst : {_, _, _}, pltOptsRaw___] :=
+    Module[{FuncList, FuncNameList, len, Calc},
+    (*Print["CalcFuncPlot3D"];*)
 
-  Calc = CalcFunc[xVarLst[[1]], yVarLst[[1]]];
-  FuncList = CalcFuncList[Calc];
-  FuncNameList = CalcFuncNameList[Calc];
-  len = Min[Length[FuncList], Length[FuncNameList]];
-  Do[CalcFuncPlot3DFunc[CalcFunc, xVarLst, yVarLst, FuncList[[i]], FuncNameList[[i]], pltOptsRaw], {i, len}];
-];
+      Calc = CalcFunc[xVarLst[[1]], yVarLst[[1]]];
+      FuncList = CalcFuncList[Calc];
+      FuncNameList = CalcFuncNameList[Calc];
+      len = Min[Length[FuncList], Length[FuncNameList]];
+      Do[CalcFuncPlot3DFunc[CalcFunc, xVarLst, yVarLst, FuncList[[i]], FuncNameList[[i]], pltOptsRaw], {i, len}];
+    ];
 (* ============================================== *)
 (* TODO::CalcFuncPlot3DFunc does not work *)
 CalcFuncPlot3DFunc[CalcFunc_, xVarLst : {_, _, _}, yVarLst : {_, _, _}, Func_, FuncName_, pltOptsRaw___] :=
@@ -1065,18 +1082,19 @@ CalcFuncPlot3DFunc[CalcFunc_, xVarLst : {_, _, _}, yVarLst : {_, _, _}, Func_, F
 
       (*Print["CalcFuncPlot3DFunc"];Print["varLst = ",varLst];*)
 
-      f[xVar_, yVar_] := Module[{clc, outpt, retval, Calc1, Media, varLst, vLen, varNew, opts},
-        Calc1 = Apply[CalcFunc, {xVar, yVar}];
-        Media = CalcMedia[Calc1];varLst = CalcVarList[Calc1];vLen = Length[varLst];
-        varNew = varLst;
-        opts = {PrintTimeEstimate -> False, PrintCalculationProgress -> False, PrintCalculationDetails -> False, CalcOptions[Calc1]};
-        Do[varNew[[vCnt, 2]] = varNew[[vCnt, 1]];, {vCnt, vLen}];
-        clc = CalcNew[Media, varNew, {Func}, "", opts];CalcPerform[clc];
-        outpt = CalcGetOutput[clc];
-        (* TODO - replace outpt[[1,1]] by a function call *)
-        retval = outpt[[1, 1]];
-        Return[retval];
-      ];
+      f[xVar_, yVar_] :=
+          Module[{clc, outpt, retval, Calc1, Media, varLst, vLen, varNew, opts},
+            Calc1 = Apply[CalcFunc, {xVar, yVar}];
+            Media = CalcMedia[Calc1];varLst = CalcVarList[Calc1];vLen = Length[varLst];
+            varNew = varLst;
+            opts = {PrintTimeEstimate -> False, PrintCalculationProgress -> False, PrintCalculationDetails -> False, CalcOptions[Calc1]};
+            Do[varNew[[vCnt, 2]] = varNew[[vCnt, 1]];, {vCnt, vLen}];
+            clc = CalcNew[Media, varNew, {Func}, "", opts];CalcPerform[clc];
+            outpt = CalcGetOutput[clc];
+            (* TODO - replace outpt[[1,1]] by a function call *)
+            retval = outpt[[1, 1]];
+            Return[retval];
+          ];
 
       (*Print["f[xStart,yStart] = ",f[xStart,yStart]];*)
 
@@ -1088,11 +1106,12 @@ CalcGetInput[Calc_] := Module[{}, Return[Calc[[3]][[1]]]];
 CalcGetOutput[Calc_] := Module[{}, Return[Calc[[3]][[2]]]];
 CalcGetFuncNames[Calc_] := Module[{}, Return[Calc[[1]][[4]]];];
 (* ============================================== *)
-CalcGetVarNames[Calc_] := Module[{VarList, VarNames, len},
-  VarList = Calc[[1]][[2]];len = Length[VarList];
-  VarNames = Table[VarList[[i]][[4]], {i, len}];
-  Return[VarNames];
-];
+CalcGetVarNames[Calc_] :=
+    Module[{VarList, VarNames, len},
+      VarList = Calc[[1]][[2]];len = Length[VarList];
+      VarNames = Table[VarList[[i]][[4]], {i, len}];
+      Return[VarNames];
+    ];
 (* ============================================== *)
 CalcGetNumberOfResults[Calc_] := Module[{}, Return[Length[Calc[[3]][[2]]]]];
 CalcMedia[Calc_] := Module[{}, Return[Calc[[1]][[1]]];];
@@ -1423,7 +1442,6 @@ SSMakeFirstStep[Media_, IncidentLight_, opts___] :=
 (* ============================================== *)
 SSMakeDownStep[Media_, IncidentLight_, opts___] :=
     Module[{retval, n1, n2, lambda, fita, sol, inclght, MediaBound, solCmb, ehZero, nOut, gamm, ehZeroRefl, h2, PPPm, Film, beta, solToAvg, inclNext, pdi, pdil, utll},
-
       utll = UseThickLastLayer /. opts /. Options[BerremanDirect];
       pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
       pdil = PrintCommonDebugInfoLevel /. opts /. Options[BerremanCommon];
@@ -1496,7 +1514,6 @@ SSMakeDownStep[Media_, IncidentLight_, opts___] :=
 (* ============================================== *)
 SSMakeUpStep[Media_, IncidentLight_, opts___] :=
     Module[{retval, inclFlp, MediaFlp, solFlp, ehZero, ehReflFlp, ehTrFlp, ehRefl, ehTr, lambda, fita, gamm, beta, solToAvg, inclNext, pdi, pdil, utll},
-
       utll = UseThickLastLayer /. opts /. Options[BerremanDirect];
       pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
       pdil = PrintCommonDebugInfoLevel /. opts /. Options[BerremanCommon];
@@ -1625,7 +1642,6 @@ retval=MapThread[Apply,{ueFuncListHlp1,solArrHlp2}];
 
 AveragingFunc[f_, solavg_, IsAverage_ : True] :=
     Module[{len, retval = 0, navg, optf, naIdx = 1, fnelhlp1, fnelhlp2, ueFuncListHlp1, solArrHlp1, solArrHlp2, hlpArr, hlpArrI, hlpArrR, hlpArrT, pdi, pdil, opts, retval1, val, FullSol, fita, eField, hField, ehVec, kVec, ehAmpl, ehArg, afc, param},
-
       opts = GetSolOptions[solavg[[1, 1]]];
       pdi = PrintCommonDebugInfo /. opts /. Options[BerremanCommon];
       pdil = PrintCommonDebugInfoLevel /. opts /. Options[BerremanCommon];
@@ -1784,7 +1800,6 @@ MakeFileName[prefix_, Media_, thk_, opts___] :=
 (* ============================================== *)
 PerformAllCalculations[layeredSystem_?LayeredSystemQ, funcList_, description_, rawOpts___] :=
     Module[{opts, media, vars, extraOptions, optsFinal, performCalc, plotFigures, calc, coll, plotOpts, plotOpts2D, reqBetaLst, ii, reqBeta},
-
     (* Print["PerformAllCalculations::Starting..."]; *)
 
       opts = ProcessOptions[rawOpts];

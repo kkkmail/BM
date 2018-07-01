@@ -5,7 +5,7 @@
 (* :Email: konstantin.k.konstantinov@gmail.com *)
 (* :License type: GPL v3 or any later version, see http://www.gnu.org/licenses/ *)
 (* :Copyright: K^3, 2001 - 2018 *)
-(* :Version: Revision: 6.03.001, Date: 2018/05/05 *)
+(* :Version: Revision: 6.04.001, Date: 2018/07/02 *)
 (* :Mathematica Version: 11.2 *)
 (* ============================================== *)
 (* This program is free software: you can redistribute it and/or modify it under the terms *)
@@ -18,7 +18,7 @@
 (* ============================================== *)
 Options[BerremanCommon] =
     {
-      BerremanCommonVersion -> 6.03,
+      BerremanCommonVersion -> 6.04,
       UseEulerAngles -> False,
       CalculateBoundarySolution -> False,
       CalculateDelta -> False,
@@ -260,13 +260,15 @@ ProcessOptionNames[(r : (Rule | RuleDelayed))[name_Symbol, val_]] := r[SymbolNam
 ProcessOptionNames[opt_] := opt;
 (* ============================================== *)
 EpsilonFromN[n1_] :=
-    Module[{retval}, retval = {{n1^2, 0, 0}, {0, n1^2, 0}, {0, 0, n1^2}};
-    Return[retval];
+    Module[{retval},
+      retval = {{n1^2, 0, 0}, {0, n1^2, 0}, {0, 0, n1^2}};
+      Return[retval];
     ];
 
 EpsilonFromN[n1_, n2_, n3_] :=
-    Module[{retval}, retval = {{n1^2, 0, 0}, {0, n2^2, 0}, {0, 0, n3^2}};
-    Return[retval];
+    Module[{retval},
+      retval = {{n1^2, 0, 0}, {0, n2^2, 0}, {0, 0, n3^2}};
+      Return[retval];
     ];
 
 deltaZero = DiagonalMatrix[{0, 0, 0, 0}];
@@ -366,11 +368,11 @@ FilmLayerRoTBase[FilmLayer_] := Module[{}, Return[FilmLayer[[9]]];];
 (* ============================================== *)
 (* ============================================== *)
 FilmNew[] :=
-    Module[{}, Return[{}];
+    Module[{},
+      Return[{}];
     ];
 
 Attributes[FilmAddLayer] = {HoldFirst};
-
 FilmAddLayer[Film_, FilmLayer_] :=
     Module[{},
       Film = Append[Film, FilmLayer];
@@ -492,10 +494,11 @@ IncidentLightNew[lambda_, fita_, beta_, eh : {_, _, _, _, _, _, _}] :=
       Return[{lambda, fita, beta, eh, 0, Indeterminate, Indeterminate}];
     ];
 
-IncidentLightFlip[inclght_] := Module[{flpLght},
-  flpLght = {inclght[[1]], inclght[[2]], inclght[[3]], EHFlip[inclght[[4]]], inclght[[5]], inclght[[6]]};
-  Return[flpLght];
-];
+IncidentLightFlip[inclght_] :=
+    Module[{flpLght},
+      flpLght = {inclght[[1]], inclght[[2]], inclght[[3]], EHFlip[inclght[[4]]], inclght[[5]], inclght[[6]]};
+      Return[flpLght];
+    ];
 
 (* ============================================== *)
 IncidentLightLambda[IncidentLight_] := IncidentLight[[1]];
@@ -531,20 +534,22 @@ If[$VersionNumber < 10.0,
 ];
 
 (* ============================================== *)
-MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] :=
-    Module[{kx, MaxwellEq, EH, lst3, lst6, sol, xxxNoz, xNoz4, EH4, EH4f, EH4d, EH4df, Dl, Dld, MM, MMd, MMdInv, retval},
-    (*
-    Print["MMM"];
-    Print["eps = ", MatrixForm[N[eps]]];
-    Print["mu = ", MatrixForm[N[mu]]];
-    Print["ro = ", MatrixForm[ro]];
-    Print["rotr = ", MatrixForm[rotr]];
-    *)
+MMM[eps_, mu_, ro_, lambda_, kx_] :=
+    Module[{kx, MaxwellEq, EH, lst3, lst6, sol, xxxNoz, xNoz4, EH4, EH4f, EH4d, EH4df, Dl, Dld, MM, MMd, MMdInv, retval, rotr},
+      rotr = Transpose[ro];
+
+      (*
+      Print["MMM"];
+      Print["eps = ", MatrixForm[N[eps]]];
+      Print["mu = ", MatrixForm[N[mu]]];
+      Print["ro = ", MatrixForm[ro]];
+      Print["rotr = ", MatrixForm[rotr]];
+      *)
 
       EH[x_, y_, z_] := Exp[I * kx * x] * {{Ex0[z]}, {Ey0[z]}, {Ez0[z]}, {Hx0[z]}, {Hy0[z]}, {Hz0[z]}};
       (*Print["EH[x,y,z] = ",EH[x,y,z]];*)
       MaxwellEq = (((I * (Exp[(-I * kx * x)] * ((2 * Pi * I / lambda) * M[eps, mu, ro, rotr].EH[x, y, z] + OFULL[EH][x, y, z]))))) /. x -> 0;
-      kx = (2 * Pi / lambda) * n1 * Sin[fita];
+      (* kx = (2 * Pi / lambda) * n1 * Sin[fita]; *)
 
       (*
       Print["kx = ",N[kx]];Print["n1 = ",N[n1]];
@@ -580,19 +585,19 @@ MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] :=
       Return[retval];
     ];
 (* ============================================== *)
-PPP[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_, h_] :=
+PPP[eps_, mu_, ro_, lambda_, kx_, h_] :=
     Module[{pDet, retval, bCalcErr, dummy},
     (*
     Print["PPP Started."];
     Print["MMM in PPP"];
-    Print[MatrixForm[Chop[N[MMM[eps, mu, ro, rotr, lambda, fita, n1][[1]]]]]];
+    Print[MatrixForm[Chop[N[MMM[eps, mu, ro, lambda, kx][[1]]]]]];
     Print["eps in PPP"];Print[MatrixForm[Chop[N[eps]]]];
     Print["mu in PPP"];Print[MatrixForm[Chop[N[mu]]]];
     Print["ro in PPP"];Print[MatrixForm[Chop[N[ro]]]];
-    Print["rotr in PPP"];Print[MatrixForm[Chop[N[rotr]]]];
     *)
+
       bCalcErr = False;
-      retval = MatrixExp[((2 * Pi * I / lambda) * h * MMM[eps, mu, ro, rotr, lambda, fita, n1][[1]])];
+      retval = MatrixExp[((2 * Pi * I / lambda) * h * MMM[eps, mu, ro, lambda, kx][[1]])];
       pDet = Abs[Det[retval]];
       If[pDet >= BCMAXPPPALLOWEDVALUE, bCalcErr = True;
       If[BCSUPPRESSERRORMESSAGES =!= True, Print["! OVERFLOW IN PPP ! ", "Det[MatrixExp[...]] = ", Chop[N[pDet]]]]];
@@ -605,17 +610,22 @@ PPP[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_, h_] :=
       Return[retval];
     ];
 
-PPPFull[Film_, lambda_, fita_, n1_] :=
-    Module[{len, cnt, PPPhlp, eps, ro, rotr, mu, h, FilmLayer},
+PPPFull[Film_, lambda_, kx_] :=
+    Module[{len, cnt, PPPhlp, eps, ro, mu, h, FilmLayer},
       len = FilmLength[Film];
       PPPhlp = II;
-      Do[FilmLayer = Film[[cnt]];
-      h = FilmLayerThickness[FilmLayer];
-      eps = FilmLayerEpsilon[FilmLayer];
-      mu = FilmLayerMu[FilmLayer];
-      ro = FilmLayerRo[FilmLayer];
-      rotr = FilmLayerRoT[FilmLayer];
-      PPPhlp = PPP[eps, mu, ro, rotr, lambda, fita, n1, h].PPPhlp, {cnt, 1, len}];
+
+      Do[
+        FilmLayer = Film[[cnt]];
+        h = FilmLayerThickness[FilmLayer];
+        eps = FilmLayerEpsilon[FilmLayer];
+        mu = FilmLayerMu[FilmLayer];
+        ro = FilmLayerRo[FilmLayer];
+        PPPhlp = PPP[eps, mu, ro, lambda, kx, h] . PPPhlp
+        ,
+        {cnt, 1, len}
+      ];
+
       Return[PPPhlp];
     ];
 (* ============================================== *)
@@ -660,15 +670,17 @@ SolutionNew[Media_, IncidentLight_, optsRaw___] :=
     Module[{retVal, opts, cbeta, retValBeta0, retValBeta90, inclBeta0, inclBeta90, lambda, fita, n1},
       opts = Flatten[{optsRaw}];
       cbeta = CalculateBeta0and90 /. opts /. Options[BerremanCommon];
+
       (*
-    Print["SolutionNew::optsRaw = ", optsRaw];
-    Print["SolutionNew::cbeta = ", cbeta];
-    *)
+      Print["SolutionNew::optsRaw = ", optsRaw];
+      Print["SolutionNew::cbeta = ", cbeta];
+      *)
+
       retVal = SolutionNewBase[Media, IncidentLight, optsRaw];
 
       If[cbeta,
         (
-        (* Print["SolutionNew::Processing cbeta."]; *)
+          (* Print["SolutionNew::Processing cbeta."]; *)
           lambda = IncidentLightLambda[IncidentLight];
           fita = IncidentLightFita[IncidentLight];
           n1 = MediaUpperRefractionIndex[Media];
@@ -679,7 +691,7 @@ SolutionNew[Media_, IncidentLight_, optsRaw___] :=
           retValBeta90 = SolutionNewBase[Media, inclBeta90, optsRaw];
           (* Print["SolutionNew::retVal (old) = ", retVal]; *)
           retVal = Join[retVal, {{retValBeta0, retValBeta90}}];
-        (* Print["SolutionNew::retVal = ", retVal]; *)
+          (* Print["SolutionNew::retVal = ", retVal]; *)
         )
       ];
 
@@ -1333,11 +1345,12 @@ CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTe
 CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] :=
     CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, rho];
 (* ============================================== *)
-CreateThickPlateFromN[___] := Module[{},
-  Print["CreateThickPlateFromN::Invalid parameters."];
-  Print["Correct usage: CreateThickPlateFromN[thickness_, refrInd_]"];
-  Abort[];
-];
+CreateThickPlateFromN[___] :=
+    Module[{},
+      Print["CreateThickPlateFromN::Invalid parameters."];
+      Print["Correct usage: CreateThickPlateFromN[thickness_, refrInd_]"];
+      Abort[];
+    ];
 (* ============================================== *)
 CreateThickPlate[___] :=
     Module[{},
