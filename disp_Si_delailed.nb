@@ -1,0 +1,185 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5935,        177]
+NotebookOptionsPosition[      5608,        163]
+NotebookOutlinePosition[      5981,        179]
+CellTagsIndexPosition[      5938,        176]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"\[Lambda]1", "=", "0.3757"}], "\[IndentingNewLine]", 
+ RowBox[{"\[CurlyKappa]1", "=", "1.32"}], "\[IndentingNewLine]", 
+ RowBox[{"\[Lambda]2", "=", "0.589"}], "\[IndentingNewLine]", 
+ RowBox[{"\[CurlyKappa]2", "=", "0.030104"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"xi", "[", "lambda_", "]"}], ":=", 
+   RowBox[{"Ko", " ", 
+    RowBox[{
+     RowBox[{"lambda", "^", "2"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"\[Epsilon]", "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"lambda", "^", "2"}], "-", 
+          RowBox[{"\[Lambda]0", "^", "2"}]}], ")"}], "^", "2"}]}], 
+      ")"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"xi", "[", "\[Lambda]1", "]"}], "\[Equal]", 
+        "\[CurlyKappa]1"}], ",", 
+       RowBox[{
+        RowBox[{"xi", "[", "\[Lambda]2", "]"}], "\[Equal]", 
+        "\[CurlyKappa]2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Ko", ",", "\[Lambda]0"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Simplify", "[", 
+   RowBox[{"sol", " ", "/.", " ", 
+    RowBox[{"{", 
+     RowBox[{"\[Epsilon]", " ", "\[Rule]", " ", "0"}], "}"}]}], "]"}], "[", 
+  RowBox[{"[", "2", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Simplify", "[", 
+   RowBox[{"sol", " ", "/.", " ", 
+    RowBox[{"{", 
+     RowBox[{"\[Epsilon]", " ", "\[Rule]", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "6"}]}]}], "}"}]}], "]"}], "[", 
+  RowBox[{"[", "2", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Simplify", "[", 
+    RowBox[{"sol", " ", "/.", " ", 
+     RowBox[{"{", 
+      RowBox[{"\[Epsilon]", " ", "\[Rule]", " ", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "5"}]}]}], "}"}]}], "]"}], "[", 
+   RowBox[{"[", "2", "]"}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"xi", "[", 
+    RowBox[{"lambda_", ",", " ", "eps_"}], "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"xi", "[", "\[Lambda]", "]"}], " ", "/.", " ", 
+       RowBox[{"sol", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ")"}], " ", "/.", " ", 
+     RowBox[{"{", 
+      RowBox[{"\[Epsilon]", " ", "\[Rule]", " ", "eps"}], "}"}]}], ")"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsTbl", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "6"}]}], ",", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "5"}]}], ",", " ", 
+      RowBox[{"5", " ", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "5"}]}]}], ",", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "4"}]}]}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"xiTbl", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"xi", "[", 
+       RowBox[{"\[Lambda]", ",", " ", 
+        RowBox[{"epsTbl", "[", 
+         RowBox[{"[", "ii", "]"}], "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"ii", ",", " ", 
+        RowBox[{"Length", "[", "epsTbl", "]"}]}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Plot", "[", 
+   RowBox[{"xiTbl", ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Lambda]", ",", "0.2", ",", "0.8"}], "}"}], ",", " ", 
+    RowBox[{"Frame", "\[Rule]", "True"}], ",", " ", 
+    RowBox[{"GridLines", "\[Rule]", "Automatic"}], ",", " ", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", " ", "10"}], "}"}]}], ",", " ", 
+    RowBox[{"PlotLegends", "\[Rule]", "epsTbl"}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"xi", "[", 
+      RowBox[{"\[Lambda]", ",", " ", "0"}], "]"}], ",", " ", 
+     RowBox[{"xi", "[", 
+      RowBox[{"\[Lambda]", ",", " ", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "6"}]}]}], "]"}], ",", " ", 
+     RowBox[{"xi", "[", 
+      RowBox[{"\[Lambda]", ",", " ", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "5"}]}]}], "]"}], ",", " ", 
+     RowBox[{"xi", "[", 
+      RowBox[{"\[Lambda]", ",", " ", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "4"}]}]}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Lambda]", ",", "0.2", ",", "0.8"}], "}"}], ",", " ", 
+   RowBox[{"Frame", "\[Rule]", "True"}], ",", " ", 
+   RowBox[{"GridLines", "\[Rule]", "Automatic"}], ",", " ", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", " ", "10"}], "}"}]}], ",", " ", 
+   RowBox[{"PlotLegends", "\[Rule]", "Automatic"}]}], 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.735463471029171*^9, 3.7354636486358585`*^9}, {
+  3.7354637370704365`*^9, 3.7354643322890034`*^9}, {3.7354643650159783`*^9, 
+  3.735464366032017*^9}, {3.735464417637107*^9, 3.7354645246148276`*^9}},
+ CellLabel->"In[46]:=",ExpressionUUID->"aabb36f1-e135-4344-87c4-99f6d2768316"]
+},
+WindowSize->{989, 720},
+WindowMargins->{{Automatic, 49}, {-29, Automatic}},
+Magnification:>1.3 Inherited,
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 5046, 141, 513, "Input",ExpressionUUID->"aabb36f1-e135-4344-87c4-99f6d2768316"]
+}
+]
+*)
+

@@ -92,6 +92,7 @@ InitializeBM[pathList_, useParallelTbl_, optsRaw___] := Module[{pathVar, useParT
   Get["OpticalModel.m", Path -> pathList];
   Get["OpticalElements.m", Path -> pathList];
   Get["OpticalModelFunctions.m", Path -> pathList];
+  Get["OpticalDispersion.m", Path -> pathList];
   Print["... completed."];
 
   OutputCopyright[];
