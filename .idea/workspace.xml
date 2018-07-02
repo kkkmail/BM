@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Calc/Example_01_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_01_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanDirect.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanDirect.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanInit.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanInit.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanInverse.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanInverse.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/FieldIO.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldIO.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalElements.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalElements.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalModel.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalModel.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,27 +25,92 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="693" column="10" selection-start-line="693" selection-start-column="10" selection-end-line="693" selection-end-column="10" />
+            <state relative-caret-position="220">
+              <caret line="436" column="27" selection-start-line="436" selection-end-line="436" selection-end-column="27" />
               <folding>
-                <element signature="e#2310#2803#0" />
-                <element signature="e#2884#3368#0" />
-                <element signature="e#4081#4532#0" />
-                <element signature="e#4619#4834#0" />
-                <element signature="e#5028#5516#0" />
+                <element signature="e#1260#1719#0" />
                 <element signature="e#6370#6963#0" />
+                <element signature="e#7681#7765#0" />
+                <element signature="e#7793#7949#0" />
+                <element signature="e#8255#8350#0" />
+                <element signature="e#8388#8483#0" />
+                <element signature="e#10041#10633#0" />
+                <element signature="e#10921#10982#0" />
+                <element signature="e#11170#11299#0" />
+                <element signature="e#11358#11806#0" />
+                <element signature="e#11838#12310#0" />
+                <element signature="e#13210#13284#0" />
+                <element signature="e#13312#13356#0" />
+                <element signature="e#13412#13608#0" />
+                <element signature="e#15095#16142#0" />
+                <element signature="e#20011#20206#0" />
+                <element signature="e#20473#22641#0" />
+                <element signature="e#22755#23941#0" />
+                <element signature="e#23987#24430#0" />
                 <element signature="e#24736#27740#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BerremanDirect.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="86">
+              <caret line="1820" column="6" selection-start-line="1820" selection-start-column="6" selection-end-line="1820" selection-end-column="6" />
+              <folding>
+                <element signature="e#1404#1467#0" />
+                <element signature="e#1552#2777#0" />
+                <element signature="e#3026#3077#0" />
+                <element signature="e#3110#3200#0" />
+                <element signature="e#3283#3419#0" />
+                <element signature="e#4028#4215#0" />
+                <element signature="e#4299#4440#0" />
+                <element signature="e#4542#4751#0" />
+                <element signature="e#4847#4984#0" />
+                <element signature="e#5095#5427#0" />
+                <element signature="e#5907#11432#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpticalModel.m" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kernel/OpticalModel.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6704">
+              <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModelCreation.m" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kernel/ModelCreation.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="389" column="21" selection-start-line="389" selection-end-line="389" selection-end-column="21" />
+              <folding>
+                <element signature="e#2310#2803#0" />
+                <element signature="e#2884#3368#0" />
+                <element signature="e#4081#4532#0" />
+                <element signature="e#4619#4834#0" />
+                <element signature="e#5028#5516#0" />
+                <element signature="e#61860#62981#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpticalElements.m" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kernel/OpticalElements.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-922">
+              <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -65,27 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CreateSubstanceFromN</find>
-      <find>MMM</find>
-      <find>Transform</find>
-      <find>Head</find>
-      <find>Re[</find>
-      <find>SolutionAverageNew</find>
-      <find>SSMakeDownStep</find>
-      <find>MediaLowerEpsilon</find>
-      <find>MediaNew</find>
-      <find>MakeFirst</find>
-      <find>GetSolAvg</find>
-      <find>MediaFlip</find>
-      <find>GetSolTransmittedLight</find>
-      <find>CalcCollectionPerform</find>
-      <find>CalcPerform</find>
-      <find>GetOutput</find>
-      <find>GetFuncArr</find>
-      <find>GetSolArr</find>
-      <find>SolutionSumNew</find>
-      <find>GetSol</find>
-      <find>TransformMedia</find>
       <find>SSMakeFirstStep::inclNext</find>
       <find>kx</find>
       <find>OFULL</find>
@@ -95,6 +135,27 @@
       <find>SolutionNewBase</find>
       <find>n2</find>
       <find>Sqrt</find>
+      <find>rotr</find>
+      <find>M[</find>
+      <find>MMM[</find>
+      <find>PPP[</find>
+      <find>CreateSubstanceFromN</find>
+      <find>IncidentLightFita</find>
+      <find>IncidentLightBeta</find>
+      <find>OutputIncidentRayInfo</find>
+      <find>IncidentLighRefrIndex</find>
+      <find>nUpper</find>
+      <find>You must supply epsilon</find>
+      <find>muMstandard</find>
+      <find>MediaLowerRo</find>
+      <find>TransformMedia does not work because of n1, n2, nOut</find>
+      <find>MediaUpperRoT</find>
+      <find>IncidentLightNew</find>
+      <find>IncidentLighKxFunc</find>
+      <find>IncidentLightKxFunc</find>
+      <find>MediaUpperRefractionIndex</find>
+      <find>IncidentLighAmplitude</find>
+      <find>LayeredSystemGetMedia</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,7 +172,6 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_00_MuellerMatrix.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law__Au.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media_v2.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" />
@@ -135,16 +195,19 @@
         <option value="$PROJECT_DIR$/Kernel/Dispersion.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" />
-        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
-        <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInverse.m" />
         <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
-        <option value="$PROJECT_DIR$/Kernel/FieldIO.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalElements.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModel.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" />
+        <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_604_Example_01_Snell_Law.m" />
+        <option value="$PROJECT_DIR$/Kernel/FieldIO.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
+        <option value="$PROJECT_DIR$/Kernel/ModelCreation.m" />
+        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
       </list>
     </option>
   </component>
@@ -187,6 +250,11 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\GitHub\BM\Kernel" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -308,14 +376,14 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32934132" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18443997" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12139504" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -365,29 +433,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="112" column="11" selection-start-line="112" selection-end-line="112" selection-end-column="11" />
-          <folding>
-            <element signature="e#2310#2803#0" />
-            <element signature="e#2884#3368#0" />
-            <element signature="e#4081#4532#0" />
-            <element signature="e#4619#4834#0" />
-            <element signature="e#5028#5516#0" />
-            <element signature="e#6370#6963#0" />
-            <element signature="e#24736#27740#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanInverse.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5899">
-          <caret line="347" column="30" selection-start-line="347" selection-start-column="30" selection-end-line="347" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Inv_000_Direct.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -414,12 +459,25 @@
         <state relative-caret-position="19601">
           <caret line="1162" column="34" lean-forward="true" selection-start-line="1162" selection-start-column="34" selection-end-line="1162" selection-end-column="34" />
           <folding>
-            <element signature="e#2310#2803#0" />
-            <element signature="e#2884#3368#0" />
-            <element signature="e#4081#4532#0" />
-            <element signature="e#4619#4834#0" />
-            <element signature="e#5028#5516#0" />
+            <element signature="e#1260#1719#0" />
             <element signature="e#6370#6963#0" />
+            <element signature="e#7681#7765#0" />
+            <element signature="e#7793#7949#0" />
+            <element signature="e#8255#8350#0" />
+            <element signature="e#8388#8483#0" />
+            <element signature="e#10041#10633#0" />
+            <element signature="e#10921#10982#0" />
+            <element signature="e#11170#11299#0" />
+            <element signature="e#11358#11806#0" />
+            <element signature="e#11838#12310#0" />
+            <element signature="e#13210#13284#0" />
+            <element signature="e#13312#13356#0" />
+            <element signature="e#13412#13608#0" />
+            <element signature="e#15095#16142#0" />
+            <element signature="e#20011#20206#0" />
+            <element signature="e#20473#22641#0" />
+            <element signature="e#22755#23941#0" />
+            <element signature="e#23987#24430#0" />
             <element signature="e#24736#27740#0" />
           </folding>
         </state>
@@ -584,24 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="35" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="52" column="37" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
-          <folding>
-            <element signature="e#528#594#0" />
-            <element signature="e#664#1004#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
@@ -609,31 +649,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalElements.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/OpticalModelFunctions.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalModel.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FieldIO.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="7" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -658,24 +677,121 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalElements.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-922">
+          <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="95" column="24" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="19" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalModel.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6704">
+          <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_604_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="e#1510#1519#0" expanded="true" />
+            <element signature="e#1547#1553#0" expanded="true" />
+            <element signature="e#1584#1591#0" expanded="true" />
+            <element signature="e#1623#1631#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/FieldIO.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="439" column="52" lean-forward="true" selection-start-line="439" selection-start-column="52" selection-end-line="439" selection-end-column="52" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="693" column="10" selection-start-line="693" selection-start-column="10" selection-end-line="693" selection-end-column="10" />
+        <state relative-caret-position="220">
+          <caret line="436" column="27" selection-start-line="436" selection-end-line="436" selection-end-column="27" />
+          <folding>
+            <element signature="e#1260#1719#0" />
+            <element signature="e#6370#6963#0" />
+            <element signature="e#7681#7765#0" />
+            <element signature="e#7793#7949#0" />
+            <element signature="e#8255#8350#0" />
+            <element signature="e#8388#8483#0" />
+            <element signature="e#10041#10633#0" />
+            <element signature="e#10921#10982#0" />
+            <element signature="e#11170#11299#0" />
+            <element signature="e#11358#11806#0" />
+            <element signature="e#11838#12310#0" />
+            <element signature="e#13210#13284#0" />
+            <element signature="e#13312#13356#0" />
+            <element signature="e#13412#13608#0" />
+            <element signature="e#15095#16142#0" />
+            <element signature="e#20011#20206#0" />
+            <element signature="e#20473#22641#0" />
+            <element signature="e#22755#23941#0" />
+            <element signature="e#23987#24430#0" />
+            <element signature="e#24736#27740#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/ModelCreation.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="389" column="21" selection-start-line="389" selection-end-line="389" selection-end-column="21" />
           <folding>
             <element signature="e#2310#2803#0" />
             <element signature="e#2884#3368#0" />
             <element signature="e#4081#4532#0" />
             <element signature="e#4619#4834#0" />
             <element signature="e#5028#5516#0" />
-            <element signature="e#6370#6963#0" />
-            <element signature="e#24736#27740#0" />
+            <element signature="e#61860#62981#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="1820" column="6" selection-start-line="1820" selection-start-column="6" selection-end-line="1820" selection-end-column="6" />
+          <folding>
+            <element signature="e#1404#1467#0" />
+            <element signature="e#1552#2777#0" />
+            <element signature="e#3026#3077#0" />
+            <element signature="e#3110#3200#0" />
+            <element signature="e#3283#3419#0" />
+            <element signature="e#4028#4215#0" />
+            <element signature="e#4299#4440#0" />
+            <element signature="e#4542#4751#0" />
+            <element signature="e#4847#4984#0" />
+            <element signature="e#5095#5427#0" />
+            <element signature="e#5907#11432#0" />
           </folding>
         </state>
       </provider>

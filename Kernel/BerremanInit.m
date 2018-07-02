@@ -93,6 +93,7 @@ InitializeBM[pathList_, useParallelTbl_, optsRaw___] :=
 
       Print["Loading modules ..."];
       Get["BerremanCommon.m", Path -> pathList];
+      Get["ModelCreation.m", Path -> pathList];
       Get["BerremanDirect.m", Path -> pathList];
       Get["FieldAlgebra.m", Path -> pathList];
       Get["BerremanInverse.m", Path -> pathList];
