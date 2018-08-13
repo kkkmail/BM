@@ -5,7 +5,7 @@
 (* :Email: konstantin.k.konstantinov@gmail.com *)
 (* :License type: GPL v3 or any later version, see http://www.gnu.org/licenses/ *)
 (* :Copyright: K^3, 2001 - 2018 *)
-(* :Version: Revision: 6.04.001, Date: 2018/07/02 *)
+(* :Version: Revision: 7.01.001, Date: 2018/07/02 *)
 (* :Mathematica Version: 11.2 *)
 (* ============================================== *)
 (* This program is free software: you can redistribute it and/or modify it under the terms *)
@@ -182,19 +182,19 @@ CreateSemiInfiniteMedia[epsilon_?OpticalTensorQ] :=
       theta = {0, 0, 1, Subscript["θ", "l"], Degree};
       psi = {0, 0, 1, Subscript["ψ", "l"], Degree};
       rotationAngles = {fi, theta, psi};
-      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, muMstandard, roMstandard];
+      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, muStandard, roStandard];
       Return[subst];
     ];
 
 CreateSemiInfiniteMedia[rotationAngles_?OpticalTensorQ, epsilon_?MatrixQ] :=
     Module[{subst},
-      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, muMstandard, roMstandard];
+      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, muStandard, roStandard];
       Return[subst];
     ];
 
 CreateSemiInfiniteMedia[rotationAngles_?MatrixQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ] :=
     Module[{subst},
-      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, mu, roMstandard];
+      subst = CreateSubstance[SemiInfiniteMediaClassName, Infinity, rotationAngles, epsilon, mu, roStandard];
       Return[subst];
     ];
 
@@ -229,7 +229,7 @@ CreateSubstanceFromN[substanceType_?StringQ, thickness_, refrInd_] :=
       psi = {0, 0, 1, Subscript["\[Psi]", strIdx], Degree};
       rotationAngles = {fi, theta, psi};
       eps = EpsilonFromN[refrInd];
-      subst = CreateSubstance[substanceType, thickness, rotationAngles, eps, muMstandard, roMstandard];
+      subst = CreateSubstance[substanceType, thickness, rotationAngles, eps, muStandard, roStandard];
       Return[subst];
     ] /; MemberQ[SubstanceClassList, substanceType];
 (* ============================================== *)
@@ -260,10 +260,10 @@ CreateThickPlateFromN[thickness_, refrInd_] :=
     CreateSubstanceFromN[ThickPlateClassName, thickness, refrInd];
 
 CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ] :=
-    CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, muMstandard, roMstandard];
+    CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, muStandard, roStandard];
 
 CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ] :=
-    CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, roMstandard];
+    CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, roStandard];
 
 CreateThickPlate[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] :=
     CreateSubstance[ThickPlateClassName, thickness, rotationAngles, epsilon, mu, rho];
@@ -289,10 +289,10 @@ CreateFilmFromN[thickness_, refrInd_] :=
     CreateSubstanceFromN[FilmClassName, thickness, refrInd];
 
 CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ] :=
-    CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, muMstandard, roMstandard];
+    CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, muStandard, roStandard];
 
 CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ] :=
-    CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, mu, roMstandard];
+    CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, mu, roStandard];
 
 CreateFilm[thickness_, rotationAngles_?RotationAnglesQ, epsilon_?OpticalTensorQ, mu_?OpticalTensorQ, rho_?OpticalTensorQ] :=
     CreateSubstance[FilmClassName, thickness, rotationAngles, epsilon, mu, rho];
@@ -478,7 +478,7 @@ CreateLayeredSystem[incidentRay_?IncidentRayQ, gamma_?VariableQ, mediaSequence__
       If[!useThickPlate,
         (
           thickness = 0;
-          media = MediaNew[gamma, film, "Layered System", thickness, epsLower, muLower, roLower, epsMstandard];
+          media = MediaNew[gamma, film, "Layered System", thickness, epsLower, muLower, roLower, epsStandard];
           extraOptions = Join[extraOptions, {UseThickLastLayer -> False}];
         ),
         (

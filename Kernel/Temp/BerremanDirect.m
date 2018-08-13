@@ -1474,7 +1474,7 @@ SSMakeDownStep[Media_, IncidentLight_, opts___] :=
       Film = FilmNew[];
 
       (* TODO - This is what was here prior to version 6.03. That makes no sense. *)
-      (* MediaBound = MediaNew[n2, nOut, gamm, Film, "", nOut, h2, EpsilonFromN[Re[nOut]], muMstandard, roMstandard, MediaLowerEpsilon[Media], MediaLowerMu[Media], MediaLowerRo[Media]]; *)
+      (* MediaBound = MediaNew[n2, nOut, gamm, Film, "", nOut, h2, EpsilonFromN[Re[nOut]], muStandard, roStandard, MediaLowerEpsilon[Media], MediaLowerMu[Media], MediaLowerRo[Media]]; *)
       MediaBound = Media;
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)

@@ -5,7 +5,7 @@
 (* :Email: konstantin.k.konstantinov@gmail.com *)
 (* :License type: GPL v3 or any later version, see http://www.gnu.org/licenses/ *)
 (* :Copyright: K^3, 2001 - 2018 *)
-(* :Version: Revision: 6.04.001, Date: 2018/07/02 *)
+(* :Version: Revision: 7.01.001, Date: 2018/07/02 *)
 (* :Mathematica Version: 11.2 *)
 (* ============================================== *)
 (* This program is free software: you can redistribute it and/or modify it under the terms *)
@@ -18,7 +18,7 @@
 (* ============================================== *)
 Options[BerremanCommon] =
     {
-      BerremanCommonVersion -> 6.04,
+      BerremanCommonVersion -> 7.01,
       UseEulerAngles -> False,
       CalculateBoundarySolution -> False,
       CalculateDelta -> False,
@@ -88,10 +88,9 @@ PrintTimeUsed[showTime_?BooleanQ] :=
 PrintTimeUsed[] := PrintTimeUsed[True];
 (* ============================================== *)
 II := IdentityMatrix[4];
-epsMstandard := IdentityMatrix[3];
-muMstandard := IdentityMatrix[3];
-roMstandard := I * DiagonalMatrix[{0, 0, 0}];
-rotMstandard := -I * DiagonalMatrix[{0, 0, 0}];
+epsStandard := IdentityMatrix[3];
+muStandard := IdentityMatrix[3];
+roStandard := I * DiagonalMatrix[{0, 0, 0}];
 (* ============================================== *)
 JoinRight[lst1_, lst2_] := Transpose[Join[Transpose[lst1], Transpose[lst2]]];
 JoinRight[lst1_, lst2_, lst3_] := Transpose[Join[Transpose[lst1], Transpose[lst2], Transpose[lst3]]];
@@ -183,7 +182,7 @@ PsiAngle[fita_, n1_, n2_] :=
     ];
 (* ============================================== *)
 (* ============================================== *)
-FilmLayerNew[Thickness_, Epsilon_, mu_ : muMstandard, ro_ : roMstandard] :=
+FilmLayerNew[Thickness_, Epsilon_, mu_ : muStandard, ro_ : roStandard] :=
     Module[{},
       Return[{Thickness, Epsilon, mu, ro, Epsilon, mu, ro}];
     ];
@@ -272,7 +271,7 @@ FilmTransformAll[Film_, rotn_, Reset_ : True] :=
 FilmItem[Film_, idx_] := Film[[idx]];
 (* ============================================== *)
 (* ============================================== *)
-MediaNew[gamma_, Film_, Description_ : "", h2_ : 0, epsilon2_ : {}, mu2_ : muMstandard, ro2_ : roMstandard, epsilon_ : {}, mu_ : muMstandard, ro_ : roMstandard] :=
+MediaNew[gamma_, Film_, Description_ : "", h2_ : 0, epsilon2_ : {}, mu2_ : muStandard, ro2_ : roStandard, epsilon_ : {}, mu_ : muStandard, ro_ : roStandard] :=
     Module[{epsVal, eps2Val, retVal},
       epsVal =
           If[Head[epsilon] === Head[{}] && Length[epsilon] === 0,

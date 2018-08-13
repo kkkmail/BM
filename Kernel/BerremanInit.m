@@ -5,7 +5,7 @@
 (* :Email: konstantin.k.konstantinov@gmail.com *)
 (* :License type: GPL v3 or any later version, see http://www.gnu.org/licenses/ *)
 (* :Copyright: K^3, 2001 - 2018 *)
-(* :Version: Revision: 6.04.001, Date: 2018/07/02 *)
+(* :Version: Revision: 7.01.001, Date: 2018/07/02 *)
 (* :Mathematica Version: 11.2 *)
 (* ============================================== *)
 (* This program is free software: you can redistribute it and/or modify it under the terms *)
@@ -16,7 +16,7 @@
 (* You should have received a copy of the GNU General Public License along with this program. *)
 (* If not, see <http://www.gnu.org/licenses/>. *)
 (* ============================================== *)
-BerremanInitVersionValue = 6.04;
+BerremanInitVersionValue = 7.01;
 (* ============================================== *)
 Options[BerremanInit] =
     {
