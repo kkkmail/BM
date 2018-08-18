@@ -42,9 +42,11 @@ eps$Vacuum = IdentityMatrix[3];
 
 refrIndex$La3Ga5SiO14$Ordinary[lambda_] :=
     refrIndex[lambda, 2.4981088, 0.12978841 mkm, 0.5 * 10^-4, 0.28 * mkm, 0.3 * mkm];
+    (* refrIndex[lambda, 2.4981088, 0.12978841 mkm, 0 * 10^-4, 0.28 * mkm, 0.3 * mkm]; *)
 
 refrIndex$La3Ga5SiO14$ExtraOrdinary[lambda_] :=
     refrIndex[lambda, 2.5408145, 0.12914765 mkm, 1.0 * 10^-4, 0.28 * mkm, 0.3 * mkm];
+   (* refrIndex[lambda, 2.5408145, 0.12914765 mkm, 0 * 10^-4, 0.28 * mkm, 0.3 * mkm]; *)
 
 refrIndex$La3Ga5SiO14$Average[lambda_] :=
     (Re[refrIndex$La3Ga5SiO14$Ordinary[lambda]] + Re[refrIndex$La3Ga5SiO14$ExtraOrdinary[lambda]]) / 2;

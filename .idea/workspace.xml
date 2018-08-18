@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanDirect.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanInit.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanInit.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanInverse.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/FieldIO.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/ModelCreation.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/ModelCreation.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalElements.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalModel.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_09_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_09_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,48 +17,139 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1022319418">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="m" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Mathematica" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="m" value="109" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Mathematica" value="109" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="BM" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BerremanInit.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-start-line="7" selection-end-line="8" />
+            <state relative-caret-position="425">
+              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModelCreation.m" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Kernel/ModelCreation.m">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3333">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="317">
+              <caret line="39" column="32" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6545">
+              <caret line="574" lean-forward="true" selection-start-line="574" selection-end-line="574" />
               <folding>
-                <element signature="e#1857#2350#0" />
-                <element signature="e#2431#2915#0" />
-                <element signature="e#3628#4079#0" />
-                <element signature="e#4166#4381#0" />
-                <element signature="e#4575#5063#0" />
-                <element signature="e#6039#6429#0" />
-                <element signature="e#6513#6673#0" />
-                <element signature="e#6777#6929#0" />
-                <element signature="e#7054#7199#0" />
-                <element signature="e#7295#7462#0" />
-                <element signature="e#7553#7978#0" />
-                <element signature="e#8107#8599#0" />
-                <element signature="e#8733#8970#0" />
-                <element signature="e#9183#9325#0" />
-                <element signature="e#9454#9770#0" />
-                <element signature="e#10779#10944#0" />
-                <element signature="e#11028#11527#0" />
-                <element signature="e#12346#12499#0" />
-                <element signature="e#12577#13052#0" />
-                <element signature="e#13850#14297#0" />
-                <element signature="e#14567#15688#0" />
+                <element signature="e#1404#1467#0" />
+                <element signature="e#1552#2777#0" />
+                <element signature="e#3026#3077#0" />
+                <element signature="e#3110#3200#0" />
+                <element signature="e#3283#3419#0" />
+                <element signature="e#4028#4215#0" />
+                <element signature="e#4299#4440#0" />
+                <element signature="e#4542#4751#0" />
+                <element signature="e#4847#4984#0" />
+                <element signature="e#5095#5427#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="861">
+              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Thin_Film_Complex_Graph.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="816">
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="385">
+              <caret line="54" column="52" lean-forward="true" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="861">
+              <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Thin_Film_Complex_Graph.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="48" column="88" selection-start-line="48" selection-start-column="88" selection-end-line="48" selection-end-column="88" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -152,11 +234,8 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Inv_000_Solution.m" />
         <option value="$PROJECT_DIR$/Optical Materials/Langasit.m" />
         <option value="$PROJECT_DIR$/Kernel/Dispersion.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInverse.m" />
         <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
-        <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalElements.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModel.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" />
@@ -167,11 +246,16 @@
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
         <option value="$PROJECT_DIR$/Kernel/ModelCreation.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Thin_Film_Complex_Graph.m" />
+        <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Thin_Film_Complex_Graph.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1835" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="1834" />
     <option name="width" value="2000" />
     <option name="height" value="1970" />
   </component>
@@ -180,13 +264,20 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
               <item name="BM" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BM" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
@@ -202,11 +293,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534218469859" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -228,50 +318,6 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
-    </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -299,18 +345,31 @@
       </Profilers>
       <method />
     </configuration>
-    <configuration default="true" type="executeSpecs" factoryName="Gauge Execution">
-      <setting name="environment" value="" />
-      <setting name="specsToExecute" value="" />
-      <setting name="tags" value="" />
-      <setting name="parallelNodes" value="" />
-      <setting name="execInParallel" value="false" />
-      <setting name="programParameters" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="moduleName" value="" />
-      <envMap />
-      <setting name="rowsRange" value="" />
-      <method />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -327,121 +386,71 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="796" extended-state="6" />
+    <frame x="-6" y="-6" width="1933" height="1053" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32934132" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23071764" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2672" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" id="Properties" order="3" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info id="Nl-Palette" order="2" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
-    </layout>
-    <layout-to-restore>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25319007" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info anchor="right" id="Properties" order="6" />
       <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Nl-Palette" order="6" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32934132" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25319007" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Nl-Palette" order="6" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Nl-Palette" order="6" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
-      <window_info id="Favorites" order="7" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Inv_000_Direct.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="74" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Inv_000_Solution.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="180" lean-forward="true" selection-start-line="25" selection-start-column="180" selection-end-line="25" selection-end-column="180" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="55" column="19" lean-forward="true" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19601">
-          <caret line="1162" column="34" lean-forward="true" selection-start-line="1162" selection-start-column="34" selection-end-line="1162" selection-end-column="34" />
-          <folding>
-            <element signature="e#1260#1719#0" />
-            <element signature="e#6370#6963#0" />
-            <element signature="e#7681#7765#0" />
-            <element signature="e#7793#7949#0" />
-            <element signature="e#8255#8350#0" />
-            <element signature="e#8388#8483#0" />
-            <element signature="e#10041#10633#0" />
-            <element signature="e#10921#10982#0" />
-            <element signature="e#11170#11299#0" />
-            <element signature="e#11358#11806#0" />
-            <element signature="e#11838#12310#0" />
-            <element signature="e#13210#13284#0" />
-            <element signature="e#13312#13356#0" />
-            <element signature="e#13412#13608#0" />
-            <element signature="e#15095#16142#0" />
-            <element signature="e#20011#20206#0" />
-            <element signature="e#20473#22641#0" />
-            <element signature="e#22755#23941#0" />
-            <element signature="e#23987#24430#0" />
-            <element signature="e#24736#27740#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_405_Inv_003_Direct.nb" />
     <entry file="file://$PROJECT_DIR$/Examples/BM_503_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
     <entry file="file://$PROJECT_DIR$/Examples/BM_602_Example_08_2L_Thin_Film_on_Substrate_Plate.m" />
@@ -506,21 +515,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_405_Inv_001_Direct.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -584,23 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-          <folding>
-            <element signature="e#529#627#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
@@ -622,24 +600,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="101" column="7" lean-forward="true" selection-start-line="101" selection-start-column="7" selection-end-line="101" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanInverse.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="541">
           <caret line="635" lean-forward="true" selection-start-line="635" selection-end-line="635" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="19" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -654,12 +618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-170">
           <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#1510#1519#0" expanded="true" />
-            <element signature="e#1547#1553#0" expanded="true" />
-            <element signature="e#1584#1591#0" expanded="true" />
-            <element signature="e#1623#1631#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -667,26 +625,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="439" column="52" lean-forward="true" selection-start-line="439" selection-start-column="52" selection-end-line="439" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="574" lean-forward="true" selection-start-line="574" selection-end-line="574" />
-          <folding>
-            <element signature="e#1404#1467#0" />
-            <element signature="e#1552#2777#0" />
-            <element signature="e#3026#3077#0" />
-            <element signature="e#3110#3200#0" />
-            <element signature="e#3283#3419#0" />
-            <element signature="e#4028#4215#0" />
-            <element signature="e#4299#4440#0" />
-            <element signature="e#4542#4751#0" />
-            <element signature="e#4847#4984#0" />
-            <element signature="e#5095#5427#0" />
-            <element signature="e#5907#11432#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -704,22 +642,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321">
-          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
-          <folding>
-            <element signature="e#2443#3036#0" />
-            <element signature="e#3789#3873#0" />
-            <element signature="e#3901#4057#0" />
-            <element signature="e#6103#6695#0" />
-            <element signature="e#6839#6899#0" />
-            <element signature="e#6987#7048#0" />
-            <element signature="e#7234#7311#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/ModelCreation.m" />
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -727,32 +650,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/ModelCreation.m">
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3333">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="425">
+          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="54" column="52" lean-forward="true" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="861">
+          <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Thin_Film_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="48" column="88" selection-start-line="48" selection-start-column="88" selection-end-line="48" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="861">
+          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Thin_Film_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="39" column="32" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6545">
+          <caret line="574" lean-forward="true" selection-start-line="574" selection-end-line="574" />
           <folding>
-            <element signature="e#1857#2350#0" />
-            <element signature="e#2431#2915#0" />
-            <element signature="e#3628#4079#0" />
-            <element signature="e#4166#4381#0" />
-            <element signature="e#4575#5063#0" />
-            <element signature="e#6039#6429#0" />
-            <element signature="e#6513#6673#0" />
-            <element signature="e#6777#6929#0" />
-            <element signature="e#7054#7199#0" />
-            <element signature="e#7295#7462#0" />
-            <element signature="e#7553#7978#0" />
-            <element signature="e#8107#8599#0" />
-            <element signature="e#8733#8970#0" />
-            <element signature="e#9183#9325#0" />
-            <element signature="e#9454#9770#0" />
-            <element signature="e#10779#10944#0" />
-            <element signature="e#11028#11527#0" />
-            <element signature="e#12346#12499#0" />
-            <element signature="e#12577#13052#0" />
-            <element signature="e#13850#14297#0" />
-            <element signature="e#14567#15688#0" />
+            <element signature="e#1404#1467#0" />
+            <element signature="e#1552#2777#0" />
+            <element signature="e#3026#3077#0" />
+            <element signature="e#3110#3200#0" />
+            <element signature="e#3283#3419#0" />
+            <element signature="e#4028#4215#0" />
+            <element signature="e#4299#4440#0" />
+            <element signature="e#4542#4751#0" />
+            <element signature="e#4847#4984#0" />
+            <element signature="e#5095#5427#0" />
           </folding>
         </state>
       </provider>

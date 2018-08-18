@@ -15,7 +15,7 @@ opts =
     {
       BDPlotFigures -> True,
       UseEulerAngles -> False,
-      NoOfAveragingPoints -> 5
+      NoOfAveragingPoints -> 3
     };
 (* ============================================== *)
 FuncList =
@@ -28,7 +28,7 @@ FuncList =
       Elr
     };
 (* ============================================== *)
-systemDescription = "Uniaxial slightly absorbing thick substrate plate (La3Ga5SiO14) - dispersion calculations.";
+systemDescription = "Uniaxial slightly absorbing thin substrate plate (La3Ga5SiO14) - dispersion calculations.";
 Print["!!! For absorbing plate I > R + T !!!"];
 (* ============================================== *)
 Print["Параметры падающего света..."];
@@ -44,22 +44,22 @@ fi = {0, 0, 1, "φ", Degree};
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];
 (* ============================================== *)
-Print["Оптические параметры толстой пластинки: La3Ga5SiO14."];
+Print["Оптические параметры тонкой пластинки: La3Ga5SiO14."];
 Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness."];
-thickness = 0.1 mm;
+thickness = {0.1, 0.1, 1, "h", mm};
 
 fiThickPlate = {0, 0, 30, Subscript["φ", "t"], Degree};
 thetaThickPlate = {0, 0, 30, Subscript["θ", "t"], Degree};
 psiThickPlate = {0, 0, 30, Subscript["ψ", "t"], Degree};
 rotationAnglesThickPlate = {fiThickPlate, thetaThickPlate, psiThickPlate};
 
-thickPlate = CreateThickPlate[thickness, rotationAnglesThickPlate, eps$La3Ga5SiO14, muMstandard, rho$La3Ga5SiO14];
+layer1 = CreateFilm[thickness, rotationAnglesThickPlate, eps$La3Ga5SiO14, muMstandard, rho$La3Ga5SiO14];
 (* ============================================== *)
 Print["Оптические параметры нижней среды: vacuum."];
 lowerMedia = CreateSemiInfiniteMedia[eps$Vacuum];
 (* ============================================== *)
 Print["Создаем оптическую систему..."];
-layeredSystem = CreateLayeredSystem[incidentLight, gamma, thickPlate, lowerMedia];
+layeredSystem = CreateLayeredSystem[incidentLight, gamma, layer1, lowerMedia];
 OutputLayeredSystem[layeredSystem];
 (* ============================================== *)
 Print["Производим вычисления для различных значений параметров...."];
