@@ -38,6 +38,9 @@ type ComplexMatrix4x4 =
 
     static member create a = matrix a |> ComplexMatrix4x4.Value
 
+    static member (*) (Value a : ComplexMatrix4x4, Value b : ComplexMatrix4x4) : ComplexMatrix4x4 = 
+        a * b |> Value
+
 
 type RotationType = 
     | Euler of double * double * double

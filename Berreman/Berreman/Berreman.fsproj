@@ -49,8 +49,8 @@
     <Compile Include="Geometry.fs" />
     <Compile Include="Fields.fs" />
     <Compile Include="MaterialProperties.fs" />
-    <Compile Include="BerremanMatrix.fs" />
     <Compile Include="Media.fs" />
+    <Compile Include="BerremanMatrix.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />

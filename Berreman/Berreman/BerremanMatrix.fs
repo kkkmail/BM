@@ -6,12 +6,20 @@ open MathNet.Numerics.LinearAlgebra
 
 open Geometry
 open MaterialProperties
+open Media
+
+
+//type BerremanInput = 
+//    {
+//        opticalProperties : OpticalProperties
+//        upperRefractionIndex : Complex
+//    }
 
 
 type BerremanMatrix = 
     | Value of ComplexMatrix4x4
 
-    // Generated
+    // Generated, do not modify.
     member this.create (o : OpticalProperties) n1SinFita = 
         [
             [
@@ -42,3 +50,21 @@ type BerremanMatrix =
         |> ComplexMatrix4x4.create
         |> BerremanMatrix.Value
 
+    static member identity : BerremanMatrix =
+        failwith ""
+
+
+type BerremanMatrixPropagated = 
+    | Value of ComplexMatrix4x4
+
+    static member propagate (l : Layer) : BerremanMatrixPropagated = 
+        failwith ""
+
+    static member propagate (ls : List<Layer>) : BerremanMatrixPropagated = 
+        ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagate r) * acc) BerremanMatrixPropagated.identity
+
+    static member identity : BerremanMatrixPropagated =
+        failwith ""
+
+    static member (*) (Value a : BerremanMatrixPropagated, Value b : BerremanMatrixPropagated) : BerremanMatrixPropagated = 
+        (a * b) |> Value

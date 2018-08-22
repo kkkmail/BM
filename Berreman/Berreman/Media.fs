@@ -3,14 +3,29 @@
 open Geometry
 open MaterialProperties
 
+type Thickness = 
+    double
 
-type Media = 
-    | UpperSemiInfinite of OpticalProperties
-    | LowerSemiInfinite of OpticalProperties
-    | ThinFilm of OpticalProperties * double
-    | ThickPlate of OpticalProperties * double
+type Layer =
+    {
+        properties : OpticalProperties
+        thickness : Thickness
+    }
+
+type BaseOpticalSystem = 
+    {
+        upper : OpticalProperties
+        thinFilm : List<Layer>
+        lower : OpticalProperties
+    }
 
 
 type OpticalSystem = 
-    | Value of List<Media>
+    {
+        upper : OpticalProperties
+        thinFilm : List<Layer>
+        thickPlate : Layer option
+        lower : OpticalProperties
+    }
+
 
