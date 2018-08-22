@@ -2,10 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Calc/Example_09_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_09_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/OpticalDispersion.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanInit.m" beforeDir="false" afterPath="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanInit.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bleeding_Edge/7.01/ModelCreation.m" beforeDir="false" afterPath="$PROJECT_DIR$/Bleeding_Edge/7.01/ModelCreation.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanCommon.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/BerremanDirect.m" beforeDir="false" afterPath="$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/BerremanDirect.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_01_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_01_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_02_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_02_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law__Au.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law__Au.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film_OptActivity.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film__BN.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/BerremanDirect.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanDirect.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,28 +36,30 @@
     <session id="-1022319418">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="m" value="10" />
+          <entry key="m" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Mathematica" value="10" />
+          <entry key="Mathematica" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="m" value="109" />
+          <entry key="m" value="2395" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Mathematica" value="109" />
+          <entry key="Mathematica" value="2395" />
         </counts>
       </usages-collector>
     </session>
@@ -53,28 +70,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="39" column="32" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6545">
-              <caret line="574" lean-forward="true" selection-start-line="574" selection-end-line="574" />
+            <state relative-caret-position="18420">
+              <caret line="1423" column="14" selection-start-line="1423" selection-end-line="1423" selection-end-column="14" />
               <folding>
                 <element signature="e#1404#1467#0" />
                 <element signature="e#1552#2777#0" />
@@ -86,70 +85,39 @@
                 <element signature="e#4542#4751#0" />
                 <element signature="e#4847#4984#0" />
                 <element signature="e#5095#5427#0" />
+                <element signature="e#5770#11710#0" />
+                <element signature="e#15174#17791#0" />
+                <element signature="e#17869#18067#0" />
+                <element signature="e#18146#19050#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4402">
+              <caret line="270" selection-start-line="270" selection-end-line="270" />
+              <folding>
+                <element signature="e#2310#2803#0" />
+                <element signature="e#2884#3368#0" />
+                <element signature="e#4081#4532#0" />
+                <element signature="e#4619#4834#0" />
+                <element signature="e#5028#5516#0" />
+                <element signature="e#6370#6963#0" />
+                <element signature="e#20061#20322#0" />
+                <element signature="e#20450#22557#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m">
+        <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="861">
-              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09a_Thin_Film_Complex_Graph.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="54" column="52" lean-forward="true" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="861">
-              <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Thin_Film_Complex_Graph.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="48" column="88" selection-start-line="48" selection-start-column="88" selection-end-line="48" selection-end-column="88" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+            <state relative-caret-position="663">
+              <caret line="51" selection-start-line="51" selection-end-line="51" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -167,9 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>OFULL</find>
-      <find>CreateSemiInfiniteMedia</find>
-      <find>CreateSubstance</find>
       <find>eps</find>
       <find>SolutionNewBase</find>
       <find>n2</find>
@@ -197,6 +162,9 @@
       <find>LayeredSystemGetMedia</find>
       <find>muMstandard</find>
       <find>roMstandard</find>
+      <find>SSMakeUpStep</find>
+      <find>SolutionCombine</find>
+      <find>SSMakeDownStep</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -205,23 +173,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Examples/BM_602_Example_08_2L_Thin_Film_on_Substrate_Plate.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_602_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_504_Example_04_Snell_Law_For_Anisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_504_Example_01_Snell_Law__Au.m" />
         <option value="$PROJECT_DIR$/Examples/BM_503_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_00_MuellerMatrix.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law__Au.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media_v2.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film_OptActivity.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film__BN.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08_2L_Thin_Film_on_Substrate_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_405_Inv_001_Direct.m" />
@@ -239,22 +198,36 @@
         <option value="$PROJECT_DIR$/Kernel/OpticalElements.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModel.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalModelFunctions.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Examples/BM_604_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Kernel/FieldIO.m" />
-        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
-        <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
         <option value="$PROJECT_DIR$/Kernel/ModelCreation.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09b_Thin_Film_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Kernel/OpticalDispersion.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Thin_Film_Complex_Graph.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_09a_Substrate_Plate_Complex_Graph.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law__Au.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" />
+        <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
+        <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanInit.m" />
+        <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanCommon.m" />
+        <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/BerremanDirect.m" />
+        <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanDirect_New.m" />
+        <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/ModelCreation.m" />
+        <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1834" />
     <option name="width" value="2000" />
     <option name="height" value="1970" />
@@ -264,7 +237,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
@@ -277,7 +249,13 @@
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
               <item name="BM" type="462c0819:PsiDirectoryNode" />
-              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="7.01" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BM" type="462c0819:PsiDirectoryNode" />
+              <item name="7.01" type="462c0819:PsiDirectoryNode" />
+              <item name="Temp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
@@ -293,14 +271,18 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534218469859" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534698668038" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GitHub\BM\Bleeding_Edge\7.01" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\GitHub\BM\Kernel" />
     </key>
@@ -386,10 +368,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1933" height="1053" extended-state="7" />
+    <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2672" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17866667" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -451,78 +433,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Examples/BM_405_Inv_003_Direct.nb" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_503_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_602_Example_08_2L_Thin_Film_on_Substrate_Plate.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_602_Example_09_1L_Thin_Film_on_Substrate_Plate_Complex_Graph.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_504_Example_04_Snell_Law_For_Anisotropic_Media.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_504_Example_01_Snell_Law__Au.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_503_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media_v2.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_00_MuellerMatrix.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="12" selection-start-line="14" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law__Au.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film__BN.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film_OptActivity.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film__BN.m" />
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film_OptActivity.m" />
     <entry file="file://$PROJECT_DIR$/Examples/BM_405_Inv_001_Direct.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="46" selection-start-line="45" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_07_1L_Thin_Film_On_Absorbing_Substrate_Plate.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -579,13 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="79" column="35" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/OpticalModelFunctions.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -593,24 +499,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="7" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanInverse.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="541">
           <caret line="635" lean-forward="true" selection-start-line="635" selection-end-line="635" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -643,31 +535,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/ModelCreation.m" />
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="7" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_09b_Substrate_Plate_Complex_Graph.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="54" column="52" lean-forward="true" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -682,13 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="48" column="88" selection-start-line="48" selection-start-column="88" selection-end-line="48" selection-end-column="88" />
         </state>
       </provider>
     </entry>
@@ -713,10 +577,193 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/BerremanInverse.m">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/FieldAlgebra.m">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m" />
+    <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="88" selection-start-line="48" selection-start-column="88" selection-end-line="48" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="52" selection-start-line="52" selection-end-line="56" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law__Au.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06c_1L_Thin_Film__BN.m">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="56" column="26" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="35" column="163" selection-start-line="35" selection-start-column="144" selection-end-line="35" selection-end-column="163" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanDirect_New.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
+          <folding>
+            <element signature="e#1409#1496#0" />
+            <element signature="e#1581#2806#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/BerremanDirect.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="90" column="34" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanCommon.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="52" />
+          <folding>
+            <element signature="e#1260#1719#0" />
+            <element signature="e#2443#3036#0" />
+            <element signature="e#3738#3822#0" />
+            <element signature="e#3850#4006#0" />
+            <element signature="e#6178#6770#0" />
+            <element signature="e#6914#6974#0" />
+            <element signature="e#7450#7527#0" />
+            <element signature="e#7610#8248#0" />
+            <element signature="e#8362#8789#0" />
+            <element signature="e#9501#9575#0" />
+            <element signature="e#9629#9673#0" />
+            <element signature="e#9779#10008#0" />
+            <element signature="e#10367#11196#0" />
+            <element signature="e#11653#12648#0" />
+            <element signature="e#13741#14625#0" />
+            <element signature="e#14622#15052#0" />
+            <element signature="e#15565#15651#0" />
+            <element signature="e#15829#16132#0" />
+            <element signature="e#22226#25230#0" />
+            <element signature="e#46000#46507#0" />
+            <element signature="e#46597#47106#0" />
+            <element signature="e#47198#47711#0" />
+            <element signature="e#47800#48307#0" />
+            <element signature="e#48397#48906#0" />
+            <element signature="e#48998#49511#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bleeding_Edge/7.01/ModelCreation.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#1857#2350#0" />
+            <element signature="e#2431#2915#0" />
+            <element signature="e#4166#4381#0" />
+            <element signature="e#4575#5063#0" />
+            <element signature="e#6039#6429#0" />
+            <element signature="e#6513#6673#0" />
+            <element signature="e#6777#6929#0" />
+            <element signature="e#7054#7199#0" />
+            <element signature="e#7295#7462#0" />
+            <element signature="e#7553#7978#0" />
+            <element signature="e#8107#8599#0" />
+            <element signature="e#8733#8970#0" />
+            <element signature="e#9183#9325#0" />
+            <element signature="e#9454#9770#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanInit.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="118" column="41" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6545">
-          <caret line="574" lean-forward="true" selection-start-line="574" selection-end-line="574" />
+        <state relative-caret-position="18420">
+          <caret line="1423" column="14" selection-start-line="1423" selection-end-line="1423" selection-end-column="14" />
           <folding>
             <element signature="e#1404#1467#0" />
             <element signature="e#1552#2777#0" />
@@ -728,6 +775,34 @@
             <element signature="e#4542#4751#0" />
             <element signature="e#4847#4984#0" />
             <element signature="e#5095#5427#0" />
+            <element signature="e#5770#11710#0" />
+            <element signature="e#15174#17791#0" />
+            <element signature="e#17869#18067#0" />
+            <element signature="e#18146#19050#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="51" selection-start-line="51" selection-end-line="51" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4402">
+          <caret line="270" selection-start-line="270" selection-end-line="270" />
+          <folding>
+            <element signature="e#2310#2803#0" />
+            <element signature="e#2884#3368#0" />
+            <element signature="e#4081#4532#0" />
+            <element signature="e#4619#4834#0" />
+            <element signature="e#5028#5516#0" />
+            <element signature="e#6370#6963#0" />
+            <element signature="e#20061#20322#0" />
+            <element signature="e#20450#22557#0" />
           </folding>
         </state>
       </provider>

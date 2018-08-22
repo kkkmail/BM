@@ -17,6 +17,7 @@ opts =
       UseEulerAngles -> False
     };
 (* ============================================== *)
+(*
 FuncList =
     {
       StokesVectorR[1],
@@ -37,6 +38,12 @@ FuncList =
       {Rx, Ry},
       {Tx, Ty}
     };
+*)
+FuncList =
+    {
+      {Rx, Ry},
+      {Tx, Ty}
+    };
 (* ============================================== *)
 systemDescription = "Snell Law: Two semi-infinite isotropic media, NO film.";
 (* ============================================== *)
@@ -47,7 +54,7 @@ lambda = {600, 600, 1, "λ", nm};
 fita = {0, 85, 85, "ϕ", Degree};
 beta = {0, 0, 30, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
-ellipt = {-1, 1, 0.5, "e"};
+ellipt = {0, 1, 0.5, "e"};
 
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];

@@ -609,13 +609,17 @@ PPPFull[Film_, lambda_, fita_, n1_] :=
     Module[{len, cnt, PPPhlp, eps, ro, rotr, mu, h, FilmLayer},
       len = FilmLength[Film];
       PPPhlp = II;
-      Do[FilmLayer = Film[[cnt]];
-      h = FilmLayerThickness[FilmLayer];
-      eps = FilmLayerEpsilon[FilmLayer];
-      mu = FilmLayerMu[FilmLayer];
-      ro = FilmLayerRo[FilmLayer];
-      rotr = FilmLayerRoT[FilmLayer];
-      PPPhlp = PPP[eps, mu, ro, rotr, lambda, fita, n1, h].PPPhlp, {cnt, 1, len}];
+
+      Do[
+        FilmLayer = Film[[cnt]];
+        h = FilmLayerThickness[FilmLayer];
+        eps = FilmLayerEpsilon[FilmLayer];
+        mu = FilmLayerMu[FilmLayer];
+        ro = FilmLayerRo[FilmLayer];
+        rotr = FilmLayerRoT[FilmLayer];
+        PPPhlp = PPP[eps, mu, ro, rotr, lambda, fita, n1, h].PPPhlp
+        , {cnt, 1, len}
+      ];
       Return[PPPhlp];
     ];
 (* ============================================== *)

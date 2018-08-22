@@ -75,17 +75,7 @@ InitializeBM[pathList_] := InitializeBM[pathList, True];
 InitializeBM[pathList_, useParallelTbl_, optsRaw___] :=
     Module[{pathVar, useParTbl, opts},
       opts = ProcessOptions[optsRaw];
-
-      UseRussianLanguageValue = UseRussianLanguage /. opts /. Options[BerremanInit];
-
-      If[UseRussianLanguageValue,
-        (
-          Print["\:0418\:043d\:0438\:0446\:0438\:0430\:043b\:0438\:0437\:0430\:0446\:0438\:044f..."];
-        ),
-        (
-          Print["Initializing..."];
-        )
-      ];
+      Print["Initializing..."];
 
       BerremanInitialize[optsRaw];
       (* Print["pathList = ", pathList]; *)
@@ -126,15 +116,7 @@ InitializeBM[pathList_, useParallelTbl_, optsRaw___] :=
 
       (* Print["Options[BerremanInit] = ", Options[BerremanInit]]; *)
 
-      If[UseRussianLanguageValue,
-        (
-          Print["\:0418\:043d\:0438\:0446\:0438\:0430\:043b\:0438\:0437\:0430\:0446\:0438\:044f \:0437\:0430\:0432\:0435\:0440\:0448\:0435\:043d\:0430."];
-        ),
-        (
-          Print["Initialization completed."];
-        )
-      ];
-
+      Print["Initialization completed."];
       Print[strSeparator];
     ];
 (* ============================================== *)

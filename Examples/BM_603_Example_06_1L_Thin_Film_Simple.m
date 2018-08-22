@@ -5,7 +5,7 @@ BaseDir = "C:\\GitHub\\BM\\";
 PathList = {BaseDir <> "Kernel\\"};
 OutDir = BaseDir <> "Calc\\";
 (* ============================================== *)
-BaseFileName = "Example_02";
+BaseFileName = "Example_06";
 (* ============================================== *)
 useParallelTbl = False;
 Get["BerremanInit.m", Path -> PathList];
@@ -44,9 +44,8 @@ FuncList =
       {Rx, Ry},
       {Tx, Ty}
     };
-
 (* ============================================== *)
-systemDescription = "Snell Law: Isotropic thick glass plate between air, NO film.";
+systemDescription = "One Layer isotropic thin film between two semi-infinite media.";
 (* ============================================== *)
 Print["Параметры падающего света..."];
 nUpper = 1;
@@ -60,20 +59,27 @@ ellipt = {0, 1, 0.5, "e"};
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];
 (* ============================================== *)
-Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness."];
-nSubstr = 1.5;
-thickness = 1 mm;
-thickPlate = CreateThickPlateFromN[thickness, nSubstr];
+Print["Оптические параметры первого тонкого слоя."];
+fiLayer1 = {0, 0, 30, Subscript["φ", "1"], Degree};
+thetaLayer1 = {0, 0, 30, Subscript["θ", "1"], Degree};
+psiLayer1 = {0, 0, 30, Subscript["ψ", "1"], Degree};
+rotationAnglesLayer1 = {fiLayer1, thetaLayer1, psiLayer1};
+thicknessLayer1 = {75, 75, 10, "h", nm};
+
+epsLayer1 = EpsilonFromN[1.50];
+Print["epsLayer1 = ", epsLayer1 // MatrixForm];
+
+layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1];
 (* ============================================== *)
 Print["Оптические параметры нижней среды..."];
-(* nLower=10^2+I*10^3; *)
-nLower = 1;
+nLower = 1.5;
 lowerMedia = CreateSemiInfiniteMediaFromN[nLower];
 (* ============================================== *)
 Print["Создаем оптическую систему..."];
-layeredSystem = CreateLayeredSystem[incidentLight, gamma, thickPlate, lowerMedia];
+layeredSystem = CreateLayeredSystem[incidentLight, gamma, layer1, lowerMedia];
 OutputLayeredSystem[layeredSystem];
 (* ============================================== *)
 Print["Производим вычисления для различных значений параметров...."];
 allCalc = PerformAllCalculations[layeredSystem, FuncList, systemDescription, opts];
 (* ============================================== *)
+

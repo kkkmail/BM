@@ -1447,8 +1447,8 @@ SSMakeDownStep[Media_, IncidentLight_, opts___] :=
       Film = FilmNew[];
 
       (* TODO - This is what was here prior to version 6.03. That makes no sense. *)
-      (* MediaBound = MediaNew[n2, nOut, gamm, Film, "", nOut, h2, EpsilonFromN[Re[nOut]], muMstandard, roMstandard, MediaLowerEpsilon[Media], MediaLowerMu[Media], MediaLowerRo[Media]]; *)
-      MediaBound = Media;
+      MediaBound = MediaNew[n2, nOut, gamm, Film, "", nOut, h2, EpsilonFromN[Re[nOut]], muMstandard, roMstandard, MediaLowerEpsilon[Media], MediaLowerMu[Media], MediaLowerRo[Media]];
+      (* MediaBound = Media; *)
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
       If[pdi == True && pdil >= PCDILEVELMEDIUM,
@@ -1520,6 +1520,7 @@ SSMakeUpStep[Media_, IncidentLight_, opts___] :=
       ehTr = EHFlip[ehReflFlp];
       (*Ok Media is not actually correct but we DO NOT CARE NOW *)
 
+      (*
       If[!utll,
         (
           solToAvg = SolutionCombine[ehZero, ehRefl, ehZero, GetSolPPP[solFlp], GetSolDelta[solFlp], MediaFlp, inclFlp, opts, GetSolM1[solFlp][[1]], GetSolM1[solFlp][[2]], GetSolCoeff[solFlp], GetSolFreeTerm[solFlp], GetSolEGSys1[solFlp], GetSolEGSys2[solFlp]];
@@ -1528,7 +1529,16 @@ SSMakeUpStep[Media_, IncidentLight_, opts___] :=
           solToAvg = SolutionCombine[ehZero, ehRefl, ehZero, GetSolPPP[solFlp], GetSolDelta[solFlp], MediaFlp, inclFlp, opts, GetSolM1[solFlp][[1]], GetSolM1[solFlp][[2]], GetSolCoeff[solFlp], GetSolFreeTerm[solFlp], GetSolEGSys1[solFlp], GetSolEGSys2[solFlp], GetSolBeta0Sol[solFlp], GetSolBeta90Sol[solFlp]];
         )
       ];
+      *)
 
+      If[!utll,
+        (
+          solToAvg = SolutionCombine[ehZero, ehRefl, ehZero, GetSolPPP[solFlp], GetSolDelta[solFlp], MediaFlp, inclFlp, opts, GetSolM1[solFlp][[1]], GetSolM1[solFlp][[2]], GetSolCoeff[solFlp], GetSolFreeTerm[solFlp], GetSolEGSys1[solFlp], GetSolEGSys2[solFlp]];
+        ),
+        (
+          solToAvg = SolutionCombine[ehZero, ehRefl, ehZero, GetSolPPP[solFlp], GetSolDelta[solFlp], MediaFlp, inclFlp, opts, GetSolM1[solFlp][[1]], GetSolM1[solFlp][[2]], GetSolCoeff[solFlp], GetSolFreeTerm[solFlp], GetSolEGSys1[solFlp], GetSolEGSys2[solFlp], GetSolBeta0Sol[solFlp], GetSolBeta90Sol[solFlp]];
+        )
+      ];
 
       inclNext = IncidentLightNew[lambda, fita, beta, ehTr];
       (*Print["SSMakeUpStep:solToAvg = ",solToAvg];*)(*Print["SSMakeUpStep:inclNext = ",inclNext];*)

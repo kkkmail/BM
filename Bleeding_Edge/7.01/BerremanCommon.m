@@ -125,19 +125,20 @@ EpsilonFromN[n1_, n2_, n3_] :=
 
 deltaZero = DiagonalMatrix[{0, 0, 0, 0}];
 (* ============================================== *)
+(* Berreman's matrix M *)
 M[epsilon : {{_, _, _}, {_, _, _}, {_, _, _}}, mu : {{_, _, _}, {_, _, _}, {_, _, _}}, ro : {{_, _, _}, {_, _, _}, {_, _, _}}] :=
     BlockMatrix[{{epsilon, ro}, {Transpose[Conjugate[ro]], mu}}];
 (* ============================================== *)
-(*Optiva Rotation 1-Fi (angle between crystal axis and deposition direction.)-rotation around z*)
+(* Alternative Rotation Angles: 1-Fi (angle between crystal axis and deposition direction.)-rotation around z*)
 fRopt1[fi_] := RotationMatrix3D[fi, 0, 0];
 
-(*Optiva Rotation 2-Psi (angle between crystal axis and substrate plane.)-rotation around y (in the opposite direction!!!)*)
+(* Alternative Rotation Angles: 2-Psi (angle between crystal axis and substrate plane.)-rotation around y (in the opposite direction!!!)*)
 fRopt2[psi_] := RotationMatrix3D[0, -Pi / 2, 0].RotationMatrix3D[0, Pi / 2, -psi];
 
-(*Optiva Rotation 3-Alpha (rotation of crystal around its axis.)-rotation around x*)
+(* Alternative Rotation Angles: 3-Alpha (rotation of crystal around its axis.)-rotation around x*)
 fRopt3[alpha_] := RotationMatrix3D[0, alpha, 0];
 
-(*Optiva Combined Rotation (1,2,3).*)
+(* Alternative Rotation Angles: (1, 2, 3). *)
 fRopt[fi_, psi_, alpha_] := fRopt3[alpha].fRopt2[psi].fRopt1[fi];
 RM[fi_, theta_, psi_] := fRopt[fi, theta, psi];
 RMT[fi_, theta_, psi_] := Transpose[RM[fi, theta, psi]];
@@ -146,6 +147,7 @@ EulerFi[fi_, psi_, alpha_] := ArcCos[(Cos[fi] * Sin[alpha] - Cos[alpha] * Sin[fi
 EulerTheta[fi_, psi_, alpha_] := ArcCos[Cos[alpha] * Cos[psi]];
 EulerPsi[fi_, psi_, alpha_] := -(ArcCos[(Cos[psi] * Sin[alpha]) / Sqrt[Cos[psi]^2 * Sin[alpha]^2 + Sin[psi]^2]] * Sign[psi]);
 (* ============================================== *)
+(* Generates 3D rotation, inverse rotation, aid information about rotation angles / rotation type. *)
 RotationNew[fi_, theta_, psi_, opts___] :=
     Module[{useEA, retval},
       useEA = TrueQ[UseEulerAngles /. Flatten[{opts}] /. Flatten[{Options[BerremanCommon]}]];
@@ -170,23 +172,28 @@ RotationNew[fi_, theta_, psi_, opts___] :=
       Return[retval];
     ];
 (* ============================================== *)
-(*The order of rotations is VERY important!!! (RMT.ee.RM)*)
+(* The order of rotations is VERY important!!! (RMT . ee . RM) *)
 Transform[ee_, rotn_] :=
     Module[{},
       Return[(rotn[[2]] . ee . rotn[[1]])];
     ];
 (* ============================================== *)
+(*
+TODO kk:20180818 - Remove
 PsiAngle[fita_, n1_, n2_] :=
     Module[{},
       Return[ArcSin[(n1 / n2) * Sin[fita]]];
     ];
+*)
 (* ============================================== *)
 (* ============================================== *)
+(* Creates file layer *)
 FilmLayerNew[Thickness_, Epsilon_, mu_ : muStandard, ro_ : roStandard] :=
     Module[{},
       Return[{Thickness, Epsilon, mu, ro, Epsilon, mu, ro}];
     ];
 
+(* Rotates film layer. *)
 FilmLayerTransform[layer_, rotn_, Reset_ : True] :=
     Module[{layerTr},
       If[Reset === True,
@@ -215,6 +222,7 @@ FilmLayerTransform[layer_, rotn_, Reset_ : True] :=
       Return[layerTr];
     ];
 
+(* Flips media of the film when we need to use reflected light as "new" input. *)
 FilmLayerFlip[layer_] :=
     Module[{flpLayer, rotn},
       rotn = RotationNew[0, 0, Pi, UseEulerAngles -> False];
@@ -232,10 +240,14 @@ FilmLayerFlip[layer_] :=
       Return[flpLayer];
     ];
 (* ============================================== *)
+(* Thickness *)
 FilmLayerThickness[FilmLayer_] := FilmLayer[[1]];
+(* Transformed eps, mu, rho. *)
 FilmLayerEpsilon[FilmLayer_] := FilmLayer[[2]];
 FilmLayerEpsilonBase[FilmLayer_] := FilmLayer[[5]];
 FilmLayerMu[FilmLayer_] := FilmLayer[[3]];
+
+(* Original eps, mu, rho. *)
 FilmLayerMuBase[FilmLayer_] := FilmLayer[[6]];
 FilmLayerRo[FilmLayer_] := FilmLayer[[4]];
 FilmLayerRoBase[FilmLayer_] := FilmLayer[[7]];
@@ -243,6 +255,7 @@ FilmLayerRoBase[FilmLayer_] := FilmLayer[[7]];
 (* ============================================== *)
 FilmNew[] := {};
 
+(* Adds one layer to a multi-layered film. *)
 Attributes[FilmAddLayer] = {HoldFirst};
 FilmAddLayer[Film_, FilmLayer_] :=
     Module[{},
@@ -250,11 +263,13 @@ FilmAddLayer[Film_, FilmLayer_] :=
       Return[Film];
     ];
 
+(* Number of layers in a multi-layered film. *)
 FilmLength[Film_] :=
     Module[{},
       Return[Length[Film]];
     ];
 
+(* Rotates all layers in a multi-layered film. *)
 FilmTransformAll[Film_, rotn_, Reset_ : True] :=
     Module[{len, filmTr},
       len = FilmLength[Film];
@@ -271,6 +286,14 @@ FilmTransformAll[Film_, rotn_, Reset_ : True] :=
 FilmItem[Film_, idx_] := Film[[idx]];
 (* ============================================== *)
 (* ============================================== *)
+(*
+Creates optical media.
+gamma is the angle of rotation of the whole optical system. It convenient to use in some experiments.
+Film is a multi-layered thin film.
+epsilon2, mu2, ro2 are optical properties of the LOWER media.
+epsilon, mu, ro are optical properties of the UPPER media.
+Usually it is considered as vacuum and so the parameters are placed last for convenience.
+*)
 MediaNew[gamma_, Film_, Description_ : "", h2_ : 0, epsilon2_ : {}, mu2_ : muStandard, ro2_ : roStandard, epsilon_ : {}, mu_ : muStandard, ro_ : roStandard] :=
     Module[{epsVal, eps2Val, retVal},
       epsVal =
@@ -311,6 +334,7 @@ MediaNew[gamma_, Film_, Description_ : "", h2_ : 0, epsilon2_ : {}, mu2_ : muSta
       Return[retVal];
     ];
 (* ============================================== *)
+(* Flips the media when we need to use reflected light as a new input. *)
 MediaFlip[Media_] :=
     Module[{flpMedia, gamma, Film, Layer, flpFilm, len, Epsilon, rotn, flpEps, Descr, h2},
       gamma = MediaGamma[Media];
@@ -327,12 +351,25 @@ MediaFlip[Media_] :=
         {i, len}
       ];
 
-      flpMedia = MediaNew[gamma, flpFilm, Descr, h2, Transform[MediaUpperEpsilon[Media], rotn], Transform[MediaUpperMu[Media], rotn], Transform[MediaUpperRo[Media], rotn], Transform[MediaLowerEpsilon[Media], rotn], Transform[MediaLowerMu[Media], rotn], Transform[MediaLowerRo[Media], rotn]];
+      flpMedia = MediaNew[
+        gamma,
+        flpFilm,
+        Descr,
+        h2,
+        Transform[MediaUpperEpsilon[Media], rotn],
+        Transform[MediaUpperMu[Media], rotn],
+        Transform[MediaUpperRo[Media], rotn],
+        Transform[MediaLowerEpsilon[Media], rotn],
+        Transform[MediaLowerMu[Media], rotn],
+        Transform[MediaLowerRo[Media], rotn]
+      ];
+
       (*Print["!!! Check Media Flip !!!"];*)
       (* Print["MediaFlip::flpMedia = ", flpMedia]; *)
       Return[flpMedia];
     ];
 (* ============================================== *)
+(* Get the pieces out of media object. *)
 MediaGamma[Media_] := Media[[1]];
 MediaFilm[Media_] := Media[[2]];
 MediaFilmLength[Media_] := Length[MediaFilm[Media]];
@@ -348,8 +385,16 @@ MediaLowerMu[Media_] := Media[[5, 5]];
 MediaLowerRo[Media_] := Media[[5, 6]];
 (* ============================================== *)
 (* ============================================== *)
-
-(* ============================================== *)
+(*
+Creates incident light for a given:
+    wavelength (lambda)
+    incidence angle (fita)
+    rotation angle of the primary polarization axis (beta)
+    refraction index (n1)
+    amplitude (Ampl)
+    ellipticity
+NOTE that we must use a single refraction index here but cannot use complicated media.
+*)
 IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] :=
     Module[{EHI, ehField1, ehField2, ehField, iLight1, iLight2, ampl1, ampl2, ellp, kxFunc, lmb, ft},
       ellp = Max[Min[ellipticity, 1], -1];
@@ -363,6 +408,8 @@ IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] :=
       ehField2 = Table[I * iLight2[[4]][[iii]], {iii, 1, 6}];
 
       ehField = ehField1 + ehField2;
+
+      (* Function that returns kx for a given wavelength (lmb) and incidence angle (ft). *)
       kxFunc[lmb_, ft_] := (2 * Pi / lmb) * n1 * Sin[ft];
 
       EHI =
@@ -379,6 +426,7 @@ IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] :=
       Return[{lambda, fita, beta, EHI, ellipticity, kxFunc, Ampl, n1}];
     ];
 
+(* Same as above but without ellipticity. *)
 IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_] :=
     Module[{EHI, kxFunc, lmb, ft},
       EHI =
@@ -396,17 +444,23 @@ IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_] :=
       Return[{lambda, fita, beta, EHI, 0, kxFunc, Ampl, n1}];
     ];
 
+(* Same as above and with the default value of amplitude = 1. *)
 IncidentLightNew[lambda_, fita_, beta_, n1_] :=
     Module[{retval},
       retval = IncidentLightNew[lambda, fita, beta, n1, 1];
       Return[retval];
     ];
 
+(*
+Creates incident light for a given EH field and function, which determines value of kx.
+NOTE that we must keep track of original n1.
+*)
 IncidentLightNew[lambda_, fita_, beta_, eh : {_, _, _, _, _, _, _}, kxFunc_, n1_] :=
     Module[{},
       Return[{lambda, fita, beta, eh, 0, kxFunc, Indeterminate, n1}];
     ];
 
+(* Flips incident light to use reflected light as a new input. *)
 IncidentLightFlip[inclght_] :=
     Module[{flpLght},
       flpLght =
@@ -425,6 +479,7 @@ IncidentLightFlip[inclght_] :=
     ];
 
 (* ============================================== *)
+(* Gets parts out of incident light. *)
 IncidentLightLambda[IncidentLight_] := IncidentLight[[1]];
 IncidentLightFita[IncidentLight_] := IncidentLight[[2]];
 IncidentLightBeta[IncidentLight_] := IncidentLight[[3]];
@@ -436,6 +491,7 @@ IncidentLightAmplitude[IncidentLight_] := IncidentLight[[7]];
 IncidentLightUpperRefrIndex[IncidentLight_] := IncidentLight[[8]];
 (* ============================================== *)
 (* ============================================== *)
+(* Transforms EH into matrix form to be used by Berreman method. *)
 If[$VersionNumber < 10.0,
   (
     Print["Mathematica version is ", $VersionNumber, " Assigning OFULL via AppendColumns."];
@@ -504,11 +560,12 @@ MMM[eps_, mu_, ro_, lambda_, kx_] :=
       MM = Table[Dl[i, j], {i, 4}, {j, 4}];
       MMd = Table[Dld[i, j], {i, 4}, {j, 4}];
       MMdInv = Inverse[MMd];
-      retval = {(MMdInv.MM) / (2 * Pi * I / lambda), sol};
+      retval = {(MMdInv . MM) / (2 * Pi * I / lambda), sol};
       (*Print["MMM retval = ",N[retval]];*)
       Return[retval];
     ];
 (* ============================================== *)
+(* Calculates propagation of light through a single layer. *)
 PPP[eps_, mu_, ro_, lambda_, kx_, h_] :=
     Module[{pDet, retval, bCalcErr, dummy},
     (*
@@ -533,7 +590,8 @@ PPP[eps_, mu_, ro_, lambda_, kx_, h_] :=
       (* Print["PPP::retval = ", retval, ", pDet = ", pDet]; *)
       Return[retval];
     ];
-
+(* ============================================== *)
+(* Calculates propagation of light through a multi-layered thin film. *)
 PPPFull[Film_, lambda_, kx_] :=
     Module[{len, cnt, PPPhlp, eps, ro, mu, h, FilmLayer},
       len = FilmLength[Film];
@@ -555,6 +613,7 @@ PPPFull[Film_, lambda_, kx_] :=
 (* ============================================== *)
 (*Energy Density Vector:P=(c/(16*Pi)*(E+Conj[E]) x (H+Conj[H])) - vecror multiplication - !!! CHECK - THIS MAY BE INCORRECT !!!*)
 (* ============================================== *)
+(* Sorts eigenvalues in a proper order. *)
 EGGetOrder[egvl : {_, _, _, _}, egvec_, ehStdRule_, opts___] :=
     Module[{odeg, ODEGhlp, EGValHlpRe, EGValHlpIm, EGUnit, egvReShft, egvRe, egMult, egShft, idxHlp, egvIm, swpev, ehf, pntgS, egMultPng, prec, chpPrec, AddOnSrt, pntgTblX, pntgTblY, pntgTbl},
       EGUnit = {1, 1, 1, 1};
@@ -625,6 +684,10 @@ SolutionNew[Media_, IncidentLight_, optsRaw___] :=
       Return[retVal];
     ];
 (* ============================================== *)
+(*
+Solves the problem of propagating input incident light coming from upper semi-infinite media through multi-layered thin film.
+The film is between two semi-infinite media.
+*)
 SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
     Module[{kxFunc, eps, ro, mu, eps2, ro2, mu2, lambda, fita, beta, gamm, kx, Film, ehIncd, opts, calcBS, len, EHIv, EHRv, EHTv, ehr1, ehr2, eht1, eht2, ssss, delta, calcDlt, FilmLayer, EI, EP, ES, MMM1, MMM2, h2, PPPm, PPPmm, outPPPm, useSolve, sss1, sss2, cf, b, cmf, sol, varLst, free, coeffTbl, freeTbl, s1, s2, s3, s4, EGVal1Hlp, EGVal2Hlp, ODEG1hlp, EGVal1HlpIm, EGVal1HlpRe, ODEG2hlp, EGVal2HlpIm, EGVal2HlpRe, EGUnit, egs1, egs2, egvf1, egvf2, EHTFullEG1, EHTFullEG2, EHTFullEG3, EHTFullEG4, tmp, egvf1Tr, egvf2Tr, useNumEV, pdi, pdil, ehirule, ehrrule, ehtrule, EGVal1, EGVec1, ODEG1, EGVal1Up, EGVal1Dn, EGVec1Up, EGVec1Dn, EGVal2, EGVec2, ODEG2, EGVal2Up, EGVec2Up, EGVal2Dn, EGVec2Dn, ehi1, ehi2, ehisol, cfm, EHIcoeff, EHI, PPPv, coeff, ehrtsol, EHRcoeff, EHR, EHTcoeff, EHT, ehrule, EHIFull, EHTFull, EHRFull, retval},
 
@@ -646,7 +709,9 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       kxFunc = IncidentLightKxFunc[IncidentLight];
       EGUnit = {1, 1, 1, 1};
       calcBS = CalculateBoundarySolution /. opts /. Options[BerremanCommon];
+
       If[len === 0, calcBS = True];
+
       calcDlt = CalculateDelta /. opts /. Options[BerremanCommon];
       outPPPm = OutputPPPMultiplier /. opts /. Options[BerremanCommon];
       useSolve = UseSolveInSolutionNew /. opts /. Options[BerremanCommon];
@@ -973,6 +1038,7 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
         Print["SolutionNewBase::end ================================================="];
         Print["   "];
       ];
+
       Return[retval];
     ];
 (* ============================================== *)
@@ -992,24 +1058,30 @@ PoyntingS[ehFld_, fldIdx_] :=
       Return[retval];
     ];
 (* ============================================== *)
-GetEfromEH[eh_] := Module[{}, Return[{{eh[[1]]}, {eh[[2]]}, {eh[[3]]}}];];
-GetHfromEH[eh_] := Module[{}, Return[{{eh[[4]]}, {eh[[5]]}, {eh[[6]]}}];];
+GetEfromEH[eh_] := {{eh[[1]]}, {eh[[2]]}, {eh[[3]]}};
+GetHfromEH[eh_] := {{eh[[4]]}, {eh[[5]]}, {eh[[6]]}};
 (* ============================================== *)
-GetSolIncidentLight[sol_] := Module[{}, Return[sol[[1]]];];
-GetSolReflectedLight[sol_] := Module[{}, Return[sol[[2]]];];
-GetSolTransmittedLight[sol_] := Module[{}, Return[sol[[3]]];];
-GetSolPPP[sol_] := Module[{}, Return[sol[[4]]];];
-GetSolDelta[sol_] := Module[{}, Return[sol[[5]]];];
-GetSolMedia[sol_] := Module[{}, Return[sol[[6]]];];
-GetSolIncidentLightInfo[sol_] := Module[{}, Return[sol[[7]]];];
-GetSolOptions[sol_] := Module[{}, Return[sol[[8]]];];
-GetSolM1[sol_] := Module[{}, Return[sol[[9]]];];
-GetSolM2[sol_] := Module[{}, Return[sol[[10]]];];
-GetSolCoeff[sol_] := Module[{}, Return[sol[[11]]];];
-GetSolFreeTerm[sol_] := Module[{}, Return[sol[[12]]];];
-GetSolEGSys1[sol_] := Module[{}, Return[sol[[13]]];];
-GetSolEGSys2[sol_] := Module[{}, Return[sol[[14]]];];
-GetSolEHTEG[sol_, idx_] := Module[{egs}, egs = GetSolEGSys2[sol];Return[egs[[idx + 2]]]];
+(* Gets parts from the solution *)
+GetSolIncidentLight[sol_] := sol[[1]];
+GetSolReflectedLight[sol_] := sol[[2]];
+GetSolTransmittedLight[sol_] := sol[[3]];
+GetSolPPP[sol_] := sol[[4]];
+GetSolDelta[sol_] := sol[[5]];
+GetSolMedia[sol_] := sol[[6]];
+GetSolIncidentLightInfo[sol_] := sol[[7]];
+GetSolOptions[sol_] := sol[[8]];
+GetSolM1[sol_] := sol[[9]];
+GetSolM2[sol_] := sol[[10]];
+GetSolCoeff[sol_] := sol[[11]];
+GetSolFreeTerm[sol_] := sol[[12]];
+GetSolEGSys1[sol_] := sol[[13]];
+GetSolEGSys2[sol_] := sol[[14]];
+
+GetSolEHTEG[sol_, idx_] :=
+    Module[{egs},
+      egs = GetSolEGSys2[sol];
+      Return[egs[[idx + 2]]]
+    ];
 (* ============================================== *)
 GetSolBeta0Sol[sol_] :=
     Module[{solRet},
@@ -1033,12 +1105,12 @@ GetSolIncidentLightE[sol_] :=
       Return[retVal];
     ];
 (* ============================================== *)
-GetSolReflectedLightE[sol_] := Module[{}, Return[GetEfromEH[GetSolReflectedLight[sol]]];];
-GetSolTransmittedLightE[sol_] := Module[{}, Return[GetEfromEH[GetSolTransmittedLight[sol]]];];
+GetSolReflectedLightE[sol_] := GetEfromEH[GetSolReflectedLight[sol]];
+GetSolTransmittedLightE[sol_] := GetEfromEH[GetSolTransmittedLight[sol]];
 
-GetSolIncidentLightH[sol_] := Module[{}, Return[GetHfromEH[GetSolIncidentLight[sol]]];];
-GetSolReflectedLightH[sol_] := Module[{}, Return[GetHfromEH[GetSolReflectedLight[sol]]];];
-GetSolTransmittedLightH[sol_] := Module[{}, Return[GetHfromEH[GetSolTransmittedLight[sol]]];];
+GetSolIncidentLightH[sol_] := GetHfromEH[GetSolIncidentLight[sol]];
+GetSolReflectedLightH[sol_] := GetHfromEH[GetSolReflectedLight[sol]];
+GetSolTransmittedLightH[sol_] := GetHfromEH[GetSolTransmittedLight[sol]];
 (* ============================================== *)
 GetSolIncidentLightD[sol_] :=
     Module[{retVal, EHfield, Efield, Dfield, Hfield, Bfield, media, eps, mu, ro},

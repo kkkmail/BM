@@ -254,8 +254,6 @@ CreateSubstance[___] :=
       Abort[];
     ];
 (* ============================================== *)
-(* /;((!ListQ[thickness]) || (ListQ[thickness] && Length[thickness]\[Equal]5)); *)
-(* ============================================== *)
 CreateThickPlateFromN[thickness_, refrInd_] :=
     CreateSubstanceFromN[ThickPlateClassName, thickness, refrInd];
 
