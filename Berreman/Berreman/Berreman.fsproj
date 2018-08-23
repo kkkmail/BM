@@ -47,8 +47,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Geometry.fs" />
-    <Compile Include="Fields.fs" />
     <Compile Include="MaterialProperties.fs" />
+    <Compile Include="Fields.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="BerremanMatrix.fs" />
     <Compile Include="Solvers.fs" />

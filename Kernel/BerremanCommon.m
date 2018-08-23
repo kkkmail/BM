@@ -789,7 +789,8 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
 
       EGVal2Hlp = Chop[N[EGVal2]];
       ODEG2 = EGGetOrder[EGVal2Hlp, EGVec2, ehtrule, opts];
-      EGVal2Up = EGVal2[[ODEG2[[1]]]];EGVal2Dn = EGVal2[[ODEG2[[2]]]];
+      EGVal2Up = EGVal2[[ODEG2[[1]]]];
+      EGVal2Dn = EGVal2[[ODEG2[[2]]]];
       EGVec2Up = Transpose[(EGVec2[[ODEG2[[1]]]])];
       EGVec2Dn = Transpose[(EGVec2[[ODEG2[[2]]]])];
 

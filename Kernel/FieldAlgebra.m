@@ -831,7 +831,8 @@ PoyntingT[xyz_, FullSol_] := Module[{retval, evIdx, ehFld, eFld, hFld, fldIdx, p
 fldIdx = Max[Min[xyz, 3], 1];
 eFld = {ehFld[[1]], ehFld[[2]], ehFld[[3]]};
 hFld = {ehFld[[4]], ehFld[[5]], ehFld[[6]]};
-pntgS = N[Re[Cross[eFld, Conjugate[hFld]]]];retval = pntgS[[fldIdx]];
+pntgS = N[Re[Cross[eFld, Conjugate[hFld]]]];
+retval = pntgS[[fldIdx]];
 Return[retval];];
 (* ============================================== *)
 PoyntingTFull[FullSol_] := Module[{retval, evIdx, ehFld, eFld, hFld, fldIdx, pntgS}, ehFld = GetSolTransmittedLight[FullSol];

@@ -54,8 +54,18 @@ type BerremanMatrix =
         |> ComplexMatrix4x4.create
         |> BerremanMatrix.Value
 
-    static member identity : BerremanMatrix =
-        ComplexMatrix4x4.identity |> BerremanMatrix.Value
+    static member identity = ComplexMatrix4x4.identity |> BerremanMatrix.Value
+
+    // Generated, do not modify.
+    static member createEmField (o : OpticalProperties) (emXY : EmFieldXY) = 
+        let n1SinFita = complex emXY.n1SinFita 0.0
+        let eX = emXY.e.x
+        let eY = emXY.e.y
+        let hX = emXY.h.x
+        let hY = emXY.h.y
+        let eZ = ((-(o.eps.[2, 0] * o.mu.[2, 2]) + o.rho.[2, 2] * o.rhoT.[2, 0]) * eX - o.eps.[2, 1] * o.mu.[2, 2] * eY + o.rho.[2, 2] * o.rhoT.[2, 1] * eY - o.rho.[2, 2] * n1SinFita * eY - o.mu.[2, 2] * o.rho.[2, 0] * hX + o.mu.[2, 0] * o.rho.[2, 2] * hX + (o.mu.[2, 1] * o.rho.[2, 2] - o.mu.[2, 2] * (o.rho.[2, 1] + n1SinFita)) * hY)/(o.eps.[2, 2] * o.mu.[2, 2] - o.rho.[2, 2] * o.rhoT.[2, 2])
+        let hZ = ((-(o.eps.[2, 2] * o.rhoT.[2, 0]) + o.eps.[2, 0] * o.rhoT.[2, 2]) * eX - o.eps.[2, 2] * o.rhoT.[2, 1] * eY + o.eps.[2, 1] * o.rhoT.[2, 2] * eY + o.eps.[2, 2] * n1SinFita * eY - o.eps.[2, 2] * o.mu.[2, 0] * hX + o.rho.[2, 0] * o.rhoT.[2, 2] * hX + (-(o.eps.[2, 2] * o.mu.[2, 1]) + o.rhoT.[2, 2] * (o.rho.[2, 1] + n1SinFita)) * hY)/(o.eps.[2, 2] * o.mu.[2, 2] - o.rho.[2, 2] * o.rhoT.[2, 2])
+        EmField.create (emXY, eZ, hZ)
 
 
 type BerremanMatrixPropagated = 
