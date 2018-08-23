@@ -8,6 +8,8 @@ open MathNet.Symbolics
 // CGS usits are used.
 type EmField =
     {
+        wavelength : double
+        n1SinFita : double
         e : ComplexVector3
         h : ComplexVector3
         d : ComplexVector3
@@ -15,3 +17,11 @@ type EmField =
     }
     member this.s : ComplexVector3 = 
         failwith ""
+
+
+type EmFieldSystem =
+    {
+        incident : EmField
+        reflected : EmField
+        transmitted : EmField
+    }

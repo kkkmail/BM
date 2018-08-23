@@ -41,6 +41,18 @@ type ComplexMatrix4x4 =
     static member (*) (Value a : ComplexMatrix4x4, Value b : ComplexMatrix4x4) : ComplexMatrix4x4 = 
         a * b |> Value
 
+    static member (*) (a : Complex, Value b : ComplexMatrix4x4) : ComplexMatrix4x4 = 
+        a * b |> Value
+
+    static member (*) (Value a : ComplexMatrix4x4, b : Complex) : ComplexMatrix4x4 = 
+        a * b |> Value
+
+    member this.matrixExp () : ComplexMatrix4x4 = 
+        failwith ""
+
+    static member identity : ComplexMatrix4x4 =
+        failwith ""
+
 
 type RotationType = 
     | Euler of double * double * double

@@ -51,6 +51,7 @@
     <Compile Include="MaterialProperties.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="BerremanMatrix.fs" />
+    <Compile Include="Solvers.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />

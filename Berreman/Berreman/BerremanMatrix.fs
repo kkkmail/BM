@@ -5,8 +5,11 @@ open MathNet.Numerics.ComplexExtensions
 open MathNet.Numerics.LinearAlgebra
 
 open Geometry
+open Fields
 open MaterialProperties
 open Media
+open MathNet.Symbolics
+open MathNet.Numerics
 
 
 //type BerremanInput = 
@@ -20,7 +23,8 @@ type BerremanMatrix =
     | Value of ComplexMatrix4x4
 
     // Generated, do not modify.
-    member this.create (o : OpticalProperties) n1SinFita = 
+    static member create (o : OpticalProperties) (em : EmField) =
+        let n1SinFita = complex em.n1SinFita 0.0
         [
             [
                 (o.eps.[2, 2] * (o.mu.[2, 2] * o.rhoT.[1, 0] - o.mu.[1, 2] * o.rhoT.[2, 0]) + o.eps.[2, 0] * o.mu.[1, 2] * o.rhoT.[2, 2] - o.rho.[2, 2] * o.rhoT.[1, 0] * o.rhoT.[2, 2] - o.eps.[2, 0] * o.mu.[2, 2] * (o.rhoT.[1, 2] + n1SinFita) + o.rho.[2, 2] * o.rhoT.[2, 0] * (o.rhoT.[1, 2] + n1SinFita))/(o.eps.[2, 2] * o.mu.[2, 2] - o.rho.[2, 2] * o.rhoT.[2, 2])
@@ -51,20 +55,21 @@ type BerremanMatrix =
         |> BerremanMatrix.Value
 
     static member identity : BerremanMatrix =
-        failwith ""
+        ComplexMatrix4x4.identity |> BerremanMatrix.Value
 
 
 type BerremanMatrixPropagated = 
     | Value of ComplexMatrix4x4
 
-    static member propagate (l : Layer) : BerremanMatrixPropagated = 
-        failwith ""
+    static member propagate (l : Layer, em : EmField) : BerremanMatrixPropagated = 
+        let (BerremanMatrix.Value m) = BerremanMatrix.create l.properties em
+        (complex 0.0 (2.0 * Constants.Pi * l.thickness / em.wavelength) * m).matrixExp () |> BerremanMatrixPropagated.Value
 
-    static member propagate (ls : List<Layer>) : BerremanMatrixPropagated = 
-        ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagate r) * acc) BerremanMatrixPropagated.identity
+    static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 
+        ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagate(r, em)) * acc) BerremanMatrixPropagated.identity
 
     static member identity : BerremanMatrixPropagated =
-        failwith ""
+        ComplexMatrix4x4.identity |> BerremanMatrixPropagated.Value
 
     static member (*) (Value a : BerremanMatrixPropagated, Value b : BerremanMatrixPropagated) : BerremanMatrixPropagated = 
         (a * b) |> Value
