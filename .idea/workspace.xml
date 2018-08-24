@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MMM.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM.nb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MMM_02.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM_02.nb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6022">
-              <caret line="1043" column="74" lean-forward="true" selection-start-line="1043" selection-start-column="74" selection-end-line="1043" selection-end-column="74" />
+            <state relative-caret-position="494">
+              <caret line="733" column="37" selection-start-line="733" selection-start-column="30" selection-end-line="733" selection-end-column="37" />
               <folding>
                 <element signature="e#2310#2803#0" />
                 <element signature="e#2884#3368#0" />
@@ -128,8 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Sqrt</find>
-      <find>rotr</find>
       <find>M[</find>
       <find>MMM[</find>
       <find>PPP[</find>
@@ -158,6 +154,8 @@
       <find>ehrrule</find>
       <find>GetSolIncidentLightD</find>
       <find>PoyntingT</find>
+      <find>EGGetOrder</find>
+      <find>outPPPm</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -221,7 +219,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1832" />
+    <option name="x" value="1834" />
     <option name="width" value="2000" />
     <option name="height" value="1970" />
   </component>
@@ -632,8 +630,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6022">
-          <caret line="1043" column="74" lean-forward="true" selection-start-line="1043" selection-start-column="74" selection-end-line="1043" selection-end-column="74" />
+        <state relative-caret-position="494">
+          <caret line="733" column="37" selection-start-line="733" selection-start-column="30" selection-end-line="733" selection-end-column="37" />
           <folding>
             <element signature="e#2310#2803#0" />
             <element signature="e#2884#3368#0" />
