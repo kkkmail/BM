@@ -12,11 +12,18 @@ open MathNet.Symbolics
 open MathNet.Numerics
 
 
-//type BerremanInput = 
-//    {
-//        opticalProperties : OpticalProperties
-//        upperRefractionIndex : Complex
-//    }
+// [ Ex, Hy, Ey, -Hx ]
+type BerremanField =
+    {
+        wavelength : double
+        n1SinFita : double
+        eh : Vector<Complex>
+    }
+    with
+        member this.eX = this.eh.[0]
+        member this.hY = this.eh.[1]
+        member this.eY = this.eh.[2]
+        member this.hX = - this.eh.[3]
 
 
 type BerremanMatrix = 
@@ -83,3 +90,29 @@ type BerremanMatrixPropagated =
 
     static member (*) (Value a : BerremanMatrixPropagated, Value b : BerremanMatrixPropagated) : BerremanMatrixPropagated = 
         (a * b) |> Value
+
+
+type BerremanField
+    with
+    member this.toEmField (o : OpticalProperties) = 
+        let emXY = 
+            {
+                wavelength = this.wavelength
+                n1SinFita = this.n1SinFita
+                e = [ this.eX; this.eY ] |> vector |> ComplexVector2.Value 
+                h = [ this.hX; this.hY ] |> vector |> ComplexVector2.Value 
+            } : EmFieldXY
+
+        BerremanMatrix.createEmField o emXY
+
+
+type EmField
+    with 
+    member this.toBerremanField () : BerremanField = 
+        {
+            wavelength = this.wavelength
+            n1SinFita = this.n1SinFita
+            eh = [ this.e.x; this.h.y; this.e.y; -this.h.x ] |> vector
+        }
+
+

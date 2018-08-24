@@ -61,6 +61,14 @@ type ComplexVector3 =
         v.Imaginary () |> RealVector3.Value
 
 
+type ComplexVector4 = 
+    | Value of Vector<Complex>
+    member this.Item 
+        with get i = 
+            let (Value v) = this
+            v.[i]
+
+
 type ComplexMatrix3x3 = 
     | Value of Matrix<Complex>
     member this.Item
@@ -106,6 +114,24 @@ type ComplexMatrix4x4 =
 
     static member identity : ComplexMatrix4x4 =
         failwith ""
+
+
+type EigenBasis =
+    {
+        v0 : Complex
+        v1 : Complex
+        e0 : ComplexVector4
+        e1 : ComplexVector4
+    }
+    member this.values = [this.v0; this.v1]
+    member this.vectors = [this.e0; this.e1]
+
+
+type FullEigenBasis = 
+    {
+        down : EigenBasis
+        up : EigenBasis
+    }
 
 
 type RotationType = 
