@@ -53,6 +53,7 @@
     <Compile Include="BerremanMatrix.fs" />
     <Compile Include="Solvers.fs" />
     <Compile Include="Program.fs" />
+    <None Include="Tests.fsx" />
     <None Include="App.config" />
     <Content Include="packages.config" />
   </ItemGroup>
