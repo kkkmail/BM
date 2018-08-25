@@ -20,6 +20,8 @@ type OpticalProperties =
     //member this.rotate (rotation : Rotation) : OpticalTensor = 
     //    failwith ""
 
-    member this.rhoT : ComplexMatrix3x3 = failwith ""
+    member this.rhoT : ComplexMatrix3x3 = 
+        let (ComplexMatrix3x3.Value r) = this.rho
+        r.ConjugateTranspose () |> ComplexMatrix3x3.Value
 
 
