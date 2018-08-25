@@ -1,31 +1,32 @@
-﻿module Media
+﻿namespace Berreman
 
-open Geometry
-open MaterialProperties
+module Media =
 
-type Thickness = 
-    double
+    open Geometry
+    open MaterialProperties
 
-type Layer =
-    {
-        properties : OpticalProperties
-        thickness : Thickness
-    }
+    type Thickness = 
+        double
 
-type BaseOpticalSystem = 
-    {
-        upper : OpticalProperties
-        thinFilm : List<Layer>
-        lower : OpticalProperties
-    }
+    type Layer =
+        {
+            properties : OpticalProperties
+            thickness : Thickness
+        }
+
+    type BaseOpticalSystem = 
+        {
+            upper : OpticalProperties
+            thinFilm : List<Layer>
+            lower : OpticalProperties
+        }
 
 
-type OpticalSystem = 
-    {
-        upper : OpticalProperties
-        thinFilm : List<Layer>
-        thickPlate : Layer option
-        lower : OpticalProperties
-    }
-
+    type OpticalSystem = 
+        {
+            upper : OpticalProperties
+            thinFilm : List<Layer>
+            thickPlate : Layer option
+            lower : OpticalProperties
+        }
 

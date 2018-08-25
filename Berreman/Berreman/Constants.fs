@@ -1,8 +1,8 @@
-﻿module Constants
+﻿namespace Berreman
+module Constants = 
+    open MathNet.Numerics
 
-open MathNet.Numerics
+    let mm = 1.0e-03
+    let nm = 1.0e-09
 
-let mm = 1.0e-03
-let nm = 1.0e-09
-
-let degree = Constants.Pi / 180.0
+    let degree = Constants.Pi / 180.0
