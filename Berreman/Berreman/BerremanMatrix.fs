@@ -115,5 +115,3 @@ type EmField
             n1SinFita = this.n1SinFita
             eh = [ this.e.x; this.h.y; this.e.y; -this.h.x ] |> vector
         }
-
-
