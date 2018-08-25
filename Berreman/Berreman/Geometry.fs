@@ -109,8 +109,12 @@ type ComplexMatrix4x4 =
     static member (*) (Value a : ComplexMatrix4x4, b : Complex) : ComplexMatrix4x4 = 
         a * b |> Value
 
-    member this.matrixExp () : ComplexMatrix4x4 = 
-        failwith ""
+    member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
+        let (ComplexMatrix4x4.Value v) = this
+        let evd = v.Evd ()
+        let v = (x * evd.EigenValues).PointwiseExp () |> DiagonalMatrix.ofDiag
+        let e = evd.EigenVectors
+        e * v * e.Inverse() |> ComplexMatrix4x4.Value
 
     static member identity : ComplexMatrix4x4 =
         failwith ""

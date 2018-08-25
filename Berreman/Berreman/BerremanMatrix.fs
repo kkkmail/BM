@@ -81,7 +81,7 @@ type BerremanMatrixPropagated =
 
     static member propagate (l : Layer, em : EmField) : BerremanMatrixPropagated = 
         let (BerremanMatrix.Value m) = BerremanMatrix.create l.properties em
-        (complex 0.0 (2.0 * Constants.Pi * l.thickness / em.wavelength) * m).matrixExp () |> BerremanMatrixPropagated.Value
+        m.matrixExp (complex 0.0 (2.0 * Constants.Pi * l.thickness / em.wavelength)) |> BerremanMatrixPropagated.Value
 
     static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 
         ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagate(r, em)) * acc) BerremanMatrixPropagated.identity
