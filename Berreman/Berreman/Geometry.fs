@@ -7,6 +7,7 @@ module Geometry =
 
     let cplx x = Complex(x, 0.0)
     let comlpexIdentityMatrix n = DiagonalMatrix.create n (cplx 1.0)
+    let comlpexZeroMatrix n = DiagonalMatrix.create n (cplx 0.0)
 
 
     type RealVector3 =
@@ -95,6 +96,7 @@ module Geometry =
             a * b |> ComplexVector3
 
         static member identity = comlpexIdentityMatrix 3 |> ComplexMatrix3x3
+        static member zero = comlpexZeroMatrix 3 |> ComplexMatrix3x3
 
 
     type ComplexMatrix4x4 = 
@@ -117,10 +119,21 @@ module Geometry =
 
         member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
             let (ComplexMatrix4x4 v) = this
+            printfn "v = %A" v
+
             let evd = v.Evd ()
-            let v = (x * evd.EigenValues).PointwiseExp () |> DiagonalMatrix.ofDiag
+            printfn "evd = %A" evd
+
+            let ev = (x * evd.EigenValues).PointwiseExp () |> DiagonalMatrix.ofDiag
+            printfn "evd = %A" evd
+
             let e = evd.EigenVectors
-            e * v * e.Inverse() |> ComplexMatrix4x4
+            printfn "e = %A" e
+
+            let retVal = e * ev * e.Inverse() |> ComplexMatrix4x4
+            printfn "retVal = %A" retVal
+
+            retVal
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
 

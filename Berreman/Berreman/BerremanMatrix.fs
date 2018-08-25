@@ -21,15 +21,14 @@ module BerremanMatrix =
             n1SinFita : double
             eh : Vector<Complex>
         }
-        with
-            member this.eX = this.eh.[0]
-            member this.hY = this.eh.[1]
-            member this.eY = this.eh.[2]
-            member this.hX = - this.eh.[3]
+        member this.eX = this.eh.[0]
+        member this.hY = this.eh.[1]
+        member this.eY = this.eh.[2]
+        member this.hX = - this.eh.[3]
 
 
     type BerremanMatrix = 
-        | Value of ComplexMatrix4x4
+        | BerremanMatrix of ComplexMatrix4x4
 
         // Generated, do not modify.
         static member create (o : OpticalProperties) (em : EmField) =
@@ -62,9 +61,9 @@ module BerremanMatrix =
                 ]
             ]
             |> ComplexMatrix4x4.create
-            |> BerremanMatrix.Value
+            |> BerremanMatrix
 
-        static member identity = ComplexMatrix4x4.identity |> BerremanMatrix.Value
+        static member identity = ComplexMatrix4x4.identity |> BerremanMatrix
 
         // Generated, do not modify.
         static member createEmField (o : OpticalProperties) (emXY : EmFieldXY) = 
@@ -79,20 +78,19 @@ module BerremanMatrix =
 
 
     type BerremanMatrixPropagated = 
-        | Value of ComplexMatrix4x4
+        | BerremanMatrixPropagated of ComplexMatrix4x4
 
-        static member propagate (l : Layer, em : EmField) : BerremanMatrixPropagated = 
-            let (BerremanMatrix.Value m) = BerremanMatrix.create l.properties em
-            m.matrixExp (complex 0.0 (2.0 * Constants.Pi * l.thickness / em.wavelength)) |> BerremanMatrixPropagated.Value
+        static member propagate (l : Layer, em : EmField) = 
+            let (BerremanMatrix m) = BerremanMatrix.create l.properties em
+            m.matrixExp (complex 0.0 (2.0 * Constants.Pi * l.thickness / em.wavelength)) |> BerremanMatrixPropagated
 
         static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 
             ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagate(r, em)) * acc) BerremanMatrixPropagated.identity
 
-        static member identity : BerremanMatrixPropagated =
-            ComplexMatrix4x4.identity |> BerremanMatrixPropagated.Value
+        static member identity = ComplexMatrix4x4.identity |> BerremanMatrixPropagated
 
-        static member (*) (Value a : BerremanMatrixPropagated, Value b : BerremanMatrixPropagated) : BerremanMatrixPropagated = 
-            (a * b) |> Value
+        static member (*) (BerremanMatrixPropagated a, BerremanMatrixPropagated b) = 
+            (a * b) |> BerremanMatrixPropagated
 
 
     type BerremanField

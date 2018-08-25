@@ -17,17 +17,67 @@ open Berreman.Geometry
 open Berreman.MaterialProperties
 open Berreman.Media
 open Berreman.Solvers
+
+open System.Numerics
+open MathNet.Numerics
+open MathNet.Numerics.ComplexExtensions
+open MathNet.Numerics.LinearAlgebra
 //===========================================================
 let info = 
     {
         wavelength = 500.0 * nm
         refractionIndex = 1.0
         incidentAngle = 0.0 * degree |> IncidentAngle
-        polarization = -90.0 * degree |> Polarization
+        polarization = 0.0 * degree |> Polarization
         ellipticity = Ellipticity.defaultValue
     }
 
 
-let light = EmField.create info
+let em = EmField.create info
+printfn "em = %A" em
 
-printfn "light = %A" light
+//let i4 = ComplexMatrix4x4.identity * (cplx 2.0)
+//printfn "i4 = %A" i4
+
+//let m1 = 
+//    [
+//        [0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx; 1.0 |> cplx]
+//        [0.0 |> cplx; 0.0 |> cplx; 1.0 |> cplx; 0.0 |> cplx]
+//        [0.0 |> cplx; 1.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx]
+//        [1.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx]
+//    ]
+//    |> matrix
+//    |> ComplexMatrix4x4
+//printfn "m1 = %A" m1
+
+//let b1 = m1.matrixExp(Complex(0.0, Constants.Pi))
+//printfn "b1 = %A" b1
+
+//let m2 = 
+//    [
+//        [0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx; 1.0 |> cplx]
+//        [0.0 |> cplx; 0.0 |> cplx; 1.0 |> cplx; 0.0 |> cplx]
+//        [0.0 |> cplx; 1.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx]
+//        [0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx]
+//    ]
+//    |> matrix
+//    |> ComplexMatrix4x4
+//printfn "m2 = %A" m2
+
+//let b2 = m2.matrixExp(Complex(0.0, Constants.Pi))
+//printfn "b2 = %A" b2
+
+//printfn "Completed"
+
+let o = OpticalProperties.defaultValue 1.5
+printfn "o = %A" o
+
+let (BerremanMatrix b) = BerremanMatrix.create o em
+let (ComplexMatrix4x4 v) = b
+printfn "b = %A" b
+printfn "b.Determinant = %A" (v.Determinant())
+
+let b2 = b.matrixExp(Complex(0.0, Constants.Pi))
+printfn "b2 = %A" b2
+
+

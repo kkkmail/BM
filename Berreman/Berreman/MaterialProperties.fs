@@ -25,4 +25,11 @@ module MaterialProperties =
             let (ComplexMatrix3x3 r) = this.rho
             r.ConjugateTranspose () |> ComplexMatrix3x3
 
+        static member defaultValue (n : double) = 
+            {
+                eps = (n * n |> cplx) * ComplexMatrix3x3.identity
+                mu = ComplexMatrix3x3.identity
+                rho = ComplexMatrix3x3.zero
+            }
+
 

@@ -21,7 +21,7 @@ module Solvers =
             failwith ""
 
         let i : EmField = em
-        let (BerremanMatrixPropagated.Value p) = BerremanMatrixPropagated.propagate (system.thinFilm, em)
+        let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.thinFilm, em)
         let (ComplexMatrix4x4 layers) = p
         let evd = layers.Evd ()
         let (b1, b2)= sortEvd evd
