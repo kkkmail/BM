@@ -13,14 +13,14 @@ open MathNet.Numerics.LinearAlgebra
 //    member this.exp = 0
 
 type RealVector3 =
-    | Value of Vector<double>
+    | RealVector3 of Vector<double>
 
 
 type ComplexVector2 =
-    | Value of Vector<Complex>
+    | ComplexVector2 of Vector<Complex>
     member this.Item 
         with get i = 
-            let (Value v) = this
+            let (ComplexVector2 v) = this
             v.[i]
 
     member this.x = this.[0]
@@ -28,93 +28,93 @@ type ComplexVector2 =
 
 
 type ComplexVector3 =
-    | Value of Vector<Complex>
+    | ComplexVector3 of Vector<Complex>
     member this.Item 
         with get i = 
-            let (Value v) = this
+            let (ComplexVector3 v) = this
             v.[i]
 
     member this.x = this.[0]
     member this.y = this.[1]
     member this.z = this.[2]
 
-    static member (+) (Value a : ComplexVector3, Value b : ComplexVector3) : ComplexVector3 = 
-        a + b |> Value
+    static member (+) (ComplexVector3 a, ComplexVector3 b) : ComplexVector3 = 
+        a + b |> ComplexVector3
 
     // TODO: 3D cross operator
-    static member cross (Value a : ComplexVector3) (Value b : ComplexVector3) : ComplexVector3 = 
+    static member cross (ComplexVector3 a) (ComplexVector3 b) : ComplexVector3 = 
         failwith ""
 
-    static member (*) (Value a : ComplexVector3, Value b : ComplexVector3) : Complex = 
+    static member (*) (ComplexVector3 a, ComplexVector3 b) : Complex = 
         a * b
 
     member this.conjugate = 
-        let (Value v) = this
-        v.Conjugate() |> Value
+        let (ComplexVector3 v) = this
+        v.Conjugate() |> ComplexVector3
 
     member this.re = 
-        let (Value v) = this
-        v.Real () |> RealVector3.Value
+        let (ComplexVector3 v) = this
+        v.Real () |> RealVector3
 
     member this.im = 
-        let (Value v) = this
-        v.Imaginary () |> RealVector3.Value
+        let (ComplexVector3 v) = this
+        v.Imaginary () |> RealVector3
 
 
 type ComplexVector4 = 
-    | Value of Vector<Complex>
+    | ComplexVector4 of Vector<Complex>
     member this.Item 
         with get i = 
-            let (Value v) = this
+            let (ComplexVector4 v) = this
             v.[i]
 
 
 type ComplexMatrix3x3 = 
-    | Value of Matrix<Complex>
+    | ComplexMatrix3x3 of Matrix<Complex>
     member this.Item
         with get(i, j) =
-            let (Value v) = this
+            let (ComplexMatrix3x3 v) = this
             v.[i, j]
 
-    static member (*) (Value a : ComplexMatrix3x3, Value b : ComplexMatrix3x3) : ComplexMatrix3x3 = 
-        a * b |> Value
+    static member (*) (ComplexMatrix3x3 a, ComplexMatrix3x3 b) : ComplexMatrix3x3 = 
+        a * b |> ComplexMatrix3x3
 
-    static member (*) (a : Complex, Value b : ComplexMatrix3x3) : ComplexMatrix3x3 = 
-        a * b |> Value
+    static member (*) (a : Complex, ComplexMatrix3x3 b) : ComplexMatrix3x3 = 
+        a * b |> ComplexMatrix3x3
 
-    static member (*) (Value a : ComplexMatrix3x3, b : Complex) : ComplexMatrix3x3 = 
-        a * b |> Value
+    static member (*) (ComplexMatrix3x3 a, b : Complex) : ComplexMatrix3x3 = 
+        a * b |> ComplexMatrix3x3
 
-    static member (*) (ComplexVector3.Value a : ComplexVector3, Value b : ComplexMatrix3x3) : ComplexVector3 = 
-        a * b |> ComplexVector3.Value
+    static member (*) (ComplexVector3 a, ComplexMatrix3x3 b) : ComplexVector3 = 
+        a * b |> ComplexVector3
 
-    static member (*) (Value a : ComplexMatrix3x3, ComplexVector3.Value b : ComplexVector3) : ComplexVector3 = 
-        a * b |> ComplexVector3.Value
+    static member (*) (ComplexMatrix3x3 a, ComplexVector3 b) : ComplexVector3 = 
+        a * b |> ComplexVector3
 
 type ComplexMatrix4x4 = 
-    | Value of Matrix<Complex>
+    | ComplexMatrix4x4 of Matrix<Complex>
     member this.Item
         with get(i, j) =
-            let (Value v) = this
+            let (ComplexMatrix4x4 v) = this
             v.[i, j]
 
-    static member create a = matrix a |> ComplexMatrix4x4.Value
+    static member create a = matrix a |> ComplexMatrix4x4
 
-    static member (*) (Value a : ComplexMatrix4x4, Value b : ComplexMatrix4x4) : ComplexMatrix4x4 = 
-        a * b |> Value
+    static member (*) (ComplexMatrix4x4 a, ComplexMatrix4x4 b) : ComplexMatrix4x4 = 
+        a * b |> ComplexMatrix4x4
 
-    static member (*) (a : Complex, Value b : ComplexMatrix4x4) : ComplexMatrix4x4 = 
-        a * b |> Value
+    static member (*) (a : Complex, ComplexMatrix4x4 b) : ComplexMatrix4x4 = 
+        a * b |> ComplexMatrix4x4
 
-    static member (*) (Value a : ComplexMatrix4x4, b : Complex) : ComplexMatrix4x4 = 
-        a * b |> Value
+    static member (*) (ComplexMatrix4x4 a, b : Complex) : ComplexMatrix4x4 = 
+        a * b |> ComplexMatrix4x4
 
     member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
-        let (ComplexMatrix4x4.Value v) = this
+        let (ComplexMatrix4x4 v) = this
         let evd = v.Evd ()
         let v = (x * evd.EigenValues).PointwiseExp () |> DiagonalMatrix.ofDiag
         let e = evd.EigenVectors
-        e * v * e.Inverse() |> ComplexMatrix4x4.Value
+        e * v * e.Inverse() |> ComplexMatrix4x4
 
     static member identity : ComplexMatrix4x4 =
         failwith ""

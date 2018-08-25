@@ -46,6 +46,7 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Constants.fs" />
     <Compile Include="Geometry.fs" />
     <Compile Include="MaterialProperties.fs" />
     <Compile Include="Fields.fs" />
