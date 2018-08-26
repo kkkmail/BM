@@ -1,11 +1,12 @@
 ﻿namespace Berreman
 module MaterialProperties = 
 
-    open Geometry
-    open System.Numerics
-    open MathNet.Numerics.ComplexExtensions
-    open MathNet.Numerics.LinearAlgebra
+    //open ExtremeNumericsMath
 
+    open System.Numerics
+    open MathNetNumericsMath
+
+    open Geometry
 
     type OpticalProperties = 
         {

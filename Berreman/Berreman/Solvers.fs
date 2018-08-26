@@ -1,20 +1,15 @@
 ﻿namespace Berreman
 
 module Solvers = 
-    open System.Numerics
-    //open MathNet.Numerics.ComplexExtensions
-    //open MathNet.Numerics.LinearAlgebra
+    //open ExtremeNumericsMath
 
-    open Constants
-    open ExtremeNumericsMath
+    open System.Numerics
+    open MathNetNumericsMath
+
     open Geometry
     open Fields
-    open MaterialProperties
     open Media
     open BerremanMatrix
-    //open MathNet.Symbolics
-    //open MathNet.Numerics
-    //open System.Threading
 
 
     type BaseOpticalSystemSolver (system: BaseOpticalSystem, em : EmField) = 

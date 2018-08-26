@@ -1,15 +1,13 @@
 ﻿namespace Berreman
 
 module Fields = 
-    open Constants
-    open ExtremeNumericsMath
+    //open ExtremeNumericsMath
+
+    open System.Numerics
+    open MathNetNumericsMath
+
     open Geometry
     open MaterialProperties
-    open System.Numerics
-    //open MathNet.Numerics
-    open MathNet.Numerics.ComplexExtensions
-    //open MathNet.Numerics.LinearAlgebra
-    open System
 
     // CGS usits are used.
 
@@ -69,8 +67,6 @@ module Fields =
                 |> ComplexVector.create
                 |> ComplexVector3
 
-            printfn "e = %A" e
-            printfn "h = %A" h
             (e, h)
 
         member this.eh0 = this.getEH this.polarization
@@ -115,11 +111,6 @@ module Fields =
             let a90 = e / sqrt(1.0 + e * e) |> cplx
             let (e0, h0) = info.eh0
             let (e90, h90) = info.eh90
-
-            printfn "e0 = %A" e0
-            printfn "h0 = %A" h0
-            printfn "e90 = %A" e90
-            printfn "h90 = %A" h90
 
             {
                 wavelength = info.wavelength

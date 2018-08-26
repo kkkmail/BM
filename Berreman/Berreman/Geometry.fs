@@ -1,13 +1,12 @@
 ﻿namespace Berreman
 module Geometry = 
 
-    open System.Numerics
-    //open MathNet.Numerics.ComplexExtensions
-    //open MathNet.Numerics.LinearAlgebra
-    //open Extreme.Mathematics
-    open Berreman.ExtremeNumericsMath
+    //open ExtremeNumericsMath
 
-    let cplx x = Complex(x, 0.0)
+    open System.Numerics
+    open MathNetNumericsMath
+
+
     let comlpexIdentityMatrix n = diagonalMatrix n (cplx 1.0)
     let comlpexZeroMatrix n = diagonalMatrix n (cplx 0.0)
 

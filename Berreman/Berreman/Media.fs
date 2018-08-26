@@ -2,7 +2,6 @@
 
 module Media =
 
-    open Geometry
     open MaterialProperties
 
     type Thickness = 
@@ -29,4 +28,3 @@ module Media =
             thickPlate : Layer option
             lower : OpticalProperties
         }
-

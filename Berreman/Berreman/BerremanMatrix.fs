@@ -2,17 +2,15 @@
 
 module BerremanMatrix = 
 
+    //open ExtremeNumericsMath
+
     open System.Numerics
-    //open MathNet.Numerics.ComplexExtensions
-    //open MathNet.Numerics.LinearAlgebra
-    open Constants
-    open ExtremeNumericsMath
+    open MathNetNumericsMath
+
     open Geometry
     open Fields
     open MaterialProperties
     open Media
-    //open MathNet.Symbolics
-    //open MathNet.Numerics
 
 
     // [ Ex, Hy, Ey, -Hx ]

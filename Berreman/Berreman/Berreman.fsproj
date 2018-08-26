@@ -46,8 +46,9 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Constants.fs" />
     <Compile Include="ExtremeNumericsMath.fs" />
+    <Compile Include="MathNetNumericsMath.fs" />
+    <Compile Include="Constants.fs" />
     <Compile Include="Geometry.fs" />
     <Compile Include="MaterialProperties.fs" />
     <Compile Include="Fields.fs" />
@@ -59,6 +60,7 @@
     <None Include="EvdErr_01.fsx" />
     <None Include="App.config" />
     <Content Include="packages.config" />
+    <None Include="Extreme60_Err.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Extreme.Numerics.FSharp.Net40, Version=6.0.16073.0, Culture=neutral, PublicKeyToken=9e513770f58567b2" />

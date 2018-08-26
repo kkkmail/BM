@@ -2,41 +2,39 @@
 
 // The purpose of this module is to abstract away differences in vector / matrix libraries.
 // Switching between them is VERY painful.
-module ExtremeNumericsMath =
-    open Extreme.Mathematics
-    open Extreme.Mathematics.LinearAlgebra
+module MathNetNumericsMath =
+    open System.Numerics
+    open MathNet.Numerics
+    open MathNet.Numerics.LinearAlgebra
 
     let pi = Constants.Pi
     let degree = Constants.Pi / 180.0
 
-    let cplx r = Complex<double>(r, 0.0)
-    let createComplex r i = Complex<double>(r, i)
-
-    type Complex = Complex<double>
+    let cplx r = Complex(r, 0.0)
+    let createComplex r i = Complex(r, i)
 
     type RealVector =
-        RealVector of DenseVector<double>
+        RealVector of Vector<double>
 
 
-    type RealMatrix = DenseMatrix<double>
+    type RealMatrix = Matrix<double>
 
 
     type ComplexVector = 
-        | ComplexVector of DenseVector<Complex>
+        | ComplexVector of Vector<Complex>
         static member (*) (ComplexVector a, ComplexVector b) = 
             a.DotProduct(b)
 
         static member (*) ((a : Complex), ComplexVector b) = 
-            (a * b).ToDenseVector() |> ComplexVector
+            (a * b) |> ComplexVector
 
         static member (*) (a : ComplexVector, (b : Complex)) = b * a
 
         static member (+) (ComplexVector a, ComplexVector b) = 
-            (a + b).ToDenseVector() |> ComplexVector
+            (a + b) |> ComplexVector
 
         static member create (a : #seq<Complex>) = 
-            let e = a |> Array.ofSeq
-            Vector.Create(e) |> ComplexVector
+            vector a |> ComplexVector
 
         member this.Item 
             with get (i: int) = 
@@ -45,40 +43,29 @@ module ExtremeNumericsMath =
 
         member this.conjugate = 
             let (ComplexVector v) = this
-            v.Conjugate().ToDenseVector() |> ComplexVector
+            v.Conjugate() |> ComplexVector
 
         member this.re = 
             let (ComplexVector v) = this
-            v.ToArray()
-            |> Array.map (fun e -> e.Re)
-            |> Vector.Create
-            |> RealVector
+            v.Real() |> RealVector
 
         member this.im = 
             let (ComplexVector v) = this
-            v.ToArray()
-            |> Array.map (fun e -> e.Im)
-            |> Vector.Create
-            |> RealVector
+            v.Imaginary() |> RealVector
 
 
     type ComplexMatrix = 
-        | ComplexMatrix of DenseMatrix<Complex>
+        | ComplexMatrix of Matrix<Complex>
         static member (*) (ComplexMatrix a, ComplexMatrix b) = 
-            (a * b).ToDenseMatrix() |> ComplexMatrix
+            (a * b) |> ComplexMatrix
 
         static member (*) ((a : Complex), ComplexMatrix b) = 
-            //let c = 
-            //    b.ToArray()
-            //    |> Array.map (fun e -> a * e)
-            //let d = Matrix.Create(b.RowCount, b.ColumnCount, c, MatrixElementOrder.ColumnMajor)
-            //d |> ComplexMatrix
-            (a * b).ToDenseMatrix() |> ComplexMatrix
+            (a * b) |> ComplexMatrix
 
         static member (*) (a : ComplexMatrix, b : Complex) = b * a
 
         static member (+) (ComplexMatrix a, ComplexMatrix b) = 
-            (a + b).ToDenseMatrix() |> ComplexMatrix
+            (a + b) |> ComplexMatrix
 
         static member (*) (ComplexVector a, ComplexMatrix b) : ComplexVector = 
             a * b |> ComplexVector
@@ -87,15 +74,16 @@ module ExtremeNumericsMath =
             a * b |> ComplexVector
 
         static member create (a : #seq<#seq<Complex>>) = 
-            Matrix.Create(array2D a) |> ComplexMatrix
+            matrix a |> ComplexMatrix
 
         member this.inverse = 
             let (ComplexMatrix m) = this
-            m.GetInverse().ToDenseMatrix() |> ComplexMatrix
+            m.Inverse() |> ComplexMatrix
 
-        member this.matrixExp = 
+        member this.matrixExp : ComplexMatrix = 
             let (ComplexMatrix m) = this
-            m.GetExponential().ToDenseMatrix() |> ComplexMatrix
+            //m.GetExponential().ToMatrix() |> ComplexMatrix
+            failwith ""
 
         member this.Item
             with get((i : int), (j : int)) =
@@ -104,25 +92,20 @@ module ExtremeNumericsMath =
 
         member this.conjugateTranspose = 
             let (ComplexMatrix m) = this
-            //let c = 
-            //    m.ToArray()
-            //    |> Array.map (fun e -> Complex(e.Real, -e.Imaginary))
-            //let d = Matrix.Create(m.ColumnCount, m.RowCount, c, MatrixElementOrder.RowMajor)
-            //d |> ComplexMatrix
-            m.ConjugateTranspose().ToDenseMatrix() |> ComplexMatrix
+            m.ConjugateTranspose() |> ComplexMatrix
 
         member this.evd = 
             let (ComplexMatrix m) = this
-            let evd = m.GetEigenvalueDecomposition()
+            let evd = m.Evd()
 
             {
-                eigenValues = evd.Eigenvalues.ToDenseVector() |> ComplexVector
-                eigenVectors = evd.Eigenvectors.ToDenseMatrix() |> ComplexMatrix
+                eigenValues = evd.EigenValues |> ComplexVector
+                eigenVectors = evd.EigenVectors |> ComplexMatrix
             }
 
         member this.determinant = 
             let (ComplexMatrix m) = this
-            m.GetDeterminant()
+            m.Determinant()
 
     and Evd = 
         {
@@ -132,4 +115,4 @@ module ExtremeNumericsMath =
 
 
     let diagonalMatrix (n : int) (e : Complex) = 
-        Matrix.Create(n, n, fun _ _ -> e) |> ComplexMatrix
+        DiagonalMatrix.create n e |> ComplexMatrix
