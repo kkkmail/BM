@@ -7,6 +7,7 @@ module Geometry =
     //open Extreme.Mathematics
     open Berreman.ExtremeNumericsMath
 
+    let cplx x = Complex(x, 0.0)
     let comlpexIdentityMatrix n = diagonalMatrix n (cplx 1.0)
     let comlpexZeroMatrix n = diagonalMatrix n (cplx 0.0)
 
@@ -20,14 +21,14 @@ module Geometry =
         member this.Item 
             with get i = 
                 let (ComplexVector2 v) = this
-                getComplexVectorItem v i
+                v.[i]
 
         member this.x = this.[0]
         member this.y = this.[1]
 
 
     type ComplexVector3 =
-        | ComplexVector3 of Vector<Complex>
+        | ComplexVector3 of ComplexVector
         member this.Item 
             with get i = 
                 let (ComplexVector3 v) = this
@@ -49,15 +50,15 @@ module Geometry =
 
         member this.conjugate = 
             let (ComplexVector3 v) = this
-            v.Conjugate() |> ComplexVector3
+            v.conjugate |> ComplexVector3
 
         member this.re = 
             let (ComplexVector3 v) = this
-            v.Real () |> RealVector3
+            v.re |> RealVector3
 
         member this.im = 
             let (ComplexVector3 v) = this
-            v.Imaginary () |> RealVector3
+            v.im |> RealVector3
 
         static member (*) (a : Complex, ComplexVector3 b) = 
             a * b |> ComplexVector3
@@ -67,7 +68,7 @@ module Geometry =
 
 
     type ComplexVector4 = 
-        | ComplexVector4 of Vector<Complex>
+        | ComplexVector4 of ComplexVector
         member this.Item 
             with get i = 
                 let (ComplexVector4 v) = this
@@ -79,7 +80,7 @@ module Geometry =
         member this.Item
             with get(i, j) =
                 let (ComplexMatrix3x3 v) = this
-                getComplexMatrixItem v i j
+                v.[i, j]
 
         static member (*) (ComplexMatrix3x3 a, ComplexMatrix3x3 b) : ComplexMatrix3x3 = 
             a * b |> ComplexMatrix3x3
@@ -101,13 +102,13 @@ module Geometry =
 
 
     type ComplexMatrix4x4 = 
-        | ComplexMatrix4x4 of Matrix<Complex>
+        | ComplexMatrix4x4 of ComplexMatrix
         member this.Item
             with get(i, j) =
                 let (ComplexMatrix4x4 v) = this
                 v.[i, j]
 
-        static member create a = matrix a |> ComplexMatrix4x4
+        static member create a = ComplexMatrix.create a |> ComplexMatrix4x4
 
         static member (*) (ComplexMatrix4x4 a, ComplexMatrix4x4 b) : ComplexMatrix4x4 = 
             a * b |> ComplexMatrix4x4
@@ -120,22 +121,7 @@ module Geometry =
 
         member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
             let (ComplexMatrix4x4 v) = this
-
-            printfn "v = %A" v
-
-            let evd = v.Evd ()
-            printfn "evd = %A" evd
-
-            let ev = (x * evd.EigenValues).PointwiseExp () |> DiagonalMatrix.ofDiag
-            printfn "evd = %A" evd
-
-            let e = evd.EigenVectors
-            printfn "e = %A" e
-
-            let retVal = e * ev * e.Inverse() |> ComplexMatrix4x4
-            printfn "retVal = %A" retVal
-
-            retVal
+            v.matrixExp |> ComplexMatrix4x4
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
 

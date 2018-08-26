@@ -23,7 +23,7 @@ module MaterialProperties =
 
         member this.rhoT : ComplexMatrix3x3 = 
             let (ComplexMatrix3x3 r) = this.rho
-            r.ConjugateTranspose () |> ComplexMatrix3x3
+            r.conjugateTranspose |> ComplexMatrix3x3
 
         static member defaultValue (n : double) = 
             {
