@@ -80,11 +80,6 @@ module MathNetNumericsMath =
             let (ComplexMatrix m) = this
             m.Inverse() |> ComplexMatrix
 
-        member this.matrixExp : ComplexMatrix = 
-            let (ComplexMatrix m) = this
-            //m.GetExponential().ToMatrix() |> ComplexMatrix
-            failwith ""
-
         member this.Item
             with get((i : int), (j : int)) =
                 let (ComplexMatrix v) = this

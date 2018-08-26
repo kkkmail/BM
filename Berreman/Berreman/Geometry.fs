@@ -5,6 +5,7 @@ module Geometry =
 
     open System.Numerics
     open MathNetNumericsMath
+    open MatrixExp
 
 
     let comlpexIdentityMatrix n = diagonalMatrix n (cplx 1.0)
@@ -120,7 +121,7 @@ module Geometry =
 
         member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
             let (ComplexMatrix4x4 v) = this
-            v.matrixExp |> ComplexMatrix4x4
+            v.matrixExp () |> ComplexMatrix4x4
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
 
