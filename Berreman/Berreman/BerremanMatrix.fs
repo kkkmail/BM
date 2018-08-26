@@ -3,15 +3,16 @@
 module BerremanMatrix = 
 
     open System.Numerics
-    open MathNet.Numerics.ComplexExtensions
-    open MathNet.Numerics.LinearAlgebra
-
+    //open MathNet.Numerics.ComplexExtensions
+    //open MathNet.Numerics.LinearAlgebra
+    open Constants
+    open ExtremeNumericsMath
     open Geometry
     open Fields
     open MaterialProperties
     open Media
-    open MathNet.Symbolics
-    open MathNet.Numerics
+    //open MathNet.Symbolics
+    //open MathNet.Numerics
 
 
     // [ Ex, Hy, Ey, -Hx ]
@@ -19,7 +20,7 @@ module BerremanMatrix =
         {
             wavelength : double
             n1SinFita : double
-            eh : Vector<Complex>
+            eh : ComplexVector4
         }
         member this.eX = this.eh.[0]
         member this.hY = this.eh.[1]
@@ -32,7 +33,7 @@ module BerremanMatrix =
 
         // Generated, do not modify.
         static member create (o : OpticalProperties) (em : EmField) =
-            let n1SinFita = complex em.n1SinFita 0.0
+            let n1SinFita = cplx em.n1SinFita
 
             [
                 [
@@ -67,7 +68,7 @@ module BerremanMatrix =
 
         // Generated, do not modify.
         static member createEmField (o : OpticalProperties) (emXY : EmFieldXY) = 
-            let n1SinFita = complex emXY.n1SinFita 0.0
+            let n1SinFita = cplx emXY.n1SinFita
             let eX = emXY.e.x
             let eY = emXY.e.y
             let hX = emXY.h.x
@@ -82,7 +83,7 @@ module BerremanMatrix =
 
         static member propagate (l : Layer, em : EmField) = 
             let (BerremanMatrix m) = BerremanMatrix.create l.properties em
-            m.matrixExp (complex 0.0 (2.0 * Constants.Pi * l.thickness / em.wavelength)) |> BerremanMatrixPropagated
+            m.matrixExp (Complex(0.0, (2.0 * pi * l.thickness / em.wavelength))) |> BerremanMatrixPropagated
 
         static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 
             ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagate(r, em)) * acc) BerremanMatrixPropagated.identity
@@ -100,8 +101,8 @@ module BerremanMatrix =
                 {
                     wavelength = this.wavelength
                     n1SinFita = this.n1SinFita
-                    e = [ this.eX; this.eY ] |> vector |> ComplexVector2
-                    h = [ this.hX; this.hY ] |> vector |> ComplexVector2
+                    e = [ this.eX; this.eY ] |> ComplexVector.create |> ComplexVector2
+                    h = [ this.hX; this.hY ] |> ComplexVector.create |> ComplexVector2
                 } : EmFieldXY
 
             BerremanMatrix.createEmField o emXY
@@ -113,5 +114,5 @@ module BerremanMatrix =
             {
                 wavelength = this.wavelength
                 n1SinFita = this.n1SinFita
-                eh = [ this.e.x; this.h.y; this.e.y; -this.h.x ] |> vector
+                eh = [ this.e.x; this.h.y; this.e.y; -this.h.x ] |> ComplexVector.create |> ComplexVector4
             }

@@ -1,12 +1,14 @@
 ﻿namespace Berreman
 
 module Fields = 
+    open Constants
+    open ExtremeNumericsMath
     open Geometry
     open MaterialProperties
     open System.Numerics
-    open MathNet.Numerics
+    //open MathNet.Numerics
     open MathNet.Numerics.ComplexExtensions
-    open MathNet.Numerics.LinearAlgebra
+    //open MathNet.Numerics.LinearAlgebra
     open System
 
     // CGS usits are used.
@@ -22,11 +24,11 @@ module Fields =
     type Polarization = 
         | Polarization of float
         static member create (p : double) =
-            p % (Constants.Pi / 2.0) |> Polarization
+            p % (pi / 2.0) |> Polarization
 
         member this.crossed = 
             let (Polarization p) = this
-            Polarization (p + (Constants.Pi / 2.0))
+            Polarization (p + (pi / 2.0))
 
         static member defaultValue = Polarization 0.0
 
@@ -34,7 +36,7 @@ module Fields =
     type IncidentAngle = 
         | IncidentAngle of float
         static member create (p : double) =
-            (p % (Constants.Pi / 2.0) + Constants.Pi) % (Constants.Pi / 2.0) |> IncidentAngle
+            (p % (pi / 2.0) + pi) % (pi / 2.0) |> IncidentAngle
 
 
     type IncidentLightInfo = 
@@ -55,7 +57,7 @@ module Fields =
                     sin(beta) |> cplx
                     -cos(beta) * sin(fita) |> cplx
                 ]
-                |> vector
+                |> ComplexVector.create
                 |> ComplexVector3
 
             let h = 
@@ -64,8 +66,11 @@ module Fields =
                     n1 * cos(beta) |> cplx
                     n1 * sin(beta) * sin(fita) |> cplx
                 ]
-                |> vector
+                |> ComplexVector.create
                 |> ComplexVector3
+
+            printfn "e = %A" e
+            printfn "h = %A" h
             (e, h)
 
         member this.eh0 = this.getEH this.polarization
@@ -99,8 +104,8 @@ module Fields =
             { 
                 wavelength = emXY.wavelength 
                 n1SinFita = emXY.n1SinFita 
-                e = [ emXY.e.x; emXY.e.y; eZ ] |> vector |> ComplexVector3
-                h = [ emXY.h.x; emXY.h.y; hZ ] |> vector |> ComplexVector3
+                e = [ emXY.e.x; emXY.e.y; eZ ] |> ComplexVector.create |> ComplexVector3
+                h = [ emXY.h.x; emXY.h.y; hZ ] |> ComplexVector.create |> ComplexVector3
             }
 
         static member create (info : IncidentLightInfo ) = 
@@ -110,6 +115,11 @@ module Fields =
             let a90 = e / sqrt(1.0 + e * e) |> cplx
             let (e0, h0) = info.eh0
             let (e90, h90) = info.eh90
+
+            printfn "e0 = %A" e0
+            printfn "h0 = %A" h0
+            printfn "e90 = %A" e90
+            printfn "h90 = %A" h90
 
             {
                 wavelength = info.wavelength

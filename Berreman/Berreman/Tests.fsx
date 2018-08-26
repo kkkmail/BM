@@ -9,8 +9,14 @@
 #r "../packages/System.ValueTuple.4.5.0/lib/net47/System.ValueTuple.dll"
 //===========================================================
 #r "./bin/Debug/Berreman.dll"
+#r "./bin/Debug/Extreme.Numerics.Net40.dll"
+#r "./bin/Debug/Extreme.Numerics.Generic.Net40.dll"
+#r "./bin/Debug/Extreme.Numerics.FSharp.Net40.dll"
 //===========================================================
+open Extreme.Mathematics
+open Extreme.Mathematics.LinearAlgebra
 open Berreman.Constants
+open Berreman.ExtremeNumericsMath
 open Berreman.Fields
 open Berreman.BerremanMatrix
 open Berreman.Geometry
@@ -19,9 +25,10 @@ open Berreman.Media
 open Berreman.Solvers
 
 open System.Numerics
-open MathNet.Numerics
-open MathNet.Numerics.ComplexExtensions
-open MathNet.Numerics.LinearAlgebra
+//open MathNet.Numerics
+//open MathNet.Numerics.ComplexExtensions
+//open MathNet.Numerics.LinearAlgebra
+NumericsConfiguration.Providers.RegisterGenericProvider()
 //===========================================================
 let info = 
     {
@@ -75,9 +82,7 @@ printfn "o = %A" o
 let (BerremanMatrix b) = BerremanMatrix.create o em
 let (ComplexMatrix4x4 v) = b
 printfn "b = %A" b
-printfn "b.Determinant = %A" (v.Determinant())
+printfn "b.Determinant = %A" (v.determinant)
 
-let b2 = b.matrixExp(Complex(0.0, Constants.Pi))
+let b2 = b.matrixExp(Complex(0.0, pi))
 printfn "b2 = %A" b2
-
-

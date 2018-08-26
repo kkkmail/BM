@@ -2,28 +2,29 @@
 
 module Solvers = 
     open System.Numerics
-    open MathNet.Numerics.ComplexExtensions
-    open MathNet.Numerics.LinearAlgebra
+    //open MathNet.Numerics.ComplexExtensions
+    //open MathNet.Numerics.LinearAlgebra
 
+    open Constants
+    open ExtremeNumericsMath
     open Geometry
     open Fields
     open MaterialProperties
     open Media
     open BerremanMatrix
-    open MathNet.Symbolics
-    open MathNet.Numerics
-    open System.Threading
+    //open MathNet.Symbolics
+    //open MathNet.Numerics
+    //open System.Threading
 
 
     type BaseOpticalSystemSolver (system: BaseOpticalSystem, em : EmField) = 
-        let sortEvd (evd : Factorization.Evd<Complex>) : (FullEigenBasis * FullEigenBasis) = 
-        
+        let sortEvd (evd : Evd) : (FullEigenBasis * FullEigenBasis) = 
             failwith ""
 
         let i : EmField = em
         let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.thinFilm, em)
         let (ComplexMatrix4x4 layers) = p
-        let evd = layers.Evd ()
+        let evd = layers.evd
         let (b1, b2)= sortEvd evd
 
         // Generated, do not modify.
@@ -54,9 +55,9 @@ module Solvers =
                     -b2.up.e1.[3]
                 ]
             ] 
-            |> matrix
+            |> ComplexMatrix.create
 
-        let cfm = coeffTbl.Inverse ()
+        let cfm = coeffTbl.inverse
 
         //let cfm = 
         //    [
@@ -93,7 +94,7 @@ module Solvers =
                 ((b1.down.e1.[2] * i.e.x - b1.down.e1.[0] * i.e.y) * (b1.down.e0.[1] * p.[2, 1] + b1.down.e0.[3] * p.[2, 3]) - b1.down.e0.[2] * (b1.down.e1.[0] * i.e.x * p.[2, 0] + b1.down.e1.[1] * i.e.x * p.[2, 1] + b1.down.e1.[0] * i.e.y * p.[2, 2] + b1.down.e1.[3] * i.e.x * p.[2, 3]) + b1.down.e0.[0] * (b1.down.e1.[2] * i.e.x * p.[2, 0] + b1.down.e1.[1] * i.e.y * p.[2, 1] + b1.down.e1.[2] * i.e.y * p.[2, 2] + b1.down.e1.[3] * i.e.y * p.[2, 3]))/(b1.down.e0.[2] * b1.down.e1.[0] - b1.down.e0.[0] * b1.down.e1.[2])
                 ((b1.down.e1.[2] * i.e.x - b1.down.e1.[0] * i.e.y) * (b1.down.e0.[1] * p.[3, 1] + b1.down.e0.[3] * p.[3, 3]) - b1.down.e0.[2] * (b1.down.e1.[0] * i.e.x * p.[3, 0] + b1.down.e1.[1] * i.e.x * p.[3, 1] + b1.down.e1.[0] * i.e.y * p.[3, 2] + b1.down.e1.[3] * i.e.x * p.[3, 3]) + b1.down.e0.[0] * (b1.down.e1.[2] * i.e.x * p.[3, 0] + b1.down.e1.[1] * i.e.y * p.[3, 1] + b1.down.e1.[2] * i.e.y * p.[3, 2] + b1.down.e1.[3] * i.e.y * p.[3, 3]))/(b1.down.e0.[2] * b1.down.e1.[0] - b1.down.e0.[0] * b1.down.e1.[2])
             ]
-            |> vector
+            |> ComplexVector.create
 
         let sol = cfm * freeTbl
 
@@ -104,7 +105,8 @@ module Solvers =
                 b1.up.e0.[2] * sol.[0] + b1.up.e1.[2] * sol.[1]
                 b1.up.e0.[3] * sol.[0] + b1.up.e1.[3] * sol.[1]
             ]
-            |> vector
+            |> ComplexVector.create
+            |> ComplexVector4
 
         let eht = 
             [
@@ -113,7 +115,8 @@ module Solvers =
                 b2.up.e0.[2] * sol.[2] + b2.up.e1.[2] * sol.[3]
                 b2.up.e0.[3] * sol.[2] + b2.up.e1.[3] * sol.[3]
             ]
-            |> vector
+            |> ComplexVector.create
+            |> ComplexVector4
 
         let r = 
             {

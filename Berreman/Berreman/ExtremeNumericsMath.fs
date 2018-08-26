@@ -21,13 +21,21 @@ module ExtremeNumericsMath =
             a.DotProduct(b)
 
         static member (*) ((a : Complex), ComplexVector b) = 
-            (a * b).ToDenseVector() |> ComplexVector
+            printfn "a = %A, b = %A" a b
+            let c = (a * b)
+            printfn "c = %A" c
+            let d = c.ToDenseVector()
+            printfn "d = %A" d
+            d|> ComplexVector
 
         static member (*) (ComplexVector a, (b : Complex)) = 
             (a * b).ToDenseVector() |> ComplexVector
 
         static member (+) (ComplexVector a, ComplexVector b) = 
             (a + b).ToDenseVector() |> ComplexVector
+
+        static member create (a : #seq<Complex>) = 
+            Vector.Create(a |> Array.ofSeq) |> ComplexVector
 
         member this.Item 
             with get (i: int) = 
@@ -92,6 +100,25 @@ module ExtremeNumericsMath =
         member this.conjugateTranspose = 
             let (ComplexMatrix m) = this
             m.ConjugateTranspose().ToDenseMatrix() |> ComplexMatrix
+
+        member this.evd = 
+            let (ComplexMatrix m) = this
+            let evd = m.GetEigenvalueDecomposition()
+
+            {
+                eigenValues = evd.Eigenvalues.ToDenseVector() |> ComplexVector
+                eigenVectors = evd.Eigenvectors.ToDenseMatrix() |> ComplexMatrix
+            }
+
+        member this.determinant = 
+            let (ComplexMatrix m) = this
+            m.GetDeterminant()
+
+    and Evd = 
+        {
+            eigenValues : ComplexVector
+            eigenVectors : ComplexMatrix
+        }
 
 
     let diagonalMatrix (n : int) (e : Complex) = 
