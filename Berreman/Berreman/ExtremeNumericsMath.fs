@@ -2,7 +2,7 @@
 
 // The purpose of this module is to abstract away differences in vector / matrix libraries.
 // Switching between them is VERY painful.
-module Math =
+module ExtremeNumericsMath =
     open System.Numerics
     open Extreme.Numerics
     open Extreme.Mathematics

@@ -79,7 +79,7 @@ module Geometry =
         member this.Item
             with get(i, j) =
                 let (ComplexMatrix3x3 v) = this
-                getMatrixItem v i j
+                getComplexMatrixItem v i j
 
         static member (*) (ComplexMatrix3x3 a, ComplexMatrix3x3 b) : ComplexMatrix3x3 = 
             a * b |> ComplexMatrix3x3
