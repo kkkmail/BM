@@ -14,8 +14,22 @@
 open System.Numerics
 open Berreman.MathNetNumericsMath
 open Berreman.MatrixExp
-open Berreman.Geometry
+//open Berreman.Geometry
 
+//===========================================================
+let m0 = 
+    [
+        [1.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx]
+        [0.0 |> cplx; 1.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx]
+        [0.0 |> cplx; 0.0 |> cplx; 1.0 |> cplx; 0.0 |> cplx]
+        [0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx; 1.0 |> cplx]
+    ]
+    |> ComplexMatrix.create
+    //|> ComplexMatrix4x4
+printfn "m0 = %A" m0
+
+let b0 = m0.matrixExp()
+printfn "b0 = %A" b0
 //===========================================================
 let m1 = 
     [
@@ -25,11 +39,12 @@ let m1 =
         [1.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx; 0.0 |> cplx]
     ]
     |> ComplexMatrix.create
-    |> ComplexMatrix4x4
+    //|> ComplexMatrix4x4
 printfn "m1 = %A" m1
 
-let (ComplexMatrix4x4 b1) = m1.matrixExp(Complex(0.0, pi))
+let b1 = m1.matrixExp()
 printfn "b1 = %A" b1
+//===========================================================
 
 //let m2 = 
 //    [

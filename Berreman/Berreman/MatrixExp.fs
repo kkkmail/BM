@@ -30,18 +30,36 @@ module MatrixExp =
 
         member this.matrixExp () : ComplexMatrix = 
             let (ComplexMatrix m) = this
-            let q = 6
+            let q = 7
+            let one = cplx 1.0
+
             let aNorm = this.lInfinityNorm ()
+            printfn "aNorm = %A" aNorm
+
             let ee = int ((log aNorm) / (log 2.0)) + 1
             let s = max 0 (ee + 1)
+            printfn "s = %A" s
+
             let t = 1.0 / (pown 2.0 s)
+            printfn "t = %A" t
+
             let a2 = (cplx t) * this
-            let one = cplx 1.0
+            printfn "a2 = %A" a2
+
             let x = a2
+            printfn "x = %A" x
+
             let c = cplx 0.5
+
             let e = ComplexMatrix.identity m.RowCount
+            printfn "e = %A" e
+
             let e1 = ComplexMatrix.addScaled one e c a2
+            printfn "e1 = %A" e1
+
             let d1 = ComplexMatrix.addScaled one e (-c) a2
+            printfn "d1 = %A" d1
+
             let p = true
 
             let rec update 
@@ -54,6 +72,8 @@ module MatrixExp =
                 if kk <= q
                 then 
                     let cn = cc * (cplx ((double (q - kk + 1)) / (double (kk * (2 * q - kk + 1)))))
+                    printfn "cn = %A" cn
+
                     let xn = a2 * xx
                     let en = ComplexMatrix.addScaled cn xn one ee
 
@@ -64,16 +84,19 @@ module MatrixExp =
 
                     update (not pp) (kk + 1) cn dn en xn
                 else
-                    ee
+                    (dd, ee)
 
-            let en = update p 2 c d1 e1 x
-            let e1 = d1.inverse * en
+            let (dn, en) = update p 2 c d1 e1 x
+            let e1 = dn.inverse * en
+            printfn "e1 = %A" e1
 
             let rec mult (k : int) (res : ComplexMatrix) = 
                 if k <= s
                 then mult (k + 1) (res * e1)
                 else res
 
-            let retVal = mult 1 e1
+            let retVal = mult 0 e1
+            printfn "retVal = %A" retVal
+            printfn "retVal * e1 = %A" (retVal * e1)
             retVal
 
