@@ -5,7 +5,7 @@ module Geometry =
     //open MathNet.Numerics.ComplexExtensions
     //open MathNet.Numerics.LinearAlgebra
     //open Extreme.Mathematics
-    open Berreman.Math
+    open Berreman.ExtremeNumericsMath
 
     let comlpexIdentityMatrix n = diagonalMatrix n (cplx 1.0)
     let comlpexZeroMatrix n = diagonalMatrix n (cplx 0.0)
