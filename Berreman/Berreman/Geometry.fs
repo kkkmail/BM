@@ -2,24 +2,25 @@
 module Geometry = 
 
     open System.Numerics
-    open MathNet.Numerics.ComplexExtensions
-    open MathNet.Numerics.LinearAlgebra
+    //open MathNet.Numerics.ComplexExtensions
+    //open MathNet.Numerics.LinearAlgebra
+    //open Extreme.Mathematics
+    open Berreman.Math
 
-    let cplx x = Complex(x, 0.0)
-    let comlpexIdentityMatrix n = DiagonalMatrix.create n (cplx 1.0)
-    let comlpexZeroMatrix n = DiagonalMatrix.create n (cplx 0.0)
+    let comlpexIdentityMatrix n = diagonalMatrix n (cplx 1.0)
+    let comlpexZeroMatrix n = diagonalMatrix n (cplx 0.0)
 
 
     type RealVector3 =
-        | RealVector3 of Vector<double>
+        | RealVector3 of RealVector
 
 
     type ComplexVector2 =
-        | ComplexVector2 of Vector<Complex>
+        | ComplexVector2 of ComplexVector
         member this.Item 
             with get i = 
                 let (ComplexVector2 v) = this
-                v.[i]
+                getComplexVectorItem v i
 
         member this.x = this.[0]
         member this.y = this.[1]
@@ -74,11 +75,11 @@ module Geometry =
 
 
     type ComplexMatrix3x3 = 
-        | ComplexMatrix3x3 of Matrix<Complex>
+        | ComplexMatrix3x3 of ComplexMatrix
         member this.Item
             with get(i, j) =
                 let (ComplexMatrix3x3 v) = this
-                v.[i, j]
+                getMatrixItem v i j
 
         static member (*) (ComplexMatrix3x3 a, ComplexMatrix3x3 b) : ComplexMatrix3x3 = 
             a * b |> ComplexMatrix3x3
@@ -119,6 +120,7 @@ module Geometry =
 
         member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
             let (ComplexMatrix4x4 v) = this
+
             printfn "v = %A" v
 
             let evd = v.Evd ()
