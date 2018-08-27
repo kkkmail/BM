@@ -20,7 +20,7 @@ module MatrixExp =
 
             let rowSum (v : Vector<Complex>) = 
                 v.ToArray()
-                |> Array.fold (fun acc e -> acc + e.Norm()) 0.0
+                |> Array.fold (fun acc e -> acc + (sqrt (e.Norm()))) 0.0
 
             let rows = [ for i in 0..m.RowCount - 1 -> m.Row(i) ]
             rows |> List.fold (fun acc v -> max acc (rowSum v)) 0.0
@@ -30,7 +30,7 @@ module MatrixExp =
 
         member this.matrixExp () : ComplexMatrix = 
             let (ComplexMatrix m) = this
-            let q = 7
+            let q = 6
             let one = cplx 1.0
 
             let aNorm = this.lInfinityNorm ()
