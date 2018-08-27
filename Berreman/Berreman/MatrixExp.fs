@@ -7,9 +7,9 @@ module MatrixExp =
     open MathNet.Numerics.LinearAlgebra
     open MathNetNumericsMath
 
-    // Simple port of https://people.sc.fsu.edu/~jburkardt/c_src/matrix_exponential/matrix_exponential.c
+    // Simple port of https://people.sc.fsu.edu/~jburkardt/c_src/matrix_exponential/matrix_exponential.c & related.
     // No optimization was performed.
-    // This code is distributed under the GNU LGPL license.
+    // This code is distributed under the GNU LGPL license, which is identical to the source license.
     type ComplexMatrix
     with
         static member identity (n : int) : ComplexMatrix = 
