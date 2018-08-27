@@ -20,6 +20,7 @@
 
 open System.Numerics
 open Berreman.MathNetNumericsMath
+open Berreman.MatrixExp
 
 open Berreman.Constants
 open Berreman.Fields
@@ -76,7 +77,7 @@ printfn "em = %A" em
 
 //printfn "Completed"
 
-let o = OpticalProperties.defaultValue 1.5
+let o = OpticalProperties.defaultValue 1.52
 printfn "o = %A" o
 
 let (BerremanMatrix b) = BerremanMatrix.create o em
@@ -86,3 +87,9 @@ printfn "b.Determinant = %A" (v.determinant)
 
 let b2 = b.matrixExp(createComplex 0.0 pi)
 printfn "b2 = %A" b2
+
+printfn "Calling evd..."
+let evd = v.evd()
+printfn "evd = %A" evd
+
+printfn "Completed."

@@ -67,6 +67,9 @@ module MathNetNumericsMath =
         static member (+) (ComplexMatrix a, ComplexMatrix b) = 
             (a + b) |> ComplexMatrix
 
+        static member (-) (ComplexMatrix a, ComplexMatrix b) = 
+            (a - b) |> ComplexMatrix
+
         static member (*) (ComplexVector a, ComplexMatrix b) : ComplexVector = 
             a * b |> ComplexVector
 
