@@ -91,11 +91,16 @@ module MatrixExp =
             //printfn "e1 = %A" e1
 
             let rec mult (k : int) (res : ComplexMatrix) = 
+                //if k <= s
+                //then mult (k + 1) (res * e1)
+                //else res
                 if k <= s
-                then mult (k + 1) (res * e1)
+                then mult (k + 1) (res * res)
                 else res
 
-            let retVal = mult 0 e1
+            //let retVal = mult 0 e1
+            let retVal = mult 1 e1
+
             //printfn "retVal = %A" retVal
             //printfn "retVal * e1 = %A" (retVal * e1)
             retVal
