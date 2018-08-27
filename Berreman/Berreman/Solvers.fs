@@ -5,6 +5,7 @@ module Solvers =
 
     open System.Numerics
     open MathNetNumericsMath
+    open MatrixExp
 
     open Geometry
     open Fields
@@ -19,7 +20,7 @@ module Solvers =
         let i : EmField = em
         let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.thinFilm, em)
         let (ComplexMatrix4x4 layers) = p
-        let evd = layers.evd
+        let evd = layers.evd ()
         let (b1, b2)= sortEvd evd
 
         // Generated, do not modify.

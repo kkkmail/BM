@@ -100,3 +100,16 @@ module MatrixExp =
             printfn "retVal * e1 = %A" (retVal * e1)
             retVal
 
+        member this.evd () = 
+            let (ComplexMatrix m) = this
+            let evd = m.Evd()
+
+            {
+                eigenValues = evd.EigenValues |> ComplexVector
+                eigenVectors = evd.EigenVectors |> ComplexMatrix
+            }
+
+        member this.svd () = 
+            let (MathNetNumericsMath.ComplexMatrix m) = this
+            let svd = m.Svd()
+            svd

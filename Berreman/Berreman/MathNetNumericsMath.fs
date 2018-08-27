@@ -89,15 +89,6 @@ module MathNetNumericsMath =
             let (ComplexMatrix m) = this
             m.ConjugateTranspose() |> ComplexMatrix
 
-        member this.evd = 
-            let (ComplexMatrix m) = this
-            let evd = m.Evd()
-
-            {
-                eigenValues = evd.EigenValues |> ComplexVector
-                eigenVectors = evd.EigenVectors |> ComplexMatrix
-            }
-
         member this.determinant = 
             let (ComplexMatrix m) = this
             m.Determinant()

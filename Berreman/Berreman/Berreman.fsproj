@@ -64,6 +64,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="DotNumerics">
+      <HintPath>..\packages\DotNumerics.1.1\lib\DotNumerics.dll</HintPath>
+    </Reference>
     <Reference Include="FParsec">
       <HintPath>..\packages\FParsec.1.0.3\lib\net40-client\FParsec.dll</HintPath>
     </Reference>
