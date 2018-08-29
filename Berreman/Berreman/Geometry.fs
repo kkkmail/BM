@@ -12,6 +12,13 @@ module Geometry =
     let comlpexZeroMatrix n = diagonalMatrix n (cplx 0.0)
 
 
+    // We don't really want to guess if 0.0 is an angle or something else.
+    type Angle =
+        | Angle of double
+        static member degree a = a * degree |> Angle
+        static member radian r = r |> Angle
+
+
     type RealVector3 =
         | RealVector3 of RealVector
 
@@ -145,7 +152,7 @@ module Geometry =
 
 
     type RotationType = 
-        | Euler of double * double * double
+        | Euler of Angle * Angle * Angle
 
 
     //type Rotation (rotation: RotationType) = 

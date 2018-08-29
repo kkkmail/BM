@@ -3,7 +3,6 @@
 module Fields = 
     //open ExtremeNumericsMath
 
-    open System.Numerics
     open MathNetNumericsMath
 
     open Geometry
@@ -16,6 +15,8 @@ module Fields =
     // This is an invariant and it deserves a type.
     type N1SinFita =
         | N1SinFita of double
+
+        static member create n (Angle f) = n * (sin f) |> N1SinFita
 
 
     type Ellipticity =
@@ -38,25 +39,25 @@ module Fields =
         static member defaultValue = Polarization 0.0
 
 
-    type IncidentAngle = 
-        | IncidentAngle of float
+    type IncidenceAngle = 
+        | IncidenceAngle of Angle
         static member create (p : double) =
-            (p % (pi / 2.0) + pi) % (pi / 2.0) |> IncidentAngle
+            (p % (pi / 2.0) + pi) % (pi / 2.0) |> Angle |> IncidenceAngle
 
 
     type IncidentLightInfo = 
         {
             wavelength : double
             refractionIndex : double
-            incidentAngle : IncidentAngle
+            incidenceAngle : IncidenceAngle
             polarization : Polarization
             ellipticity : Ellipticity
         }
         member this.getEH (Polarization beta) = 
             let n1 = this.refractionIndex
-            let (IncidentAngle fita) = this.incidentAngle
+            let (IncidenceAngle (Angle fita)) = this.incidenceAngle
 
-            let e = 
+            let e =
                 [
                     cos(beta) * cos(fita) |> cplx
                     sin(beta) |> cplx
@@ -65,7 +66,7 @@ module Fields =
                 |> ComplexVector.create
                 |> ComplexVector3
 
-            let h = 
+            let h =
                 [
                     -n1 * cos(fita) * sin(beta) |> cplx
                     n1 * cos(beta) |> cplx
@@ -112,7 +113,7 @@ module Fields =
             }
 
         static member create (info : IncidentLightInfo ) = 
-            let (IncidentAngle a) = info.incidentAngle
+            let (IncidenceAngle (Angle a)) = info.incidenceAngle
             let (Ellipticity e) = info.ellipticity
             let a0 = 1.0 / sqrt(1.0 + e * e) |> cplx
             let a90 = e / sqrt(1.0 + e * e) |> cplx
@@ -121,7 +122,7 @@ module Fields =
 
             {
                 wavelength = info.wavelength
-                n1SinFita = info.refractionIndex * (sin a)
+                n1SinFita = info.refractionIndex * (sin a) |> N1SinFita
                 e = a0 * e0 + a90 * e90
                 h = a0 * h0 + a90 * h90
             }

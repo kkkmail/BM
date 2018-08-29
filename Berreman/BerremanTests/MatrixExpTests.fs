@@ -1,11 +1,13 @@
 ﻿namespace BerremanTests
 
-open MathNet.Numerics
 open Berreman.MatrixExp
 open Berreman.MathNetNumericsMath
 
 open Xunit
 open Xunit.Abstractions
+
+open MatrixComparison
+
 
 type MatriExpTestData =
     {
@@ -13,9 +15,8 @@ type MatriExpTestData =
         exp : ComplexMatrix
     }
 
-type MatrixExpTests(output : ITestOutputHelper) =
-    let allowedDiff = 1.0e-05
 
+type MatrixExpTests(output : ITestOutputHelper) =
     let data = 
         [|
             {
@@ -115,23 +116,7 @@ type MatrixExpTests(output : ITestOutputHelper) =
         |]
 
     // Complex matrix and expected matrix exponent
-    member __.runTest (d : MatriExpTestData) = 
-        let exp = d.matrix.matrixExp()
-        let (ComplexMatrix ev) = d.exp
-        let (ComplexMatrix diff) = exp - d.exp
-        let norm = ev.L2Norm ()
-        let diffValue = diff.L2Norm ()
-        let mNorm = d.matrix.lInfinityNorm ()
-
-        output.WriteLine ("m = {0}", d.matrix.ToString())
-        output.WriteLine ("exp = {0}", exp.ToString())
-        output.WriteLine ("d.exp = {0}", d.exp.ToString())
-        output.WriteLine ("diff = {0}", diff.ToString())
-
-        output.WriteLine ("d.matrix.lInfinityNorm = {0}", mNorm.ToString())
-        output.WriteLine ("norm = {0}", norm)
-        output.WriteLine ("diffValue = {0}", diffValue)
-        Assert.True(diffValue / norm < allowedDiff)
+    member __.runTest (d : MatriExpTestData) = verifyMatrixEquality output (d.matrix.matrixExp()) d.exp
 
     [<Fact>]
     member this.matrixExpTest0 () = this.runTest (data.[0])
