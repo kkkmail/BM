@@ -12,12 +12,11 @@ module BerremanMatrix =
     open MaterialProperties
     open Media
 
-
     // [ Ex, Hy, Ey, -Hx ]
     type BerremanField =
         {
             wavelength : double
-            n1SinFita : double
+            n1SinFita : N1SinFita
             eh : ComplexVector4
         }
         member this.eX = this.eh.[0]
@@ -30,8 +29,8 @@ module BerremanMatrix =
         | BerremanMatrix of ComplexMatrix4x4
 
         // Generated, do not modify.
-        static member create (o : OpticalProperties) (em : EmField) =
-            let n1SinFita = cplx em.n1SinFita
+        static member create (o : OpticalProperties) (N1SinFita nsf) =
+            let n1SinFita = cplx nsf
 
             [
                 [
@@ -66,7 +65,8 @@ module BerremanMatrix =
 
         // Generated, do not modify.
         static member createEmField (o : OpticalProperties) (emXY : EmFieldXY) = 
-            let n1SinFita = cplx emXY.n1SinFita
+            let (N1SinFita nsf) = emXY.n1SinFita
+            let n1SinFita = cplx nsf
             let eX = emXY.e.x
             let eY = emXY.e.y
             let hX = emXY.h.x
@@ -80,7 +80,7 @@ module BerremanMatrix =
         | BerremanMatrixPropagated of ComplexMatrix4x4
 
         static member propagate (l : Layer, em : EmField) = 
-            let (BerremanMatrix m) = BerremanMatrix.create l.properties em
+            let (BerremanMatrix m) = BerremanMatrix.create l.properties em.n1SinFita
             m.matrixExp (Complex(0.0, (2.0 * pi * l.thickness / em.wavelength))) |> BerremanMatrixPropagated
 
         static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 

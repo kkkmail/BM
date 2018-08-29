@@ -11,6 +11,13 @@ module Fields =
 
     // CGS usits are used.
 
+
+    // n1 * sin(fita), where fita is the incidence angle and n1 is the refraction index of upper media.
+    // This is an invariant and it deserves a type.
+    type N1SinFita =
+        | N1SinFita of double
+
+
     type Ellipticity =
         | Ellipticity of float
         static member create (e : double) =
@@ -76,7 +83,7 @@ module Fields =
     type EmFieldXY =
         {
             wavelength : double
-            n1SinFita : double
+            n1SinFita : N1SinFita
             e : ComplexVector2
             h : ComplexVector2
         }
@@ -85,7 +92,7 @@ module Fields =
     type EmField =
         {
             wavelength : double
-            n1SinFita : double
+            n1SinFita : N1SinFita
             e : ComplexVector3
             h : ComplexVector3
         }

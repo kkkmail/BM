@@ -4,14 +4,17 @@ module Media =
 
     open MaterialProperties
 
+
     type Thickness = 
         double
+
 
     type Layer =
         {
             properties : OpticalProperties
             thickness : Thickness
         }
+
 
     type BaseOpticalSystem = 
         {
