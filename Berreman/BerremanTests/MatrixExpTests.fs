@@ -22,58 +22,58 @@ type MatrixExpTests(output : ITestOutputHelper) =
             {
                 matrix = 
                     [
-                        [ createComplex 1. 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 1. 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 1. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 1. 0. ]
+                        [ 1.; 0.; 0.; 0. ]
+                        [ 0.; 1.; 0.; 0. ]
+                        [ 0.; 0.; 1.; 0. ]
+                        [ 0.; 0.; 0.; 1. ]
                     ]
-                    |> ComplexMatrix.create
+                    |> ComplexMatrix.fromRe
                 exp = 
                     [
-                        [ createComplex 2.718281828459045 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 2.718281828459045 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 2.718281828459045 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 2.718281828459045 0. ]
+                        [ 2.718281828459045; 0.; 0.; 0. ]
+                        [ 0.; 2.718281828459045; 0.; 0. ]
+                        [ 0.; 0.; 2.718281828459045; 0. ]
+                        [ 0.; 0.; 0.; 2.718281828459045 ]
                     ]
-                    |> ComplexMatrix.create
+                    |> ComplexMatrix.fromRe
             }
 
             {
                 matrix = 
                     [
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 1. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 1. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 1. 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 1. 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0. ]
+                        [ 0.; 0.; 0.; 1. ]
+                        [ 0.; 0.; 1.; 0. ]
+                        [ 0.; 1.; 0.; 0. ]
+                        [ 1.; 0.; 0.; 0. ]
                     ]
-                    |> ComplexMatrix.create
+                    |> ComplexMatrix.fromRe
                 exp = 
                     [
-                        [ createComplex 1.5430806348152437 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 1.1752011936438014 0. ]
-                        [ createComplex 0. 0.; createComplex 1.5430806348152437 0.; createComplex 1.1752011936438014 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 1.1752011936438014 0.; createComplex 1.5430806348152437 0.; createComplex 0. 0. ]
-                        [ createComplex 1.1752011936438014 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 1.5430806348152437 0. ]
+                        [ 1.5430806348152437; 0.; 0.; 1.1752011936438014 ]
+                        [ 0.; 1.5430806348152437; 1.1752011936438014; 0. ]
+                        [ 0.; 1.1752011936438014; 1.5430806348152437; 0. ]
+                        [ 1.1752011936438014; 0.; 0.; 1.5430806348152437 ]
                     ]
-                    |> ComplexMatrix.create
+                    |> ComplexMatrix.fromRe
             }
 
             {
                 matrix = 
                     [
-                        [ createComplex 0. 0.; createComplex 1. 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 2.25 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 0.; createComplex 1. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 2.25 0.; createComplex 0. 0. ]
+                        [ 0.; 1.; 0.; 0. ]
+                        [ 2.25; 0.; 0.; 0. ]
+                        [ 0.; 0.; 0.; 1. ]
+                        [ 0.; 0.; 2.25; 0. ]
                     ]
-                    |> ComplexMatrix.create
+                    |> ComplexMatrix.fromRe
                 exp = 
                     [
-                        [ createComplex 2.352409615243247 0.; createComplex 1.4195196367298781 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 3.1939191826422255 0.; createComplex 2.3524096152432468 0.; createComplex 0. 0.; createComplex 0. 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 2.352409615243247 0.; createComplex 1.4195196367298781 0. ]
-                        [ createComplex 0. 0.; createComplex 0. 0.; createComplex 3.1939191826422255 0.; createComplex 2.3524096152432468 0. ]
+                        [ 2.352409615243247; 1.4195196367298781; 0.; 0. ]
+                        [ 3.1939191826422255; 2.3524096152432468; 0.; 0. ]
+                        [ 0.; 0.; 2.352409615243247; 1.4195196367298781 ]
+                        [ 0.; 0.; 3.1939191826422255; 2.3524096152432468 ]
                     ]
-                    |> ComplexMatrix.create
+                    |> ComplexMatrix.fromRe
             }
 
             {

@@ -576,7 +576,7 @@ MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] :=
       MMd = Table[Dld[i, j], {i, 4}, {j, 4}];
       MMdInv = Inverse[MMd];
       retval = {(MMdInv.MM) / (2 * Pi * I / lambda), sol};
-      Print["MMM retval = ",retval];
+      Print["MMM retval = ", N[retval]];
       Return[retval];
     ];
 (* ============================================== *)

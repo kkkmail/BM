@@ -106,6 +106,9 @@ module Geometry =
 
         static member identity = comlpexIdentityMatrix 3 |> ComplexMatrix3x3
         static member zero = comlpexZeroMatrix 3 |> ComplexMatrix3x3
+        static member create a = a |> ComplexMatrix.create |> ComplexMatrix3x3
+        static member fromRe a = a |> ComplexMatrix.fromRe |> ComplexMatrix3x3
+        static member fromIm a = a |> ComplexMatrix.fromIm |> ComplexMatrix3x3
 
 
     type ComplexMatrix4x4 = 
@@ -116,6 +119,8 @@ module Geometry =
                 v.[i, j]
 
         static member create a = ComplexMatrix.create a |> ComplexMatrix4x4
+        static member fromRe a = a |> ComplexMatrix.fromRe |> ComplexMatrix4x4
+        static member fromIm a = a |> ComplexMatrix.fromIm |> ComplexMatrix4x4
 
         static member (*) (ComplexMatrix4x4 a, ComplexMatrix4x4 b) : ComplexMatrix4x4 = 
             a * b |> ComplexMatrix4x4

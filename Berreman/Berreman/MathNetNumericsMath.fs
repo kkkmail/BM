@@ -79,6 +79,15 @@ module MathNetNumericsMath =
         static member create (a : #seq<#seq<Complex>>) = 
             matrix a |> ComplexMatrix
 
+        static member fromRe (a : #seq<#seq<double>>) = 
+            a
+            |> Seq.map (fun e -> e |> Seq.map (fun x -> cplx x))
+            |> matrix 
+            |> ComplexMatrix
+
+        static member fromIm (a : #seq<#seq<double>>) = 
+            (createComplex 0. 1.) * (ComplexMatrix.fromRe a)
+
         member this.inverse = 
             let (ComplexMatrix m) = this
             m.Inverse() |> ComplexMatrix

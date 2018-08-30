@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanTests.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanTests.fsproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/MatrixExpTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/MatrixExpTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/Example_01_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_01_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_04_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_04_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -42,12 +42,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="m" value="2536" />
+          <entry key="m" value="2819" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Mathematica" value="2536" />
+          <entry key="Mathematica" value="2819" />
         </counts>
       </usages-collector>
     </session>
@@ -60,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24191">
-              <caret line="1423" column="14" selection-start-line="1423" selection-end-line="1423" selection-end-column="14" />
+            <state relative-caret-position="290">
+              <caret line="219" column="44" selection-start-line="219" selection-start-column="38" selection-end-line="219" selection-end-column="44" />
               <folding>
                 <element signature="e#1404#1467#0" />
                 <element signature="e#1552#2777#0" />
@@ -73,7 +73,8 @@
                 <element signature="e#4542#4751#0" />
                 <element signature="e#4847#4984#0" />
                 <element signature="e#5095#5427#0" />
-                <element signature="e#5770#11710#0" />
+                <element signature="e#11792#12801#0" />
+                <element signature="e#12886#13918#0" />
                 <element signature="e#15174#17791#0" />
                 <element signature="e#17869#18067#0" />
                 <element signature="e#18146#19050#0" />
@@ -85,8 +86,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="699">
-              <caret line="578" column="34" selection-start-line="578" selection-start-column="34" selection-end-line="578" selection-end-column="34" />
+            <state relative-caret-position="290">
+              <caret line="578" column="38" selection-start-line="578" selection-start-column="38" selection-end-line="578" selection-end-column="38" />
               <folding>
                 <element signature="e#1260#1719#0" />
                 <element signature="e#2310#2803#0" />
@@ -110,29 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="78" column="14" lean-forward="true" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
+            <state relative-caret-position="572">
+              <caret line="100" lean-forward="true" selection-start-line="100" selection-end-line="100" />
             </state>
           </provider>
         </entry>
@@ -168,8 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>M[</find>
-      <find>MMM[</find>
       <find>PPP[</find>
       <find>CreateSubstanceFromN</find>
       <find>IncidentLightFita</find>
@@ -198,6 +179,8 @@
       <find>PoyntingT</find>
       <find>EGGetOrder</find>
       <find>outPPPm</find>
+      <find>Rotati</find>
+      <find>MMM</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -279,11 +262,6 @@
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
               <item name="BM" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BM" type="462c0819:PsiDirectoryNode" />
-              <item name="Examples" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
@@ -400,7 +378,7 @@
     <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.37066665" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2096" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -618,10 +596,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="45" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanDirect.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24191">
-          <caret line="1423" column="14" selection-start-line="1423" selection-end-line="1423" selection-end-column="14" />
+        <state relative-caret-position="290">
+          <caret line="219" column="44" selection-start-line="219" selection-start-column="38" selection-end-line="219" selection-end-column="44" />
           <folding>
             <element signature="e#1404#1467#0" />
             <element signature="e#1552#2777#0" />
@@ -633,7 +625,8 @@
             <element signature="e#4542#4751#0" />
             <element signature="e#4847#4984#0" />
             <element signature="e#5095#5427#0" />
-            <element signature="e#5770#11710#0" />
+            <element signature="e#11792#12801#0" />
+            <element signature="e#12886#13918#0" />
             <element signature="e#15174#17791#0" />
             <element signature="e#17869#18067#0" />
             <element signature="e#18146#19050#0" />
@@ -641,17 +634,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        <state relative-caret-position="198">
+          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="578" column="34" selection-start-line="578" selection-start-column="34" selection-end-line="578" selection-end-column="34" />
+        <state relative-caret-position="290">
+          <caret line="578" column="38" selection-start-line="578" selection-start-column="38" selection-end-line="578" selection-end-column="38" />
           <folding>
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />
@@ -674,31 +674,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" selection-start-line="19" selection-end-line="45" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="78" column="14" lean-forward="true" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
+        <state relative-caret-position="572">
+          <caret line="100" lean-forward="true" selection-start-line="100" selection-end-line="100" />
         </state>
       </provider>
     </entry>

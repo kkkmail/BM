@@ -13,7 +13,7 @@ InitializeBM[PathList, useParallelTbl];
 (* ============================================== *)
 opts =
     {
-      BDPlotFigures -> True,
+      BDPlotFigures -> False,
       UseEulerAngles -> False
     };
 (* ============================================== *)
@@ -60,8 +60,7 @@ fita = {ft, ft, 90, "ϕ", Degree};
 bt = RandomInteger[{0, 85}];
 beta = {bt, bt, 90, "β", Degree};
 
-gm = RandomInteger[{0, 85}];
-gamma = {gm, gm, 90, "γ", Degree};
+gamma = {0, 0, 90, "γ", Degree};
 
 el = RandomReal[{-1, 1}];
 ellipt = {el, el, 1, "e"};
@@ -76,19 +75,39 @@ thetaLower = {0, 0, 30, Subscript["θ", "1"], Degree};
 psiLower = {0, 0, 30, Subscript["ψ", "1"], Degree};
 rotationAnglesLower = {fiLower, thetaLower, psiLower};
 
-epsIm = 10^-3;
+epsReMin = 1;
+epsReMax = 5;
 
-epsLower =
-    {
-      { RandomReal[{1, 3}] + I * 0.0432, -0.000357 + I * 0.002945, 0},
-      {-0.000357 + I * 0.002945, 2.465 + I * 0.0425, 0},
-      {0, 0, 2.51 + I * 0.048}
-    };
+epsImMin = 0;
+epsImMax = 10^-2;
 
-muLower = DiagonalMatrix[{1, 2, 1}];
-rhoLower = I * 0.1 * DiagonalMatrix[{2, 1, 1}];
+muMin = 0.9;
+muMax = 1.1;
 
-Print["epsLower = ", epsLower // MatrixForm];
+rhoMin = -0.1;
+rhoMax = 0.1;
+
+rotationEpsRe = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+Print["rotationEpsRe = ", N[rotationEpsRe] // MatrixForm];
+
+rotationEpsIm = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+Print["rotationEpsIm = ", N[rotationEpsIm] // MatrixForm];
+
+rotationMu = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+Print["rotationMu = ", N[rotationMu] // MatrixForm];
+
+rotationRho = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+Print["rotationRho = ", N[rotationRho] // MatrixForm];
+
+useIm = False;
+
+epsLower = Transform[DiagonalMatrix[{RandomReal[{epsReMin, epsReMax}], RandomReal[{epsReMin, epsReMax}], RandomReal[{epsReMin, epsReMax}]}], rotationEpsRe] + I * Transform[DiagonalMatrix[{RandomReal[{epsImMin, epsImMax}], RandomReal[{epsImMin, epsImMax}], RandomReal[{epsImMin, epsImMax}]}], rotationEpsIm];
+
+muLower = Transform[DiagonalMatrix[{RandomReal[{muMin, muMax}], RandomReal[{muMin, muMax}], RandomReal[{muMin, muMax}]}], rotationMu];
+
+rhoLower = I * Transform[DiagonalMatrix[{RandomReal[{rhoMin, rhoMax}], RandomReal[{rhoMin, rhoMax}], RandomReal[{rhoMin, rhoMax}]}], rotationRho];
+
+Print["epsLower = ", N[epsLower] // MatrixForm];
 Print["muLower = ", muLower // MatrixForm];
 Print["rhoLower = ", rhoLower // MatrixForm];
 
