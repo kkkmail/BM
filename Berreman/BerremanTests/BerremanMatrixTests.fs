@@ -87,7 +87,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
                             ]
                             |> ComplexMatrix3x3.fromIm
                     }
-                n1SinFita = N1SinFita.create 1.0 (Angle.degree 19.0)
+                n1SinFita = N1SinFita.create 1.0 (Angle.degree 48.0)
 
                 expected = 
                     [
