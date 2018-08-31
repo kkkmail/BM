@@ -50,6 +50,7 @@
     <Compile Include="MatrixComparison.fs" />
     <Compile Include="BerremanMatrixTests.fs" />
     <Compile Include="MatrixExpTests.fs" />
+    <Compile Include="ThinFilmTests.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
