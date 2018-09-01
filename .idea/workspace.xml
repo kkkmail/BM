@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/MatrixExpTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/MatrixExpTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/Example_04_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_04_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
-    </list>
+    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +16,7 @@
     <session id="-1022319418">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="2" />
           <entry key="project.opened" value="3" />
@@ -115,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="572">
-              <caret line="100" lean-forward="true" selection-start-line="100" selection-end-line="100" />
+              <caret line="100" selection-start-line="100" selection-end-line="100" />
             </state>
           </provider>
         </entry>
@@ -677,7 +669,7 @@
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
-          <caret line="100" lean-forward="true" selection-start-line="100" selection-end-line="100" />
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
         </state>
       </provider>
     </entry>
