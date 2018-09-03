@@ -108,25 +108,38 @@ let data =
                 }
         }
 
-    create OpticalProperties.transparentGlass IncidenceAngle.normal (WaveLength.nm 600.0)
+    create OpticalProperties.transparentGlass (Angle.degree 7.0 |> IncidenceAngle) (WaveLength.nm 600.0)
+
+let (BerremanMatrix bm1) = BerremanMatrix.create data.opticalSystem.upper data.light.n1SinFita
+printfn "bm1 = %A" bm1
+let (ComplexMatrix4x4 (ComplexMatrix m1)) = bm1
+let evd1 = m1.Evd()
+printfn "evd1 = %A\n" evd1
+printfn "EigenValues (1) = %A\n" evd1.EigenValues
+printfn "EigenVectors (1) = %A\n" evd1.EigenVectors
+printfn "EigenVectors.Inv (1) = %A\n" (evd1.EigenVectors.Inverse())
+
+let bm1Evd = bm1.eigenBasis data.light.wavelength data.light.n1SinFita
+let up1 = bm1Evd.up
+let down1 = bm1Evd.down
+printfn "up1 = %A\n" up1
+printfn "down1 = %A\n" down1
 
 
-let (BerremanMatrix bm) = BerremanMatrix.create data.opticalSystem.lower data.light.n1SinFita
-printfn "bm = %A" bm
+let (BerremanMatrix bm2) = BerremanMatrix.create data.opticalSystem.lower data.light.n1SinFita
+printfn "bm2 = %A" bm2
+let (ComplexMatrix4x4 (ComplexMatrix m2)) = bm2
+let evd2 = m2.Evd()
+printfn "evd2 = %A\n" evd2
+printfn "EigenValues (2) = %A\n" evd2.EigenValues
+printfn "EigenVectors (2) = %A\n" evd2.EigenVectors
+printfn "EigenVectors.Inv (2) = %A\n" (evd2.EigenVectors.Inverse())
 
-let (ComplexMatrix4x4 (ComplexMatrix m0)) = bm
-
-let evd0 = m0.Evd()
-printfn "evd0 = %A\n" evd0
-printfn "EigenValues = %A\n" evd0.EigenValues
-printfn "EigenVectors = %A\n" evd0.EigenVectors
-printfn "EigenVectors.Inv = %A\n" (evd0.EigenVectors.Inverse())
-
-let evd = bm.eigenBasis data.light.wavelength data.light.n1SinFita
-let up = evd.up
-let down = evd.down
-printfn "up = %A\n" up
-printfn "down = %A\n" down
+let bm2Evd = bm2.eigenBasis data.light.wavelength data.light.n1SinFita
+let up2 = bm2Evd.up
+let down2 = bm2Evd.down
+printfn "up2 = %A\n" up2
+printfn "down2 = %A\n" down2
 
 //let evdEm = 
 //    evd

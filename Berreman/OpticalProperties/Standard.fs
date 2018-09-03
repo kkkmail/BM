@@ -8,8 +8,8 @@ open Berreman.MaterialProperties
 open Berreman.BerremanMatrix
 
 
+// !!! DO NOT CHANGE ANY VALUES HERE !!!
 // Standard optical properties without dispresion to be used in various simple calculations and tests.
-// Values here must not be changed.
 // If some other values are desired, introduce another module and set the new values there.
 module Standard =
 

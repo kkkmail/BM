@@ -19,6 +19,9 @@ module MathNetNumericsMath =
         member this.conjugate
             with get () = this
 
+        member this.abs
+            with get () = Complex.Abs this
+
 
     type RealVector =
         | RealVector of Vector<double>

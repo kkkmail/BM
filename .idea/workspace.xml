@@ -3,12 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Berreman.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Berreman.fsproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/SortEvd.fsx" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/SortEvd.fsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/SortEvd.fsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanTests.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanTests.fsproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/MatrixComparison.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/MatrixComparison.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/OpticalProperties/Standard.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/OpticalProperties/Standard.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_01_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_01_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_04_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_04_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/FSharpHelpers.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FSharpHelpers.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,8 +95,8 @@
       <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="652" column="40" selection-start-line="652" selection-start-column="40" selection-end-line="652" selection-end-column="40" />
+            <state relative-caret-position="390">
+              <caret line="845" column="14" selection-start-line="845" selection-start-column="14" selection-end-line="845" selection-end-column="14" />
               <folding>
                 <element signature="e#1260#1719#0" />
                 <element signature="e#2310#2803#0" />
@@ -114,13 +122,30 @@
       <file leaf-file-name="FSharpHelpers.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="14" selection-start-line="17" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="249">
+              <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
               <folding>
-                <element signature="e#685#2514#0" />
                 <element signature="e#2557#2881#0" />
                 <element signature="e#2972#4897#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BM_603_Example_01_Snell_Law.m" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-652">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -147,9 +172,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>OutputIncidentRayInfo</find>
-      <find>IncidentLighRefrIndex</find>
-      <find>nUpper</find>
       <find>You must supply epsilon</find>
       <find>MediaLowerRo</find>
       <find>TransformMedia does not work because of n1, n2, nOut</find>
@@ -173,10 +195,13 @@
       <find>Rotati</find>
       <find>MMM</find>
       <find>ODEGhlp</find>
-      <find>EGGetOrder</find>
       <find>useSolve</find>
       <find>freeTbl</find>
       <find>cfm</find>
+      <find>EGGetOrder</find>
+      <find>EGVec1</find>
+      <find>EGVal1Hlp</find>
+      <find>toFSharpMatrix</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,7 +240,6 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_02_Snell_Law_For_Thick_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_03_Snell_Law_For_Thick_Absorbing_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
         <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanInit.m" />
@@ -231,10 +255,11 @@
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m" />
-        <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08a_2L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
+        <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
       </list>
     </option>
@@ -419,7 +444,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18712273" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31522468" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -617,13 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -708,19 +726,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-652">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="35" column="18" lean-forward="true" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+        <state relative-caret-position="283">
+          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="14" selection-start-line="17" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="249">
+          <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
           <folding>
-            <element signature="e#685#2514#0" />
             <element signature="e#2557#2881#0" />
             <element signature="e#2972#4897#0" />
           </folding>
@@ -729,8 +753,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="652" column="40" selection-start-line="652" selection-start-column="40" selection-end-line="652" selection-end-column="40" />
+        <state relative-caret-position="390">
+          <caret line="845" column="14" selection-start-line="845" selection-start-column="14" selection-end-line="845" selection-end-column="14" />
           <folding>
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />

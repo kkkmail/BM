@@ -60,7 +60,8 @@
     <None Include="Extreme60_Err.fsx" />
     <None Include="EvdErr.fsx" />
     <None Include="EvdErr_01.fsx" />
-    <None Include="SortEvd.fsx" />
+    <None Include="SortEvd_01.fsx" />
+    <None Include="SortEvd_02.fsx" />
     <None Include="App.config" />
     <Content Include="packages.config" />
   </ItemGroup>

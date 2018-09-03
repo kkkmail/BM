@@ -80,13 +80,27 @@ toFSharpMatrix[m_?MatrixQ] :=
             ]
           ];
 
-        s = s <> "\n";
+          s = s <> "\n";
         ),
         dummy = 0
       ];
       Return[s];
     ];
 
+
+toFSharpEH[eh_?VectorQ] :=
+    Module[{e, h, s},
+      e = { Take[eh, 3] };
+      h = { Take[eh, {4, 6}] };
+      s = "\n// e\n" <> toFSharpMatrix[e] <> "\n// h\n" <> toFSharpMatrix[h] <> "\n";
+      Return[s];
+    ];
+
+toFSharpBasis[type_?StringQ, egValUp_, egVecUp_, egValDn_, egVecDn_] :=
+    Module[{s},
+      s = "\n// " <> type;
+      Return[s];
+    ];
 
 randomLightInfo[seed_?IntegerQ] :=
     Module[{lmb, ft , bt, el, retVal},

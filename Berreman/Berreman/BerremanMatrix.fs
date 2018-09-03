@@ -156,7 +156,28 @@ module BerremanMatrix =
 
             let toArrays (e : Matrix<Complex>) = 
                 let len = e.RowCount
-                [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> e.[j, i] |] |]
+            
+                let normed = 
+                    [| for i in 0..(len-1) -> 
+                        [| for j in 0..(len-1) -> e.[j, i] |]
+                        |> normalize
+                        |> Array.ofSeq
+                    |]
+            
+                [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> normed.[i].[j] |] |]
+
+            //let toArrays (ei : Matrix<Complex>) = 
+            //    let e = ei.Inverse()
+            //    let len = e.RowCount
+
+            //    let normed = 
+            //        [| for i in 0..(len-1) -> 
+            //            [| for j in 0..(len-1) -> e.[i, j] |]
+            //            |> normalize
+            //            |> Array.ofSeq
+            //        |]
+
+            //    [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> normed.[i].[j] |] |]
 
             let ve =
                 //Array.zip (evd.EigenValues.ToArray()) (evd.EigenVectors.ToColumnArrays())
@@ -164,7 +185,7 @@ module BerremanMatrix =
                 |> List.ofArray
                 |> List.map (fun (v, e) -> v, e |> normalize |> ComplexVector4.create)
                 |> List.map (fun (v, e) -> v, e, (e |> toBerremanField).sZ)
-                |> List.sortBy (fun (_, _, s) -> -s)
+                |> List.sortBy (fun (_, _, s) -> s)
                 |> List.map (fun (v, e, _) -> v, e)
 
             let up = ve |> List.take 2 |> EigenBasis.create

@@ -61,6 +61,7 @@
     <Compile Include="BerremanMatrixTests.fs" />
     <Compile Include="MatrixExpTests.fs" />
     <Compile Include="ThinFilmTests.fs" />
+    <Compile Include="EigenVectorTests.fs" />
     <Compile Include="BasicSolverTests.fs" />
     <Content Include="packages.config" />
   </ItemGroup>

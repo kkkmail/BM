@@ -57,7 +57,7 @@ Print["Параметры падающего света..."];
 nUpper = 1;
 
 lambda = {600, 600, 1, "λ", nm};
-fita = {0, 0, 85, "ϕ", Degree};
+fita = {7, 7, 85, "ϕ", Degree};
 beta = {0, 0, 30, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
 ellipt = {0, 0, 0.5, "e"};

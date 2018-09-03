@@ -31,7 +31,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                     let n1SinFita = N1SinFita.create 1.0 incidenceAngle
 
                     {
-                        description = "Snell's law for standard transparent glass, normal incidence angle."
+                        description = "Snell's law for standard transparent glass, 7 degrees incidence angle."
                         opticalSystem = 
                             {
                                 upper = OpticalProperties.vacuum
@@ -55,10 +55,10 @@ type BasicSolverTests(output : ITestOutputHelper) =
                                         wavelength = waveLength
                                         n1SinFita = n1SinFita
                                         e = 
-                                            [ 1.; 0.; 0.0;]
+                                            [ 0.992546151641322; 0.; -0.12186934340514745 ]
                                             |> ComplexVector3.fromRe
                                         h = 
-                                            [  0.; 1.0000000000000002; 0.0 ]
+                                            [ 0.; 0.9999999999999998; 0. ]
                                             |> ComplexVector3.fromRe
                                     }
                                 reflected = 
@@ -66,10 +66,10 @@ type BasicSolverTests(output : ITestOutputHelper) =
                                         wavelength = waveLength
                                         n1SinFita = n1SinFita
                                         e = 
-                                            [ -0.20634920634920656; 0.; 0.0 ]
+                                            [ -0.2027874513413428; 0.; -0.024899168169565895 ]
                                             |> ComplexVector3.fromRe
                                         h = 
-                                            [ 0.; 0.2063492063492065; 0.0 ]
+                                            [ 0.; 0.2043103497061609; 0. ]
                                             |> ComplexVector3.fromRe
                                     }
                                 transmitted = 
@@ -77,18 +77,82 @@ type BasicSolverTests(output : ITestOutputHelper) =
                                         wavelength = waveLength
                                         n1SinFita = n1SinFita
                                         e = 
-                                            [ 0.7936507936507936; 0.; 0. ]
+                                            [ 0.7897587002999794; 0.; -0.06352515217049573; ]
                                             |> ComplexVector3.fromRe
                                         h = 
-                                            [ 0.; 1.206349206349207; 0. ]
+                                            [ 0.; 1.2043103497061607; 0. ]
                                             |> ComplexVector3.fromRe
                                     }
                             }
                     }
 
-                create OpticalProperties.transparentGlass IncidenceAngle.normal (WaveLength.nm 600.0)
+                create OpticalProperties.transparentGlass (Angle.degree 7.0 |> IncidenceAngle) (WaveLength.nm 600.0)
             )
 
+            //(
+            //    let create opticalProperties incidenceAngle waveLength = 
+            //        let n1SinFita = N1SinFita.create 1.0 incidenceAngle
+            //
+            //        {
+            //            description = "Snell's law for standard transparent glass, normal incidence angle."
+            //            opticalSystem = 
+            //                {
+            //                    upper = OpticalProperties.vacuum
+            //                    films =
+            //                        [
+            //                        ]
+            //                    lower = opticalProperties
+            //                }
+            //            info = 
+            //                {
+            //                    wavelength = waveLength
+            //                    refractionIndex = RefractionIndex.defaultValue
+            //                    incidenceAngle = incidenceAngle
+            //                    polarization = Polarization.defaultValue
+            //                    ellipticity = Ellipticity.defaultValue
+            //                }
+            //            expected = 
+            //                {
+            //                    incident = 
+            //                        {
+            //                            wavelength = waveLength
+            //                            n1SinFita = n1SinFita
+            //                            e = 
+            //                                [ 1.; 0.; 0.0;]
+            //                                |> ComplexVector3.fromRe
+            //                            h = 
+            //                                [  0.; 1.0000000000000002; 0.0 ]
+            //                                |> ComplexVector3.fromRe
+            //                        }
+            //                    reflected = 
+            //                        {
+            //                            wavelength = waveLength
+            //                            n1SinFita = n1SinFita
+            //                            e = 
+            //                                [ -0.20634920634920656; 0.; 0.0 ]
+            //                                |> ComplexVector3.fromRe
+            //                            h = 
+            //                                [ 0.; 0.2063492063492065; 0.0 ]
+            //                                |> ComplexVector3.fromRe
+            //                        }
+            //                    transmitted = 
+            //                        {
+            //                            wavelength = waveLength
+            //                            n1SinFita = n1SinFita
+            //                            e = 
+            //                                [ 0.7936507936507936; 0.; 0. ]
+            //                                |> ComplexVector3.fromRe
+            //                            h = 
+            //                                [ 0.; 1.206349206349207; 0. ]
+            //                                |> ComplexVector3.fromRe
+            //                        }
+            //                }
+            //        }
+            //
+            //    create OpticalProperties.transparentGlass IncidenceAngle.normal (WaveLength.nm 600.0)
+            //)
+
+            ///////////////////////////////////////////////////////
             //{
             //    description = "One layer homegenious media, normal incidence angle."
             //    opticalSystem = 
