@@ -41,6 +41,12 @@ FuncList =
 *)
 FuncList =
     {
+      PoyntingR[1],
+      PoyntingR[2],
+      PoyntingR[3],
+      PoyntingT[1],
+      PoyntingT[2],
+      PoyntingT[3],
       {Rx, Ry},
       {Tx, Ty}
     };
@@ -51,7 +57,7 @@ Print["Параметры падающего света..."];
 nUpper = 1;
 
 lambda = {600, 600, 1, "λ", nm};
-fita = {0, 85, 85, "ϕ", Degree};
+fita = {0, 0, 85, "ϕ", Degree};
 beta = {0, 0, 30, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
 ellipt = {0, 0, 0.5, "e"};

@@ -89,6 +89,10 @@ module Fields =
         member this.eh0 = this.getEH this.polarization
         member this.eh90 = this.getEH this.polarization.crossed
 
+        member this.n1SinFita = 
+            let (IncidenceAngle (Angle a)) = this.incidenceAngle
+            let (RefractionIndex n) = this.refractionIndex
+            n * (sin a) |> N1SinFita
 
     type EmFieldXY =
         {
@@ -121,10 +125,8 @@ module Fields =
                 h = [ emXY.h.x; emXY.h.y; hZ ] |> ComplexVector.create |> ComplexVector3
             }
 
-        static member create (info : IncidentLightInfo ) = 
-            let (IncidenceAngle (Angle a)) = info.incidenceAngle
+        static member create (info : IncidentLightInfo) = 
             let (Ellipticity e) = info.ellipticity
-            let (RefractionIndex n) = info.refractionIndex
             let a0 = 1.0 / sqrt(1.0 + e * e) |> cplx
             let a90 = e / sqrt(1.0 + e * e) |> cplx
             let (e0, h0) = info.eh0
@@ -132,7 +134,7 @@ module Fields =
 
             {
                 wavelength = info.wavelength
-                n1SinFita = n * (sin a) |> N1SinFita
+                n1SinFita = info.n1SinFita
                 e = a0 * e0 + a90 * e90
                 h = a0 * h0 + a90 * h90
             }

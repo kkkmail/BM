@@ -633,6 +633,8 @@ PPPFull[Film_, lambda_, fita_, n1_] :=
 (* ============================================== *)
 EGGetOrder[egvl : {_, _, _, _}, egvec_, ehStdRule_, opts___] :=
     Module[{odeg, ODEGhlp, EGValHlpRe, EGValHlpIm, EGUnit, egvReShft, egvRe, egMult, egShft, idxHlp, egvIm, swpev, ehf, pntgS, egMultPng, prec, chpPrec, AddOnSrt, pntgTblX, pntgTblY, pntgTbl},
+      Print["EGGetOrder::egvl =", N[egvl] // MatrixForm];
+      Print["EGGetOrder::egvec =", N[egvec] // MatrixForm];
       EGUnit = {1, 1, 1, 1};
       egvReShft = 0;
       egMult = 10^6;
@@ -776,6 +778,7 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       ];
 
       EGVal1Hlp = Chop[N[EGVal1]];
+      Print["ODEG1"];
       ODEG1 = EGGetOrder[EGVal1Hlp, EGVec1, ehirule, opts];
       EGVal1Up = EGVal1[[ODEG1[[1]]]];
       EGVal1Dn := EGVal1[[ODEG1[[2]]]];
@@ -797,6 +800,7 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       (* Print["MMM2[[1]] = ", MatrixForm[Chop[N[MMM2[[1]]]]]]; Print["EGVec2 = ", MatrixForm[Chop[N[EGVec2]]]]; *)
 
       EGVal2Hlp = Chop[N[EGVal2]];
+      Print["ODEG2"];
       ODEG2 = EGGetOrder[EGVal2Hlp, EGVec2, ehtrule, opts];
       EGVal2Up = EGVal2[[ODEG2[[1]]]];
       EGVal2Dn = EGVal2[[ODEG2[[2]]]];

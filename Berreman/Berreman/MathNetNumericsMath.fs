@@ -14,17 +14,14 @@ module MathNetNumericsMath =
     let createComplex r i = Complex(r, i)
 
     type RealVector =
-        RealVector of Vector<double>
+        | RealVector of Vector<double>
+        member this.Item 
+            with get (i: int) = 
+                let (RealVector v) = this
+                v.[i]
 
 
-    type RealMatrix = Matrix<double>
-
-
-    type EigenValueVector = 
-        {
-            value : Complex
-            vector : Vector<Complex>
-        }
+    //type RealMatrix = Matrix<double>
 
 
     type ComplexVector = 

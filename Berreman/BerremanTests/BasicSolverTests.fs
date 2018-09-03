@@ -24,16 +24,6 @@ type BaseOpticalSystemTestData =
     }
 
 type BasicSolverTests(output : ITestOutputHelper) =
-
-    //let x = 
-        //[
-        //    (
-        //        let y (n) = 
-        //            2 * n
-        //        y 2
-        //    )
-        //]
-
     let data = 
         [
             (

@@ -18,8 +18,8 @@ module Solvers =
             failwith ""
 
         let i : EmField = em
-        let (BerremanMatrixPropagated (ComplexMatrix4x4 p)) = BerremanMatrixPropagated.propagate (system.films, em)
-        let evd = p.evd ()
+        let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.films, em)
+        let evd = p.eigenBasis em.wavelength em.n1SinFita 
         let (b1, b2)= sortEvd evd
 
         // Generated, do not modify.

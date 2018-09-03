@@ -35,7 +35,7 @@ let info =
     {
         wavelength = 500.0 * nm
         refractionIndex = 1.0
-        incidentAngle = 0.0 * degree |> IncidentAngle
+        incidenceAngle = 0.0 * degree |> IncidenceAngle
         polarization = 0.0 * degree |> Polarization
         ellipticity = Ellipticity.defaultValue
     }

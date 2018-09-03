@@ -49,8 +49,7 @@ Epsilon_IM
 *** End Optical Properties Block ***
 
 *** Begin Output Block ***
-Input,No,lambda,phita,beta,gamma,e,phi_0,theta_0,psi_0,Output,R_p,R_s,T_p,T_s
-,1.,600.,0.,0.,0.,0.,0.,0.,0.,,0.04257999496094741,0.,0.9574200050390529,0.
-,2.,600.,85.,0.,0.,0.,0.,0.,0.,,0.4921730178413461,0.,0.5078269821586537,0.
+Input,No,lambda,phita,beta,gamma,e,phi_0,theta_0,psi_0,Output,SR[x],SR[y],SR[z],ST[x],ST[y],ST[z],R_p,R_s,T_p,T_s
+,1.,600.,0.,0.,0.,0.,0.,0.,0.,,0.,0.,-0.042579994960947415,0.,0.,0.9574200050390531,0.04257999496094741,0.,0.9574200050390529,0.
 *** End Output Block ***
 

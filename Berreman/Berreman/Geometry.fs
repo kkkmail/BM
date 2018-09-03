@@ -21,6 +21,14 @@ module Geometry =
 
     type RealVector3 =
         | RealVector3 of RealVector
+        member this.Item 
+            with get i = 
+                let (RealVector3 v) = this
+                v.[i]
+
+        member this.x = this.[0]
+        member this.y = this.[1]
+        member this.z = this.[2]
 
 
     type ComplexVector2 =
@@ -89,6 +97,10 @@ module Geometry =
                 let (ComplexVector4 v) = this
                 v.[i]
 
+        static member create a = a |> ComplexVector.create |> ComplexVector4
+        static member fromRe a = a |> ComplexVector.fromRe |> ComplexVector4
+        static member fromIm a = a |> ComplexVector.fromIm |> ComplexVector4
+
 
     type ComplexMatrix3x3 = 
         | ComplexMatrix3x3 of ComplexMatrix
@@ -119,6 +131,50 @@ module Geometry =
         static member fromIm a = a |> ComplexMatrix.fromIm |> ComplexMatrix3x3
 
 
+    // It is only needed for 4x4 matrices
+    type EigenValueVector = 
+        {
+            value : Complex
+            vector : ComplexVector4
+        }
+
+
+    type EigenBasis =
+        {
+            v0 : Complex
+            v1 : Complex
+            e0 : ComplexVector4
+            e1 : ComplexVector4
+        }
+        member this.values = [ this.v0; this.v1 ]
+        member this.vectors = [ this.e0; this.e1 ]
+
+        static member create l = 
+            let fail() = failwith "EigenBasis::Invalid input data."
+            match l with 
+            | [] -> fail()
+            | h0 :: t ->
+                match t with 
+                | [] -> fail()
+                | h1 :: t1 -> 
+                    match t1 with 
+                    | [] -> 
+                        {
+                            v0 = fst h0
+                            v1 = fst h1
+                            e0 = snd h0
+                            e1= snd h1
+                        }
+                    | _ -> fail()
+
+
+    type FullEigenBasis = 
+        {
+            down : EigenBasis
+            up : EigenBasis
+        }
+
+
     type ComplexMatrix4x4 = 
         | ComplexMatrix4x4 of ComplexMatrix
         member this.Item
@@ -144,24 +200,6 @@ module Geometry =
             v.matrixExp () |> ComplexMatrix4x4
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
-
-
-    type EigenBasis =
-        {
-            v0 : Complex
-            v1 : Complex
-            e0 : ComplexVector4
-            e1 : ComplexVector4
-        }
-        member this.values = [ this.v0; this.v1 ]
-        member this.vectors = [ this.e0; this.e1 ]
-
-
-    type FullEigenBasis = 
-        {
-            down : EigenBasis
-            up : EigenBasis
-        }
 
 
     type RotationType = 

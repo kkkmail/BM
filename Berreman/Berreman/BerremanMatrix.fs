@@ -24,6 +24,13 @@ module BerremanMatrix =
         member this.eY = this.eh.[2]
         member this.hX = - this.eh.[3]
 
+        static member create (info : IncidentLightInfo) (eh : ComplexVector4) = 
+            {
+                wavelength = info.wavelength
+                n1SinFita = info.n1SinFita
+                eh = eh
+            }
+
 
     type BerremanMatrix = 
         | BerremanMatrix of ComplexMatrix4x4
@@ -117,4 +124,39 @@ module BerremanMatrix =
                 wavelength = this.wavelength
                 n1SinFita = this.n1SinFita
                 eh = [ this.e.x; this.h.y; this.e.y; -this.h.x ] |> ComplexVector.create |> ComplexVector4
+            }
+
+
+    type ComplexMatrix4x4 
+        with 
+
+        member this.eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita) (o : OpticalProperties) : FullEigenBasis = 
+            let (ComplexMatrix4x4 (ComplexMatrix m)) = this
+            let evd = m.Evd()
+
+            let normalize (v : #seq<Complex>) = 
+                let norm = v |> Seq.fold (fun acc r -> acc + r.Real * r.Real + r.Imaginary * r.Imaginary) 0.0 |> sqrt |> cplx
+                v |> Seq.map (fun e -> e / norm)
+
+            let toBerremanField eh= 
+                {
+                    wavelength = wavelength
+                    n1SinFita = n1SinFita
+                    eh = eh
+                }
+
+            let ve =
+                Array.zip (evd.EigenValues.ToArray()) (evd.EigenVectors.ToColumnArrays())
+                |> List.ofArray
+                |> List.map (fun (v, e) -> v, e |> normalize |> ComplexVector4.create)
+                |> List.map (fun (v, e) -> v, e, ((e |> toBerremanField).toEmField o).s)
+                |> List.sortBy (fun (_, _, s) -> s.z)
+                |> List.map (fun (v, e, _) -> v, e)
+
+            let up = ve |> List.take 2 |> EigenBasis.create
+            let dn = ve |> List.rev |> List.take 2 |> List.rev |> EigenBasis.create
+
+            {
+                down = dn
+                up = up
             }
