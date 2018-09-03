@@ -11,14 +11,6 @@ module Fields =
     // CGS usits are used.
 
 
-    // n1 * sin(fita), where fita is the incidence angle and n1 is the refraction index of upper media.
-    // This is an invariant and it deserves a type.
-    type N1SinFita =
-        | N1SinFita of double
-
-        static member create n (Angle f) = n * (sin f) |> N1SinFita
-
-
     type WaveLength = 
         WaveLength of double
         with
@@ -50,6 +42,16 @@ module Fields =
         | IncidenceAngle of Angle
         static member create (p : double) =
             (p % (pi / 2.0) + pi) % (pi / 2.0) |> Angle |> IncidenceAngle
+
+        static member normal = IncidenceAngle.create 0.0
+
+
+    // n1 * sin(fita), where fita is the incidence angle and n1 is the refraction index of upper media.
+    // This is an invariant and it deserves a type.
+    type N1SinFita =
+        | N1SinFita of double
+
+        static member create n (IncidenceAngle(Angle f)) = n * (sin f) |> N1SinFita
 
 
     type IncidentLightInfo = 

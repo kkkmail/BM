@@ -17,7 +17,7 @@ type ThinFilmTestData =
     {
         description : string
         thinFilms : List<Layer>
-        em : EmField
+        light : IncidentLightInfo
         expected : ComplexMatrix
     }
 
@@ -34,7 +34,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                             thickness = Thickness.nm 75.0
                         }
                     ]
-                em = 
+                light = 
                     {
                         wavelength = WaveLength.nm 600.0
                         refractionIndex = RefractionIndex.defaultValue
@@ -42,7 +42,6 @@ type ThinFilmTests(output : ITestOutputHelper) =
                         polarization = Polarization.defaultValue
                         ellipticity = Ellipticity.defaultValue
                     }
-                    |> EmField.create
                 expected = 
                     [
                         [ createComplex 0.36812455268467836 0.; createComplex 0. 0.6116950565054284; createComplex 0. 0.; createComplex 0. 0. ]
@@ -62,7 +61,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                             thickness = Thickness.nm 75.0
                         }
                     ]
-                em = 
+                light = 
                     {
                         wavelength = WaveLength.nm 600.0
                         refractionIndex = RefractionIndex.defaultValue
@@ -70,7 +69,6 @@ type ThinFilmTests(output : ITestOutputHelper) =
                         polarization = Polarization.defaultValue
                         ellipticity = Ellipticity.defaultValue
                     }
-                    |> EmField.create
                 expected = 
                     [
                         [ createComplex 0.6203020411609136 0.; createComplex 0. 0.38975079646975697; createComplex 0. 0.; createComplex 0. 0. ]
@@ -101,7 +99,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                             thickness = Thickness.nm 227.0
                         }
                     ]
-                em = 
+                light = 
                     {
                         wavelength = WaveLength.nm 687.0
                         refractionIndex = RefractionIndex.defaultValue
@@ -109,7 +107,6 @@ type ThinFilmTests(output : ITestOutputHelper) =
                         polarization = Angle.degree 50.0 |> Polarization
                         ellipticity = -0.802933683069591 |> Ellipticity
                     }
-                    |> EmField.create
                 expected = 
                     [
                         [ createComplex -0.9274014609420038 -0.16759861804121412; createComplex 0.017170207434521613 -0.1456139561785692; createComplex -0.017403663019614386 -0.13060623757618983; createComplex 0.014075507609934673 0.06306021155774927 ]
@@ -152,7 +149,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                             thickness = Thickness.nm 168.0
                         }
                     ]
-                em = 
+                light = 
                     {
                         wavelength = WaveLength.nm 504.0
                         refractionIndex = RefractionIndex.defaultValue
@@ -160,7 +157,6 @@ type ThinFilmTests(output : ITestOutputHelper) =
                         polarization = Angle.degree 64.0 |> Polarization
                         ellipticity = -0.42025305376355426 |> Ellipticity
                     }
-                    |> EmField.create
                 expected = 
                     [
                         [ createComplex -0.98816443746049 0.055880632349881706; createComplex 0.006127601130424354 0.005034180198318153; createComplex 0.08128797263166429 0.03840650088667767; createComplex 0.035631210452151146 -0.010682458054276114 ]
@@ -213,7 +209,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                             thickness = Thickness.nm 100.0
                         }
                     ]
-                em = 
+                light = 
                     {
                         wavelength = WaveLength.nm 600.0
                         refractionIndex = RefractionIndex.defaultValue
@@ -221,7 +217,6 @@ type ThinFilmTests(output : ITestOutputHelper) =
                         polarization = Angle.degree 0.0 |> Polarization
                         ellipticity = 0.0 |> Ellipticity
                     }
-                    |> EmField.create
                 expected = 
                     [
                         [ createComplex -0.8485039057576538 0.; createComplex 0. 0.13283157354221561; createComplex -0.0020704335282441806 0.; createComplex 0. 0.0000422277299978338 ]
@@ -292,7 +287,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                             thickness = Thickness.nm 108.0
                         }
                     ]
-                em = 
+                light = 
                     {
                         wavelength = WaveLength.nm 553.0
                         refractionIndex = RefractionIndex.defaultValue
@@ -300,7 +295,6 @@ type ThinFilmTests(output : ITestOutputHelper) =
                         polarization = Angle.degree 60.0 |> Polarization
                         ellipticity = -0.43910436091105565 |> Ellipticity
                     }
-                    |> EmField.create
                 expected = 
                     [
                         [ createComplex -0.32872665940734547 0.07513745800952036; createComplex 0.07518575799759133 0.3235168796466171; createComplex -0.10129094865899069 0.07509724581660444; createComplex 0.11960879746762723 0.08993784648874378 ]
@@ -315,7 +309,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
     member __.runTest (d : ThinFilmTestData) = 
         output.WriteLine d.description
         let (BerremanMatrixPropagated (ComplexMatrix4x4 bm)) = 
-            BerremanMatrixPropagated.propagate (d.thinFilms, d.em)
+            BerremanMatrixPropagated.propagate (d.thinFilms, d.light |> EmField.create)
         verifyMatrixEquality output bm d.expected
 
     [<Fact>]

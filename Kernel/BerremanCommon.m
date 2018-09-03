@@ -653,7 +653,10 @@ EGGetOrder[egvl : {_, _, _, _}, egvec_, ehStdRule_, opts___] :=
       EGValHlpRe = Sign[Re[egvl]];
       EGValHlpIm = Sign[Im[egvl]];
       (*Print["EGValHlpRe = ",MFCN[EGValHlpRe]];
-    Print["EGValHlpIm = ",MFCN[EGValHlpIm]];*)ODEGhlp = egMult * SetPrecision[Chop[Im[egvl], chpPrec], prec] + egMultPng * SetPrecision[Chop[pntgTbl, chpPrec], prec] + SetPrecision[Chop[Re[egvl], chpPrec], prec];
+    Print["EGValHlpIm = ",MFCN[EGValHlpIm]];*)
+
+      ODEGhlp = egMult * SetPrecision[Chop[Im[egvl], chpPrec], prec] + egMultPng * SetPrecision[Chop[pntgTbl, chpPrec], prec] + SetPrecision[Chop[Re[egvl], chpPrec], prec];
+
       (*Print["ODEGhlp = ",MFCN[ODEGhlp]];*)
       odeg = {Ordering[ODEGhlp, 2], Ordering[ODEGhlp, -2]};
       egvRe = SetPrecision[Chop[Re[egvl], chpPrec], prec];

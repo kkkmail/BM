@@ -27,7 +27,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
             {
                 description = "Homegenious media, normal incidence angle."
                 opticalProperties = 1.5 |> RefractionIndex.create |> OpticalProperties.defaultValue
-                n1SinFita = N1SinFita.create 1.0 (Angle.degree 0.0)
+                n1SinFita = N1SinFita.create 1.0 (Angle.degree 0.0 |> IncidenceAngle)
 
                 expected = 
                     [
@@ -53,7 +53,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
                         mu = ComplexMatrix3x3.identity
                         rho = ComplexMatrix3x3.zero
                     }
-                n1SinFita = N1SinFita.create 1.0 (Angle.degree 19.0)
+                n1SinFita = N1SinFita.create 1.0 (Angle.degree 19.0 |> IncidenceAngle)
 
                 expected = 
                     [
@@ -91,7 +91,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
                             ]
                             |> ComplexMatrix3x3.fromIm
                     }
-                n1SinFita = N1SinFita.create 1.0 (Angle.degree 48.0)
+                n1SinFita = N1SinFita.create 1.0 (Angle.degree 48.0 |> IncidenceAngle)
 
                 expected = 
                     [

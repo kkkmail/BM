@@ -14,13 +14,12 @@ module Solvers =
 
 
     type BaseOpticalSystemSolver (system: BaseOpticalSystem, em : EmField) = 
-        let sortEvd (evd : Evd) : (FullEigenBasis * FullEigenBasis) = 
+        let sortEvd (evd : List<EigenValueVector>) : (FullEigenBasis * FullEigenBasis) = 
             failwith ""
 
         let i : EmField = em
-        let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.thinFilm, em)
-        let (ComplexMatrix4x4 layers) = p
-        let evd = layers.evd ()
+        let (BerremanMatrixPropagated (ComplexMatrix4x4 p)) = BerremanMatrixPropagated.propagate (system.films, em)
+        let evd = p.evd ()
         let (b1, b2)= sortEvd evd
 
         // Generated, do not modify.
@@ -131,3 +130,4 @@ module Solvers =
         member this.reflectedLight = r
         member this.transmittedLight = t
         member this.incidentLight = i
+        member this.eigenValueVectors = evd

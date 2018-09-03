@@ -35,3 +35,5 @@ module MaterialProperties =
                 mu = ComplexMatrix3x3.identity
                 rho = ComplexMatrix3x3.zero
             }
+
+        static member vacuum = RefractionIndex 1.0 |> OpticalProperties.defaultValue

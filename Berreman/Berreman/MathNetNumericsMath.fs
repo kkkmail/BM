@@ -20,6 +20,13 @@ module MathNetNumericsMath =
     type RealMatrix = Matrix<double>
 
 
+    type EigenValueVector = 
+        {
+            value : Complex
+            vector : Vector<Complex>
+        }
+
+
     type ComplexVector = 
         | ComplexVector of Vector<Complex>
         static member (*) (ComplexVector a, ComplexVector b) = 
@@ -35,6 +42,15 @@ module MathNetNumericsMath =
 
         static member create (a : #seq<Complex>) = 
             vector a |> ComplexVector
+
+        static member fromRe (a : #seq<double>) = 
+            a
+            |> Seq.map (fun e -> cplx e)
+            |> vector
+            |> ComplexVector
+
+        static member fromIm (a : #seq<double>) = 
+           (createComplex 0. 1.) * (ComplexVector.fromRe a)
 
         member this.Item 
             with get (i: int) = 
@@ -104,12 +120,6 @@ module MathNetNumericsMath =
         member this.determinant = 
             let (ComplexMatrix m) = this
             m.Determinant()
-
-    and Evd = 
-        {
-            eigenValues : ComplexVector
-            eigenVectors : ComplexMatrix
-        }
 
 
     let diagonalMatrix (n : int) (e : Complex) = 

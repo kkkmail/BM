@@ -45,12 +45,20 @@ module Geometry =
         member this.y = this.[1]
         member this.z = this.[2]
 
+        static member create a = a |> ComplexVector.create |> ComplexVector3
+        static member fromRe a = a |> ComplexVector.fromRe |> ComplexVector3
+        static member fromIm a = a |> ComplexVector.fromIm |> ComplexVector3
+
         static member (+) (ComplexVector3 a, ComplexVector3 b) : ComplexVector3 = 
             a + b |> ComplexVector3
 
-        // TODO: 3D cross operator
-        static member cross (ComplexVector3 a) (ComplexVector3 b) : ComplexVector3 = 
-            failwith ""
+        static member cross (u : ComplexVector3) (v : ComplexVector3) : ComplexVector3 = 
+            [
+                u.y * v.z - u.z * v.y
+                u.z * v.x -  u.x * v.z
+                u.x * v.y - u.y * v.x
+            ]
+            |> ComplexVector3.create
 
         static member (*) (ComplexVector3 a, ComplexVector3 b) : Complex = 
             a * b
@@ -145,8 +153,8 @@ module Geometry =
             e0 : ComplexVector4
             e1 : ComplexVector4
         }
-        member this.values = [this.v0; this.v1]
-        member this.vectors = [this.e0; this.e1]
+        member this.values = [ this.v0; this.v1 ]
+        member this.vectors = [ this.e0; this.e1 ]
 
 
     type FullEigenBasis = 

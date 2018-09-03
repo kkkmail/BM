@@ -12,7 +12,7 @@ module Media =
         static member nm t = t * Constants.nm |> Thickness
         static member mkm t = t * Constants.mkm |> Thickness
         static member mm t = t * Constants.mm |> Thickness
-        member this.toInfinity () = Thickness.Infinity
+        member __.toInfinity () = Thickness.Infinity
 
 
     type Layer =
@@ -25,7 +25,7 @@ module Media =
     type BaseOpticalSystem = 
         {
             upper : OpticalProperties
-            thinFilm : List<Layer>
+            films : List<Layer>
             lower : OpticalProperties
         }
 
@@ -33,7 +33,7 @@ module Media =
     type OpticalSystem = 
         {
             upper : OpticalProperties
-            thinFilm : List<Layer>
-            thickPlate : Layer option
+            films : List<Layer>
+            substrate : Layer option
             lower : OpticalProperties
         }

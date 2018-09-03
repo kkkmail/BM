@@ -101,14 +101,13 @@ module MatrixExp =
             //printfn "retVal * e1 = %A" (retVal * e1)
             retVal
 
-        member this.evd () = 
+        member this.evd () : List<EigenValueVector> = 
             let (ComplexMatrix m) = this
             let evd = m.Evd()
 
-            {
-                eigenValues = evd.EigenValues |> ComplexVector
-                eigenVectors = evd.EigenVectors |> ComplexMatrix
-            }
+            Array.zip (evd.EigenValues.ToArray()) (evd.EigenVectors.ToColumnArrays())
+            |> List.ofArray
+            |> List.map (fun (v, e) -> {value = v; vector = e |> vector })
 
         member this.svd () = 
             let (MathNetNumericsMath.ComplexMatrix m) = this

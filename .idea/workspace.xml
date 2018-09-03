@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/ThinFilmTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/ThinFilmTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/Example_06_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_06_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/FSharpHelpers.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FSharpHelpers.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="604" column="54" selection-start-line="604" selection-start-column="54" selection-end-line="604" selection-end-column="54" />
+            <state relative-caret-position="203">
+              <caret line="655" column="6" lean-forward="true" selection-start-line="655" selection-start-column="6" selection-end-line="655" selection-end-column="6" />
               <folding>
                 <element signature="e#1260#1719#0" />
                 <element signature="e#2310#2803#0" />
@@ -108,65 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="51" selection-start-line="51" selection-end-line="51" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BM_603_Example_06_1L_Thin_Film_Simple.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BM_603_Example_06r_1L_RandomThin_Film.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BM_603_Example_06b_1L_Thin_Film_OptActivity.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-323">
-              <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FSharpHelpers.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-867">
               <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BM_603_Example_08r_2L_RandomThin_Film.m" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BM_603_Example_08a_2L_Thin_Film.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08a_2L_Thin_Film.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -184,7 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PPP[</find>
       <find>CreateSubstanceFromN</find>
       <find>IncidentLightFita</find>
       <find>IncidentLightBeta</find>
@@ -214,6 +157,7 @@
       <find>outPPPm</find>
       <find>Rotati</find>
       <find>MMM</find>
+      <find>ODEGhlp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -267,12 +211,12 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
-        <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m" />
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08a_2L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m" />
+        <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
       </list>
     </option>
   </component>
@@ -451,7 +395,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31790745" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19517103" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -684,31 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="604" column="54" selection-start-line="604" selection-start-column="54" selection-end-line="604" selection-end-column="54" />
-          <folding>
-            <element signature="e#1260#1719#0" />
-            <element signature="e#2310#2803#0" />
-            <element signature="e#2884#3368#0" />
-            <element signature="e#4081#4532#0" />
-            <element signature="e#4619#4834#0" />
-            <element signature="e#5028#5516#0" />
-            <element signature="e#6370#6963#0" />
-            <element signature="e#10045#10637#0" />
-            <element signature="e#14148#15019#0" />
-            <element signature="e#15099#16146#0" />
-            <element signature="e#17373#18055#0" />
-            <element signature="e#18117#18357#0" />
-            <element signature="e#18412#18516#0" />
-            <element signature="e#18594#18683#0" />
-            <element signature="e#18717#18861#0" />
-            <element signature="e#20061#20322#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -751,17 +670,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-867">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="521">
           <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -772,10 +691,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m">
+    <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        <state relative-caret-position="-867">
+          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="655" column="6" lean-forward="true" selection-start-line="655" selection-start-column="6" selection-end-line="655" selection-end-column="6" />
+          <folding>
+            <element signature="e#1260#1719#0" />
+            <element signature="e#2310#2803#0" />
+            <element signature="e#2884#3368#0" />
+            <element signature="e#4081#4532#0" />
+            <element signature="e#4619#4834#0" />
+            <element signature="e#5028#5516#0" />
+            <element signature="e#6370#6963#0" />
+            <element signature="e#10045#10637#0" />
+            <element signature="e#14148#15019#0" />
+            <element signature="e#15099#16146#0" />
+            <element signature="e#17373#18055#0" />
+            <element signature="e#18117#18357#0" />
+            <element signature="e#18412#18516#0" />
+            <element signature="e#18594#18683#0" />
+            <element signature="e#18717#18861#0" />
+            <element signature="e#20061#20322#0" />
+          </folding>
         </state>
       </provider>
     </entry>
