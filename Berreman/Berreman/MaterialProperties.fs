@@ -8,17 +8,20 @@ module MaterialProperties =
 
     open Geometry
 
+    // Covers only real refraction indices.
+    type RefractionIndex = 
+        RefractionIndex of double
+        with 
+        static member create n = RefractionIndex n
+        static member defaultValue = RefractionIndex.create 1.0
+
+
     type OpticalProperties = 
         {
             eps : ComplexMatrix3x3
             mu : ComplexMatrix3x3
             rho : ComplexMatrix3x3
         }
-        //inherit ComplexMatrix3x3 ()
-        ////| A of Matrix<Complex>(3, 3)
-        ////with
-        ////static member create e = 
-        ////    0
         //member this.rotate (rotation : Rotation) : OpticalTensor = 
         //    failwith ""
 
@@ -26,11 +29,9 @@ module MaterialProperties =
             let (ComplexMatrix3x3 r) = this.rho
             r.conjugateTranspose |> ComplexMatrix3x3
 
-        static member defaultValue (n : double) = 
+        static member defaultValue (RefractionIndex n) = 
             {
                 eps = (n * n |> cplx) * ComplexMatrix3x3.identity
                 mu = ComplexMatrix3x3.identity
                 rho = ComplexMatrix3x3.zero
             }
-
-

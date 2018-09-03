@@ -601,14 +601,16 @@ PPP[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_, h_] :=
       If[bCalcErr === True && BCZEROPPPONCALCERR === True, retval = deltaZero, dummy = 0];
       (*Print["PPP Ended."];*)
       (*Print["Det[MatrixExp[...]] = ",Chop[N[pDet]]];*)
-      (* Print["PPP::retval = ", retval, ", pDet = ", pDet]; *)
+
+      Print["PPP::retval = ", retval // toFSharpMatrix, ", pDet = ", pDet];
+
       Return[retval];
     ];
 
 PPPFull[Film_, lambda_, fita_, n1_] :=
-    Module[{len, cnt, PPPhlp, eps, ro, rotr, mu, h, FilmLayer},
+    Module[{len, cnt, retval, eps, ro, rotr, mu, h, FilmLayer},
       len = FilmLength[Film];
-      PPPhlp = II;
+      retval = II;
 
       Do[
         FilmLayer = Film[[cnt]];
@@ -617,10 +619,14 @@ PPPFull[Film_, lambda_, fita_, n1_] :=
         mu = FilmLayerMu[FilmLayer];
         ro = FilmLayerRo[FilmLayer];
         rotr = FilmLayerRoT[FilmLayer];
-        PPPhlp = PPP[eps, mu, ro, rotr, lambda, fita, n1, h].PPPhlp
+
+        retval = PPP[eps, mu, ro, rotr, lambda, fita, n1, h] . retval
         , {cnt, 1, len}
       ];
-      Return[PPPhlp];
+
+      pDet = Abs[Det[retval]];
+      Print["PPPFull::retval = ", retval // toFSharpMatrix, ", pDet = ", pDet];
+      Return[retval];
     ];
 (* ============================================== *)
 (*Energy Density Vector:P=(c/(16*Pi)*(E+Conj[E]) x (H+Conj[H])) - vecror multiplication - !!! CHECK - THIS MAY BE INCORRECT !!!*)

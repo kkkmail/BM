@@ -15,7 +15,7 @@ module BerremanMatrix =
     // [ Ex, Hy, Ey, -Hx ]
     type BerremanField =
         {
-            wavelength : double
+            wavelength : WaveLength
             n1SinFita : N1SinFita
             eh : ComplexVector4
         }
@@ -81,7 +81,11 @@ module BerremanMatrix =
 
         static member propagate (l : Layer, em : EmField) = 
             let (BerremanMatrix m) = BerremanMatrix.create l.properties em.n1SinFita
-            m.matrixExp (Complex(0.0, (2.0 * pi * l.thickness / em.wavelength))) |> BerremanMatrixPropagated
+            let (WaveLength w) = em.wavelength
+            
+            match l.thickness with 
+            | Thickness t -> m.matrixExp (Complex(0.0, (2.0 * pi * t / w))) |> BerremanMatrixPropagated
+            | Infinity -> failwith "TODO Implelement infinite thickness by making that layer the output media."
 
         static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 
             ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagate(r, em)) * acc) BerremanMatrixPropagated.identity

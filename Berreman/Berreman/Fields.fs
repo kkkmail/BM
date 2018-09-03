@@ -19,6 +19,13 @@ module Fields =
         static member create n (Angle f) = n * (sin f) |> N1SinFita
 
 
+    type WaveLength = 
+        WaveLength of double
+        with
+        static member nm l = l * Constants.nm |> WaveLength
+        static member mkm l = l * Constants.mkm |> WaveLength
+
+
     type Ellipticity =
         | Ellipticity of float
         static member create (e : double) =
@@ -47,14 +54,14 @@ module Fields =
 
     type IncidentLightInfo = 
         {
-            wavelength : double
-            refractionIndex : double
+            wavelength : WaveLength
+            refractionIndex : RefractionIndex
             incidenceAngle : IncidenceAngle
             polarization : Polarization
             ellipticity : Ellipticity
         }
         member this.getEH (Polarization beta) = 
-            let n1 = this.refractionIndex
+            let (RefractionIndex n1) = this.refractionIndex
             let (IncidenceAngle (Angle fita)) = this.incidenceAngle
 
             let e =
@@ -83,7 +90,7 @@ module Fields =
 
     type EmFieldXY =
         {
-            wavelength : double
+            wavelength : WaveLength
             n1SinFita : N1SinFita
             e : ComplexVector2
             h : ComplexVector2
@@ -92,7 +99,7 @@ module Fields =
 
     type EmField =
         {
-            wavelength : double
+            wavelength : WaveLength
             n1SinFita : N1SinFita
             e : ComplexVector3
             h : ComplexVector3
@@ -115,6 +122,7 @@ module Fields =
         static member create (info : IncidentLightInfo ) = 
             let (IncidenceAngle (Angle a)) = info.incidenceAngle
             let (Ellipticity e) = info.ellipticity
+            let (RefractionIndex n) = info.refractionIndex
             let a0 = 1.0 / sqrt(1.0 + e * e) |> cplx
             let a90 = e / sqrt(1.0 + e * e) |> cplx
             let (e0, h0) = info.eh0
@@ -122,7 +130,7 @@ module Fields =
 
             {
                 wavelength = info.wavelength
-                n1SinFita = info.refractionIndex * (sin a) |> N1SinFita
+                n1SinFita = n * (sin a) |> N1SinFita
                 e = a0 * e0 + a90 * e90
                 h = a0 * h0 + a90 * h90
             }

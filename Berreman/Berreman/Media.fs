@@ -6,7 +6,13 @@ module Media =
 
 
     type Thickness = 
-        double
+        | Thickness of double
+        | Infinity
+        with
+        static member nm t = t * Constants.nm |> Thickness
+        static member mkm t = t * Constants.mkm |> Thickness
+        static member mm t = t * Constants.mm |> Thickness
+        member this.toInfinity () = Thickness.Infinity
 
 
     type Layer =

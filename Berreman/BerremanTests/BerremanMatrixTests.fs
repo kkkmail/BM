@@ -14,6 +14,7 @@ open MatrixComparison
 
 type BerremanMatrixTestData =
     {
+        description : string
         opticalProperties : OpticalProperties
         n1SinFita : N1SinFita
         expected : ComplexMatrix
@@ -24,7 +25,8 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
     let data = 
         [|
             {
-                opticalProperties = OpticalProperties.defaultValue 1.5
+                description = "Homegenious media, normal incidence angle."
+                opticalProperties = 1.5 |> RefractionIndex.create |> OpticalProperties.defaultValue
                 n1SinFita = N1SinFita.create 1.0 (Angle.degree 0.0)
 
                 expected = 
@@ -38,6 +40,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
             }
 
             {
+                description = "Random real epsilon, random incidence angle."
                 opticalProperties = 
                     {
                         eps = 
@@ -63,6 +66,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
             }
 
             {
+                description = "All random optical properties, randome incidence angle."
                 opticalProperties = 
                     {
                         eps = 
@@ -103,6 +107,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
 
     // Calculated and expected Berreman matrix.
     member __.runTest (d : BerremanMatrixTestData) = 
+        output.WriteLine d.description
         let (BerremanMatrix (ComplexMatrix4x4 bm)) = BerremanMatrix.create d.opticalProperties d.n1SinFita
         verifyMatrixEquality output bm d.expected
 

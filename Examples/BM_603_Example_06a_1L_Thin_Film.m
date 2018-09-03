@@ -13,12 +13,13 @@ InitializeBM[PathList, useParallelTbl];
 (* ============================================== *)
 opts =
     {
-      BDPlotFigures -> True,
+      BDPlotFigures -> False,
       UseEulerAngles -> False
     };
 (* ============================================== *)
 FuncList =
     {
+      (*
       StokesVectorR[1],
       StokesVectorR[2],
       StokesVectorR[3],
@@ -34,6 +35,7 @@ FuncList =
       Elr,
       PsiPPDegree,
       DeltaPPDegree,
+      *)
       {Rx, Ry},
       {Tx, Ty}
     };
@@ -47,7 +49,7 @@ lambda = {600, 600, 1, "λ", nm};
 fita = {0, 85, 85, "ϕ", Degree};
 beta = {0, 0, 30, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
-ellipt = {0, 1, 0.5, "e"};
+ellipt = {0, 0, 0.5, "e"};
 
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];
@@ -65,7 +67,7 @@ Print["epsLayer1 = ", epsLayer1 // MatrixForm];
 layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1];
 (* ============================================== *)
 Print["Оптические параметры нижней среды..."];
-nLower = 1.5;
+nLower = 1.52;
 lowerMedia = CreateSemiInfiniteMediaFromN[nLower];
 (* ============================================== *)
 Print["Создаем оптическую систему..."];

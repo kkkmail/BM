@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     95854,       2320]
-NotebookOptionsPosition[     94620,       2285]
-NotebookOutlinePosition[     94995,       2301]
-CellTagsIndexPosition[     94952,       2298]
+NotebookDataLength[     95902,       2320]
+NotebookOptionsPosition[     94671,       2285]
+NotebookOutlinePosition[     95043,       2301]
+CellTagsIndexPosition[     95000,       2298]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -83,7 +83,7 @@ Cell[BoxData[
     "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"toFSharMatrix", "[", 
+     RowBox[{"toFSharpMatrix", "[", 
       RowBox[{"m_", "?", "MatrixQ"}], "]"}], ":=", "\[IndentingNewLine]", 
      RowBox[{"Module", "[", 
       RowBox[{
@@ -1445,11 +1445,11 @@ Cell[BoxData[
          RowBox[{"EGVec2Dn", ".", "EHTcoeff"}]}], ";", "\[IndentingNewLine]", 
         RowBox[{"Print", "[", 
          RowBox[{"\"\<EHR = \>\"", ",", " ", 
-          RowBox[{"EHR", " ", "//", " ", "toFSharMatrix"}]}], "]"}], ";", 
+          RowBox[{"EHR", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";", 
         "\[IndentingNewLine]", 
         RowBox[{"Print", "[", 
          RowBox[{"\"\<EHT = \>\"", ",", " ", 
-          RowBox[{"EHT", " ", "//", " ", "toFSharMatrix"}]}], "]"}], ";", 
+          RowBox[{"EHT", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";", 
         "\[IndentingNewLine]", "\[IndentingNewLine]", 
         RowBox[{"Abort", "[", "]"}], ";", "\[IndentingNewLine]", 
         "\[IndentingNewLine]", 
@@ -2082,8 +2082,8 @@ Cell[BoxData[
    3.7441442467376556`*^9}, {3.744144300423891*^9, 3.7441443170165977`*^9}, {
    3.7441449571145163`*^9, 3.7441449689847317`*^9}, {3.7441450449595575`*^9, 
    3.7441451013531513`*^9}, {3.7441451666913147`*^9, 3.744145168329791*^9}, {
-   3.7443203320895863`*^9, 
-   3.7443203327303815`*^9}},ExpressionUUID->"cf156f64-9158-436b-9647-\
+   3.7443203320895863`*^9, 3.7443203327303815`*^9}, {3.7449335992050323`*^9, 
+   3.744933629948831*^9}},ExpressionUUID->"cf156f64-9158-436b-9647-\
 0b87f77bf6f6"],
 
 Cell[BoxData[
@@ -2283,8 +2283,8 @@ Cell[BoxData["$Aborted"], "Output",
 1a6a311f204c"]
 }, Open  ]]
 },
-WindowSize->{1614, 872},
-WindowMargins->{{Automatic, 114}, {15, Automatic}},
+WindowSize->{1433, 673},
+WindowMargins->{{4, Automatic}, {Automatic, 0}},
 Magnification:>1.2 Inherited,
 FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (March 13, 2017)",
 StyleDefinitions->"Default.nb"
@@ -2301,25 +2301,25 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 86342, 2064, 7550, "Input", "ExpressionUUID" -> \
+Cell[580, 22, 86393, 2064, 7622, "Input", "ExpressionUUID" -> \
 "cf156f64-9158-436b-9647-0b87f77bf6f6"],
-Cell[86925, 2088, 892, 21, 91, "Output", "ExpressionUUID" -> \
+Cell[86976, 2088, 892, 21, 74, "Output", "ExpressionUUID" -> \
 "bb58eb07-d90c-4e04-9b38-7d134398d801"],
 Cell[CellGroupData[{
-Cell[87842, 2113, 167, 3, 27, "Print", "ExpressionUUID" -> \
+Cell[87893, 2113, 167, 3, 27, "Print", "ExpressionUUID" -> \
 "f0fcb5a0-0fc2-49ed-ba00-b4f49978dbb3"],
-Cell[88012, 2118, 2566, 55, 82, "Print", "ExpressionUUID" -> \
+Cell[88063, 2118, 2566, 55, 82, "Print", "ExpressionUUID" -> \
 "dc491c45-24e3-44c2-a8e2-8939c6832b63"],
-Cell[90581, 2175, 1012, 28, 82, "Print", "ExpressionUUID" -> \
+Cell[90632, 2175, 1012, 28, 82, "Print", "ExpressionUUID" -> \
 "d6627dd6-58ac-4118-96df-b95d516035d8"],
-Cell[91596, 2205, 1356, 35, 82, "Print", "ExpressionUUID" -> \
+Cell[91647, 2205, 1356, 35, 82, "Print", "ExpressionUUID" -> \
 "71624fda-05bf-4f99-b3cb-9ed9ace14515"],
-Cell[92955, 2242, 746, 16, 182, "Print", "ExpressionUUID" -> \
+Cell[93006, 2242, 746, 16, 182, "Print", "ExpressionUUID" -> \
 "791bb267-1ee0-4f1a-862b-e1b5dddd4d0c"],
-Cell[93704, 2260, 746, 16, 182, "Print", "ExpressionUUID" -> \
+Cell[93755, 2260, 746, 16, 182, "Print", "ExpressionUUID" -> \
 "47d162ca-f601-48e3-90d2-1bcd19f5b865"]
 }, Open  ]],
-Cell[94465, 2279, 139, 3, 70, "Output", "ExpressionUUID" -> \
+Cell[94516, 2279, 139, 3, 37, "Output", "ExpressionUUID" -> \
 "3e8aee3c-d527-47c3-bd2d-1a6a311f204c"]
 }, Open  ]]
 }
