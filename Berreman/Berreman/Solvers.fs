@@ -13,14 +13,20 @@ module Solvers =
     open BerremanMatrix
 
 
-    type BaseOpticalSystemSolver (system: BaseOpticalSystem, em : EmField) = 
+    type BaseOpticalSystemSolver (system: BaseOpticalSystem, info : IncidentLightInfo) = 
         let sortEvd (evd : List<EigenValueVector>) : (FullEigenBasis * FullEigenBasis) = 
             failwith ""
 
-        let i : EmField = em
-        let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.films, em)
-        let evd = p.eigenBasis em.wavelength em.n1SinFita 
-        let (b1, b2)= sortEvd evd
+        let i : EmField = info |> EmField.create
+        let m1 = BerremanMatrix.create system.upper info.n1SinFita
+        let m2 = BerremanMatrix.create system.lower info.n1SinFita
+        let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.films, i)
+        let evd = p.eigenBasis i.wavelength i.n1SinFita
+        //let (b1, b2)= sortEvd evd
+
+        // eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita)
+        let b1 = failwith ""
+        let b2 = failwith ""
 
         // Generated, do not modify.
         let coeffTbl = 
@@ -115,19 +121,19 @@ module Solvers =
 
         let r = 
             {
-                wavelength = em.wavelength
-                n1SinFita = em.n1SinFita
+                wavelength = info.wavelength
+                n1SinFita = info.n1SinFita
                 eh = ehr
             }.toEmField system.upper
 
         let t = 
             {
-                wavelength = em.wavelength
-                n1SinFita = em.n1SinFita
+                wavelength = info.wavelength
+                n1SinFita = info.n1SinFita
                 eh = eht
             }.toEmField system.lower
 
-        member this.reflectedLight = r
-        member this.transmittedLight = t
-        member this.incidentLight = i
-        member this.eigenValueVectors = evd
+        member __.reflectedLight = r
+        member __.transmittedLight = t
+        member __.incidentLight = i
+        member __.eigenValueVectors = evd

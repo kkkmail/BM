@@ -1039,6 +1039,10 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
     *)
 
       retval = {EHIFull, EHRFull, EHTFull, PPPv, delta, Media, IncidentLight, opts, MMM1[[1]], MMM2[[1]], coeffTbl, freeTbl, egs1, egs2};
+      (* // toFSharpMatrix *)
+      Print["EHIFull = ", { Take[EHIFull, 6] } // toFSharpMatrix];
+      Print["EHRFull = ", { Take[EHRFull, 6] } // toFSharpMatrix];
+      Print["EHTFull = ", { Take[EHTFull, 6] } // toFSharpMatrix];
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
       If[pdi == True && pdil >= PCDILEVELALL,

@@ -13,6 +13,13 @@ module MathNetNumericsMath =
     let cplx r = Complex(r, 0.0)
     let createComplex r i = Complex(r, i)
 
+
+    type Complex
+        with 
+        member this.conjugate
+            with get () = this
+
+
     type RealVector =
         | RealVector of Vector<double>
         member this.Item 

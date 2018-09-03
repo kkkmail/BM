@@ -114,7 +114,7 @@ let data =
 let (BerremanMatrix bm) = BerremanMatrix.create data.opticalSystem.lower data.light.n1SinFita
 printfn "bm = %A" bm
 
-let evd = bm.evd ()
+let evd = bm.
 printfn "evd = %A" evd
 
 let evdEm = 

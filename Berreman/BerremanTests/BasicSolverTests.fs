@@ -19,7 +19,7 @@ type BaseOpticalSystemTestData =
     {
         description : string
         opticalSystem : BaseOpticalSystem
-        light : IncidentLightInfo
+        info : IncidentLightInfo
         expected : EmFieldSystem
     }
 
@@ -40,7 +40,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                                     ]
                                 lower = opticalProperties
                             }
-                        light = 
+                        info = 
                             {
                                 wavelength = waveLength
                                 refractionIndex = RefractionIndex.defaultValue
@@ -55,39 +55,33 @@ type BasicSolverTests(output : ITestOutputHelper) =
                                         wavelength = waveLength
                                         n1SinFita = n1SinFita
                                         e = 
-                                            [
-                                            ]
-                                            |> ComplexVector3.create
+                                            [ 1.; 0.; 0.0; 0. ]
+                                            |> ComplexVector3.fromRe
                                         h = 
-                                            [
-                                            ]
-                                            |> ComplexVector3.create
+                                            [ 1.0000000000000002; 0.0 ]
+                                            |> ComplexVector3.fromRe
                                     }
                                 reflected = 
                                     {
                                         wavelength = waveLength
                                         n1SinFita = n1SinFita
                                         e = 
-                                            [
-                                            ]
-                                            |> ComplexVector3.create
+                                            [ -0.20634920634920656; 0.; 0.0 ]
+                                            |> ComplexVector3.fromRe
                                         h = 
-                                            [
-                                            ]
-                                            |> ComplexVector3.create
+                                            [ 0.; 0.2063492063492065; 0.0 ]
+                                            |> ComplexVector3.fromRe
                                     }
                                 transmitted = 
                                     {
                                         wavelength = waveLength
                                         n1SinFita = n1SinFita
                                         e = 
-                                            [
-                                            ]
-                                            |> ComplexVector3.create
+                                            [ 0.7936507936507936; 0.; 0. ]
+                                            |> ComplexVector3.fromRe
                                         h = 
-                                            [
-                                            ]
-                                            |> ComplexVector3.create
+                                            [ 0.; 1.206349206349207; 0. ]
+                                            |> ComplexVector3.fromRe
                                     }
                             }
                     }
@@ -130,13 +124,26 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
     member __.runTest (d : BaseOpticalSystemTestData) = 
         output.WriteLine d.description
-        let solver = BaseOpticalSystemSolver (d.opticalSystem, d.light |> EmField.create)
+        let solver = BaseOpticalSystemSolver (d.opticalSystem, d.info)
 
-        //let (BerremanMatrixPropagated (ComplexMatrix4x4 bm)) = 
-        //    BerremanMatrixPropagated.propagate (d.thinFilms, d.em)
-        //verifyMatrixEquality output bm d.expected
-        failwith ""
+        let eI = solver.incidentLight.e
+        let hI = solver.incidentLight.h
+
+        let eR = solver.reflectedLight.e
+        let hR = solver.reflectedLight.h
+
+        let eT = solver.transmittedLight.e
+        let hT = solver.transmittedLight.h
+
+        verifyVectorEquality output eI d.expected.incident.e
+        verifyVectorEquality output hI d.expected.incident.h
+
+        verifyVectorEquality output eR d.expected.reflected.e
+        verifyVectorEquality output hR d.expected.reflected.h
+
+        verifyVectorEquality output eT d.expected.transmitted.e
+        verifyVectorEquality output hT d.expected.transmitted.h
+
 
     [<Fact>]
     member this.basicSolverTest0 () = this.runTest (data.[0])
-

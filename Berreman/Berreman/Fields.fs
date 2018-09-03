@@ -52,6 +52,11 @@ module Fields =
         | N1SinFita of double
 
         static member create n (IncidenceAngle(Angle f)) = n * (sin f) |> N1SinFita
+        static member normal = N1SinFita 0.0
+
+        member this.complex = 
+            let (N1SinFita nsf) = this
+            cplx nsf
 
 
     type IncidentLightInfo = 

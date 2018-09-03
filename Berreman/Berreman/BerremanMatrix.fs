@@ -7,6 +7,7 @@ module BerremanMatrix =
     open System.Numerics
     open MathNetNumericsMath
 
+
     open Geometry
     open Fields
     open MaterialProperties
@@ -19,10 +20,14 @@ module BerremanMatrix =
             n1SinFita : N1SinFita
             eh : ComplexVector4
         }
-        member this.eX = this.eh.[0]
-        member this.hY = this.eh.[1]
-        member this.eY = this.eh.[2]
-        member this.hX = - this.eh.[3]
+        member b.eX = b.eh.[0]
+        member b.hY = b.eh.[1]
+        member b.eY = b.eh.[2]
+        member b.hX = - b.eh.[3]
+
+        // z component of Poynting vector
+        member b.sZ = 
+            (b.eX * b.hY.conjugate - b.eY * b.hX.conjugate).Real
 
         static member create (info : IncidentLightInfo) (eh : ComplexVector4) = 
             {
@@ -130,7 +135,7 @@ module BerremanMatrix =
     type ComplexMatrix4x4 
         with 
 
-        member this.eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita) (o : OpticalProperties) : FullEigenBasis = 
+        member this.eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita) : FullEigenBasis = 
             let (ComplexMatrix4x4 (ComplexMatrix m)) = this
             let evd = m.Evd()
 
@@ -149,8 +154,8 @@ module BerremanMatrix =
                 Array.zip (evd.EigenValues.ToArray()) (evd.EigenVectors.ToColumnArrays())
                 |> List.ofArray
                 |> List.map (fun (v, e) -> v, e |> normalize |> ComplexVector4.create)
-                |> List.map (fun (v, e) -> v, e, ((e |> toBerremanField).toEmField o).s)
-                |> List.sortBy (fun (_, _, s) -> s.z)
+                |> List.map (fun (v, e) -> v, e, (e |> toBerremanField).sZ)
+                |> List.sortBy (fun (_, _, s) -> s)
                 |> List.map (fun (v, e, _) -> v, e)
 
             let up = ve |> List.take 2 |> EigenBasis.create
