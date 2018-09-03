@@ -647,9 +647,10 @@ EGGetOrder[egvl : {_, _, _, _}, egvec_, ehStdRule_, opts___] :=
       pntgTblY = Table[PoyntingS[GetEHFull[egvec[[i]], ehStdRule, True], 2], {i, 4}];
       (*Print["egvl = ",MFCN[egvl]];Print["egvec = ",MFCN[egvec]];
     Print["ehStdRule = ",MFCN[ehStdRule]];
-    Print["pntgTbl = ",MFCN[pntgTbl]];
+
     Print["pntgTblX = ",MFCN[pntgTblX]];
     Print["pntgTblY = ",MFCN[pntgTblY]];*)
+      Print["pntgTbl = ",MFCN[pntgTbl]];
       swpev = SwapEigenValues /. opts /. Options[BerremanCommon];
       AddOnSrt = AddOnEigenValuesSort /. opts /. Options[BerremanCommon];
       EGValHlpRe = Sign[Re[egvl]];
@@ -730,6 +731,8 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       useNumEV = UseNumericEigenValues /. opts /. Options[BerremanCommon];
       UseQuietSolveValue = UseQuietSolve /. opts /. Options[BerremanCommon];
 
+      useSolve = False;
+
       kx = (2 * Pi / lambda) * n1 * Sin[fita];
       delta = deltaZero;
       kx = SetAccuracy[kx, 100];
@@ -808,30 +811,39 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       EGVec2Dn = Transpose[(EGVec2[[ODEG2[[2]]]])];
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
-      If[pdi == True && pdil >= PCDILEVELDETAILED,
-        Print["SolutionNewBase::=================="];
-        Print["MMM1 = ", MatrixForm[Chop[N[MMM1[[1]]]]]];
-        Print["MMM2 = ", MatrixForm[Chop[N[MMM2[[1]]]]]];
-        Print["EGVec1 = ", MFCN[EGVec1]];
-        Print["EGVal1Hlp = ", MatrixForm[EGVal1Hlp]];
-        Print["EGVal1 = ", MatrixForm[EGVal1]];
-        Print["ODEG1 = ", MFCN[ODEG1]];
-        Print["EGVal1Up = ", MFCN[EGVal1Up]];
-        Print["EGVal1Dn = ", MFCN[EGVal1Dn]];
-        Print["EGVec1Up = ", MFCN[EGVec1Up]];
-        Print["EGVec1Dn = ", MFCN[EGVec1Dn]];
-        Print["EGVec2 = ", MFCN[EGVec2]];
-        Print["EGVal2Hlp = ", MatrixForm[EGVal2Hlp]];
-        Print["EGVal2 = ", MatrixForm[EGVal2]];
-        Print["ODEG2hlp", ODEG2hlp];
-        Print["ODEG2 = ", MFCN[ODEG2]];
-        Print["EGVec2Up = ", MFCN[EGVec2Up]];
-        Print["EGVec2Dn = ", MFCN[EGVec2Dn]];
-        Print["EGVec2Up (full) = ", EGVec2Up];
-        Print["EGVec2Dn (full) = ", EGVec2Dn];
-        Print["==================::SolutionNewBase"];
-        Print["   "];
-      ];
+      (* If[pdi == True && pdil >= PCDILEVELDETAILED, *)
+      Print["SolutionNewBase::=================="];
+      Print["MMM1 = ", MatrixForm[Chop[N[MMM1[[1]]]]]];
+      Print["MMM2 = ", MatrixForm[Chop[N[MMM2[[1]]]]]];
+
+      Print["Eigenvalues[MMM1] = ", MatrixForm[Chop[N[Eigenvalues[MMM1[[1]]]]]]];
+      Print["Eigenvectors[MMM1] = ", MatrixForm[Chop[N[Eigenvectors[MMM1[[1]]]]]]];
+
+      Print["Eigenvalues[MMM2] = ", MatrixForm[Chop[N[Eigenvalues[MMM2[[1]]]]]]];
+      Print["Eigenvectors[MMM2] = ", MatrixForm[Chop[N[Eigenvectors[MMM2[[1]]]]]]];
+
+      Print["EGVec1 = ", MFCN[EGVec1]];
+      Print["EGVal1Hlp = ", MatrixForm[EGVal1Hlp]];
+      Print["EGVal1 = ", MatrixForm[EGVal1]];
+      Print["ODEG1 = ", MFCN[ODEG1]];
+      Print["EGVal1Up = ", MFCN[EGVal1Up]];
+      Print["EGVal1Dn = ", MFCN[EGVal1Dn]];
+      Print["EGVec1Up = ", MFCN[EGVec1Up]];
+      Print["EGVec1Dn = ", MFCN[EGVec1Dn]];
+      Print["EGVec2 = ", MFCN[EGVec2]];
+      Print["EGVal2Hlp = ", MatrixForm[EGVal2Hlp]];
+      Print["EGVal2 = ", MatrixForm[EGVal2]];
+      Print["ODEG2hlp", ODEG2hlp];
+      Print["ODEG2 = ", MFCN[ODEG2]];
+      Print["EGVal2Up = ", MFCN[EGVal2Up]];
+      Print["EGVal2Dn = ", MFCN[EGVal2Dn]];
+      Print["EGVec2Up = ", MFCN[EGVec2Up]];
+      Print["EGVec2Dn = ", MFCN[EGVec2Dn]];
+      Print["EGVec2Up (full) = ", EGVec2Up];
+      Print["EGVec2Dn (full) = ", EGVec2Dn];
+      Print["==================::SolutionNewBase"];
+      Print["   "];
+      (* ]; *)
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
       If[pdi == True && pdil >= PCDILEVELMEDIUM,
@@ -881,6 +893,9 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
           cfm = Inverse[cf];
           sol = cfm.b;
           ehisol = {ehi1 -> sol[[1, 1]], ehi2 -> sol[[2, 1]]};
+
+          Print["cf(2) = ", cf // MatrixForm];
+          Print["b(2) = ", b // MatrixForm];
         )
       ];
 
@@ -920,9 +935,12 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       varLst = {ehr1, ehr2, eht1, eht2};
       coeff[q_, s_] := Coefficient[ssss[[q, 1]], varLst[[s]]];
       free[q_] := (-ssss[[q, 1]] /. ehr1 -> 0 /. ehr2 -> 0 /. eht1 -> 0 /. eht2 -> 0);
-      coeffTbl = Table[coeff[i, j], {i, 4}, {j, 4}];cfm = Inverse[coeffTbl];
+      coeffTbl = Table[coeff[i, j], {i, 4}, {j, 4}];
+      cfm = Inverse[coeffTbl];
       freeTbl = Table[free[i], {i, 4}, {j, 1}];
-      (* Print["coeffTbl = ",MatrixForm[Chop[N[coeffTbl]]]]; *)
+      Print["coeffTbl = ",MatrixForm[Chop[N[coeffTbl]]]];
+      Print["freeTbl = ",MatrixForm[Chop[N[freeTbl]]]];
+      Print["cfm = ",MatrixForm[Chop[N[cfm]]]];
 
       If[useSolve === True,
         (

@@ -4,8 +4,6 @@
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/SortEvd.fsx" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/SortEvd.fsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" afterDir="false" />
@@ -89,8 +87,8 @@
       <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="1044" column="40" selection-start-line="1044" selection-start-column="40" selection-end-line="1044" selection-end-column="40" />
+            <state relative-caret-position="271">
+              <caret line="652" column="40" selection-start-line="652" selection-start-column="40" selection-end-line="652" selection-end-column="40" />
               <folding>
                 <element signature="e#1260#1719#0" />
                 <element signature="e#2310#2803#0" />
@@ -149,9 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CreateSubstanceFromN</find>
-      <find>IncidentLightFita</find>
-      <find>IncidentLightBeta</find>
       <find>OutputIncidentRayInfo</find>
       <find>IncidentLighRefrIndex</find>
       <find>nUpper</find>
@@ -179,6 +174,9 @@
       <find>MMM</find>
       <find>ODEGhlp</find>
       <find>EGGetOrder</find>
+      <find>useSolve</find>
+      <find>freeTbl</find>
+      <find>cfm</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -421,7 +419,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29510397" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18712273" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -731,8 +729,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="1044" column="40" selection-start-line="1044" selection-start-column="40" selection-end-line="1044" selection-end-column="40" />
+        <state relative-caret-position="271">
+          <caret line="652" column="40" selection-start-line="652" selection-start-column="40" selection-end-line="652" selection-end-column="40" />
           <folding>
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />

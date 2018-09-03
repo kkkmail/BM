@@ -14,22 +14,19 @@ module Solvers =
 
 
     type BaseOpticalSystemSolver (system: BaseOpticalSystem, info : IncidentLightInfo) = 
-        let sortEvd (evd : List<EigenValueVector>) : (FullEigenBasis * FullEigenBasis) = 
-            failwith ""
-
         let i : EmField = info |> EmField.create
-        let m1 = BerremanMatrix.create system.upper info.n1SinFita
-        let m2 = BerremanMatrix.create system.lower info.n1SinFita
+        let (BerremanMatrix m1) = BerremanMatrix.create system.upper info.n1SinFita
+        let (BerremanMatrix m2) = BerremanMatrix.create system.lower info.n1SinFita
         let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.films, i)
         let evd = p.eigenBasis i.wavelength i.n1SinFita
         //let (b1, b2)= sortEvd evd
 
         // eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita)
-        let b1 = failwith ""
-        let b2 = failwith ""
+        let b1 = m1.eigenBasis i.wavelength i.n1SinFita
+        let b2 = m2.eigenBasis i.wavelength i.n1SinFita
 
         // Generated, do not modify.
-        let coeffTbl = 
+        let coeffTblVal = 
             [
                 [
                     b1.up.e0.[0] * p.[0, 0] + b1.up.e0.[1] * p.[0, 1] + b1.up.e0.[2] * p.[0, 2] + b1.up.e0.[3] * p.[0, 3]
@@ -58,7 +55,7 @@ module Solvers =
             ] 
             |> ComplexMatrix.create
 
-        let cfm = coeffTbl.inverse
+        let cfmVal = coeffTblVal.inverse
 
         //let cfm = 
         //    [
@@ -88,7 +85,7 @@ module Solvers =
         //        ]
         //    ]
 
-        let freeTbl = 
+        let freeTblVal = 
             [
                 ((b1.down.e1.[2] * i.e.x - b1.down.e1.[0] * i.e.y) * (b1.down.e0.[1] * p.[0, 1] + b1.down.e0.[3] * p.[0, 3]) - b1.down.e0.[2] * (b1.down.e1.[0] * i.e.x * p.[0, 0] + b1.down.e1.[1] * i.e.x * p.[0, 1] + b1.down.e1.[0] * i.e.y * p.[0, 2] + b1.down.e1.[3] * i.e.x * p.[0, 3]) + b1.down.e0.[0] * (b1.down.e1.[2] * i.e.x * p.[0, 0] + b1.down.e1.[1] * i.e.y * p.[0, 1] + b1.down.e1.[2] * i.e.y * p.[0, 2] + b1.down.e1.[3] * i.e.y * p.[0, 3]))/(b1.down.e0.[2] * b1.down.e1.[0] - b1.down.e0.[0] * b1.down.e1.[2])
                 ((b1.down.e1.[2] * i.e.x - b1.down.e1.[0] * i.e.y) * (b1.down.e0.[1] * p.[1, 1] + b1.down.e0.[3] * p.[1, 3]) - b1.down.e0.[2] * (b1.down.e1.[0] * i.e.x * p.[1, 0] + b1.down.e1.[1] * i.e.x * p.[1, 1] + b1.down.e1.[0] * i.e.y * p.[1, 2] + b1.down.e1.[3] * i.e.x * p.[1, 3]) + b1.down.e0.[0] * (b1.down.e1.[2] * i.e.x * p.[1, 0] + b1.down.e1.[1] * i.e.y * p.[1, 1] + b1.down.e1.[2] * i.e.y * p.[1, 2] + b1.down.e1.[3] * i.e.y * p.[1, 3]))/(b1.down.e0.[2] * b1.down.e1.[0] - b1.down.e0.[0] * b1.down.e1.[2])
@@ -97,7 +94,7 @@ module Solvers =
             ]
             |> ComplexVector.create
 
-        let sol = cfm * freeTbl
+        let sol = cfmVal * freeTblVal
 
         let ehr = 
             [
@@ -136,4 +133,9 @@ module Solvers =
         member __.reflectedLight = r
         member __.transmittedLight = t
         member __.incidentLight = i
-        member __.eigenValueVectors = evd
+        member __.eigenBasisFilm = evd
+        member __.eigenBasisUpper = b1
+        member __.eigenBasisLower = b2
+        member __.coeffTbl = coeffTblVal
+        member __.freeTbl = freeTblVal
+        member __.cfm = cfmVal

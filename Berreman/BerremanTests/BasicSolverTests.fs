@@ -55,10 +55,10 @@ type BasicSolverTests(output : ITestOutputHelper) =
                                         wavelength = waveLength
                                         n1SinFita = n1SinFita
                                         e = 
-                                            [ 1.; 0.; 0.0; 0. ]
+                                            [ 1.; 0.; 0.0;]
                                             |> ComplexVector3.fromRe
                                         h = 
-                                            [ 1.0000000000000002; 0.0 ]
+                                            [  0.; 1.0000000000000002; 0.0 ]
                                             |> ComplexVector3.fromRe
                                     }
                                 reflected = 
@@ -126,6 +126,13 @@ type BasicSolverTests(output : ITestOutputHelper) =
         output.WriteLine d.description
         let solver = BaseOpticalSystemSolver (d.opticalSystem, d.info)
 
+        output.WriteLine("eigenBasisUpper = {0}\n", solver.eigenBasisUpper)
+        output.WriteLine("eigenBasisFilm = {0}\n", solver.eigenBasisFilm)
+        output.WriteLine("eigenBasisLower = {0}\n", solver.eigenBasisLower)
+        output.WriteLine("coeffTbl = {0}\n", solver.coeffTbl)
+        output.WriteLine("freeTbl = {0}\n", solver.freeTbl)
+        output.WriteLine("cfm = {0}\n", solver.cfm)
+
         let eI = solver.incidentLight.e
         let hI = solver.incidentLight.h
 
@@ -135,14 +142,14 @@ type BasicSolverTests(output : ITestOutputHelper) =
         let eT = solver.transmittedLight.e
         let hT = solver.transmittedLight.h
 
-        verifyVectorEquality output eI d.expected.incident.e
-        verifyVectorEquality output hI d.expected.incident.h
+        verifyVectorEquality output "eI" eI d.expected.incident.e
+        verifyVectorEquality output "hI" hI d.expected.incident.h
 
-        verifyVectorEquality output eR d.expected.reflected.e
-        verifyVectorEquality output hR d.expected.reflected.h
+        verifyVectorEquality output "eR" eR d.expected.reflected.e
+        verifyVectorEquality output "hR" hR d.expected.reflected.h
 
-        verifyVectorEquality output eT d.expected.transmitted.e
-        verifyVectorEquality output hT d.expected.transmitted.h
+        verifyVectorEquality output "eT" eT d.expected.transmitted.e
+        verifyVectorEquality output "hT" hT d.expected.transmitted.h
 
 
     [<Fact>]

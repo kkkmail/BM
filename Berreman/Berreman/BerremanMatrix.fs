@@ -5,6 +5,7 @@ module BerremanMatrix =
     //open ExtremeNumericsMath
 
     open System.Numerics
+    open MathNet.Numerics.LinearAlgebra
     open MathNetNumericsMath
 
 
@@ -27,7 +28,7 @@ module BerremanMatrix =
 
         // z component of Poynting vector
         member b.sZ = 
-            (b.eX * b.hY.conjugate - b.eY * b.hX.conjugate).Real
+            ((b.eX) * (b.hY.conjugate) - (b.eY) * (b.hX.conjugate)).Real
 
         static member create (info : IncidentLightInfo) (eh : ComplexVector4) = 
             {
@@ -133,15 +134,18 @@ module BerremanMatrix =
 
 
     type ComplexMatrix4x4 
-        with 
+        with
 
         member this.eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita) : FullEigenBasis = 
             let (ComplexMatrix4x4 (ComplexMatrix m)) = this
             let evd = m.Evd()
 
             let normalize (v : #seq<Complex>) = 
+                printfn "v = %A" (v |> List.ofSeq)
                 let norm = v |> Seq.fold (fun acc r -> acc + r.Real * r.Real + r.Imaginary * r.Imaginary) 0.0 |> sqrt |> cplx
-                v |> Seq.map (fun e -> e / norm)
+                let retVal = v |> Seq.map (fun e -> e / norm)
+                printfn "retVal = %A" (retVal |> List.ofSeq)
+                retVal
 
             let toBerremanField eh= 
                 {
@@ -150,12 +154,17 @@ module BerremanMatrix =
                     eh = eh
                 }
 
+            let toArrays (e : Matrix<Complex>) = 
+                let len = e.RowCount
+                [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> e.[j, i] |] |]
+
             let ve =
-                Array.zip (evd.EigenValues.ToArray()) (evd.EigenVectors.ToColumnArrays())
+                //Array.zip (evd.EigenValues.ToArray()) (evd.EigenVectors.ToColumnArrays())
+                Array.zip (evd.EigenValues.ToArray()) (evd.EigenVectors |> toArrays)
                 |> List.ofArray
                 |> List.map (fun (v, e) -> v, e |> normalize |> ComplexVector4.create)
                 |> List.map (fun (v, e) -> v, e, (e |> toBerremanField).sZ)
-                |> List.sortBy (fun (_, _, s) -> s)
+                |> List.sortBy (fun (_, _, s) -> -s)
                 |> List.map (fun (v, e, _) -> v, e)
 
             let up = ve |> List.take 2 |> EigenBasis.create

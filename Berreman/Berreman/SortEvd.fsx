@@ -114,29 +114,40 @@ let data =
 let (BerremanMatrix bm) = BerremanMatrix.create data.opticalSystem.lower data.light.n1SinFita
 printfn "bm = %A" bm
 
-let evd = bm.
-printfn "evd = %A" evd
+let (ComplexMatrix4x4 (ComplexMatrix m0)) = bm
 
-let evdEm = 
-    evd
-    |> List.map (fun e -> e.value, (e.vector |> BerremanField.create data.light).toEmField data.opticalSystem.lower)
-printfn "evdEm = %A" evdEm
+let evd0 = m0.Evd()
+printfn "evd0 = %A\n" evd0
+printfn "EigenValues = %A\n" evd0.EigenValues
+printfn "EigenVectors = %A\n" evd0.EigenVectors
+printfn "EigenVectors.Inv = %A\n" (evd0.EigenVectors.Inverse())
 
-let evdS = 
-    evdEm
-    |> List.map (fun (v, em) -> v, em.s)
-printfn "evdS = %A" evdS
+let evd = bm.eigenBasis data.light.wavelength data.light.n1SinFita
+let up = evd.up
+let down = evd.down
+printfn "up = %A\n" up
+printfn "down = %A\n" down
 
-let sorted = 
-    evdS
-    |> List.sortBy (fun (_, s) -> s.z)
-printfn "sorted = %A" sorted
+//let evdEm = 
+//    evd
+//    |> List.map (fun e -> e.value, (e.vector |> BerremanField.create data.light).toEmField data.opticalSystem.lower)
+//printfn "evdEm = %A" evdEm
 
-let up = sorted |> List.take 2
-let dn = sorted |> List.rev |> List.take 2 |> List.rev
+//let evdS = 
+//    evdEm
+//    |> List.map (fun (v, em) -> v, em.s)
+//printfn "evdS = %A" evdS
 
-printfn "up = %A" up
-printfn "dn = %A" dn
+//let sorted = 
+//    evdS
+//    |> List.sortBy (fun (_, s) -> s.z)
+//printfn "sorted = %A" sorted
+
+//let up = sorted |> List.take 2
+//let dn = sorted |> List.rev |> List.take 2 |> List.rev
+
+//printfn "up = %A" up
+//printfn "dn = %A" dn
 
 //let m = 
 //    [
