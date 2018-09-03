@@ -7,14 +7,46 @@ generateVector[name_, n_, m_] :=
     Table[ToString[name] <> ToString[ii - 1] <> ".[" <> ToString[jj - 1] <> "]", {ii, 1, n}, {jj, 1, m}];
 
 complexFuncName = "createComplex";
+matrix3x3Name = "ComplexMatrix3x3";
+matrix4x4Name = "ComplexMatrix4x4";
+createName = "create";
+createFromReName = "fromRe";
+createFromImName = "fromIm";
 
 toFloat[s_?StringQ] := If[StringCount[s, "."] == 0, s <> ".0", s];
 
 toFSharpMatrix[m_?MatrixQ] :=
-    Module[{s, nn, mm, ii, jj, f, r, i},
+    Module[{s, nn, mm, ii, jj, f, r, i, im, diffIm, diffRe, tolerance, useIm, useRe, useCall, callName, dummy},
+      tolerance = 10^-8;
       s = "\n[\n";
       nn = Length[m];
       mm = Length[m[[1]]];
+
+      diffIm = Sum[Abs[Im[m[[ii, jj]]]], {jj, 1, mm}, {ii, 1, nn}];
+      useIm = If[diffIm < tolerance, False, True, True];
+      Print["diffIm = ", diffIm, ", useIm = ", useIm];
+
+      diffRe = Sum[Abs[Re[m[[ii, jj]]]], {jj, 1, mm}, {ii, 1, nn}];
+      useRe = If[diffRe < tolerance, False, True, True];
+      Print["diffRe = ", diffRe, ", useRe = ", useRe];
+
+      useCall = False;
+
+      If[nn == 3 && mm == 3
+        (
+          useCall = True;
+          callName = matrix3x3Name;
+        ),
+        dummy = 0
+      ];
+
+      If[nn == 4 && mm == 4
+        (
+          useCall = True;
+          callName = matrix4x4Name;
+        ),
+        dummy = 0
+      ];
 
       Do[
         (
@@ -23,7 +55,11 @@ toFSharpMatrix[m_?MatrixQ] :=
             (
               r = toFloat[ToString[InputForm[Re[m[[ii, jj]]]]]];
               i = toFloat[ToString[InputForm[Im[m[[ii, jj]]]]]];
-              f = complexFuncName <> " " <> r <> " " <> i;
+              f =
+                  If[useRe && useIm,
+                    complexFuncName <> " " <> r <> " " <> i,
+                    If[useIm, i, r]
+                  ];
               s = s <> f <> If[jj < mm, "; ", ""];
             ), {jj, 1, mm}
           ];
@@ -31,6 +67,23 @@ toFSharpMatrix[m_?MatrixQ] :=
         ), {ii, 1, nn}
       ];
       s = StringReplace[ s <> "]\n", "\"" -> ""];
+
+      If[useCall,
+        (
+          s = s <> "|> " <> callName <> ".";
+
+          If[useRe && useIm,
+            s = s <> createName,
+            If[useIm,
+              s = s <> createFromImName,
+              s = s <> createFromReName
+            ]
+          ];
+
+        s = s <> "\n";
+        ),
+        dummy = 0
+      ];
       Return[s];
     ];
 

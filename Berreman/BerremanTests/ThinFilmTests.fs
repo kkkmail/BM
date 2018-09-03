@@ -82,7 +82,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
             }
 
             {
-                description = "One layer homegenious media, random incident light, random real epsilon."
+                description = "One layer media with random real epsilon, random incident light."
                 thinFilms =
                     [
                         {
@@ -121,7 +121,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
             }
 
             {
-                description = "One layer homegenious media, random incident light, random optical properties."
+                description = "One layer media with random optical properties, random incident light."
                 thinFilms =
                     [
                         {
@@ -171,23 +171,145 @@ type ThinFilmTests(output : ITestOutputHelper) =
                     |> ComplexMatrix.create
             }
 
-            //{
-            //    description = ""
-            //    thinFilms =
-            //        [
-            //        ]
-            //    em = failwith ""
-            //    expected = failwith ""
-            //}
+            {
+                description = "Two layer inhomogeneous media."
+                thinFilms =
+                    [
+                        {
+                            properties = 
+                                {
+                                    eps = 
+                                        [
+                                            [ 2.25; 0.0; 0.0 ]
+                                            [ 0.0; 4.; 0.0 ]
+                                            [ 0.0; 0.0; 3.0625 ]
+                                        ]
+                                        |> ComplexMatrix3x3.fromRe
+                                    mu = ComplexMatrix3x3.identity
+                                    rho = ComplexMatrix3x3.zero
+                                }
+                            thickness = Thickness.nm 75.0
+                        }
 
-            //{
-            //    description = ""
-            //    thinFilms =
-            //        [
-            //        ]
-            //    em = failwith ""
-            //    expected = failwith ""
-            //}
+                        {
+                            properties = 
+                                {
+                                    eps = 
+                                        [
+                                            [ 3.0625; 0.0; 0.0 ]
+                                            [ 0.0; 2.25; 0.0 ]
+                                            [ 0.0; 0.0; 4. ]
+                                        ]
+                                        |> ComplexMatrix3x3.fromRe
+                                    mu = ComplexMatrix3x3.identity
+                                    rho = 
+                                        [
+                                            [ createComplex 0. 0.0019; createComplex 0. -0.0035; createComplex 0.0 0.0 ]
+                                            [ createComplex 0. 0.0035; createComplex 0. 0.0019; createComplex 0.0 0.0 ]
+                                            [ createComplex 0.0 0.0; createComplex 0.0 0.0; createComplex 0. -0.0057 ]
+                                        ]
+                                        |> ComplexMatrix3x3.create
+                                }
+                            thickness = Thickness.nm 100.0
+                        }
+                    ]
+                em = 
+                    {
+                        wavelength = WaveLength.nm 600.0
+                        refractionIndex = RefractionIndex.defaultValue
+                        incidenceAngle = Angle.degree 35.0 |> IncidenceAngle
+                        polarization = Angle.degree 0.0 |> Polarization
+                        ellipticity = 0.0 |> Ellipticity
+                    }
+                    |> EmField.create
+                expected = 
+                    [
+                        [ createComplex -0.8485039057576538 0.; createComplex 0. 0.13283157354221561; createComplex -0.0020704335282441806 0.; createComplex 0. 0.0000422277299978338 ]
+                        [ createComplex 0. 0.5347834505187596; createComplex -1.0948222010162802 0.; createComplex 0. 0.00007390465299844232; createComplex -0.0014277057856303319 0. ]
+                        [ createComplex 0.0015677909592953017 0.; createComplex 0. -0.0004410721015131045; createComplex -1.3618717897715529 0.; createComplex 0. 0.1079522775922998 ]
+                        [ createComplex 0. -0.0011390718740658097; createComplex 0.0015669677854363532 0.; createComplex 0. 0.32322207831362226; createComplex -0.7086603075529351 0. ]
+                    ]
+                    |> ComplexMatrix.create
+            }
+
+            {
+                description = "Two layer media with random optical properties, random incident light."
+                thinFilms =
+                    [
+                        {
+                            properties = 
+                                {
+                                    eps = 
+                                        [
+                                            [ createComplex 1.6229392617495504 0.007895343463263902; createComplex -0.012875560449085471 -0.0018573990732654619; createComplex 0.01140303906526267 -0.0007114143338732871 ]
+                                            [ createComplex -0.012875560449085471 -0.0018573990732654617; createComplex 2.2410029463497887 0.006256075978668986; createComplex 0.4998570259368046 -0.0010734607231248966 ]
+                                            [ createComplex 0.01140303906526267 -0.0007114143338732871; createComplex 0.49985702593680437 -0.0010734607231248966; createComplex 3.274581737837376 0.00790862579383793 ]
+                                        ]
+                                        |> ComplexMatrix3x3.create
+                                    mu = 
+                                        [
+                                            [ 1.0752234830197742; 0.0013550391998404174; -0.011020254808265406 ]
+                                            [ 0.0013550391998404174; 1.0814019591272515; -0.003564423558419294 ]
+                                            [ -0.011020254808265406; -0.0035644235584192524; 1.0379932189480254 ]
+                                        ]
+                                        |> ComplexMatrix3x3.fromRe
+                                    rho = 
+                                        [
+                                            [ 0.029844968141584625; -0.028763456042956777; 0.02967893641567288 ]
+                                            [ -0.028763456042956777; 0.08086531310521229; -0.008102599261662975 ]
+                                            [ 0.029678936415672878; -0.008102599261662971; -0.002768651477557617 ]
+                                        ]
+                                        |> ComplexMatrix3x3.fromIm
+                                }
+                            thickness = Thickness.nm 137.0
+                        }
+
+                        {
+                            properties = 
+                                {
+                                    eps = 
+                                        [
+                                            [ createComplex 4.093032870157705 0.008171658275933694; createComplex -0.43907349972552323 0.0007297634441781452; createComplex 0.16606340745107284 0.0009007821122230149 ]
+                                            [ createComplex -0.439073499725523 0.0007297634441781455; createComplex 3.470984197432937 0.005853023141142169; createComplex 0.12069703508523659 -0.0005644826514393578 ]
+                                            [ createComplex 0.1660634074510728 0.0009007821122230149; createComplex 0.12069703508523656 -0.0005644826514393578; createComplex 1.048122711751765 0.006030083363077285 ]
+                                        ]
+                                        |> ComplexMatrix3x3.create
+                                    mu = 
+                                        [
+                                            [ 1.0611136888365906; 0.02673834542393358; 0.013429064297689877 ]
+                                            [ 0.02673834542393355; 0.9263839240886705; -0.0012911236702604911 ]
+                                            [ 0.013429064297689877; -0.0012911236702604911; 0.9587673756718665 ]
+                                        ]
+                                        |> ComplexMatrix3x3.fromRe
+                                    rho = 
+                                        [
+                                            [ -0.054014619992991966; 0.006888036849500936; 0.04764456404037003 ]
+                                            [ 0.006888036849500938; 0.07760464614164607; 0.015470784063986442 ]
+                                            [ 0.04764456404037003; 0.015470784063986439; 0.03178409630852125 ]
+                                        ]
+                                        |> ComplexMatrix3x3.fromIm
+                                }
+                            thickness = Thickness.nm 108.0
+                        }
+                    ]
+                em = 
+                    {
+                        wavelength = WaveLength.nm 553.0
+                        refractionIndex = RefractionIndex.defaultValue
+                        incidenceAngle = Angle.degree 63.0 |> IncidenceAngle
+                        polarization = Angle.degree 60.0 |> Polarization
+                        ellipticity = -0.43910436091105565 |> Ellipticity
+                    }
+                    |> EmField.create
+                expected = 
+                    [
+                        [ createComplex -0.32872665940734547 0.07513745800952036; createComplex 0.07518575799759133 0.3235168796466171; createComplex -0.10129094865899069 0.07509724581660444; createComplex 0.11960879746762723 0.08993784648874378 ]
+                        [ createComplex 0.006931905968003277 -0.3335527410704436; createComplex -2.862833829114862 0.5368250659420413; createComplex 0.19181848462366236 0.20204680633965483; createComplex -0.2750678558475286 0.7339990447614074 ]
+                        [ createComplex -0.015189533275087201 0.053558696483902844; createComplex -0.15947009800218834 0.33387229005853564; createComplex -0.43950485477761825 -0.002596221135850757; createComplex 0.05922623686616131 -0.5094461692859155 ]
+                        [ createComplex -0.2801703300419268 0.2304947668577903; createComplex 0.24843941106131673 0.1616699012007487; createComplex 0.012608876313015929 -0.8918431079164595; createComplex -0.9559642856086528 -0.03029991123705772 ]
+                    ]
+                    |> ComplexMatrix.create
+            }
         ]
 
     member __.runTest (d : ThinFilmTestData) = 
@@ -208,3 +330,8 @@ type ThinFilmTests(output : ITestOutputHelper) =
     [<Fact>]
     member this.berremanMatrixTest3 () = this.runTest (data.[3])
 
+    [<Fact>]
+    member this.berremanMatrixTest4 () = this.runTest (data.[4])
+
+    [<Fact>]
+    member this.berremanMatrixTest5 () = this.runTest (data.[5])
