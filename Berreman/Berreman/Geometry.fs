@@ -132,7 +132,7 @@ module Geometry =
             a * b |> ComplexMatrix4x4
 
         member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
-            let (ComplexMatrix4x4 v) = this
+            let (ComplexMatrix4x4 v) = this * x
             v.matrixExp () |> ComplexMatrix4x4
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4

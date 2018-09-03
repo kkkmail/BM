@@ -3,22 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Constants.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Constants.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MaterialProperties.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MaterialProperties.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Media.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Media.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/ThinFilmTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/ThinFilmTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/Example_01_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_01_1.CSV" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Calc/Example_06_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_06_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanInit.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanInit.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MMM_02.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM_02.nb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MMM_03.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM_03.nb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/Example_06a_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_06a_1.CSV" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/FSharpHelpers.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FSharpHelpers.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,10 +85,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
+            <state relative-caret-position="408">
               <caret line="604" column="54" selection-start-line="604" selection-start-column="54" selection-end-line="604" selection-end-column="54" />
               <folding>
                 <element signature="e#1260#1719#0" />
@@ -121,6 +112,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="51" selection-start-line="51" selection-end-line="51" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BM_603_Example_06_1L_Thin_Film_Simple.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m">
           <provider selected="true" editor-type-id="text-editor">
@@ -130,20 +130,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BM_603_Example_06a_1L_Thin_Film.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m">
+      <file leaf-file-name="BM_603_Example_06r_1L_RandomThin_Film.m" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+            <state relative-caret-position="510">
+              <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BM_603_Example_01_Snell_Law.m" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <file leaf-file-name="BM_603_Example_06b_1L_Thin_Film_OptActivity.m" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+            <state relative-caret-position="-323">
+              <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -151,8 +151,8 @@
       <file leaf-file-name="FSharpHelpers.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+            <state relative-caret-position="320">
+              <caret line="47" column="58" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -208,7 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media_v2.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04a_Snell_Law_For_Anisotropic_Media_v2.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film_OptActivity.m" />
@@ -243,7 +242,6 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_03a_Snell_Law_For_Thick_Anisotropic_Plate.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanDirect.m" />
         <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanCommon.m" />
@@ -256,9 +254,11 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers" />
-        <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanInit.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" />
+        <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m" />
       </list>
     </option>
   </component>
@@ -437,7 +437,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22736418" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1602951" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -487,13 +487,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_07_1L_Thin_Film_On_Absorbing_Substrate_Plate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="41" selection-start-line="40" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_405_Inv_003_Solution.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5355" />
@@ -598,7 +591,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06c_1L_Thin_Film__BN.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m" />
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_05_Snell_Law_For_Thick_Anisotropic_Plate.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -677,25 +669,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" />
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="3" selection-start-column="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -706,23 +683,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="408">
           <caret line="604" column="54" selection-start-line="604" selection-start-column="54" selection-end-line="604" selection-end-column="54" />
           <folding>
             <element signature="e#1260#1719#0" />
@@ -742,6 +705,55 @@
             <element signature="e#18717#18861#0" />
             <element signature="e#20061#20322#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="51" selection-start-line="51" selection-end-line="51" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06b_1L_Thin_Film_OptActivity.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="47" column="58" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
         </state>
       </provider>
     </entry>

@@ -35,15 +35,15 @@ module Fields =
 
 
     type Polarization = 
-        | Polarization of float
-        static member create (p : double) =
-            p % (pi / 2.0) |> Polarization
+        | Polarization of Angle
+        static member create (Angle p) =
+            p % (pi / 2.0) |> Angle |> Polarization
 
         member this.crossed = 
-            let (Polarization p) = this
-            Polarization (p + (pi / 2.0))
+            let (Polarization (Angle p)) = this
+            Angle (p + (pi / 2.0)) |> Polarization
 
-        static member defaultValue = Polarization 0.0
+        static member defaultValue = Angle 0.0 |> Polarization
 
 
     type IncidenceAngle = 
@@ -60,7 +60,7 @@ module Fields =
             polarization : Polarization
             ellipticity : Ellipticity
         }
-        member this.getEH (Polarization beta) = 
+        member this.getEH (Polarization (Angle beta)) = 
             let (RefractionIndex n1) = this.refractionIndex
             let (IncidenceAngle (Angle fita)) = this.incidenceAngle
 

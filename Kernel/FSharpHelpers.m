@@ -33,3 +33,65 @@ toFSharpMatrix[m_?MatrixQ] :=
       s = StringReplace[ s <> "]\n", "\"" -> ""];
       Return[s];
     ];
+
+
+randomLightInfo[seed_?IntegerQ] :=
+    Module[{lmb, ft , bt, el, retVal},
+      SeedRandom[seed];
+      lmb = RandomInteger[{200, 800}];
+      ft = RandomInteger[{0, 85}];
+      bt = RandomInteger[{0, 85}];
+      el = RandomReal[{-1, 1}];
+
+      retVal = {lmb, ft, bt, el};
+
+      Print["randomLightInfo::retVal", retVal // InputForm];
+      Return[retVal];
+    ];
+
+
+randomMedia[seed_?IntegerQ, useIm_?BooleanQ, useMu_?BooleanQ, useRho_?BooleanQ] :=
+    Module[{epsReMin, epsReMax, epsImMin, epsImMax, muMin, muMax, rhoMin, rhoMax, rotationEpsRe, rotationEpsIm, rotationMu, rotationRho, eps, mu, rho, retVal},
+      SeedRandom[seed];
+
+      epsReMin = 1;
+      epsReMax = 5;
+
+      epsImMin = 0;
+      epsImMax = 10^-2;
+
+      muMin = 0.9;
+      muMax = 1.1;
+
+      rhoMin = -0.1;
+      rhoMax = 0.1;
+
+      rotationEpsRe = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+      rotationEpsIm = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+      rotationMu = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+      rotationRho = RotationNew[RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, RandomInteger[{0, 90}] Degree, opts];
+
+      eps = Transform[DiagonalMatrix[{RandomReal[{epsReMin, epsReMax}], RandomReal[{epsReMin, epsReMax}], RandomReal[{epsReMin, epsReMax}]}], rotationEpsRe];
+      If[useIm, eps = eps + I * Transform[DiagonalMatrix[{RandomReal[{epsImMin, epsImMax}], RandomReal[{epsImMin, epsImMax}], RandomReal[{epsImMin, epsImMax}]}], rotationEpsIm]];
+
+      mu =
+          If[useMu,
+            Transform[DiagonalMatrix[{RandomReal[{muMin, muMax}], RandomReal[{muMin, muMax}], RandomReal[{muMin, muMax}]}], rotationMu],
+            muMstandard
+          ];
+
+      rho =
+          If[useRho,
+            I * Transform[DiagonalMatrix[{RandomReal[{rhoMin, rhoMax}], RandomReal[{rhoMin, rhoMax}], RandomReal[{rhoMin, rhoMax}]}], rotationRho],
+            roMstandard
+          ];
+
+      Print["randomMedia::eps = ", eps // toFSharpMatrix];
+      Print["randomMedia::mu = ", mu // toFSharpMatrix];
+      Print["randomMedia::rho = ", rho // toFSharpMatrix];
+
+      retVal = {eps, mu, rho};
+      Print["randomMedia::retVal = ", retVal];
+
+      Return[retVal];
+    ];
