@@ -1,6 +1,5 @@
-In[212]:= (* Needs["VectorAnalysis`"]; *)
+In[19]:= (* Needs["VectorAnalysis`"]; *)
 Needs["VariationalMethods`"];
-crlf = 
 
 generateMatrix[name_, n_, m_]:=Table[ToString[name] <> "[" <>ToString[ii - 1] <> ", " <>ToString[jj - 1] <> "]",{ii, 1, n}, {jj, 1, m}];
 generateMatrix[name_, n_]:=generateMatrix[name, n, n];
@@ -150,29 +149,30 @@ Print["EGVec2Dn = ", EGVec2Dn // MatrixForm];
 ehIncd={"i.e.x", "i.e.y", "i.e.z", "i.h.x","i.h.y", "i.h.z"};
 
 EI={{ehIncd[[1]]},{ehIncd[[5]]},{ehIncd[[2]]},{-ehIncd[[4]]}};
-Print["EI = ", EI // MatrixForm];
+(* Print["EI = ", EI // MatrixForm]; *)
 
 Clear[ehi1,ehi2,ssss];
 ssss=(EGVec1Dn . {{ehi1},{ehi2}}-EI);
-Print["ssss = ", ssss // MatrixForm];
+(* Print["ssss = ", ssss // MatrixForm]; *)
 
 sss1=ssss[[1,1]];
 sss2=ssss[[3,1]];
 cf={{Coefficient[sss1,ehi1],Coefficient[sss1,ehi2]},{Coefficient[sss2,ehi1],Coefficient[sss2,ehi2]}};
 b=-{{sss1/.ehi1->0/.ehi2->0},{sss2/.ehi1->0/.ehi2->0}};
+(*
 Print["sss1 = ", sss1];
 Print["sss2 = ", sss2];
 Print["cf = ", cf // MatrixForm];
 Print["b = ", b // MatrixForm];
-
+*)
 cfm=Inverse[cf];
-Print["cfm = ", cfm // MatrixForm];
+(* Print["cfm = ", cfm // MatrixForm]; *)
 
 sol=Simplify[cfm.b];
-Print["sol = ", sol // MatrixForm];
+(* Print["sol = ", sol // MatrixForm]; *)
 
 ehisol={ehi1->sol[[1,1]],ehi2->sol[[2,1]]};
-Print["ehisol = ", ehisol // MatrixForm];
+(* Print["ehisol = ", ehisol // MatrixForm]; *)
 
 EHIcoeff=(Clear[ehi1,ehi2];({{ehi1},{ehi2}}/.ehisol));
 EHI=EGVec1Dn.EHIcoeff;
@@ -199,11 +199,13 @@ varLst={ehr1,ehr2,eht1,eht2};
 coeff[q_,s_]:=Coefficient[ssss[[q,1]],varLst[[s]]];
 free[q_]:=(-ssss[[q,1]]/.ehr1->0/.ehr2->0/.eht1->0/.eht2->0);
 coeffTbl=FullSimplify[Table[coeff[i,j],{i,4},{j,4}]];
-Print["varLst = ", varLst // MatrixForm];
-Print["coeffTbl = ", coeffTbl // MatrixForm];
+
+(* Print["varLst = ", varLst // MatrixForm]; *)
+(* Print["coeffTbl = ", coeffTbl // toFSharMatrix]; *)
 
 freeTbl=FullSimplify[Table[free[i],{i,4},{j,1}]];
 cfm=Inverse[coeffTbl];
+
 
 Print["cfm = ", cfm // toFSharMatrix];
 Print["freeTbl = ", freeTbl // toFSharMatrix];
@@ -211,8 +213,10 @@ Print["freeTbl = ", freeTbl // toFSharMatrix];
 
 freeTbl=generateMatrix["ft.", 4,1];
 cfm=generateMatrix["cfm.", 4];
+
 Print["cfm (subst) = ", cfm // toFSharMatrix];
 Print["freeTbl (subst) = ", freeTbl // toFSharMatrix];
+
 
 s1=ssss[[1,1]];
 s2=ssss[[2,1]];
@@ -220,8 +224,12 @@ s3=ssss[[3,1]];
 s4=ssss[[4,1]];
 
 sol=cfm.freeTbl;
-ehrtsol={ehr1->sol[[1,1]],ehr2->sol[[2,1]],eht1->sol[[3,1]],eht2->sol[[4,1]]};
 Print["sol = ", sol // MatrixForm];
+
+sol=generateMatrix["sol.", 4,1];
+Print["sol = ", sol // MatrixForm];
+
+ehrtsol={ehr1->sol[[1,1]],ehr2->sol[[2,1]],eht1->sol[[3,1]],eht2->sol[[4,1]]};
 Print["ehrtsol = ", ehrtsol // MatrixForm];
 
 
@@ -229,8 +237,8 @@ EHRcoeff=(Clear[ehr1,ehr2];({{ehr1},{ehr2}}/.ehrtsol));
 EHTcoeff=(Clear[eht1,eht2];({{eht1},{eht2}}/.ehrtsol));
 EHR=EGVec1Up.EHRcoeff;
 EHT=EGVec2Dn.EHTcoeff;
-Print["EHR = ", EHR // MatrixForm];
-Print["EHT = ", EHT // MatrixForm];
+Print["EHR = ", EHR // toFSharMatrix];
+Print["EHT = ", EHT // toFSharMatrix];
 
 Abort[];
 
@@ -289,59 +297,13 @@ Print["============================="];
 
 SolutionNewBase[];
 
-Out[227]//MatrixForm= (o.eps.[0, 0]	o.eps.[0, 1]	o.eps.[0, 2]
+Out[34]//MatrixForm= (o.eps.[0, 0]	o.eps.[0, 1]	o.eps.[0, 2]
 o.eps.[1, 0]	o.eps.[1, 1]	o.eps.[1, 2]
 o.eps.[2, 0]	o.eps.[2, 1]	o.eps.[2, 2]
 
 )
-During evaluation of In[212]:= =============================
-During evaluation of In[212]:= EI = (i.e.x
-i.h.y
-i.e.y
--i.h.x
-
-)
-During evaluation of In[212]:= ssss = (-i.e.x+b1.down.e0.[0] ehi1$13060+b1.down.e1.[0] ehi2$13060
--i.h.y+b1.down.e0.[1] ehi1$13060+b1.down.e1.[1] ehi2$13060
--i.e.y+b1.down.e0.[2] ehi1$13060+b1.down.e1.[2] ehi2$13060
-i.h.x+b1.down.e0.[3] ehi1$13060+b1.down.e1.[3] ehi2$13060
-
-)
-During evaluation of In[212]:= sss1 = -i.e.x+b1.down.e0.[0] ehi1$13060+b1.down.e1.[0] ehi2$13060
-During evaluation of In[212]:= sss2 = -i.e.y+b1.down.e0.[2] ehi1$13060+b1.down.e1.[2] ehi2$13060
-During evaluation of In[212]:= cf = (b1.down.e0.[0]	b1.down.e1.[0]
-b1.down.e0.[2]	b1.down.e1.[2]
-
-)
-During evaluation of In[212]:= b = (i.e.x
-i.e.y
-
-)
-During evaluation of In[212]:= cfm = ((b1.down.e1.[2])/(-b1.down.e0.[2] b1.down.e1.[0]+b1.down.e0.[0] b1.down.e1.[2])	-((b1.down.e1.[0])/(-b1.down.e0.[2] b1.down.e1.[0]+b1.down.e0.[0] b1.down.e1.[2]))
--((b1.down.e0.[2])/(-b1.down.e0.[2] b1.down.e1.[0]+b1.down.e0.[0] b1.down.e1.[2]))	(b1.down.e0.[0])/(-b1.down.e0.[2] b1.down.e1.[0]+b1.down.e0.[0] b1.down.e1.[2])
-
-)
-During evaluation of In[212]:= sol = ((b1.down.e1.[2] i.e.x-b1.down.e1.[0] i.e.y)/(-b1.down.e0.[2] b1.down.e1.[0]+b1.down.e0.[0] b1.down.e1.[2])
-(b1.down.e0.[2] i.e.x-b1.down.e0.[0] i.e.y)/(b1.down.e0.[2] b1.down.e1.[0]-b1.down.e0.[0] b1.down.e1.[2])
-
-)
-During evaluation of In[212]:= ehisol = (ehi1$13060->(b1.down.e1.[2] i.e.x-b1.down.e1.[0] i.e.y)/(-b1.down.e0.[2] b1.down.e1.[0]+b1.down.e0.[0] b1.down.e1.[2])
-ehi2$13060->(b1.down.e0.[2] i.e.x-b1.down.e0.[0] i.e.y)/(b1.down.e0.[2] b1.down.e1.[0]-b1.down.e0.[0] b1.down.e1.[2])
-
-)
-During evaluation of In[212]:= varLst = (ehr1$13060
-ehr2$13060
-eht1$13060
-eht2$13060
-
-)
-During evaluation of In[212]:= coeffTbl = (b1.up.e0.[0] p.[0, 0]+b1.up.e0.[1] p.[0, 1]+b1.up.e0.[2] p.[0, 2]+b1.up.e0.[3] p.[0, 3]	b1.up.e1.[0] p.[0, 0]+b1.up.e1.[1] p.[0, 1]+b1.up.e1.[2] p.[0, 2]+b1.up.e1.[3] p.[0, 3]	-b2.up.e0.[0]	-b2.up.e1.[0]
-b1.up.e0.[0] p.[1, 0]+b1.up.e0.[1] p.[1, 1]+b1.up.e0.[2] p.[1, 2]+b1.up.e0.[3] p.[1, 3]	b1.up.e1.[0] p.[1, 0]+b1.up.e1.[1] p.[1, 1]+b1.up.e1.[2] p.[1, 2]+b1.up.e1.[3] p.[1, 3]	-b2.up.e0.[1]	-b2.up.e1.[1]
-b1.up.e0.[0] p.[2, 0]+b1.up.e0.[1] p.[2, 1]+b1.up.e0.[2] p.[2, 2]+b1.up.e0.[3] p.[2, 3]	b1.up.e1.[0] p.[2, 0]+b1.up.e1.[1] p.[2, 1]+b1.up.e1.[2] p.[2, 2]+b1.up.e1.[3] p.[2, 3]	-b2.up.e0.[2]	-b2.up.e1.[2]
-b1.up.e0.[0] p.[3, 0]+b1.up.e0.[1] p.[3, 1]+b1.up.e0.[2] p.[3, 2]+b1.up.e0.[3] p.[3, 3]	b1.up.e1.[0] p.[3, 0]+b1.up.e1.[1] p.[3, 1]+b1.up.e1.[2] p.[3, 2]+b1.up.e1.[3] p.[3, 3]	-b2.up.e0.[3]	-b2.up.e1.[3]
-
-)
-During evaluation of In[212]:= cfm = 
+During evaluation of In[19]:= =============================
+During evaluation of In[19]:= cfm = 
 [
     [
         (-(b1.up.e1.[0]*b2.up.e0.[3]*b2.up.e1.[2]*p.[1, 0]) + b1.up.e1.[0]*b2.up.e0.[2]*b2.up.e1.[3]*p.[1, 0] - b1.up.e1.[1]*b2.up.e0.[3]*b2.up.e1.[2]*p.[1, 1] + b1.up.e1.[1]*b2.up.e0.[2]*b2.up.e1.[3]*p.[1, 1] - b1.up.e1.[2]*b2.up.e0.[3]*b2.up.e1.[2]*p.[1, 2] + b1.up.e1.[2]*b2.up.e0.[2]*b2.up.e1.[3]*p.[1, 2] - b1.up.e1.[3]*b2.up.e0.[3]*b2.up.e1.[2]*p.[1, 3] + b1.up.e1.[3]*b2.up.e0.[2]*b2.up.e1.[3]*p.[1, 3] + b1.up.e1.[0]*b2.up.e0.[3]*b2.up.e1.[1]*p.[2, 0] - b1.up.e1.[0]*b2.up.e0.[1]*b2.up.e1.[3]*p.[2, 0] + b1.up.e1.[1]*b2.up.e0.[3]*b2.up.e1.[1]*p.[2, 1] - b1.up.e1.[1]*b2.up.e0.[1]*b2.up.e1.[3]*p.[2, 1] + b1.up.e1.[2]*b2.up.e0.[3]*b2.up.e1.[1]*p.[2, 2] - b1.up.e1.[2]*b2.up.e0.[1]*b2.up.e1.[3]*p.[2, 2] + b1.up.e1.[3]*b2.up.e0.[3]*b2.up.e1.[1]*p.[2, 3] - b1.up.e1.[3]*b2.up.e0.[1]*b2.up.e1.[3]*p.[2, 3] - b1.up.e1.[0]*b2.up.e0.[2]*b2.up.e1.[1]*p.[3, 0] + b1.up.e1.[0]*b2.up.e0.[1]*b2.up.e1.[2]*p.[3, 0] - b1.up.e1.[1]*b2.up.e0.[2]*b2.up.e1.[1]*p.[3, 1] + b1.up.e1.[1]*b2.up.e0.[1]*b2.up.e1.[2]*p.[3, 1] - b1.up.e1.[2]*b2.up.e0.[2]*b2.up.e1.[1]*p.[3, 2] + b1.up.e1.[2]*b2.up.e0.[1]*b2.up.e1.[2]*p.[3, 2] - b1.up.e1.[3]*b2.up.e0.[2]*b2.up.e1.[1]*p.[3, 3] + b1.up.e1.[3]*b2.up.e0.[1]*b2.up.e1.[2]*p.[3, 3])/(-(b2.up.e1.[3]*(-(b2.up.e0.[2]*(-((b1.up.e1.[0]*p.[0, 0] + b1.up.e1.[1]*p.[0, 1] + b1.up.e1.[2]*p.[0, 2] + b1.up.e1.[3]*p.[0, 3])*(b1.up.e0.[0]*p.[1, 0] + b1.up.e0.[1]*p.[1, 1] + b1.up.e0.[2]*p.[1, 2] + b1.up.e0.[3]*p.[1, 3])) + (b1.up.e0.[0]*p.[0, 0] + b1.up.e0.[1]*p.[0, 1] + b1.up.e0.[2]*p.[0, 2] + b1.up.e0.[3]*p.[0, 3])*(b1.up.e1.[0]*p.[1, 0] + b1.up.e1.[1]*p.[1, 1] + b1.up.e1.[2]*p.[1, 2] + b1.up.e1.[3]*p.[1, 3]))) + (-(b1.up.e1.[0]*b2.up.e0.[1]*p.[0, 0]) - b1.up.e1.[1]*b2.up.e0.[1]*p.[0, 1] - b1.up.e1.[2]*b2.up.e0.[1]*p.[0, 2] - b1.up.e1.[3]*b2.up.e0.[1]*p.[0, 3] + b1.up.e1.[0]*b2.up.e0.[0]*p.[1, 0] + b1.up.e1.[1]*b2.up.e0.[0]*p.[1, 1] + b1.up.e1.[2]*b2.up.e0.[0]*p.[1, 2] + b1.up.e1.[3]*b2.up.e0.[0]*p.[1, 3])*(b1.up.e0.[0]*p.[2, 0] + b1.up.e0.[1]*p.[2, 1] + b1.up.e0.[2]*p.[2, 2] + b1.up.e0.[3]*p.[2, 3]) - (-(b1.up.e0.[0]*b2.up.e0.[1]*p.[0, 0]) - b1.up.e0.[1]*b2.up.e0.[1]*p.[0, 1] - b1.up.e0.[2]*b2.up.e0.[1]*p.[0, 2] - b1.up.e0.[3]*b2.up.e0.[1]*p.[0, 3] + b1.up.e0.[0]*b2.up.e0.[0]*p.[1, 0] + b1.up.e0.[1]*b2.up.e0.[0]*p.[1, 1] + b1.up.e0.[2]*b2.up.e0.[0]*p.[1, 2] + b1.up.e0.[3]*b2.up.e0.[0]*p.[1, 3])*(b1.up.e1.[0]*p.[2, 0] + b1.up.e1.[1]*p.[2, 1] + b1.up.e1.[2]*p.[2, 2] + b1.up.e1.[3]*p.[2, 3]))) + b2.up.e0.[3]*(-(b2.up.e1.[2]*(-((b1.up.e1.[0]*p.[0, 0] + b1.up.e1.[1]*p.[0, 1] + b1.up.e1.[2]*p.[0, 2] + b1.up.e1.[3]*p.[0, 3])*(b1.up.e0.[0]*p.[1, 0] + b1.up.e0.[1]*p.[1, 1] + b1.up.e0.[2]*p.[1, 2] + b1.up.e0.[3]*p.[1, 3])) + (b1.up.e0.[0]*p.[0, 0] + b1.up.e0.[1]*p.[0, 1] + b1.up.e0.[2]*p.[0, 2] + b1.up.e0.[3]*p.[0, 3])*(b1.up.e1.[0]*p.[1, 0] + b1.up.e1.[1]*p.[1, 1] + b1.up.e1.[2]*p.[1, 2] + b1.up.e1.[3]*p.[1, 3]))) + (-(b1.up.e1.[0]*b2.up.e1.[1]*p.[0, 0]) - b1.up.e1.[1]*b2.up.e1.[1]*p.[0, 1] - b1.up.e1.[2]*b2.up.e1.[1]*p.[0, 2] - b1.up.e1.[3]*b2.up.e1.[1]*p.[0, 3] + b1.up.e1.[0]*b2.up.e1.[0]*p.[1, 0] + b1.up.e1.[1]*b2.up.e1.[0]*p.[1, 1] + b1.up.e1.[2]*b2.up.e1.[0]*p.[1, 2] + b1.up.e1.[3]*b2.up.e1.[0]*p.[1, 3])*(b1.up.e0.[0]*p.[2, 0] + b1.up.e0.[1]*p.[2, 1] + b1.up.e0.[2]*p.[2, 2] + b1.up.e0.[3]*p.[2, 3]) - (-(b1.up.e0.[0]*b2.up.e1.[1]*p.[0, 0]) - b1.up.e0.[1]*b2.up.e1.[1]*p.[0, 1] - b1.up.e0.[2]*b2.up.e1.[1]*p.[0, 2] - b1.up.e0.[3]*b2.up.e1.[1]*p.[0, 3] + b1.up.e0.[0]*b2.up.e1.[0]*p.[1, 0] + b1.up.e0.[1]*b2.up.e1.[0]*p.[1, 1] + b1.up.e0.[2]*b2.up.e1.[0]*p.[1, 2] + b1.up.e0.[3]*b2.up.e1.[0]*p.[1, 3])*(b1.up.e1.[0]*p.[2, 0] + b1.up.e1.[1]*p.[2, 1] + b1.up.e1.[2]*p.[2, 2] + b1.up.e1.[3]*p.[2, 3])) - (-(b1.up.e1.[0]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 0]) + b1.up.e1.[0]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 0] - b1.up.e1.[1]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 1] + b1.up.e1.[1]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 1] - b1.up.e1.[2]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 2] + b1.up.e1.[2]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 2] - b1.up.e1.[3]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 3] + b1.up.e1.[3]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 3] + b1.up.e1.[0]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 0] - b1.up.e1.[0]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 0] + b1.up.e1.[1]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 1] - b1.up.e1.[1]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 1] + b1.up.e1.[2]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 2] - b1.up.e1.[2]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 2] + b1.up.e1.[3]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 3] - b1.up.e1.[3]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 3] - b1.up.e1.[0]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 0] + b1.up.e1.[0]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 0] - b1.up.e1.[1]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 1] + b1.up.e1.[1]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 1] - b1.up.e1.[2]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 2] + b1.up.e1.[2]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 2] - b1.up.e1.[3]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 3] + b1.up.e1.[3]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 3])*(b1.up.e0.[0]*p.[3, 0] + b1.up.e0.[1]*p.[3, 1] + b1.up.e0.[2]*p.[3, 2] + b1.up.e0.[3]*p.[3, 3]) + (-(b1.up.e0.[0]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 0]) + b1.up.e0.[0]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 0] - b1.up.e0.[1]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 1] + b1.up.e0.[1]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 1] - b1.up.e0.[2]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 2] + b1.up.e0.[2]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 2] - b1.up.e0.[3]*b2.up.e0.[2]*b2.up.e1.[1]*p.[0, 3] + b1.up.e0.[3]*b2.up.e0.[1]*b2.up.e1.[2]*p.[0, 3] + b1.up.e0.[0]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 0] - b1.up.e0.[0]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 0] + b1.up.e0.[1]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 1] - b1.up.e0.[1]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 1] + b1.up.e0.[2]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 2] - b1.up.e0.[2]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 2] + b1.up.e0.[3]*b2.up.e0.[2]*b2.up.e1.[0]*p.[1, 3] - b1.up.e0.[3]*b2.up.e0.[0]*b2.up.e1.[2]*p.[1, 3] - b1.up.e0.[0]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 0] + b1.up.e0.[0]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 0] - b1.up.e0.[1]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 1] + b1.up.e0.[1]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 1] - b1.up.e0.[2]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 2] + b1.up.e0.[2]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 2] - b1.up.e0.[3]*b2.up.e0.[1]*b2.up.e1.[0]*p.[2, 3] + b1.up.e0.[3]*b2.up.e0.[0]*b2.up.e1.[1]*p.[2, 3])*(b1.up.e1.[0]*p.[3, 0] + b1.up.e1.[1]*p.[3, 1] + b1.up.e1.[2]*p.[3, 2] + b1.up.e1.[3]*p.[3, 3]))
@@ -369,7 +331,7 @@ During evaluation of In[212]:= cfm =
     ]
 ]
 
-During evaluation of In[212]:= freeTbl = 
+During evaluation of In[19]:= freeTbl = 
 [
     ((b1.down.e1.[2]*i.e.x - b1.down.e1.[0]*i.e.y)*(b1.down.e0.[1]*p.[0, 1] + b1.down.e0.[3]*p.[0, 3]) - b1.down.e0.[2]*(b1.down.e1.[0]*i.e.x*p.[0, 0] + b1.down.e1.[1]*i.e.x*p.[0, 1] + b1.down.e1.[0]*i.e.y*p.[0, 2] + b1.down.e1.[3]*i.e.x*p.[0, 3]) + b1.down.e0.[0]*(b1.down.e1.[2]*i.e.x*p.[0, 0] + b1.down.e1.[1]*i.e.y*p.[0, 1] + b1.down.e1.[2]*i.e.y*p.[0, 2] + b1.down.e1.[3]*i.e.y*p.[0, 3]))/(b1.down.e0.[2]*b1.down.e1.[0] - b1.down.e0.[0]*b1.down.e1.[2])
     ((b1.down.e1.[2]*i.e.x - b1.down.e1.[0]*i.e.y)*(b1.down.e0.[1]*p.[1, 1] + b1.down.e0.[3]*p.[1, 3]) - b1.down.e0.[2]*(b1.down.e1.[0]*i.e.x*p.[1, 0] + b1.down.e1.[1]*i.e.x*p.[1, 1] + b1.down.e1.[0]*i.e.y*p.[1, 2] + b1.down.e1.[3]*i.e.x*p.[1, 3]) + b1.down.e0.[0]*(b1.down.e1.[2]*i.e.x*p.[1, 0] + b1.down.e1.[1]*i.e.y*p.[1, 1] + b1.down.e1.[2]*i.e.y*p.[1, 2] + b1.down.e1.[3]*i.e.y*p.[1, 3]))/(b1.down.e0.[2]*b1.down.e1.[0] - b1.down.e0.[0]*b1.down.e1.[2])
@@ -377,7 +339,7 @@ During evaluation of In[212]:= freeTbl =
     ((b1.down.e1.[2]*i.e.x - b1.down.e1.[0]*i.e.y)*(b1.down.e0.[1]*p.[3, 1] + b1.down.e0.[3]*p.[3, 3]) - b1.down.e0.[2]*(b1.down.e1.[0]*i.e.x*p.[3, 0] + b1.down.e1.[1]*i.e.x*p.[3, 1] + b1.down.e1.[0]*i.e.y*p.[3, 2] + b1.down.e1.[3]*i.e.x*p.[3, 3]) + b1.down.e0.[0]*(b1.down.e1.[2]*i.e.x*p.[3, 0] + b1.down.e1.[1]*i.e.y*p.[3, 1] + b1.down.e1.[2]*i.e.y*p.[3, 2] + b1.down.e1.[3]*i.e.y*p.[3, 3]))/(b1.down.e0.[2]*b1.down.e1.[0] - b1.down.e0.[0]*b1.down.e1.[2])
 ]
 
-During evaluation of In[212]:= cfm (subst) = 
+During evaluation of In[19]:= cfm (subst) = 
 [
     [
         cfm.[0, 0]
@@ -405,7 +367,7 @@ During evaluation of In[212]:= cfm (subst) =
     ]
 ]
 
-During evaluation of In[212]:= freeTbl (subst) = 
+During evaluation of In[19]:= freeTbl (subst) = 
 [
     ft.[0, 0]
     ft.[1, 0]
@@ -413,28 +375,38 @@ During evaluation of In[212]:= freeTbl (subst) =
     ft.[3, 0]
 ]
 
-During evaluation of In[212]:= sol = (cfm.[0, 0] ft.[0, 0]+cfm.[0, 1] ft.[1, 0]+cfm.[0, 2] ft.[2, 0]+cfm.[0, 3] ft.[3, 0]
+During evaluation of In[19]:= sol = (cfm.[0, 0] ft.[0, 0]+cfm.[0, 1] ft.[1, 0]+cfm.[0, 2] ft.[2, 0]+cfm.[0, 3] ft.[3, 0]
 cfm.[1, 0] ft.[0, 0]+cfm.[1, 1] ft.[1, 0]+cfm.[1, 2] ft.[2, 0]+cfm.[1, 3] ft.[3, 0]
 cfm.[2, 0] ft.[0, 0]+cfm.[2, 1] ft.[1, 0]+cfm.[2, 2] ft.[2, 0]+cfm.[2, 3] ft.[3, 0]
 cfm.[3, 0] ft.[0, 0]+cfm.[3, 1] ft.[1, 0]+cfm.[3, 2] ft.[2, 0]+cfm.[3, 3] ft.[3, 0]
 
 )
-During evaluation of In[212]:= ehrtsol = (ehr1$13060->cfm.[0, 0] ft.[0, 0]+cfm.[0, 1] ft.[1, 0]+cfm.[0, 2] ft.[2, 0]+cfm.[0, 3] ft.[3, 0]
-ehr2$13060->cfm.[1, 0] ft.[0, 0]+cfm.[1, 1] ft.[1, 0]+cfm.[1, 2] ft.[2, 0]+cfm.[1, 3] ft.[3, 0]
-eht1$13060->cfm.[2, 0] ft.[0, 0]+cfm.[2, 1] ft.[1, 0]+cfm.[2, 2] ft.[2, 0]+cfm.[2, 3] ft.[3, 0]
-eht2$13060->cfm.[3, 0] ft.[0, 0]+cfm.[3, 1] ft.[1, 0]+cfm.[3, 2] ft.[2, 0]+cfm.[3, 3] ft.[3, 0]
+During evaluation of In[19]:= sol = (sol.[0, 0]
+sol.[1, 0]
+sol.[2, 0]
+sol.[3, 0]
 
 )
-During evaluation of In[212]:= EHR = (b1.up.e0.[0] (cfm.[0, 0] ft.[0, 0]+cfm.[0, 1] ft.[1, 0]+cfm.[0, 2] ft.[2, 0]+cfm.[0, 3] ft.[3, 0])+b1.up.e1.[0] (cfm.[1, 0] ft.[0, 0]+cfm.[1, 1] ft.[1, 0]+cfm.[1, 2] ft.[2, 0]+cfm.[1, 3] ft.[3, 0])
-b1.up.e0.[1] (cfm.[0, 0] ft.[0, 0]+cfm.[0, 1] ft.[1, 0]+cfm.[0, 2] ft.[2, 0]+cfm.[0, 3] ft.[3, 0])+b1.up.e1.[1] (cfm.[1, 0] ft.[0, 0]+cfm.[1, 1] ft.[1, 0]+cfm.[1, 2] ft.[2, 0]+cfm.[1, 3] ft.[3, 0])
-b1.up.e0.[2] (cfm.[0, 0] ft.[0, 0]+cfm.[0, 1] ft.[1, 0]+cfm.[0, 2] ft.[2, 0]+cfm.[0, 3] ft.[3, 0])+b1.up.e1.[2] (cfm.[1, 0] ft.[0, 0]+cfm.[1, 1] ft.[1, 0]+cfm.[1, 2] ft.[2, 0]+cfm.[1, 3] ft.[3, 0])
-b1.up.e0.[3] (cfm.[0, 0] ft.[0, 0]+cfm.[0, 1] ft.[1, 0]+cfm.[0, 2] ft.[2, 0]+cfm.[0, 3] ft.[3, 0])+b1.up.e1.[3] (cfm.[1, 0] ft.[0, 0]+cfm.[1, 1] ft.[1, 0]+cfm.[1, 2] ft.[2, 0]+cfm.[1, 3] ft.[3, 0])
+During evaluation of In[19]:= ehrtsol = (ehr1$4567->sol.[0, 0]
+ehr2$4567->sol.[1, 0]
+eht1$4567->sol.[2, 0]
+eht2$4567->sol.[3, 0]
 
 )
-During evaluation of In[212]:= EHT = (b2.up.e0.[0] (cfm.[2, 0] ft.[0, 0]+cfm.[2, 1] ft.[1, 0]+cfm.[2, 2] ft.[2, 0]+cfm.[2, 3] ft.[3, 0])+b2.up.e1.[0] (cfm.[3, 0] ft.[0, 0]+cfm.[3, 1] ft.[1, 0]+cfm.[3, 2] ft.[2, 0]+cfm.[3, 3] ft.[3, 0])
-b2.up.e0.[1] (cfm.[2, 0] ft.[0, 0]+cfm.[2, 1] ft.[1, 0]+cfm.[2, 2] ft.[2, 0]+cfm.[2, 3] ft.[3, 0])+b2.up.e1.[1] (cfm.[3, 0] ft.[0, 0]+cfm.[3, 1] ft.[1, 0]+cfm.[3, 2] ft.[2, 0]+cfm.[3, 3] ft.[3, 0])
-b2.up.e0.[2] (cfm.[2, 0] ft.[0, 0]+cfm.[2, 1] ft.[1, 0]+cfm.[2, 2] ft.[2, 0]+cfm.[2, 3] ft.[3, 0])+b2.up.e1.[2] (cfm.[3, 0] ft.[0, 0]+cfm.[3, 1] ft.[1, 0]+cfm.[3, 2] ft.[2, 0]+cfm.[3, 3] ft.[3, 0])
-b2.up.e0.[3] (cfm.[2, 0] ft.[0, 0]+cfm.[2, 1] ft.[1, 0]+cfm.[2, 2] ft.[2, 0]+cfm.[2, 3] ft.[3, 0])+b2.up.e1.[3] (cfm.[3, 0] ft.[0, 0]+cfm.[3, 1] ft.[1, 0]+cfm.[3, 2] ft.[2, 0]+cfm.[3, 3] ft.[3, 0])
+During evaluation of In[19]:= EHR = 
+[
+    b1.up.e0.[0]*sol.[0, 0] + b1.up.e1.[0]*sol.[1, 0]
+    b1.up.e0.[1]*sol.[0, 0] + b1.up.e1.[1]*sol.[1, 0]
+    b1.up.e0.[2]*sol.[0, 0] + b1.up.e1.[2]*sol.[1, 0]
+    b1.up.e0.[3]*sol.[0, 0] + b1.up.e1.[3]*sol.[1, 0]
+]
 
-)
-Out[229]= $Aborted
+During evaluation of In[19]:= EHT = 
+[
+    b2.up.e0.[0]*sol.[2, 0] + b2.up.e1.[0]*sol.[3, 0]
+    b2.up.e0.[1]*sol.[2, 0] + b2.up.e1.[1]*sol.[3, 0]
+    b2.up.e0.[2]*sol.[2, 0] + b2.up.e1.[2]*sol.[3, 0]
+    b2.up.e0.[3]*sol.[2, 0] + b2.up.e1.[3]*sol.[3, 0]
+]
+
+Out[36]= $Aborted

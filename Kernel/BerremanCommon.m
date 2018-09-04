@@ -925,6 +925,13 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       EHRv = EGVec1Up.{{ehr1}, {ehr2}};
       EHTv = EGVec2Dn.{{eht1}, {eht2}};
       ssss = (PPPv.(EHIv + EHRv) - EHTv);
+
+      Print["EHIv = ", EHIv // MatrixForm];
+      Print["EHRv = ", EHRv // MatrixForm];
+      Print["EHTv = ", EHTv // MatrixForm];
+
+      Print["EGVec2Dn = ", EGVec2Dn // MatrixForm];
+      Print["ssss = ", ssss // MatrixForm];
       (* ============================================== *)
 
       (*

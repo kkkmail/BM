@@ -14,7 +14,9 @@ InitializeBM[PathList, useParallelTbl];
 opts =
     {
       BDPlotFigures -> False,
-      UseEulerAngles -> False
+      UseEulerAngles -> False,
+      PrintCommonDebugInfo -> True,
+      PrintCommonDebugInfoLevel -> PCDILEVELALL
     };
 (* ============================================== *)
 (*

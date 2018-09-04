@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/BerremanMatrix.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/SortEvd_02.fsx" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/SortEvd_02.fsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanMatrixTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/EigenVectorTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/EigenVectorTests.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MMM.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM.nb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MMM_02.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM_02.nb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MMM_02.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MMM_02.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -86,8 +87,8 @@
       <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="660" column="172" selection-start-line="660" selection-start-column="172" selection-end-line="660" selection-end-column="172" />
+            <state relative-caret-position="-443">
+              <caret line="932" column="51" selection-start-line="932" selection-start-column="51" selection-end-line="932" selection-end-column="51" />
               <folding>
                 <element signature="e#1260#1719#0" />
                 <element signature="e#2310#2803#0" />
@@ -113,9 +114,10 @@
       <file leaf-file-name="FSharpHelpers.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="17" column="14" selection-start-line="17" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="408">
+              <caret line="93" column="31" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
               <folding>
+                <element signature="e#685#2514#0" />
                 <element signature="e#2557#2881#0" />
                 <element signature="e#2972#4897#0" />
               </folding>
@@ -126,8 +128,8 @@
       <file leaf-file-name="BM_603_Example_01_Snell_Law.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+            <state relative-caret-position="272">
+              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -249,8 +251,8 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08a_2L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
       </list>
     </option>
@@ -435,7 +437,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12944333" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12944333" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -724,28 +726,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="17" column="14" selection-start-line="17" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="408">
+          <caret line="93" column="31" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
           <folding>
+            <element signature="e#685#2514#0" />
             <element signature="e#2557#2881#0" />
             <element signature="e#2972#4897#0" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="660" column="172" selection-start-line="660" selection-start-column="172" selection-end-line="660" selection-end-column="172" />
+        <state relative-caret-position="-443">
+          <caret line="932" column="51" selection-start-line="932" selection-start-column="51" selection-end-line="932" selection-end-column="51" />
           <folding>
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />
