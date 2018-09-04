@@ -14,6 +14,27 @@ module BerremanMatrix =
     open MaterialProperties
     open Media
 
+
+    let normalize (v : #seq<Complex>) = 
+        printfn "v = %A" (v |> List.ofSeq)
+        let norm = v |> Seq.fold (fun acc r -> acc + r.Real * r.Real + r.Imaginary * r.Imaginary) 0.0 |> sqrt |> cplx
+        let retVal = v |> Seq.map (fun e -> e / norm)
+        printfn "retVal = %A" (retVal |> List.ofSeq)
+        retVal
+
+
+    let normalizeMatrix (m : Matrix<Complex>) = 
+        let len = m.RowCount
+            
+        [| for i in 0..(len-1) -> 
+            [| for j in 0..(len-1) -> m.[j, i] |]
+            |> normalize
+            |> Array.ofSeq
+        |]
+        |> matrix
+
+
+
     // [ Ex, Hy, Ey, -Hx ]
     type BerremanField =
         {
@@ -139,13 +160,6 @@ module BerremanMatrix =
         member this.eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita) : FullEigenBasis = 
             let (ComplexMatrix4x4 (ComplexMatrix m)) = this
             let evd = m.Evd()
-
-            let normalize (v : #seq<Complex>) = 
-                printfn "v = %A" (v |> List.ofSeq)
-                let norm = v |> Seq.fold (fun acc r -> acc + r.Real * r.Real + r.Imaginary * r.Imaginary) 0.0 |> sqrt |> cplx
-                let retVal = v |> Seq.map (fun e -> e / norm)
-                printfn "retVal = %A" (retVal |> List.ofSeq)
-                retVal
 
             let toBerremanField eh= 
                 {

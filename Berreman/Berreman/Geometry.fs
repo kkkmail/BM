@@ -97,6 +97,12 @@ module Geometry =
                 let (ComplexVector4 v) = this
                 v.[i]
 
+        static member (*) (a : Complex, ComplexVector4 b) : ComplexVector4 = 
+            a * b |> ComplexVector4
+
+        static member (*) (ComplexVector4 a, b : Complex) : ComplexVector4 = 
+            a * b |> ComplexVector4
+
         static member create a = a |> ComplexVector.create |> ComplexVector4
         static member fromRe a = a |> ComplexVector.fromRe |> ComplexVector4
         static member fromIm a = a |> ComplexVector.fromIm |> ComplexVector4

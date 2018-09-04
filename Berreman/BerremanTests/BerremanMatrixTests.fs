@@ -120,8 +120,3 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
     [<Fact>]
     member this.berremanMatrixTest2 () = this.runTest (data.[2])
 
-    //[<Fact>]
-    //member this.berremanMatrixTest3 () = this.runTest (data.[3])
-
-    //[<Fact>]
-    //member this.berremanMatrixTest4 () = this.runTest (data.[4])

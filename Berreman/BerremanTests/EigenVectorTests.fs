@@ -20,45 +20,47 @@ type EigenVectorTestData =
         description : string
         opticalProperties : OpticalProperties
         n1SinFita : N1SinFita
-        expected : FullEigenBasis
+        values : ComplexVector4
+        vectors : ComplexMatrix4x4
     }
 
 type EigenVecgtorTests(output : ITestOutputHelper) =
     let data = 
         [
             {
-                description = "Snell's law for standard transparent glass, 7 degrees incidence angle."
-                opticalProperties = 1.52 |> RefractionIndex.create |> OpticalProperties.defaultValue
+                description = "Vacuum, 7 degrees incidence angle."
+                opticalProperties = OpticalProperties.vacuum
                 n1SinFita = N1SinFita.create 7.0 (Angle.degree 0.0 |> IncidenceAngle)
-                expected = 
-                    {
-                        up = 
-                            {
-                                v0 = failwith "" // : Complex
-                                v1 = failwith "" // Complex
-                                e0 =
-                                    [
-                                    ]
-                                    |> ComplexVector4.create
-                                e1 =
-                                    [
-                                    ]
-                                    |> ComplexVector4.create
-                            }
-                        down =  
-                            {
-                                v0 = failwith "" // : Complex
-                                v1 = failwith "" // Complex
-                                e0 =
-                                    [
-                                    ]
-                                    |> ComplexVector4.create
-                                e1 =
-                                    [
-                                    ]
-                                    |> ComplexVector4.create
-                            }
-                    }
+
+                values = 
+                    [ 0.9925461516413222; 0.9925461516413222; -0.992546151641322; -0.9925461516413219 ]
+                    |> ComplexVector4.fromRe
+                vectors = 
+                    [
+                        [ 0.7044566603032238; 0.7097470068654241; 0.; 0. ]
+                        [ 0.; 0.; 0.7097470068654242; 0.7044566603032237 ]
+                        [ 0.; 0.; 0.7097470068654242; -0.7044566603032238 ]
+                        [ -0.704456660303224; 0.7097470068654241; 0.; 0. ]
+                    ]
+                    |> ComplexMatrix4x4.fromRe
+            }
+
+            {
+                description = "Standard transparent glass, 7 degrees incidence angle."
+                opticalProperties = OpticalProperties.transparentGlass
+                n1SinFita = N1SinFita.create 7.0 (Angle.degree 0.0 |> IncidenceAngle)
+
+                values = 
+                    [ 1.5151065517441338; -1.5151065517441336; -1.5151065517441333; 1.5151065517441322 ]
+                    |> ComplexVector4.fromRe
+                vectors = 
+                    [
+                        [ 0.; 0.; 0.5508535951895028; 0.8346018911234261 ]
+                        [ 0.; 0.; -0.5508535951895027; 0.8346018911234262 ]
+                        [ -0.5483797817402465; 0.8362294033209545; 0.; 0. ]
+                        [ 0.5483797817402465; 0.8362294033209545; 0.; 0. ]
+                    ]
+                    |> ComplexMatrix4x4.fromRe
             }
         ]
 
@@ -95,3 +97,6 @@ type EigenVecgtorTests(output : ITestOutputHelper) =
 
     [<Fact>]
     member this.basicSolverTest0 () = this.runTest (data.[0])
+
+    [<Fact>]
+    member this.basicSolverTest1 () = this.runTest (data.[1])

@@ -36,6 +36,18 @@ type BaseOpticalSystemTestData =
     }
 
 
+let matrixToString (m : Matrix<Complex>) = 
+    let len = m.RowCount
+
+    let foldRow i = 
+        [| for j in 0..(len-1) -> j, m.[i, j] |]
+        |> Array.fold (fun acc (j, r) -> acc + "m.[" + i.ToString() + ", " + j.ToString() + "]: " + r.ToString() + ", ") ("\n")
+
+    [| for i in 0..(len-1) -> foldRow i |]
+    |> Array.fold(fun acc r -> acc + r) ""
+
+
+
 let data = 
     let create opticalProperties incidenceAngle waveLength = 
         let n1SinFita = N1SinFita.create 1.0 incidenceAngle
@@ -117,6 +129,7 @@ let evd1 = m1.Evd()
 printfn "evd1 = %A\n" evd1
 printfn "EigenValues (1) = %A\n" evd1.EigenValues
 printfn "EigenVectors (1) = %A\n" evd1.EigenVectors
+//printfn "EigenVectors (1) = %A\n" (matrixToString evd1.EigenVectors)
 printfn "EigenVectors.Inv (1) = %A\n" (evd1.EigenVectors.Inverse())
 
 let bm1Evd = bm1.eigenBasis data.light.wavelength data.light.n1SinFita
@@ -130,10 +143,14 @@ let (BerremanMatrix bm2) = BerremanMatrix.create data.opticalSystem.lower data.l
 printfn "bm2 = %A" bm2
 let (ComplexMatrix4x4 (ComplexMatrix m2)) = bm2
 let evd2 = m2.Evd()
+let e2 = normalizeMatrix evd2.EigenVectors
 printfn "evd2 = %A\n" evd2
 printfn "EigenValues (2) = %A\n" evd2.EigenValues
 printfn "EigenVectors (2) = %A\n" evd2.EigenVectors
-printfn "EigenVectors.Inv (2) = %A\n" (evd2.EigenVectors.Inverse())
+//printfn "EigenVectors (2) = %A\n" (matrixToString evd2.EigenVectors)
+//printfn "EigenVectors.Inv (2) = %A\n" (evd2.EigenVectors.Inverse())
+printfn "Normalized EigenVectors (2) = %A\n" e2
+
 
 let bm2Evd = bm2.eigenBasis data.light.wavelength data.light.n1SinFita
 let up2 = bm2Evd.up

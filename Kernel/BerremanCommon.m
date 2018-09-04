@@ -633,8 +633,8 @@ PPPFull[Film_, lambda_, fita_, n1_] :=
 (* ============================================== *)
 EGGetOrder[egvl : {_, _, _, _}, egvec_, ehStdRule_, opts___] :=
     Module[{odeg, ODEGhlp, EGValHlpRe, EGValHlpIm, EGUnit, egvReShft, egvRe, egMult, egShft, idxHlp, egvIm, swpev, ehf, pntgS, egMultPng, prec, chpPrec, AddOnSrt, pntgTblX, pntgTblY, pntgTbl},
-      Print["EGGetOrder::egvl =", N[egvl] // MatrixForm];
-      Print["EGGetOrder::egvec =", N[egvec] // MatrixForm];
+      Print["EGGetOrder::egvl =", { N[egvl] } // toFSharpMatrix];
+      Print["EGGetOrder::egvec =", N[egvec] // toFSharpMatrix];
       EGUnit = {1, 1, 1, 1};
       egvReShft = 0;
       egMult = 10^6;

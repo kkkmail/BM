@@ -14,6 +14,42 @@ module Solvers =
 
 
     type BaseOpticalSystemSolver (system: BaseOpticalSystem, info : IncidentLightInfo) = 
+        let fixB1 (b : FullEigenBasis) = 
+            {
+                down = 
+                    {
+                        v0 = b.down.v1
+                        v1 = b.down.v0
+                        e0 = b.down.e1
+                        e1 = b.down.e0
+                    }
+                up = 
+                    {
+                        v0 = b.up.v1
+                        v1 = b.up.v0
+                        e0 = b.up.e1
+                        e1 = b.up.e0
+                    }
+            }
+
+        let fixB2 (b : FullEigenBasis) = 
+            {
+                down = 
+                    {
+                        v0 = b.down.v1
+                        v1 = b.down.v0
+                        e0 = b.down.e1
+                        e1 = b.down.e0
+                    }
+                up = 
+                    {
+                        v0 = b.up.v0
+                        v1 = b.up.v1
+                        e0 = b.up.e0 * (-1.0 |> cplx)
+                        e1 = b.up.e1
+                    }
+            }
+            
         let i : EmField = info |> EmField.create
         let (BerremanMatrix m1) = BerremanMatrix.create system.upper info.n1SinFita
         let (BerremanMatrix m2) = BerremanMatrix.create system.lower info.n1SinFita
@@ -22,8 +58,8 @@ module Solvers =
         //let (b1, b2)= sortEvd evd
 
         // eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita)
-        let b1 = m1.eigenBasis i.wavelength i.n1SinFita
-        let b2 = m2.eigenBasis i.wavelength i.n1SinFita
+        let b1 = m1.eigenBasis i.wavelength i.n1SinFita |> fixB1
+        let b2 = m2.eigenBasis i.wavelength i.n1SinFita |> fixB2
 
         // Generated, do not modify.
         let coeffTblVal = 
