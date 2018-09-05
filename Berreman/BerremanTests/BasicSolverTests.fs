@@ -24,70 +24,103 @@ type BaseOpticalSystemTestData =
     }
 
 type BasicSolverTests(output : ITestOutputHelper) =
+
+    let addLayer (l : Layer) (d : BaseOpticalSystemTestData) = 
+        { d with opticalSystem = { d.opticalSystem with films = l :: d.opticalSystem.films } }
+
+    let rec addLayers (ls : List<Layer>) (d : BaseOpticalSystemTestData) = 
+        match (ls |> List.rev) with 
+        | [] -> d
+        | h :: t -> addLayers (t |> List.rev) (addLayer h d)
+
+    let stdGlassLayer = 
+        {
+            properties = OpticalProperties.transparentGlass
+            thickness = Thickness.nm 100.0
+        }
+
+    let vacuumLayer = 
+        {
+            properties = OpticalProperties.vacuum
+            thickness = Thickness.nm 150.0
+        }
+
+    let createStdGlassLightAt7Degrees description = 
+        let opticalProperties = OpticalProperties.transparentGlass
+        let incidenceAngle = Angle.degree 7.0 |> IncidenceAngle
+        let waveLength = WaveLength.nm 600.0
+        let n1SinFita = N1SinFita.create 1.0 incidenceAngle
+
+        {
+            description = description
+            opticalSystem = 
+                {
+                    upper = OpticalProperties.vacuum
+                    films =
+                        [
+                        ]
+                    lower = opticalProperties
+                }
+            info = 
+                {
+                    wavelength = waveLength
+                    refractionIndex = RefractionIndex.defaultValue
+                    incidenceAngle = incidenceAngle
+                    polarization = Polarization.defaultValue
+                    ellipticity = Ellipticity.defaultValue
+                }
+            expected = 
+                {
+                    incident = 
+                        {
+                            wavelength = waveLength
+                            n1SinFita = n1SinFita
+                            e = 
+                                [ 0.992546151641322; 0.; -0.12186934340514745 ]
+                                |> ComplexVector3.fromRe
+                            h = 
+                                [ 0.; 0.9999999999999998; 0. ]
+                                |> ComplexVector3.fromRe
+                        }
+                    reflected = 
+                        {
+                            wavelength = waveLength
+                            n1SinFita = n1SinFita
+                            e = 
+                                [ -0.2027874513413428; 0.; -0.024899168169565895 ]
+                                |> ComplexVector3.fromRe
+                            h = 
+                                [ 0.; 0.2043103497061609; 0. ]
+                                |> ComplexVector3.fromRe
+                        }
+                    transmitted = 
+                        {
+                            wavelength = waveLength
+                            n1SinFita = n1SinFita
+                            e = 
+                                [ 0.7897587002999794; 0.; -0.06352515217049573; ]
+                                |> ComplexVector3.fromRe
+                            h = 
+                                [ 0.; 1.2043103497061607; 0. ]
+                                |> ComplexVector3.fromRe
+                        }
+                }
+        }
+
+
     let data = 
         [
-            (
-                let create opticalProperties incidenceAngle waveLength = 
-                    let n1SinFita = N1SinFita.create 1.0 incidenceAngle
+            createStdGlassLightAt7Degrees "Snell's law for standard transparent glass, 7 degrees incidence angle."
 
-                    {
-                        description = "Snell's law for standard transparent glass, 7 degrees incidence angle."
-                        opticalSystem = 
-                            {
-                                upper = OpticalProperties.vacuum
-                                films =
-                                    [
-                                    ]
-                                lower = opticalProperties
-                            }
-                        info = 
-                            {
-                                wavelength = waveLength
-                                refractionIndex = RefractionIndex.defaultValue
-                                incidenceAngle = incidenceAngle
-                                polarization = Polarization.defaultValue
-                                ellipticity = Ellipticity.defaultValue
-                            }
-                        expected = 
-                            {
-                                incident = 
-                                    {
-                                        wavelength = waveLength
-                                        n1SinFita = n1SinFita
-                                        e = 
-                                            [ 0.992546151641322; 0.; -0.12186934340514745 ]
-                                            |> ComplexVector3.fromRe
-                                        h = 
-                                            [ 0.; 0.9999999999999998; 0. ]
-                                            |> ComplexVector3.fromRe
-                                    }
-                                reflected = 
-                                    {
-                                        wavelength = waveLength
-                                        n1SinFita = n1SinFita
-                                        e = 
-                                            [ -0.2027874513413428; 0.; -0.024899168169565895 ]
-                                            |> ComplexVector3.fromRe
-                                        h = 
-                                            [ 0.; 0.2043103497061609; 0. ]
-                                            |> ComplexVector3.fromRe
-                                    }
-                                transmitted = 
-                                    {
-                                        wavelength = waveLength
-                                        n1SinFita = n1SinFita
-                                        e = 
-                                            [ 0.7897587002999794; 0.; -0.06352515217049573; ]
-                                            |> ComplexVector3.fromRe
-                                        h = 
-                                            [ 0.; 1.2043103497061607; 0. ]
-                                            |> ComplexVector3.fromRe
-                                    }
-                            }
-                    }
+            createStdGlassLightAt7Degrees "Snell's law for thin standard glass film on standard transparent glass, 7 degrees incidence angle."
+            |> addLayer stdGlassLayer
 
-                create OpticalProperties.transparentGlass (Angle.degree 7.0 |> IncidenceAngle) (WaveLength.nm 600.0)
-            )
+            createStdGlassLightAt7Degrees "Snell's law for vacuum film on standard transparent glass, 7 degrees incidence angle."
+            |> addLayer vacuumLayer
+
+            createStdGlassLightAt7Degrees "Snell's law for vacuum film + thin standard glass film on standard transparent glass, 7 degrees incidence angle."
+            |> addLayer stdGlassLayer
+            |> addLayer vacuumLayer
 
             //(
             //    let create opticalProperties incidenceAngle waveLength = 
@@ -218,3 +251,12 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
     [<Fact>]
     member this.basicSolverTest0 () = this.runTest (data.[0])
+
+    [<Fact>]
+    member this.basicSolverTest1 () = this.runTest (data.[1])
+
+    [<Fact>]
+    member this.basicSolverTest2 () = this.runTest (data.[2])
+
+    [<Fact>]
+    member this.basicSolverTest3 () = this.runTest (data.[3])
