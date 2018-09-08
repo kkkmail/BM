@@ -31,9 +31,7 @@ module MathNetNumericsMath =
                 v.[i]
 
         static member (*) (RealVector a, RealVector b) : double = a * b
-
-
-    //type RealMatrix = Matrix<double>
+        static member create (a : #seq<double>) = vector a |> RealVector
 
 
     type ComplexVector = 
@@ -49,8 +47,7 @@ module MathNetNumericsMath =
         static member (+) (ComplexVector a, ComplexVector b) = 
             (a + b) |> ComplexVector
 
-        static member create (a : #seq<Complex>) = 
-            vector a |> ComplexVector
+        static member create (a : #seq<Complex>) = vector a |> ComplexVector
 
         static member fromRe (a : #seq<double>) = 
             a
@@ -77,6 +74,15 @@ module MathNetNumericsMath =
         member this.im = 
             let (ComplexVector v) = this
             v.Imaginary() |> RealVector
+
+
+    type RealMatrix = 
+        | RealMatrix  of Matrix<double>
+
+        member this.Item
+            with get((i : int), (j : int)) =
+                let (RealMatrix v) = this
+                v.[i, j]
 
 
     type ComplexMatrix = 

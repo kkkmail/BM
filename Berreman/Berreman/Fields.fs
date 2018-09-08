@@ -37,6 +37,10 @@ module Fields =
 
         static member defaultValue = Angle 0.0 |> Polarization
 
+        // TODO Check angle
+        static member s = Angle 0.0 |> Polarization
+        static member p = Polarization.s.crossed
+
 
     type IncidenceAngle = 
         | IncidenceAngle of Angle
@@ -93,6 +97,8 @@ module Fields =
 
         member this.eh0 = this.getEH this.polarization
         member this.eh90 = this.getEH this.polarization.crossed
+        member this.ehS = this.getEH Polarization.s
+        member this.ehP = this.getEH Polarization.p
 
         member this.n1SinFita = 
             let (IncidenceAngle (Angle a)) = this.incidenceAngle
@@ -154,3 +160,13 @@ module Fields =
             reflected : EmField
             transmitted : EmField
         }
+
+
+    type MuellerMatrix = 
+        | MuellerMatrix of RealMatrix4x4
+
+
+    type StokesVector = 
+        | StokesVector of RealVector4
+
+        static member create v = v |> RealVector4.create

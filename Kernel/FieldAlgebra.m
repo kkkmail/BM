@@ -1015,88 +1015,90 @@ Print["CalculateEllipsometricData::eBeta90fieldT = ",eBeta90fieldT];
   Return[retVal];
 ];
 
-CalculateEllipsometricData[fita_, er0R : {_, _, _}, er90R : {_, _, _}, er0T : {_, _, _}, er90T : {_, _, _}] := Module[{fi, fiRule, fiMinusRule, rot, rotI, rotR, ERpRot, ERps, ERpp, ERsRot, ERss, ERsp, rpp, rps, rsp, rss, ropp, rops, rosp, psipp, psips, psisp, deltapp, deltaps, deltasp, retVal, muellMtrR, muellMtrT}, fiRule = {fi -> fita};
-fiMinusRule = {fi -> -fita};
-rot = {{Cos[fi], 0, Sin[fi]}, {0, 1, 0}, {-Sin[fi], 0, Cos[fi]}};
-rotI = rot /. fiMinusRule;
-rotR = rot /. fiRule;
+CalculateEllipsometricData[fita_, er0R : {_, _, _}, er90R : {_, _, _}, er0T : {_, _, _}, er90T : {_, _, _}] :=
+    Module[{fi, fiRule, fiMinusRule, rot, rotI, rotR, ERpRot, ERps, ERpp, ERsRot, ERss, ERsp, rpp, rps, rsp, rss, ropp, rops, rosp, psipp, psips, psisp, deltapp, deltaps, deltasp, retVal, muellMtrR, muellMtrT},
+      fiRule = {fi -> fita};
+      fiMinusRule = {fi -> -fita};
+      rot = {{Cos[fi], 0, Sin[fi]}, {0, 1, 0}, {-Sin[fi], 0, Cos[fi]}};
+      rotI = rot /. fiMinusRule;
+      rotR = rot /. fiRule;
 
-(*
-Print["rot = ",rot//MatrixForm];
-Print["rotI = ",rotI//MatrixForm];
-Print["rotR = ",rotR//MatrixForm];
-Print["er0R = ",er0R//MatrixForm];
-Print["er90R = ",er90R//MatrixForm];
-Print["er0T = ",er0T//MatrixForm];
-Print["er90T = ",er90T//MatrixForm];
-*)
+      (*
+      Print["rot = ",rot//MatrixForm];
+      Print["rotI = ",rotI//MatrixForm];
+      Print["rotR = ",rotR//MatrixForm];
+      Print["er0R = ",er0R//MatrixForm];
+      Print["er90R = ",er90R//MatrixForm];
+      Print["er0T = ",er0T//MatrixForm];
+      Print["er90T = ",er90T//MatrixForm];
+      *)
 
-ERpRot = Flatten[(rotR.er0R)];
-ERps = ERpRot[[2]];
-ERpp = Sqrt[Abs[ERpRot[[1]]]^2 + Abs[ERpRot[[3]]]^2];
-ERsRot = Flatten[(rotR.er90R)];
-ERss = ERsRot[[2]];
-ERsp = Sqrt[Abs[ERsRot[[1]]]^2 + Abs[ERsRot[[3]]]^2];
+      ERpRot = Flatten[(rotR.er0R)];
+      ERps = ERpRot[[2]];
+      ERpp = Sqrt[Abs[ERpRot[[1]]]^2 + Abs[ERpRot[[3]]]^2];
+      ERsRot = Flatten[(rotR.er90R)];
+      ERss = ERsRot[[2]];
+      ERsp = Sqrt[Abs[ERsRot[[1]]]^2 + Abs[ERsRot[[3]]]^2];
 
-(*
-Print["ERpRot = ",ERpRot//MatrixForm];
-Print["ERsRot = ",ERsRot//MatrixForm];
-*)
+      (*
+      Print["ERpRot = ",ERpRot//MatrixForm];
+      Print["ERsRot = ",ERsRot//MatrixForm];
+      *)
 
-rpp = ERpp;
-rps = ERps;
-rsp = ERsp;
-rss = ERss;
+      rpp = ERpp;
+      rps = ERps;
+      rsp = ERsp;
+      rss = ERss;
 
-(*
-Print["rpp = ",rpp];
-Print["rps = ",rps];
-Print["rsp = ",rsp];
-Print["rss = ",rss];
-*)
+      (*
+      Print["rpp = ",rpp];
+      Print["rps = ",rps];
+      Print["rsp = ",rsp];
+      Print["rss = ",rss];
+      *)
 
-ropp = rpp / rss;
-rops = rps / rss;
-rosp = rsp / rss;
-psipp = ArcTan[Abs[ropp]];
-psips = ArcTan[Abs[rops]];
-psisp = ArcTan[Abs[rosp]];
-deltapp = -Arg[ropp];
-deltaps = -Arg[rops];
-deltasp = -Arg[rosp];
+      ropp = rpp / rss;
+      rops = rps / rss;
+      rosp = rsp / rss;
+      psipp = ArcTan[Abs[ropp]];
+      psips = ArcTan[Abs[rops]];
+      psisp = ArcTan[Abs[rosp]];
+      deltapp = -Arg[ropp];
+      deltaps = -Arg[rops];
+      deltasp = -Arg[rosp];
 
 
-muellMtrR = MuellerMatrix[rss, rpp, rps, rsp];
-muellMtrT = Table[Indeterminate, {ii, 1, 4}, {jj, 1, 4}];
-retVal = {psipp, deltapp, psips, deltaps, psisp, deltasp, rss, rpp, rps, rsp, muellMtrR, muellMtrT};
+      muellMtrR = MuellerMatrix[rss, rpp, rps, rsp];
+      muellMtrT = Table[Indeterminate, {ii, 1, 4}, {jj, 1, 4}];
+      retVal = {psipp, deltapp, psips, deltaps, psisp, deltasp, rss, rpp, rps, rsp, muellMtrR, muellMtrT};
 
-(*
-Print["ERpRot = ",ERpRot];
-Print["ERps = ",ERps];
-Print["ERpp = ",ERpp];
-Print["..."];
-Print["ERsRot = ",ERsRot];
-Print["ERss = ",ERss];
-Print["ERsp = ",ERsp];
-Print["..."];
-Print["ropp = ",ropp];
-Print["rops = ",rops];
-Print["rosp = ",rosp];
-Print["..."];
-Print["psipp = ",psipp];
-Print["psips = ",psips];
-Print["psisp = ",psisp];
-Print["..."];
-Print["deltapp = ",deltapp];
-Print["deltaps = ",deltaps];
-Print["deltasp = ",deltasp];
-Print["..."];
-Print["muellMtrR = ",muellMtrR // MatrixForm];
-Print["..."];
-*)
+      (*
+      Print["ERpRot = ",ERpRot];
+      Print["ERps = ",ERps];
+      Print["ERpp = ",ERpp];
+      Print["..."];
+      Print["ERsRot = ",ERsRot];
+      Print["ERss = ",ERss];
+      Print["ERsp = ",ERsp];
+      Print["..."];
+      Print["ropp = ",ropp];
+      Print["rops = ",rops];
+      Print["rosp = ",rosp];
+      Print["..."];
+      Print["psipp = ",psipp];
+      Print["psips = ",psips];
+      Print["psisp = ",psisp];
+      Print["..."];
+      Print["deltapp = ",deltapp];
+      Print["deltaps = ",deltaps];
+      Print["deltasp = ",deltasp];
+      Print["..."];
+      Print["muellMtrR = ",muellMtrR // MatrixForm];
+      Print["..."];
+      *)
 
-Return[retVal];
-];
+      Return[retVal];
+    ];
 (* ============================================== *)
 (*Function to get various elements from the list of ellipsometric data*)
 EDataGetPsiPP[eld : {___}] := eld[[1]];

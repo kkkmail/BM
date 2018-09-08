@@ -33,6 +33,16 @@ module Geometry =
         static member (*) (RealVector3 a, RealVector3 b) : double = a * b
 
 
+    type RealVector4 =
+        | RealVector4 of RealVector
+        member this.Item 
+            with get i = 
+                let (RealVector4 v) = this
+                v.[i]
+
+         static member create a = RealVector.create a |> RealVector4
+
+
     type ComplexVector2 =
         | ComplexVector2 of ComplexVector
         member this.Item 
@@ -110,6 +120,14 @@ module Geometry =
         static member create a = a |> ComplexVector.create |> ComplexVector4
         static member fromRe a = a |> ComplexVector.fromRe |> ComplexVector4
         static member fromIm a = a |> ComplexVector.fromIm |> ComplexVector4
+
+
+    type RealMatrix4x4 = 
+        | RealMatrix4x4 of RealMatrix
+        member this.Item
+            with get(i, j) =
+                let (RealMatrix4x4 v) = this
+                v.[i, j]
 
 
     type ComplexMatrix3x3 = 
