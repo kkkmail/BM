@@ -50,16 +50,13 @@ module Solvers =
                     }
             }
             
-        let i : EmField = info |> EmField.create
-        let (BerremanMatrix m1) = BerremanMatrix.create system.upper info.n1SinFita
-        let (BerremanMatrix m2) = BerremanMatrix.create system.lower info.n1SinFita
+        let i : EmField = EmField.create (info, system.upper)
+        let m1 = BerremanMatrix.create system.upper info.n1SinFita
+        let m2 = BerremanMatrix.create system.lower info.n1SinFita
         let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.films, i)
-        let evd = p.eigenBasis i.wavelength i.n1SinFita
-        //let (b1, b2)= sortEvd evd
-
-        // eigenBasis (wavelength : WaveLength) (n1SinFita : N1SinFita)
-        let b1 = m1.eigenBasis i.wavelength i.n1SinFita // |> fixB1
-        let b2 = m2.eigenBasis i.wavelength i.n1SinFita // |> fixB2
+        let evd = p.eigenBasis ()
+        let b1 = m1.eigenBasis () // |> fixB1
+        let b2 = m2.eigenBasis () // |> fixB2
 
         // Generated, do not modify.
         let coeffTblVal = 
@@ -111,8 +108,7 @@ module Solvers =
                 b1.up.e0.[2] * sol.[0] + b1.up.e1.[2] * sol.[1]
                 b1.up.e0.[3] * sol.[0] + b1.up.e1.[3] * sol.[1]
             ]
-            |> ComplexVector.create
-            |> ComplexVector4
+            |> ComplexVector4.create
 
         let eht = 
             [
@@ -121,22 +117,23 @@ module Solvers =
                 b2.down.e0.[2] * sol.[2] + b2.down.e1.[2] * sol.[3]
                 b2.down.e0.[3] * sol.[2] + b2.down.e1.[3] * sol.[3]
             ]
-            |> ComplexVector.create
-            |> ComplexVector4
+            |> ComplexVector4.create
 
         let r = 
             {
                 wavelength = info.wavelength
                 n1SinFita = info.n1SinFita
-                eh = ehr
-            }.toEmField system.upper
+                opticalProperties = system.upper
+                eh = ehr |> BerremanFieldEH
+            }.toEmField ()
 
         let t = 
             {
                 wavelength = info.wavelength
                 n1SinFita = info.n1SinFita
-                eh = eht
-            }.toEmField system.lower
+                opticalProperties = system.lower
+                eh = eht |> BerremanFieldEH
+            }.toEmField ()
 
         member __.reflectedLight = r
         member __.transmittedLight = t

@@ -103,6 +103,7 @@ module Fields =
         {
             wavelength : WaveLength
             n1SinFita : N1SinFita
+            opticalProperties : OpticalProperties
             e : ComplexVector2
             h : ComplexVector2
         }
@@ -112,12 +113,12 @@ module Fields =
         {
             wavelength : WaveLength
             n1SinFita : N1SinFita
+            opticalProperties : OpticalProperties
             e : ComplexVector3
             h : ComplexVector3
         }
-        member this.d (o : OpticalProperties) : ComplexVector3 = o.eps * this.e + o.rho * this.h
-
-        member this.b (o : OpticalProperties) : ComplexVector3 = o.rhoT * this.e + o.mu * this.h
+        member this.d = this.opticalProperties.eps * this.e + this.opticalProperties.rho * this.h
+        member this.b = this.opticalProperties.rhoT * this.e + this.opticalProperties.mu * this.h
 
         // Poynting vector
         member this.s : RealVector3 = (ComplexVector3.cross this.e this.h.conjugate).re
@@ -126,11 +127,12 @@ module Fields =
             { 
                 wavelength = emXY.wavelength 
                 n1SinFita = emXY.n1SinFita 
+                opticalProperties = emXY.opticalProperties
                 e = [ emXY.e.x; emXY.e.y; eZ ] |> ComplexVector.create |> ComplexVector3
                 h = [ emXY.h.x; emXY.h.y; hZ ] |> ComplexVector.create |> ComplexVector3
             }
 
-        static member create (info : IncidentLightInfo) = 
+        static member create (info : IncidentLightInfo, o : OpticalProperties) = 
             let (Ellipticity e) = info.ellipticity
             let a0 = 1.0 / sqrt(1.0 + e * e) |> cplx
             let a90 = e / sqrt(1.0 + e * e) |> cplx
@@ -140,6 +142,7 @@ module Fields =
             {
                 wavelength = info.wavelength
                 n1SinFita = info.n1SinFita
+                opticalProperties = o
                 e = a0 * e0 + a90 * e90
                 h = a0 * h0 + a90 * h90
             }

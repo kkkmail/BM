@@ -13,7 +13,7 @@ module MaterialProperties =
         RefractionIndex of double
         with 
         static member create n = RefractionIndex n
-        static member defaultValue = RefractionIndex.create 1.0
+        static member vacuum = RefractionIndex.create 1.0
 
 
     type OpticalProperties = 
@@ -36,4 +36,4 @@ module MaterialProperties =
                 rho = ComplexMatrix3x3.zero
             }
 
-        static member vacuum = RefractionIndex 1.0 |> OpticalProperties.defaultValue
+        static member vacuum = RefractionIndex.vacuum |> OpticalProperties.defaultValue

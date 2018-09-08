@@ -37,7 +37,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 light = 
                     {
                         wavelength = WaveLength.nm 600.0
-                        refractionIndex = RefractionIndex.defaultValue
+                        refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 0.0 |> IncidenceAngle
                         polarization = Polarization.defaultValue
                         ellipticity = Ellipticity.defaultValue
@@ -64,7 +64,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 light = 
                     {
                         wavelength = WaveLength.nm 600.0
-                        refractionIndex = RefractionIndex.defaultValue
+                        refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 85.0 |> IncidenceAngle
                         polarization = Polarization.defaultValue
                         ellipticity = Ellipticity.defaultValue
@@ -102,7 +102,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 light = 
                     {
                         wavelength = WaveLength.nm 687.0
-                        refractionIndex = RefractionIndex.defaultValue
+                        refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 53.0 |> IncidenceAngle
                         polarization = Angle.degree 50.0 |> Polarization
                         ellipticity = -0.802933683069591 |> Ellipticity
@@ -152,7 +152,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 light = 
                     {
                         wavelength = WaveLength.nm 504.0
-                        refractionIndex = RefractionIndex.defaultValue
+                        refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 41.0 |> IncidenceAngle
                         polarization = Angle.degree 64.0 |> Polarization
                         ellipticity = -0.42025305376355426 |> Ellipticity
@@ -212,7 +212,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 light = 
                     {
                         wavelength = WaveLength.nm 600.0
-                        refractionIndex = RefractionIndex.defaultValue
+                        refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 35.0 |> IncidenceAngle
                         polarization = Angle.degree 0.0 |> Polarization
                         ellipticity = 0.0 |> Ellipticity
@@ -290,7 +290,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 light = 
                     {
                         wavelength = WaveLength.nm 553.0
-                        refractionIndex = RefractionIndex.defaultValue
+                        refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 63.0 |> IncidenceAngle
                         polarization = Angle.degree 60.0 |> Polarization
                         ellipticity = -0.43910436091105565 |> Ellipticity
@@ -308,8 +308,10 @@ type ThinFilmTests(output : ITestOutputHelper) =
 
     member __.runTest (d : ThinFilmTestData) = 
         output.WriteLine d.description
+
         let (BerremanMatrixPropagated (ComplexMatrix4x4 bm)) = 
-            BerremanMatrixPropagated.propagate (d.thinFilms, d.light |> EmField.create)
+            BerremanMatrixPropagated.propagate (d.thinFilms, EmField.create (d.light, OpticalProperties.vacuum))
+
         verifyMatrixEquality output bm d.expected
 
     [<Fact>]

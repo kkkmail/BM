@@ -41,6 +41,8 @@ module Geometry =
         member this.x = this.[0]
         member this.y = this.[1]
 
+        static member create a = ComplexVector.create a |> ComplexVector2
+
 
     type ComplexVector3 =
         | ComplexVector3 of ComplexVector

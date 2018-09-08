@@ -108,8 +108,9 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
     // Calculated and expected Berreman matrix.
     member __.runTest (d : BerremanMatrixTestData) = 
         output.WriteLine d.description
-        let (BerremanMatrix (ComplexMatrix4x4 bm)) = BerremanMatrix.create d.opticalProperties d.n1SinFita
-        verifyMatrixEquality output bm d.expected
+        let bm = BerremanMatrix.create d.opticalProperties d.n1SinFita
+        let (ComplexMatrix4x4 result) = bm.berremanMatrix
+        verifyMatrixEquality output result d.expected
 
     [<Fact>]
     member this.berremanMatrixTest0 () = this.runTest (data.[0])

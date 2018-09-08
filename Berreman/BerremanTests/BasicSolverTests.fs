@@ -15,6 +15,7 @@ open MatrixComparison
 open Berreman.Media
 open OpticalProperties.Standard
 
+
 type BaseOpticalSystemTestData =
     {
         description : string
@@ -23,15 +24,23 @@ type BaseOpticalSystemTestData =
         expected : EmFieldSystem
     }
 
+
+type ResultComparisionType = 
+    | Field
+    | Intensity
+
+
 type BasicSolverTests(output : ITestOutputHelper) =
 
     let addLayer (l : Layer) (d : BaseOpticalSystemTestData) = 
         { d with opticalSystem = { d.opticalSystem with films = l :: d.opticalSystem.films } }
 
+
     let rec addLayers (ls : List<Layer>) (d : BaseOpticalSystemTestData) = 
         match (ls |> List.rev) with 
         | [] -> d
         | h :: t -> addLayers (t |> List.rev) (addLayer h d)
+
 
     let stdGlassLayer = 
         {
@@ -39,11 +48,13 @@ type BasicSolverTests(output : ITestOutputHelper) =
             thickness = Thickness.nm 100.0
         }
 
+
     let vacuumLayer = 
         {
             properties = OpticalProperties.vacuum
             thickness = Thickness.nm 150.0
         }
+
 
     let createStdGlassLightAt7Degrees description = 
         let opticalProperties = OpticalProperties.transparentGlass
@@ -64,7 +75,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
             info = 
                 {
                     wavelength = waveLength
-                    refractionIndex = RefractionIndex.defaultValue
+                    refractionIndex = RefractionIndex.vacuum
                     incidenceAngle = incidenceAngle
                     polarization = Polarization.defaultValue
                     ellipticity = Ellipticity.defaultValue
@@ -75,6 +86,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                         {
                             wavelength = waveLength
                             n1SinFita = n1SinFita
+                            opticalProperties = OpticalProperties.vacuum
                             e = 
                                 [ 0.992546151641322; 0.; -0.12186934340514745 ]
                                 |> ComplexVector3.fromRe
@@ -86,6 +98,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                         {
                             wavelength = waveLength
                             n1SinFita = n1SinFita
+                            opticalProperties = OpticalProperties.vacuum
                             e = 
                                 [ -0.2027874513413428; 0.; -0.024899168169565895 ]
                                 |> ComplexVector3.fromRe
@@ -97,6 +110,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                         {
                             wavelength = waveLength
                             n1SinFita = n1SinFita
+                            opticalProperties = opticalProperties
                             e = 
                                 [ 0.7897587002999794; 0.; -0.06352515217049573; ]
                                 |> ComplexVector3.fromRe
@@ -219,7 +233,8 @@ type BasicSolverTests(output : ITestOutputHelper) =
             //}
         ]
 
-    member __.runTest (d : BaseOpticalSystemTestData) = 
+
+    member __.runTest (d : BaseOpticalSystemTestData) (c : ResultComparisionType) = 
         output.WriteLine d.description
         let solver = BaseOpticalSystemSolver (d.opticalSystem, d.info)
 
@@ -239,24 +254,28 @@ type BasicSolverTests(output : ITestOutputHelper) =
         let eT = solver.transmittedLight.e
         let hT = solver.transmittedLight.h
 
-        verifyVectorEquality output "eI" eI d.expected.incident.e
-        verifyVectorEquality output "hI" hI d.expected.incident.h
+        match c with 
+        | Field -> 
+            verifyVectorEquality output "eI" eI d.expected.incident.e
+            verifyVectorEquality output "hI" hI d.expected.incident.h
 
-        verifyVectorEquality output "eR" eR d.expected.reflected.e
-        verifyVectorEquality output "hR" hR d.expected.reflected.h
+            verifyVectorEquality output "eR" eR d.expected.reflected.e
+            verifyVectorEquality output "hR" hR d.expected.reflected.h
 
-        verifyVectorEquality output "eT" eT d.expected.transmitted.e
-        verifyVectorEquality output "hT" hT d.expected.transmitted.h
+            verifyVectorEquality output "eT" eT d.expected.transmitted.e
+            verifyVectorEquality output "hT" hT d.expected.transmitted.h
+        | Intensity ->
+            failwith ""
 
-
-    [<Fact>]
-    member this.basicSolverTest0 () = this.runTest (data.[0])
-
-    [<Fact>]
-    member this.basicSolverTest1 () = this.runTest (data.[1])
 
     [<Fact>]
-    member this.basicSolverTest2 () = this.runTest (data.[2])
+    member this.basicSolverTest0 () = this.runTest (data.[0]) Field
 
     [<Fact>]
-    member this.basicSolverTest3 () = this.runTest (data.[3])
+    member this.basicSolverTest1 () = this.runTest (data.[1]) Field
+
+    [<Fact>]
+    member this.basicSolverTest2 () = this.runTest (data.[2]) Field
+
+    [<Fact>]
+    member this.basicSolverTest3 () = this.runTest (data.[3]) Field
