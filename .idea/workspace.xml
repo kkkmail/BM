@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MMM.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM.nb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MMM_02.nb" beforeDir="false" afterPath="$PROJECT_DIR$/MMM_02.nb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MMM_02.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MMM_02.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Berreman.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Berreman.fsproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,7 +81,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-443">
@@ -143,11 +140,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="815" column="9" selection-start-line="815" selection-end-line="815" selection-end-column="9" />
+            <state relative-caret-position="-86">
+              <caret line="548" column="77" lean-forward="true" selection-start-line="548" selection-start-column="32" selection-end-line="548" selection-end-column="77" />
+              <folding>
+                <element signature="e#27038#28610#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,10 +165,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>You must supply epsilon</find>
-      <find>MediaLowerRo</find>
-      <find>TransformMedia does not work because of n1, n2, nOut</find>
-      <find>MediaUpperRoT</find>
       <find>IncidentLightNew</find>
       <find>IncidentLighKxFunc</find>
       <find>IncidentLightKxFunc</find>
@@ -195,6 +191,10 @@
       <find>EGVal1Hlp</find>
       <find>toFSharpMatrix</find>
       <find>EGGetOrder</find>
+      <find>IFull</find>
+      <find>Elt</find>
+      <find>FieldEllipticity</find>
+      <find>pVector</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -240,7 +240,6 @@
         <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/Temp/BerremanDirect.m" />
         <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/BerremanDirect_New.m" />
         <option value="$PROJECT_DIR$/Bleeding_Edge/7.01/ModelCreation.m" />
-        <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06_1L_Thin_Film_Simple.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06a_1L_Thin_Film.m" />
@@ -254,6 +253,7 @@
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
+        <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
       </list>
     </option>
   </component>
@@ -276,11 +276,6 @@
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
               <item name="BM" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BM" type="462c0819:PsiDirectoryNode" />
-              <item name="Examples" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
@@ -437,7 +432,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.12944333" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1307847" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -712,13 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="815" column="9" selection-start-line="815" selection-end-line="815" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-652">
@@ -766,6 +754,16 @@
             <element signature="e#18594#18683#0" />
             <element signature="e#18717#18861#0" />
             <element signature="e#20061#20322#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-86">
+          <caret line="548" column="77" lean-forward="true" selection-start-line="548" selection-start-column="32" selection-end-line="548" selection-end-column="77" />
+          <folding>
+            <element signature="e#27038#28610#0" />
           </folding>
         </state>
       </provider>

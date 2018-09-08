@@ -55,6 +55,7 @@
     <Compile Include="Media.fs" />
     <Compile Include="BerremanMatrix.fs" />
     <Compile Include="Solvers.fs" />
+    <Compile Include="FieldFunctions.fs" />
     <None Include="MatrixExpTests.fsx" />
     <None Include="Tests.fsx" />
     <None Include="Extreme60_Err.fsx" />

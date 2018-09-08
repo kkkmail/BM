@@ -30,6 +30,8 @@ module Geometry =
         member this.y = this.[1]
         member this.z = this.[2]
 
+        static member (*) (RealVector3 a, RealVector3 b) : double = a * b
+
 
     type ComplexVector2 =
         | ComplexVector2 of ComplexVector

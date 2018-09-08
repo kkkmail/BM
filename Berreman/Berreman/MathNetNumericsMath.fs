@@ -30,6 +30,8 @@ module MathNetNumericsMath =
                 let (RealVector v) = this
                 v.[i]
 
+        static member (*) (RealVector a, RealVector b) : double = a * b
+
 
     //type RealMatrix = Matrix<double>
 
