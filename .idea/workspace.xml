@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Constants.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Constants.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -123,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BM_603_Example_01_Snell_Law.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BM_603_Example_01_Snell_Law.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="579">
+              <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -141,10 +142,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1495">
+            <state relative-caret-position="1954">
               <caret line="1099" column="21" selection-start-line="1099" selection-start-column="21" selection-end-line="1099" selection-end-column="21" />
               <folding>
                 <element signature="e#27038#28610#0" />
@@ -252,9 +253,9 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
-        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
         <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
+        <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
       </list>
     </option>
   </component>
@@ -727,13 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-443">
@@ -761,11 +755,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1495">
+        <state relative-caret-position="1954">
           <caret line="1099" column="21" selection-start-line="1099" selection-start-column="21" selection-end-line="1099" selection-end-column="21" />
           <folding>
             <element signature="e#27038#28610#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
         </state>
       </provider>
     </entry>

@@ -13,21 +13,25 @@ module FieldFunctions =
 
     type EmField 
         with 
-        member em.intensity= em.s * em.s |> sqrt
+        member em.stokesVector =
+            let stokes (b : ComplexBasis3) = 
+                let ex = em.e * b.cX
+                let ey = em.e * b.cY
+                let s0 = (ex * ex.conjugate + ey * ey.conjugate).Real
+                let s1 = (ex * ex.conjugate - ey * ey.conjugate).Real
+                let s2 = (ex * ey.conjugate + ey * ex.conjugate).Real
+                let s3 = ((createComplex 0.0 1.0) * (ex * ey.conjugate - ey * ex.conjugate)).Real
+                [ s0; s1; s2; s3 ] |> StokesVector.create
+
+            thread em.complesBasis stokes
+
+        member em.intensity= em.s.norm
 
         member em.ellipticity : Ellipticity = 
             failwith ""
 
         member em.azimuth : Angle = 
             failwith ""
-
-        member em.stokesVector =
-            let s0 = (em.e.x * em.e.x.conjugate + em.e.y * em.e.y.conjugate).Real
-            let s1 = (em.e.x * em.e.x.conjugate - em.e.y * em.e.y.conjugate).Real
-            let s2 = (em.e.x * em.e.y.conjugate + em.e.y * em.e.x.conjugate).Real
-            let s3 = ((createComplex 0.0 1.0) * (em.e.x * em.e.y.conjugate - em.e.y * em.e.x.conjugate)).Real
-
-            [ s0; s1; s2; s3 ] |> StokesVector.create
 
 
         member em.muellerMatrix : MuellerMatrix = 

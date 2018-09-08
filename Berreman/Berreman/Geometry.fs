@@ -8,6 +8,12 @@ module Geometry =
     open MatrixExp
 
 
+    let thread a f = 
+        match a with
+        | Some b -> f b |> Some
+        | None -> None
+
+
     let comlpexIdentityMatrix n = diagonalMatrix n (cplx 1.0)
     let comlpexZeroMatrix n = diagonalMatrix n (cplx 0.0)
 
@@ -30,7 +36,30 @@ module Geometry =
         member this.y = this.[1]
         member this.z = this.[2]
 
+        member this.norm = 
+            let (RealVector3 v) = this
+            v.norm
+
         static member (*) (RealVector3 a, RealVector3 b) : double = a * b
+        static member (/) (RealVector3 a, b : double) = a / b |> RealVector3
+        static member create a = RealVector.create a |> RealVector3
+
+        static member cross (u : RealVector3) (v : RealVector3) = 
+            [
+                u.y * v.z - u.z * v.y
+                u.z * v.x -  u.x * v.z
+                u.x * v.y - u.y * v.x
+            ]
+            |> RealVector3.create
+
+
+    // Orthonormal basis
+    type RealBasis3 = 
+        {
+            vX : RealVector3
+            vY : RealVector3
+            vZ : RealVector3
+        }
 
 
     type RealVector4 =
@@ -74,7 +103,7 @@ module Geometry =
         static member (+) (ComplexVector3 a, ComplexVector3 b) : ComplexVector3 = 
             a + b |> ComplexVector3
 
-        static member cross (u : ComplexVector3) (v : ComplexVector3) : ComplexVector3 = 
+        static member cross (u : ComplexVector3) (v : ComplexVector3) = 
             [
                 u.y * v.z - u.z * v.y
                 u.z * v.x -  u.x * v.z
@@ -82,8 +111,7 @@ module Geometry =
             ]
             |> ComplexVector3.create
 
-        static member (*) (ComplexVector3 a, ComplexVector3 b) : Complex = 
-            a * b
+        static member (*) (ComplexVector3 a, ComplexVector3 b) = a * b
 
         member this.conjugate = 
             let (ComplexVector3 v) = this
@@ -102,6 +130,14 @@ module Geometry =
 
         static member (*) (ComplexVector3 a, b : Complex) = 
             a * b |> ComplexVector3
+
+
+    type ComplexBasis3 = 
+        {
+            cX : ComplexVector3
+            cY : ComplexVector3
+            cZ : ComplexVector3
+        }
 
 
     type ComplexVector4 = 

@@ -105,6 +105,7 @@ module Fields =
             let (RefractionIndex n) = this.refractionIndex
             n * (sin a) |> N1SinFita
 
+
     type EmFieldXY =
         {
             wavelength : WaveLength
@@ -127,7 +128,23 @@ module Fields =
         member this.b = this.opticalProperties.rhoT * this.e + this.opticalProperties.mu * this.h
 
         // Poynting vector
-        member this.s : RealVector3 = (ComplexVector3.cross this.e this.h.conjugate).re
+        member this.s = (ComplexVector3.cross this.e this.h.conjugate).re
+
+        member this.normal = 
+            let norm = this.s.norm
+
+            if norm > Constants.almostZero
+            then Some (this.s / norm)
+            else None
+
+        member this.complexNormal = thread this.normal (fun n -> [ cplx n.x; cplx n.y; cplx n.z ] |> ComplexVector3.create)
+
+        /// Basis in the system of coordinates where ez is the directon of propagation,
+        /// ey lays in the plane of media boundary and is orthogonal to directon of propagation,
+        /// and ex = cross ey ez.
+        member this.complesBasis = 
+            let cy = [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
+            thread this.complexNormal (fun cz -> { cX = ComplexVector3.cross cy cz; cY = cy; cZ = cz})
 
         static member create (emXY : EmFieldXY, eZ, hZ) = 
             { 
@@ -169,4 +186,12 @@ module Fields =
     type StokesVector = 
         | StokesVector of RealVector4
 
-        static member create v = v |> RealVector4.create
+        static member create v = v |> RealVector4.create |> StokesVector
+
+
+    type StokesSystem = 
+        {
+            incidentStokes : StokesVector
+            reflectedStokes : StokesVector
+            transmittedStokes : StokesVector
+        }

@@ -30,8 +30,15 @@ module MathNetNumericsMath =
                 let (RealVector v) = this
                 v.[i]
 
-        static member (*) (RealVector a, RealVector b) : double = a * b
+        static member (*) (RealVector a, RealVector b) = a * b
+        static member (*) (a : double, RealVector b) = a * b |> RealVector
+        static member (*) (RealVector a, b : double) = b * a |> RealVector
+        static member (/) (RealVector a, b : double) = a / b |> RealVector
         static member create (a : #seq<double>) = vector a |> RealVector
+
+        member this.norm = 
+            let (RealVector v) = this
+            v * v |> sqrt
 
 
     type ComplexVector = 
@@ -74,6 +81,8 @@ module MathNetNumericsMath =
         member this.im = 
             let (ComplexVector v) = this
             v.Imaginary() |> RealVector
+
+        member this.norm = (this * this.conjugate).Real |> sqrt
 
 
     type RealMatrix = 

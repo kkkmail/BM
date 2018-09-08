@@ -16,10 +16,10 @@ module BerremanMatrix =
 
 
     let normalize (v : #seq<Complex>) = 
-        printfn "v = %A" (v |> List.ofSeq)
+        //printfn "v = %A" (v |> List.ofSeq)
         let norm = v |> Seq.fold (fun acc r -> acc + r.Real * r.Real + r.Imaginary * r.Imaginary) 0.0 |> sqrt |> cplx
         let retVal = v |> Seq.map (fun e -> e / norm)
-        printfn "retVal = %A" (retVal |> List.ofSeq)
+        //printfn "retVal = %A" (retVal |> List.ofSeq)
         retVal
 
 
