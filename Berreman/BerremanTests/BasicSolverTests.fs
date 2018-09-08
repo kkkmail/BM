@@ -144,103 +144,109 @@ type BasicSolverTests(output : ITestOutputHelper) =
             createStdGlassLightAt7Degrees "Snell's law for vacuum film + thin standard glass film on standard transparent glass, 7 degrees incidence angle."
             |> addLayer stdGlassLayer
             |> addLayer vacuumLayer
-
-            //(
-            //    let create opticalProperties incidenceAngle waveLength = 
-            //        let n1SinFita = N1SinFita.create 1.0 incidenceAngle
-            //
-            //        {
-            //            description = "Snell's law for standard transparent glass, normal incidence angle."
-            //            opticalSystem = 
-            //                {
-            //                    upper = OpticalProperties.vacuum
-            //                    films =
-            //                        [
-            //                        ]
-            //                    lower = opticalProperties
-            //                }
-            //            info = 
-            //                {
-            //                    wavelength = waveLength
-            //                    refractionIndex = RefractionIndex.defaultValue
-            //                    incidenceAngle = incidenceAngle
-            //                    polarization = Polarization.defaultValue
-            //                    ellipticity = Ellipticity.defaultValue
-            //                }
-            //            expected = 
-            //                {
-            //                    incident = 
-            //                        {
-            //                            wavelength = waveLength
-            //                            n1SinFita = n1SinFita
-            //                            e = 
-            //                                [ 1.; 0.; 0.0;]
-            //                                |> ComplexVector3.fromRe
-            //                            h = 
-            //                                [  0.; 1.0000000000000002; 0.0 ]
-            //                                |> ComplexVector3.fromRe
-            //                        }
-            //                    reflected = 
-            //                        {
-            //                            wavelength = waveLength
-            //                            n1SinFita = n1SinFita
-            //                            e = 
-            //                                [ -0.20634920634920656; 0.; 0.0 ]
-            //                                |> ComplexVector3.fromRe
-            //                            h = 
-            //                                [ 0.; 0.2063492063492065; 0.0 ]
-            //                                |> ComplexVector3.fromRe
-            //                        }
-            //                    transmitted = 
-            //                        {
-            //                            wavelength = waveLength
-            //                            n1SinFita = n1SinFita
-            //                            e = 
-            //                                [ 0.7936507936507936; 0.; 0. ]
-            //                                |> ComplexVector3.fromRe
-            //                            h = 
-            //                                [ 0.; 1.206349206349207; 0. ]
-            //                                |> ComplexVector3.fromRe
-            //                        }
-            //                }
-            //        }
-            //
-            //    create OpticalProperties.transparentGlass IncidenceAngle.normal (WaveLength.nm 600.0)
-            //)
-
-            ///////////////////////////////////////////////////////
-            //{
-            //    description = "One layer homegenious media, normal incidence angle."
-            //    opticalSystem = 
-            //        {
-            //            upper = OpticalProperties.vacuum
-            //            films =
-            //                [
-            //                    {
-            //                        properties = OpticalProperties.transparentGlass
-            //                        thickness = Thickness.nm 75.0
-            //                    }
-            //                ]
-            //            lower = OpticalProperties.transparentGlass
-            //        }
-            //    light = 
-            //        {
-            //            wavelength = WaveLength.nm 600.0
-            //            refractionIndex = RefractionIndex.defaultValue
-            //            incidenceAngle = Angle.degree 0.0 |> IncidenceAngle
-            //            polarization = Polarization.defaultValue
-            //            ellipticity = Ellipticity.defaultValue
-            //        }
-            //    expected = 
-            //        [
-            //            [ createComplex 0.36812455268467836 0.; createComplex 0. 0.6116950565054284; createComplex 0. 0.; createComplex 0. 0. ]
-            //            [ createComplex 0. 1.4132602585501424; createComplex 0.3681245526846782 0.; createComplex 0. 0.; createComplex 0. 0. ]
-            //            [ createComplex 0. 0.; createComplex 0. 0.; createComplex 0.36812455268467836 0.; createComplex 0. 0.6116950565054284 ]
-            //            [ createComplex 0. 0.; createComplex 0. 0.; createComplex 0. 1.4132602585501424; createComplex 0.3681245526846782 0.]
-            //        ]
-            //        |> ComplexMatrix.create
-            //}
         ]
+
+
+    let randomData = 
+        let opticalProperties = OpticalProperties.transparentGlass
+        let incidenceAngle = Angle.degree 50.0 |> IncidenceAngle
+        let waveLength = WaveLength.nm 394.0
+        let n1SinFita = N1SinFita.create 1.0 incidenceAngle
+        let beta = Angle.degree 28.0
+        let ellipticity = Ellipticity 0.41378575406900664
+
+        {
+            description = "Random 1-layer film (r04)."
+            opticalSystem = 
+                {
+                    upper = OpticalProperties.vacuum
+                    films =
+                        [
+                            {
+                                properties = 
+                                    {
+                                        eps = 
+                                            [
+                                                [ createComplex 2.9951561294777456 0.004168150397966634; createComplex -0.5829262349784788 0.00044895006717315185; createComplex 1.1068496972419206 -0.0007575417483233533 ]
+                                                [ createComplex -0.5829262349784788 0.00044895006717315185; createComplex 3.2091311788032657 0.0026794460594853266; createComplex 0.1037267395830751 0.0002308596522789394 ]
+                                                [ createComplex 1.1068496972419206 -0.0007575417483233533; createComplex 0.1037267395830751 0.00023085965227893945; createComplex 3.8412649402347565 0.005053313374866639 ]
+                                            ]
+                                            |> ComplexMatrix3x3.create
+                                        mu = 
+                                            [
+                                                [ 1.0465011813510727; 0.005487385174496151; -0.0033534986252906213 ]
+                                                [ 0.0054873851744962066; 1.027948494963144; 0.0035387414684809326 ]
+                                                [ -0.0033534986252905657; 0.0035387414684808494; 1.0436182675132528 ]
+                                            ]
+                                            |> ComplexMatrix3x3.fromRe
+                                        rho = 
+                                            [
+                                                [ -0.05646672882733954; -0.000710796791700627; 0.0116005197723429 ]
+                                                [ -0.0007107967917006237; -0.05672604545420977; -0.014253526385969741 ]
+                                                [ 0.0116005197723429; -0.014253526385969741; -0.017920566339098533 ]
+                                            ]
+                                            |> ComplexMatrix3x3.fromIm
+                                    }
+                                thickness = Thickness.nm 86.0
+                            }
+                        ]
+                    lower = opticalProperties
+                }
+            info = 
+                {
+                    wavelength = waveLength
+                    refractionIndex = RefractionIndex.vacuum
+                    incidenceAngle = incidenceAngle
+                    polarization = Polarization beta
+                    ellipticity = ellipticity
+                }
+            expected = 
+                {
+                    incident = 
+                        {
+                            wavelength = waveLength
+                            n1SinFita = n1SinFita
+                            opticalProperties = OpticalProperties.vacuum
+                            e = 
+                                [ createComplex 0.5244250568473124 -0.1153807433449855; createComplex 0.4338007527265541 0.3375914755203022; createComplex -0.6249854455442077 0.13750541539757702 ]
+                                |> ComplexVector3.create
+                            h = 
+                                [ createComplex -0.27884174892532315 -0.21699961760024683; createComplex 0.8158605563399906 -0.17950057158265997; createComplex 0.3323106560470066 0.258610073866664 ]
+                                |> ComplexVector3.create
+                        }
+                    reflected = 
+                        {
+                            wavelength = waveLength
+                            n1SinFita = n1SinFita
+                            opticalProperties = OpticalProperties.vacuum
+                            e = 
+                                [ createComplex -0.007302575642388954 0.024443690065852296; createComplex -0.08450713524591316 -0.15735967361301947; createComplex -0.008702870757008006 0.029130855452238875 ]
+                                |> ComplexVector3.create
+                            h = 
+                                [ createComplex -0.0543201394661776 -0.10114884846276676; createComplex 0.011360790924314978 -0.03802763105183758; createComplex -0.0647362213590357 -0.12054450354226964 ]
+                                |> ComplexVector3.create
+                        }
+                    transmitted = 
+                        {
+                            wavelength = waveLength
+                            n1SinFita = n1SinFita
+                            opticalProperties = opticalProperties
+                            e = 
+                                [ createComplex 0.07161377408818743 0.5399618144532632; createComplex -0.20383484246715727 0.17727725562901583; createComplex -0.041786434962015576 -0.3150661940234894 ]
+                                |> ComplexVector3.create
+                            h = 
+                                [ createComplex 0.2676046341577096 -0.2327384983003056; createComplex 0.1260284311223 0.950243737436539; createComplex -0.1561465483859981 0.13580225656599015 ]
+                                |> ComplexVector3.create
+                        }
+                }
+
+            stokes = None
+                //{
+                //    incidentStokes = [ 1.; 1.; 0.; 0. ] |> StokesVector.create
+                //    reflectedStokes = [ 0.0417427189970538; 0.0417427189970538; 0.; 0. ] |> StokesVector.create
+                //    transmittedStokes  = [ 0.6277542496577975; 0.6277542496577975; 0.; 0. ] |> StokesVector.create
+                //} |> Some
+        }
 
 
     member __.runTest (d : BaseOpticalSystemTestData) (c : ResultComparisionType) = 
@@ -292,3 +298,6 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
     [<Fact>]
     member this.basicSolverTest3 () = this.runTest (data.[3]) Intensity
+
+    [<Fact>]
+    member this.basicSolverTestRandom () = this.runTest randomData Field

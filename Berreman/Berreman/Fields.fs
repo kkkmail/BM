@@ -7,6 +7,7 @@ module Fields =
 
     open Geometry
     open MaterialProperties
+    open Constants
 
     // CGS usits are used.
 
@@ -133,7 +134,7 @@ module Fields =
         member this.normal = 
             let norm = this.s.norm
 
-            if norm > Constants.almostZero
+            if norm > almostZero
             then Some (this.s / norm)
             else None
 
@@ -166,8 +167,8 @@ module Fields =
                 wavelength = info.wavelength
                 n1SinFita = info.n1SinFita
                 opticalProperties = o
-                e = a0 * e0 + a90 * e90
-                h = a0 * h0 + a90 * h90
+                e = a0 * e0 + cplxI * a90 * e90
+                h = a0 * h0 + cplxI * a90 * h90
             }
 
 

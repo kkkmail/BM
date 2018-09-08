@@ -15,7 +15,7 @@ opts =
     {
       BDPlotFigures -> False,
       UseEulerAngles -> False,
-      PrintCommonDebugInfo -> True,
+      PrintCommonDebugInfo -> False,
       PrintCommonDebugInfoLevel -> PCDILEVELALL
     };
 (* ============================================== *)

@@ -36,6 +36,18 @@ FuncList =
     PsiPPDegree,
     DeltaPPDegree,
     *)
+      StokesVectorI[1],
+      StokesVectorI[2],
+      StokesVectorI[3],
+      StokesVectorI[4],
+      StokesVectorR[1],
+      StokesVectorR[2],
+      StokesVectorR[3],
+      StokesVectorR[4],
+      StokesVectorT[1],
+      StokesVectorT[2],
+      StokesVectorT[3],
+      StokesVectorT[4],
       {Rx, Ry},
       {Tx, Ty}
     };
