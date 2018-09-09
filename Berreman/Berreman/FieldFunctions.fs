@@ -11,8 +11,8 @@ module FieldFunctions =
     open Media
     open BerremanMatrix
 
-    type EmField 
-        with 
+    type EmField
+        with
         member em.stokesVector =
             let stokes (b : ComplexBasis3) = 
                 let ex = em.e * b.cX
@@ -25,14 +25,16 @@ module FieldFunctions =
 
             thread em.complesBasis stokes
 
+        // (ComplexVector3.cross this.e this.h.conjugate).re
         member em.intensity= em.s.norm
+        member em.intensityX = thread em.complesBasis (fun b -> (ComplexVector3.cross (b.toX em.e) em.h.conjugate).re.norm)
+        member em.intensityY = thread em.complesBasis (fun b -> (ComplexVector3.cross (b.toY em.e) em.h.conjugate).re.norm)
 
         member em.ellipticity : Ellipticity = 
             failwith ""
 
         member em.azimuth : Angle = 
             failwith ""
-
 
         member em.muellerMatrix : MuellerMatrix = 
             failwith ""

@@ -264,6 +264,15 @@ type BasicSolverTests(output : ITestOutputHelper) =
         output.WriteLine("stokesVector (R) = {0}\n", solver.reflectedLight.stokesVector)
         output.WriteLine("stokesVector (T) = {0}\n", solver.transmittedLight.stokesVector)
 
+        output.WriteLine("intensityX (I) = {0}\n", solver.incidentLight.intensityX)
+        output.WriteLine("intensityY (I) = {0}\n", solver.incidentLight.intensityY)
+
+        output.WriteLine("intensityX (R) = {0}\n", solver.reflectedLight.intensityX)
+        output.WriteLine("intensityY (R) = {0}\n", solver.reflectedLight.intensityY)
+
+        output.WriteLine("intensityX (T) = {0}\n", solver.transmittedLight.intensityX)
+        output.WriteLine("intensityY (T) = {0}\n", solver.transmittedLight.intensityY)
+
         let eI = solver.incidentLight.e
         let hI = solver.incidentLight.h
 
@@ -284,7 +293,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
             verifyVectorEquality output "eT" eT d.expected.transmitted.e
             verifyVectorEquality output "hT" hT d.expected.transmitted.h
         | Intensity ->
-            ()
+            failwith ""
 
 
     [<Fact>]

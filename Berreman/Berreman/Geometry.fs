@@ -41,6 +41,8 @@ module Geometry =
             v.norm
 
         static member (*) (RealVector3 a, RealVector3 b) : double = a * b
+        static member (*) (a : double, RealVector3 b) = a * b |> RealVector3
+        static member (*) (RealVector3 a, b : double) = b * a
         static member (/) (RealVector3 a, b : double) = a / b |> RealVector3
         static member create a = RealVector.create a |> RealVector3
 
@@ -53,13 +55,21 @@ module Geometry =
             |> RealVector3.create
 
 
-    // Orthonormal basis
+    /// Orthonormal real basis
     type RealBasis3 = 
         {
             vX : RealVector3
             vY : RealVector3
             vZ : RealVector3
         }
+        member b.toX (v : RealVector3) = 
+            b.vX * (b.vX * v)
+
+        member b.toY (v : RealVector3) = 
+            b.vY * (b.vY * v)
+
+        member b.toZ (v : RealVector3) = 
+            b.vZ * (b.vZ * v)
 
 
     type RealVector4 =
@@ -131,13 +141,26 @@ module Geometry =
         static member (*) (ComplexVector3 a, b : Complex) = 
             a * b |> ComplexVector3
 
+        member this.norm = 
+            let (ComplexVector3 v) = this
+            v.norm
 
+
+    /// Orthonormal complex basis
     type ComplexBasis3 = 
         {
             cX : ComplexVector3
             cY : ComplexVector3
             cZ : ComplexVector3
         }
+        member b.toX (v : ComplexVector3) = 
+            b.cX * (b.cX * v)
+
+        member b.toY (v : ComplexVector3) = 
+            b.cY * (b.cY * v)
+
+        member b.toZ (v : ComplexVector3) = 
+            b.cZ * (b.cZ * v)
 
 
     type ComplexVector4 = 

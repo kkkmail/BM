@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanTests.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BerremanTests.fsproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/Example_01_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_01_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/Example_06_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_06_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -86,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7973">
-              <caret line="932" column="51" selection-start-line="932" selection-start-column="51" selection-end-line="932" selection-end-column="51" />
+            <state relative-caret-position="489">
+              <caret line="479" selection-start-line="479" selection-end-line="479" />
               <folding>
                 <element signature="e#1260#1719#0" />
                 <element signature="e#2310#2803#0" />
@@ -102,9 +96,6 @@
                 <element signature="e#10045#10637#0" />
                 <element signature="e#14148#15019#0" />
                 <element signature="e#15099#16146#0" />
-                <element signature="e#18117#18357#0" />
-                <element signature="e#18412#18516#0" />
-                <element signature="e#18594#18683#0" />
                 <element signature="e#18717#18861#0" />
                 <element signature="e#20061#20322#0" />
               </folding>
@@ -116,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="474">
-              <caret line="116" column="6" lean-forward="true" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
+              <caret line="116" column="6" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
               <folding>
                 <element signature="e#685#2514#0" />
               </folding>
@@ -128,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="62">
-              <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+              <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -145,17 +136,17 @@
       <file leaf-file-name="BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-357">
-              <caret line="81" column="52" lean-forward="true" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
+            <state relative-caret-position="918">
+              <caret line="81" column="52" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1954">
-              <caret line="1099" column="21" selection-start-line="1099" selection-start-column="21" selection-end-line="1099" selection-end-column="21" />
+            <state relative-caret-position="67">
+              <caret line="428" column="22" selection-start-line="428" selection-start-column="22" selection-end-line="428" selection-end-column="22" />
               <folding>
                 <element signature="e#27038#28610#0" />
               </folding>
@@ -176,8 +167,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>IncidentLightKxFunc</find>
-      <find>MediaUpperRefractionIndex</find>
       <find>CalcNew</find>
       <find>IncidentLighAmplitude</find>
       <find>LayeredSystemGetMedia</find>
@@ -199,13 +188,15 @@
       <find>EGVec1</find>
       <find>EGVal1Hlp</find>
       <find>toFSharpMatrix</find>
-      <find>EGGetOrder</find>
       <find>IFull</find>
       <find>Elt</find>
       <find>FieldEllipticity</find>
       <find>pVector</find>
       <find>StokesVector</find>
       <find>CalculateEllipsometricData</find>
+      <find>EGGetOrder</find>
+      <find>Rx</find>
+      <find>Ry</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -259,12 +250,12 @@
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08a_2L_Thin_Film.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_08r_2L_RandomThin_Film.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
-        <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m" />
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
+        <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
       </list>
     </option>
   </component>
@@ -291,7 +282,7 @@
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
               <item name="BM" type="462c0819:PsiDirectoryNode" />
-              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="Kernel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
@@ -443,7 +434,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18443997" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26626426" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -704,16 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1954">
-          <caret line="1099" column="21" selection-start-line="1099" selection-start-column="21" selection-end-line="1099" selection-end-column="21" />
-          <folding>
-            <element signature="e#27038#28610#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04_Snell_Law_For_Anisotropic_Media.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-187">
@@ -721,24 +702,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="81" column="52" lean-forward="true" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06r_1L_RandomThin_Film.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="62">
-          <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
-          <caret line="116" column="6" lean-forward="true" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
+          <caret line="116" column="6" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
           <folding>
             <element signature="e#685#2514#0" />
           </folding>
@@ -754,8 +728,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7973">
-          <caret line="932" column="51" selection-start-line="932" selection-start-column="51" selection-end-line="932" selection-end-column="51" />
+        <state relative-caret-position="489">
+          <caret line="479" selection-start-line="479" selection-end-line="479" />
           <folding>
             <element signature="e#1260#1719#0" />
             <element signature="e#2310#2803#0" />
@@ -767,11 +741,25 @@
             <element signature="e#10045#10637#0" />
             <element signature="e#14148#15019#0" />
             <element signature="e#15099#16146#0" />
-            <element signature="e#18117#18357#0" />
-            <element signature="e#18412#18516#0" />
-            <element signature="e#18594#18683#0" />
             <element signature="e#18717#18861#0" />
             <element signature="e#20061#20322#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_04r_Snell_Law_For_RandomAnisotropic_Media.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="81" column="52" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="428" column="22" selection-start-line="428" selection-start-column="22" selection-end-line="428" selection-end-column="22" />
+          <folding>
+            <element signature="e#27038#28610#0" />
           </folding>
         </state>
       </provider>
