@@ -135,6 +135,13 @@ module Solvers =
                 eh = eht |> BerremanFieldEH
             }.toEmField ()
 
+        let ems = 
+            {
+                incident= i
+                reflected = r
+                transmitted = t
+            }
+
         member __.reflectedLight = r
         member __.transmittedLight = t
         member __.incidentLight = i
@@ -144,3 +151,4 @@ module Solvers =
         member __.coeffTbl = coeffTblVal
         member __.freeTbl = freeTblVal
         member __.cfm = cfmVal
+        member __.emSys = ems
