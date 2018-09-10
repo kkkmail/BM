@@ -143,7 +143,7 @@ module Fields =
         /// Basis in the system of coordinates where ez is the directon of propagation,
         /// ey lays in the plane of media boundary and is orthogonal to directon of propagation,
         /// and ex = cross ey ez.
-        member this.complesBasis = 
+        member this.complexBasis = 
             let cy = [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
             thread this.complexNormal (fun cz -> { cX = ComplexVector3.cross cy cz; cY = cy; cZ = cz})
 

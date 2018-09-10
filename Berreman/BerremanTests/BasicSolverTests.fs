@@ -264,14 +264,17 @@ type BasicSolverTests(output : ITestOutputHelper) =
         output.WriteLine("stokesVector (R) = {0}\n", solver.reflectedLight.stokesVector)
         output.WriteLine("stokesVector (T) = {0}\n", solver.transmittedLight.stokesVector)
 
-        output.WriteLine("intensityX (I) = {0}\n", solver.incidentLight.intensityX)
-        output.WriteLine("intensityY (I) = {0}\n", solver.incidentLight.intensityY)
+        output.WriteLine("I = {0}\n", solver.emSys.i)
+        output.WriteLine("Ip = {0}\n", solver.emSys.ip)
+        output.WriteLine("Is = {0}\n", solver.emSys.is)
 
-        output.WriteLine("intensityX (R) = {0}\n", solver.reflectedLight.intensityX)
-        output.WriteLine("intensityY (R) = {0}\n", solver.reflectedLight.intensityY)
+        output.WriteLine("R = {0}\n", solver.emSys.r)
+        output.WriteLine("Rp = {0}\n", solver.emSys.rp)
+        output.WriteLine("Rs = {0}\n", solver.emSys.rs)
 
-        output.WriteLine("intensityX (T) = {0}\n", solver.transmittedLight.intensityX)
-        output.WriteLine("intensityY (T) = {0}\n", solver.transmittedLight.intensityY)
+        output.WriteLine("T = {0}\n", solver.emSys.t)
+        output.WriteLine("Tp = {0}\n", solver.emSys.tp)
+        output.WriteLine("Ts = {0}\n", solver.emSys.ts)
 
         let eI = solver.incidentLight.e
         let hI = solver.incidentLight.h

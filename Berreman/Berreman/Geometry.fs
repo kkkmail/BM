@@ -71,6 +71,13 @@ module Geometry =
         member b.toZ (v : RealVector3) = 
             b.vZ * (b.vZ * v)
 
+        static member defaultValue = 
+            {
+                vX = [ 1.0; 0.0; 0.0 ] |> RealVector3.create
+                vY = [ 0.0; 1.0; 0.0 ] |> RealVector3.create
+                vZ = [ 0.0; 0.0; 1.0 ] |> RealVector3.create
+            }
+
 
     type RealVector4 =
         | RealVector4 of RealVector
@@ -154,13 +161,20 @@ module Geometry =
             cZ : ComplexVector3
         }
         member b.toX (v : ComplexVector3) = 
-            b.cX * (b.cX * v)
+            b.cX * ((b.cX.conjugate * v) / (b.cX * b.cX.conjugate))
 
         member b.toY (v : ComplexVector3) = 
-            b.cY * (b.cY * v)
+            b.cY * ((b.cY.conjugate * v)/ (b.cY * b.cY.conjugate))
 
         member b.toZ (v : ComplexVector3) = 
-            b.cZ * (b.cZ * v)
+            b.cZ * ((b.cZ.conjugate * v)/ (b.cZ * b.cZ.conjugate))
+
+        static member defaultValue = 
+            {
+                cX = [ cplx 1.0; cplx 0.0; cplx 0.0 ] |> ComplexVector3.create
+                cY = [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
+                cZ = [ cplx 0.0; cplx 0.0; cplx 1.0 ] |> ComplexVector3.create
+            }
 
 
     type ComplexVector4 = 
