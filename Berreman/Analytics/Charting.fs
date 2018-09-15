@@ -52,11 +52,13 @@ module Charting =
                 ellipticity = Ellipticity.defaultValue
             }
 
-        let getSol a = BaseOpticalSystemSolver(system, getLight a)
+        let getSol a = 
+            let sol = BaseOpticalSystemSolver(system, getLight a)
+            sol.reflectedLight.s.z
 
 
-        failwith ""
+        [| for i in 1..89 -> (float i, (float i |> Angle.degree |> getSol)) |]
 
     let plot() = 
-
-        failwith ""
+        Chart.Line(gePlotData1())
+        |> Chart.Show

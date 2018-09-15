@@ -32,4 +32,5 @@ open Berreman
 open Analytics.Charting
 
 //===========================================================
-plotData ()
+plot ()
+printfn "Completed."
