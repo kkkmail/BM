@@ -274,13 +274,13 @@ deltaZero = DiagonalMatrix[{0, 0, 0, 0}];
 M[epsilon : {{_, _, _}, {_, _, _}, {_, _, _}}, mu : {{_, _, _}, {_, _, _}, {_, _, _}}, ro : {{_, _, _}, {_, _, _}, {_, _, _}}, rotr : {{_, _, _}, {_, _, _}, {_, _, _}}] :=
     BlockMatrix[{{epsilon, ro}, {rotr, mu}}];
 (* ============================================== *)
-(*Optiva Rotation 1-Fi (angle between crystal axis and deposition direction.)-rotation around z*)
+(*Optiva Rotation 1 - Fi (angle between crystal axis and deposition direction.)-rotation around z *)
 fRopt1[fi_] := RotationMatrix3D[fi, 0, 0];
 
-(*Optiva Rotation 2-Psi (angle between crystal axis and substrate plane.)-rotation around y (in the opposite direction!!!)*)
+(*Optiva Rotation 2 - Psi (angle between crystal axis and substrate plane.)-rotation around y (in the opposite direction!!!) *)
 fRopt2[psi_] := RotationMatrix3D[0, -Pi / 2, 0].RotationMatrix3D[0, Pi / 2, -psi];
 
-(*Optiva Rotation 3-Alpha (rotation of crystal around its axis.)-rotation around x*)
+(*Optiva Rotation 3 - Alpha (rotation of crystal around its axis.) - rotation around x *)
 fRopt3[alpha_] := RotationMatrix3D[0, alpha, 0];
 
 (*Optiva Combined Rotation (1,2,3).*)

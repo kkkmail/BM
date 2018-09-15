@@ -195,6 +195,14 @@ module Geometry =
         static member fromIm a = a |> ComplexVector.fromIm |> ComplexVector4
 
 
+    type RealMatrix3x3 = 
+        | RealMatrix3x3 of RealMatrix
+        member this.Item
+            with get(i, j) =
+                let (RealMatrix4x4 v) = this
+                v.[i, j]
+
+
     type RealMatrix4x4 = 
         | RealMatrix4x4 of RealMatrix
         member this.Item
@@ -302,9 +310,102 @@ module Geometry =
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
 
+    type RotationX =
+        int
 
-    type RotationType = 
-        | Euler of Angle * Angle * Angle
+    type RotationConvention = 
+        | ZmXpZm of RotationX * RotationX //of (Rotation.zRotation, Rotation.xRotation) // Rotation around (-z), (x'), (-z'')
+        | ZmYmXp // Rotation around (-z), (-y'), (x'')
+
+    and Rotation = 
+        | Rotation of RealMatrix3x3
+
+        // Rotation around x axis.
+        static member xRotation (Angle xAngle) = 
+            [
+                [
+                    1.
+                    0.
+                    0.
+                ]
+                [
+                    0.
+                    cos(xAngle)
+                    -sin(xAngle)
+                ]
+                [
+                    0.
+                    sin(xAngle)
+                    cos(xAngle)
+                ]
+            ]
+
+
+        // Rotation around y axis.
+        static member yRotation (Angle yAngle) = 
+            [
+                [
+                    cos(yAngle)
+                    0.
+                    sin(yAngle)
+                ]
+                [
+                    0.
+                    1.
+                    0.
+                ]
+                [
+                    -sin(yAngle)
+                    0.
+                    cos(yAngle)
+                ]
+            ]
+
+
+        // Rotation around z axis.
+        static member zRotation (Angle zAngle) = 
+            [
+                [
+                    cos(zAngle)
+                    -sin(zAngle)
+                    0.
+                ]
+                [
+                    sin(zAngle)
+                    cos(zAngle)
+                    0.
+                ]
+                [
+                    0.
+                    0.
+                    1.
+                ]
+            ]
+
+
+        // Generated, do not modify.
+        static member create convention (Angle phi) (Angle theta) (Angle psi) = 
+            match convention with 
+            | ZmXpZm ->
+                [
+                    [
+                        cos(phi) * cos(psi) - cos(theta) * sin(phi) * sin(psi)
+                        cos(psi) * sin(phi) + cos(phi) * cos(theta) * sin(psi)
+                        sin(psi) * sin(theta)
+                    ]
+                    [
+                        -(cos(psi) * cos(theta) * sin(phi)) - cos(phi) * sin(psi)
+                        cos(phi) * cos(psi) * cos(theta) - sin(phi) * sin(psi)
+                        cos(psi) * sin(theta)
+                    ]
+                    [
+                        sin(phi) * sin(theta)
+                        -(cos(phi) * sin(theta))
+                        cos(theta)
+                    ]
+                ]
+            | ZmYmXp ->
+                failwith ""
 
 
     //type Rotation (rotation: RotationType) = 
