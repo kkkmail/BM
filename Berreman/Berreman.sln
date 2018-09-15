@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BerremanTests", "BerremanTe
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "OpticalProperties", "OpticalProperties\OpticalProperties.fsproj", "{31A3D7D4-252A-419B-A848-F778C9014748}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analytics", "Analytics\Analytics.fsproj", "{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{31A3D7D4-252A-419B-A848-F778C9014748}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31A3D7D4-252A-419B-A848-F778C9014748}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31A3D7D4-252A-419B-A848-F778C9014748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

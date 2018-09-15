@@ -13,7 +13,7 @@ module MatrixExp =
     type ComplexMatrix
     with
         static member identity (n : int) : ComplexMatrix = 
-            diagonalMatrix n (cplx 1.0)
+            complexDiagonalMatrix n (cplx 1.0)
 
         member this.lInfinityNorm () : double =
             let (ComplexMatrix m) = this

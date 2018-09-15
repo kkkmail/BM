@@ -22,8 +22,6 @@ module MaterialProperties =
             mu : ComplexMatrix3x3
             rho : ComplexMatrix3x3
         }
-        //member this.rotate (rotation : Rotation) : OpticalTensor = 
-        //    failwith ""
 
         member this.rhoT : ComplexMatrix3x3 = 
             let (ComplexMatrix3x3 r) = this.rho
@@ -37,3 +35,14 @@ module MaterialProperties =
             }
 
         static member vacuum = RefractionIndex.vacuum |> OpticalProperties.defaultValue
+
+        member this.rotate (Rotation r) = 
+            let c = r.toComplex()
+            let cInv = c.inverse
+            let rotate e = cInv * e * c
+
+            {
+                eps = this.eps |> rotate
+                mu = this.mu |> rotate
+                rho = this.rho |> rotate
+            }

@@ -264,8 +264,20 @@ module Geometry =
         static member fromRe a = a |> ComplexMatrix.fromRe |> ComplexMatrix3x3
         static member fromIm a = a |> ComplexMatrix.fromIm |> ComplexMatrix3x3
 
+        member this.inverse = 
+            let (ComplexMatrix3x3 m) = this
+            m.inverse |> ComplexMatrix3x3
 
-    // It is only needed for 4x4 matrices
+
+    type RealMatrix3x3
+        with 
+        member this.toComplex () = 
+            let (RealMatrix3x3 (RealMatrix m)) = this
+            let len = m.RowCount
+            [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> cplx m.[i, j] |] |] |> ComplexMatrix3x3.create
+
+
+    // It is only needed for 4x4 matrices here.
     type EigenValueVector = 
         {
             value : Complex
@@ -382,64 +394,15 @@ module Geometry =
             | PiZmXpPiZm -> [ (fun a -> zRotation (Angle.pi - a)); xRotation; (fun a -> zRotation (Angle.pi - a)) ]
 
 
-    and Rotation = 
+    type Rotation = 
         | Rotation of RealMatrix3x3
 
-        //// Rotation around x axis.
-        //static member xRotation (Angle xAngle) = 
-        //    [
-        //        [ 1.; 0.; 0. ]
-        //        [ 0.; cos(xAngle); -sin(xAngle) ]
-        //        [ 0.; sin(xAngle); cos(xAngle) ]
-        //    ]
-        //    |> RealMatrix3x3.create
+        static member create convention phi theta psi = 
+            [ phi; theta; psi ]
+            |> List.zip (RotationConvention.conventionMapping convention)
+            |> List.map (fun (r, a) -> r a)
+            |> List.fold (fun acc r -> r * acc) RealMatrix3x3.identity
 
-
-        //// Rotation around y axis.
-        //static member yRotation (Angle yAngle) = 
-        //    [
-        //        [ cos(yAngle); 0.; sin(yAngle) ]
-        //        [ 0.; 1.; 0. ]
-        //        [ -sin(yAngle); 0.; cos(yAngle) ]
-        //    ]
-        //    |> RealMatrix3x3.create
-
-
-        //// Rotation around z axis.
-        //static member zRotation (Angle zAngle) = 
-        //    [
-        //        [ cos(zAngle); -sin(zAngle); 0. ]
-        //        [ sin(zAngle); cos(zAngle); 0. ]
-        //        [ 0.; 0.; 1. ]
-        //    ]
-        //    |> RealMatrix3x3.create
-
-
-        // Generated, do not modify.
-        static member create convention (Angle phi) (Angle theta) (Angle psi) = 
-            match convention with 
-            | ZmXpZm ->
-                [
-                    [
-                        cos(phi) * cos(psi) - cos(theta) * sin(phi) * sin(psi)
-                        cos(psi) * sin(phi) + cos(phi) * cos(theta) * sin(psi)
-                        sin(psi) * sin(theta)
-                    ]
-                    [
-                        -(cos(psi) * cos(theta) * sin(phi)) - cos(phi) * sin(psi)
-                        cos(phi) * cos(psi) * cos(theta) - sin(phi) * sin(psi)
-                        cos(psi) * sin(theta)
-                    ]
-                    [
-                        sin(phi) * sin(theta)
-                        -(cos(phi) * sin(theta))
-                        cos(theta)
-                    ]
-                ]
-            | ZmYmXp ->
-                failwith ""
-
-
-    //type Rotation (rotation: RotationType) = 
-    //    inherit Matrix3x3 ()
-
+        static member createZmXpZm = Rotation.create ZmXpZm
+        static member createZmYpXp = Rotation.create ZmYpXp
+        static member createPiZmXpPiZm = Rotation.create PiZmXpPiZm
