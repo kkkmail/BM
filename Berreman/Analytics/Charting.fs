@@ -53,11 +53,13 @@ module Charting =
             }
 
         let getSol a = 
+            printfn "a = %A" a
             let sol = BaseOpticalSystemSolver(system, getLight a)
+            printfn "sol = %A" sol
             sol.reflectedLight.s.z
 
 
-        [| for i in 1..89 -> (float i, (float i |> Angle.degree |> getSol)) |]
+        [| for i in 7..2..19 -> (float i, (float i |> Angle.degree |> getSol)) |]
 
     let plot() = 
         Chart.Line(gePlotData1())
