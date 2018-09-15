@@ -45,10 +45,10 @@ module Fields =
 
     type IncidenceAngle = 
         | IncidenceAngle of Angle
-        static member create (p : double) =
+        static member create (Angle p) =
             (p % (pi / 2.0) + pi) % (pi / 2.0) |> Angle |> IncidenceAngle
 
-        static member normal = IncidenceAngle.create 0.0
+        static member normal = IncidenceAngle.create (Angle 0.0)
 
 
     // n1 * sin(fita), where fita is the incidence angle and n1 is the refraction index of upper media.

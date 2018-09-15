@@ -36,7 +36,24 @@ module Charting =
 
 
     let gePlotData1() : (float * float)[] =
-        let x = 0
+        let system = 
+            {
+                upper = OpticalProperties.vacuum
+                films = []
+                lower = OpticalProperties.transparentGlass
+            }
+
+        let getLight a = 
+            {
+                wavelength = WaveLength.nm 600.0
+                refractionIndex = RefractionIndex.vacuum
+                incidenceAngle = IncidenceAngle.create a
+                polarization = Polarization.defaultValue
+                ellipticity = Ellipticity.defaultValue
+            }
+
+        let getSol a = BaseOpticalSystemSolver(system, getLight a)
+
 
         failwith ""
 
