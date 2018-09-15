@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     19199,        534]
-NotebookOptionsPosition[     18074,        501]
-NotebookOutlinePosition[     18449,        517]
-CellTagsIndexPosition[     18406,        514]
+NotebookDataLength[     34982,        911]
+NotebookOptionsPosition[     33134,        864]
+NotebookOutlinePosition[     33509,        880]
+CellTagsIndexPosition[     33466,        877]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -63,8 +63,8 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"fRopt1", "[", "fi_", "]"}], ":=", 
     RowBox[{"RotationMatrix3D", "[", 
-     RowBox[{"fi", ",", "0", ",", "0"}], "]"}]}], ";"}], "\n", 
-  "\[IndentingNewLine]", 
+     RowBox[{"fi", ",", "0", ",", "0"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{"Optiva", " ", "Rotation", " ", "2"}], "-", 
@@ -78,8 +78,7 @@ Cell[BoxData[{
      RowBox[{"(", 
       RowBox[{"in", " ", "the", " ", "opposite", " ", 
        RowBox[{
-        RowBox[{"direction", "!!"}], "!"}]}], ")"}]}]}], " ", 
-   "*)"}]}], "\[IndentingNewLine]", 
+        RowBox[{"direction", "!!"}], "!"}]}], ")"}]}]}], " ", "*)"}]}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -92,8 +91,7 @@ Cell[BoxData[{
      RowBox[{"RotationMatrix3D", "[", 
       RowBox[{"0", ",", 
        RowBox[{"Pi", "/", "2"}], ",", 
-       RowBox[{"-", "psi"}]}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]", 
+       RowBox[{"-", "psi"}]}], "]"}]}]}], ";"}], "\[IndentingNewLine]", "\n", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{"Optiva", " ", "Rotation", " ", "3"}], "-", 
@@ -102,14 +100,15 @@ Cell[BoxData[{
       RowBox[{
       "rotation", " ", "of", " ", "crystal", " ", "around", " ", "its", " ", 
        RowBox[{"axis", "."}]}], ")"}]}], "-", 
-    RowBox[{"rotation", " ", "around", " ", "x"}]}], " ", "*)"}]}], "\n", 
+    RowBox[{"rotation", " ", "around", " ", "x"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
     RowBox[{"fRopt3", "[", "alpha_", "]"}], ":=", 
     RowBox[{"RotationMatrix3D", "[", 
-     RowBox[{"0", ",", "alpha", ",", "0"}], "]"}]}], ";"}], 
-  "\[IndentingNewLine]", "\n", 
+     RowBox[{"0", ",", "alpha", ",", "0"}], "]"}]}], ";"}], "\n", 
+  "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{"Optiva", " ", "Combined", " ", "Rotation", " ", 
     RowBox[{
@@ -249,63 +248,70 @@ Cell[BoxData[{
    RowBox[{"Print", "[", 
     RowBox[{"\"\<zRot = \>\"", ",", " ", 
      RowBox[{"zRot", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";"}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"ZmXpZm", "=", 
-     RowBox[{"RotationMatrix3D", "[", 
-      RowBox[{"phi", ",", "theta", ",", "psi"}], "]"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"Print", "[", 
-     RowBox[{"\"\<ZmXpZm = \>\"", ",", " ", 
-      RowBox[{"ZmXpZm", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]"}], "\n", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"(*", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"ZmYmXp", "=", 
-     RowBox[{"fRopt", "[", 
-      RowBox[{"phi", ",", "theta", ",", "psi"}], "]"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"Print", "[", 
-     RowBox[{"\"\<ZmYmXp = \>\"", ",", " ", 
-      RowBox[{"ZmYmXp", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";", 
-    "\[IndentingNewLine]", "\[IndentingNewLine]", 
-    RowBox[{"ZmYmXp1", " ", "=", " ", 
-     RowBox[{"(", 
+  RowBox[{"ZmXpZm", "=", 
+   RowBox[{"RotationMatrix3D", "[", 
+    RowBox[{"phi", ",", "theta", ",", "psi"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<ZmXpZm = \>\"", ",", " ", 
+     RowBox[{"ZmXpZm", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Optiva", " ", "Rotations"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"ZmYmXp", "=", 
+   RowBox[{"fRopt", "[", 
+    RowBox[{"phi", ",", "theta", ",", "psi"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<ZmYmXp = \>\"", ",", " ", 
+     RowBox[{"ZmYmXp", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ZmYmXm1", " ", "=", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"RotationMatrix", "[", 
       RowBox[{
-       RowBox[{"RotationMatrix", "[", 
-        RowBox[{
-         RowBox[{"-", "psi"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], "]"}], " ", ".", " ", 
-       RowBox[{"RotationMatrix", "[", 
-        RowBox[{
-         RowBox[{"-", "theta"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], "]"}], " ", ".", " ", 
-       RowBox[{"RotationMatrix", "[", 
-        RowBox[{
-         RowBox[{"-", "phi"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "]"}]}], ")"}]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"Print", "[", 
-     RowBox[{"\"\<ZmYmXp1 = \>\"", ",", " ", 
-      RowBox[{"ZmYmXp1", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{"Print", "[", 
-     RowBox[{
-      RowBox[{"(", 
-       RowBox[{"ZmYmXp", " ", "-", " ", "ZmYmXp1"}], ")"}], " ", "//", " ", 
-      "MatrixForm"}], "]"}], ";"}], "\[IndentingNewLine]", "*)"}]}]}], "Input",
+       RowBox[{"-", "psi"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], "]"}], " ", ".", " ", 
+     RowBox[{"RotationMatrix", "[", 
+      RowBox[{
+       RowBox[{"-", "theta"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], "]"}], " ", ".", " ", 
+     RowBox[{"RotationMatrix", "[", 
+      RowBox[{
+       RowBox[{"-", "phi"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "]"}]}], ")"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<ZmYmXm1 = \>\"", ",", " ", 
+    RowBox[{"ZmYmXm1", " ", "//", " ", "toFSharpMatrix"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"ZmYmXp", " ", "-", " ", "ZmYmXm1"}], ")"}], " ", "//", " ", 
+    "MatrixForm"}], "]"}], ";"}], "\[IndentingNewLine]"}], "Input",
  CellChangeTimes->{{3.7459968449607973`*^9, 3.7459968507168217`*^9}, {
   3.745996917269455*^9, 3.7459969199776955`*^9}, {3.7459973756185637`*^9, 
   3.7459974521122026`*^9}, {3.74599756759188*^9, 3.745997716949808*^9}, {
   3.745997798020363*^9, 3.7459978483044667`*^9}, {3.7459979317146587`*^9, 
   3.745998318128581*^9}, {3.7459983969858685`*^9, 3.7459984076756425`*^9}, {
-  3.746000335702915*^9, 
-  3.7460005028386045`*^9}},ExpressionUUID->"c8ad0c64-7196-44c4-bdc4-\
+  3.746000335702915*^9, 3.7460005028386045`*^9}, {3.746020537235401*^9, 
+  3.746020543779386*^9}, {3.746020574736518*^9, 
+  3.746020594433575*^9}},ExpressionUUID->"c8ad0c64-7196-44c4-bdc4-\
 54df1b5fcfa0"],
 
 Cell[BoxData[
@@ -332,9 +338,9 @@ Cell[BoxData[
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{
-  3.7460005054523926`*^9},ExpressionUUID->"c2da01e8-8fdc-4f26-a186-\
-b38bff31d3f6"],
+ CellChangeTimes->{3.7460005054523926`*^9, 
+  3.746020546339113*^9},ExpressionUUID->"a41fd5c1-fdd9-42f9-b45a-\
+6fe1cef233e9"],
 
 Cell[CellGroupData[{
 
@@ -370,9 +376,9 @@ Cell[BoxData[
       Sin[$CellContext`xAngle], 
       Cos[$CellContext`xAngle]}}]],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.746000505455405*^9},ExpressionUUID->"1789e980-4b1f-4ad9-93ca-\
-eccac7f0a4c9"],
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463594856`*^9},ExpressionUUID->"14347594-66ec-4fca-b834-\
+ad0d6a4c55c9"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -387,9 +393,9 @@ Cell[BoxData[
     cos(xAngle)\n        -sin(xAngle)\n    ]\n    [\n        0\n        \
 sin(xAngle)\n        cos(xAngle)\n    ]\n]\n"],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.7460005054593725`*^9},ExpressionUUID->"ed1d88df-6020-439b-a7d3-\
-ae3ec15f4cae"],
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.746020546362424*^9},ExpressionUUID->"f26b7f99-c5de-4fb8-82bb-\
+e6453b254904"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -423,9 +429,9 @@ Cell[BoxData[
       Sin[$CellContext`yAngle]}, {0, 1, 0}, {-Sin[$CellContext`yAngle], 0, 
       Cos[$CellContext`yAngle]}}]],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.7460005054633455`*^9},ExpressionUUID->"23f05a0f-8069-4365-9d57-\
-aad58f72608d"],
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463673835`*^9},ExpressionUUID->"593bb803-449e-4e97-ab97-\
+e5448318bfbc"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -440,9 +446,8 @@ Cell[BoxData[
   [\n        0\n        1\n        0\n    ]\n    [\n        -sin(yAngle)\n    \
     0\n        cos(yAngle)\n    ]\n]\n"],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.746000505466812*^9},ExpressionUUID->"6dc0f627-ae57-40a7-8718-\
-b30b3510a239"],
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.74602054637284*^9},ExpressionUUID->"49b1fed5-bbec-44b0-b1eb-6ad58eaff782"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -476,9 +481,9 @@ Cell[BoxData[
       Sin[$CellContext`zAngle], 
       Cos[$CellContext`zAngle], 0}, {0, 0, 1}}]],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.7460005054687967`*^9},ExpressionUUID->"d953cf6b-48cc-4c34-a27b-\
-178c8fec05df"],
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463758154`*^9},ExpressionUUID->"76e7333e-0bcf-41ed-9b0c-\
+460e1e8994c1"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -493,9 +498,367 @@ cos(zAngle)\\n        0\\n    ]\\n    [\\n        0\\n        0\\n        \
    [\n        sin(zAngle)\n        cos(zAngle)\n        0\n    ]\n    [\n     \
    0\n        0\n        1\n    ]\n]\n"],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.7460005054712825`*^9},ExpressionUUID->"d03642b0-48e1-41c0-bce4-\
-6ed8640989cf"]
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.746020546377799*^9},ExpressionUUID->"b947d365-5d0a-419d-9a3a-\
+706131c261b5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m = \\n\"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Cos", "[", "psi", "]"}]}], "-", 
+         RowBox[{
+          RowBox[{"Cos", "[", "theta", "]"}], " ", 
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}]}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Cos", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "phi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Cos", "[", "theta", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}]}], 
+        RowBox[{
+         RowBox[{"Sin", "[", "psi", "]"}], " ", 
+         RowBox[{"Sin", "[", "theta", "]"}]}]},
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Cos", "[", "psi", "]"}]}], " ", 
+          RowBox[{"Cos", "[", "theta", "]"}], " ", 
+          RowBox[{"Sin", "[", "phi", "]"}]}], "-", 
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}]}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Cos", "[", "psi", "]"}], " ", 
+          RowBox[{"Cos", "[", "theta", "]"}]}], "-", 
+         RowBox[{
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}]}], 
+        RowBox[{
+         RowBox[{"Cos", "[", "psi", "]"}], " ", 
+         RowBox[{"Sin", "[", "theta", "]"}]}]},
+       {
+        RowBox[{
+         RowBox[{"Sin", "[", "phi", "]"}], " ", 
+         RowBox[{"Sin", "[", "theta", "]"}]}], 
+        RowBox[{
+         RowBox[{"-", 
+          RowBox[{"Cos", "[", "phi", "]"}]}], " ", 
+         RowBox[{"Sin", "[", "theta", "]"}]}], 
+        RowBox[{"Cos", "[", "theta", "]"}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["m = \n", 
+   MatrixForm[{{
+     Cos[$CellContext`phi] Cos[$CellContext`psi] - Cos[$CellContext`theta] 
+      Sin[$CellContext`phi] Sin[$CellContext`psi], 
+      Cos[$CellContext`psi] Sin[$CellContext`phi] + 
+      Cos[$CellContext`phi] Cos[$CellContext`theta] Sin[$CellContext`psi], 
+      Sin[$CellContext`psi] 
+      Sin[$CellContext`theta]}, {-Cos[$CellContext`psi] 
+       Cos[$CellContext`theta] Sin[$CellContext`phi] - Cos[$CellContext`phi] 
+      Sin[$CellContext`psi], 
+      Cos[$CellContext`phi] Cos[$CellContext`psi] Cos[$CellContext`theta] - 
+      Sin[$CellContext`phi] Sin[$CellContext`psi], Cos[$CellContext`psi] 
+      Sin[$CellContext`theta]}, {
+     Sin[$CellContext`phi] Sin[$CellContext`theta], -Cos[$CellContext`phi] 
+      Sin[$CellContext`theta], 
+      Cos[$CellContext`theta]}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463823004`*^9},ExpressionUUID->"eea36efa-5561-49f8-bdaa-\
+f4a11e5225e5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"ZmXpZm = \"\>", 
+   "\[InvisibleSpace]", "\<\"\\n[\\n    [\\n        cos(phi) * cos(psi) - \
+cos(theta) * sin(phi) * sin(psi)\\n        cos(psi) * sin(phi) + cos(phi) * \
+cos(theta) * sin(psi)\\n        sin(psi) * sin(theta)\\n    ]\\n    [\\n      \
+  -(cos(psi) * cos(theta) * sin(phi)) - cos(phi) * sin(psi)\\n        \
+cos(phi) * cos(psi) * cos(theta) - sin(phi) * sin(psi)\\n        cos(psi) * \
+sin(theta)\\n    ]\\n    [\\n        sin(phi) * sin(theta)\\n        \
+-(cos(phi) * sin(theta))\\n        cos(theta)\\n    ]\\n]\\n\"\>"}],
+  SequenceForm[
+  "ZmXpZm = ", 
+   "\n[\n    [\n        cos(phi) * cos(psi) - cos(theta) * sin(phi) * \
+sin(psi)\n        cos(psi) * sin(phi) + cos(phi) * cos(theta) * sin(psi)\n    \
+    sin(psi) * sin(theta)\n    ]\n    [\n        -(cos(psi) * cos(theta) * \
+sin(phi)) - cos(phi) * sin(psi)\n        cos(phi) * cos(psi) * cos(theta) - \
+sin(phi) * sin(psi)\n        cos(psi) * sin(theta)\n    ]\n    [\n        \
+sin(phi) * sin(theta)\n        -(cos(phi) * sin(theta))\n        cos(theta)\n \
+   ]\n]\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463855352`*^9},ExpressionUUID->"611cdf3b-a9a0-440c-b9f0-\
+2171d53be8a6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m = \\n\"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        RowBox[{
+         RowBox[{"Cos", "[", "phi", "]"}], " ", 
+         RowBox[{"Cos", "[", "theta", "]"}]}], 
+        RowBox[{
+         RowBox[{"Cos", "[", "theta", "]"}], " ", 
+         RowBox[{"Sin", "[", "phi", "]"}]}], 
+        RowBox[{"-", 
+         RowBox[{"Sin", "[", "theta", "]"}]}]},
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Cos", "[", "psi", "]"}]}], " ", 
+          RowBox[{"Sin", "[", "phi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Cos", "[", "psi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{"Cos", "[", "theta", "]"}], " ", 
+         RowBox[{"Sin", "[", "psi", "]"}]}]},
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Cos", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Cos", "[", "phi", "]"}]}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Cos", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{"Cos", "[", "psi", "]"}], " ", 
+         RowBox[{"Cos", "[", "theta", "]"}]}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["m = \n", 
+   MatrixForm[{{
+     Cos[$CellContext`phi] Cos[$CellContext`theta], Cos[$CellContext`theta] 
+      Sin[$CellContext`phi], -
+      Sin[$CellContext`theta]}, {-Cos[$CellContext`psi] Sin[$CellContext`phi] + 
+      Cos[$CellContext`phi] Sin[$CellContext`psi] Sin[$CellContext`theta], 
+      Cos[$CellContext`phi] Cos[$CellContext`psi] + 
+      Sin[$CellContext`phi] Sin[$CellContext`psi] Sin[$CellContext`theta], 
+      Cos[$CellContext`theta] Sin[$CellContext`psi]}, {
+     Sin[$CellContext`phi] Sin[$CellContext`psi] + 
+      Cos[$CellContext`phi] Cos[$CellContext`psi] Sin[$CellContext`theta], -
+       Cos[$CellContext`phi] Sin[$CellContext`psi] + 
+      Cos[$CellContext`psi] Sin[$CellContext`phi] Sin[$CellContext`theta], 
+      Cos[$CellContext`psi] Cos[$CellContext`theta]}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463924785`*^9},ExpressionUUID->"bb074ccc-fa1e-415b-b28e-\
+890b258cd720"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"ZmYmXp = \"\>", 
+   "\[InvisibleSpace]", "\<\"\\n[\\n    [\\n        cos(phi) * cos(theta)\\n  \
+      cos(theta) * sin(phi)\\n        -sin(theta)\\n    ]\\n    [\\n        \
+-(cos(psi) * sin(phi)) + cos(phi) * sin(psi) * sin(theta)\\n        cos(phi) \
+* cos(psi) + sin(phi) * sin(psi) * sin(theta)\\n        cos(theta) * sin(psi)\
+\\n    ]\\n    [\\n        sin(phi) * sin(psi) + cos(phi) * cos(psi) * \
+sin(theta)\\n        -(cos(phi) * sin(psi)) + cos(psi) * sin(phi) * \
+sin(theta)\\n        cos(psi) * cos(theta)\\n    ]\\n]\\n\"\>"}],
+  SequenceForm[
+  "ZmYmXp = ", 
+   "\n[\n    [\n        cos(phi) * cos(theta)\n        cos(theta) * sin(phi)\n\
+        -sin(theta)\n    ]\n    [\n        -(cos(psi) * sin(phi)) + cos(phi) \
+* sin(psi) * sin(theta)\n        cos(phi) * cos(psi) + sin(phi) * sin(psi) * \
+sin(theta)\n        cos(theta) * sin(psi)\n    ]\n    [\n        sin(phi) * \
+sin(psi) + cos(phi) * cos(psi) * sin(theta)\n        -(cos(phi) * sin(psi)) + \
+cos(psi) * sin(phi) * sin(theta)\n        cos(psi) * cos(theta)\n    ]\n]\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463954887`*^9},ExpressionUUID->"eae11524-8a1b-4fad-a6d1-\
+18649a95cd93"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m = \\n\"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        RowBox[{
+         RowBox[{"Cos", "[", "phi", "]"}], " ", 
+         RowBox[{"Cos", "[", "theta", "]"}]}], 
+        RowBox[{
+         RowBox[{"Cos", "[", "theta", "]"}], " ", 
+         RowBox[{"Sin", "[", "phi", "]"}]}], 
+        RowBox[{"-", 
+         RowBox[{"Sin", "[", "theta", "]"}]}]},
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Cos", "[", "psi", "]"}]}], " ", 
+          RowBox[{"Sin", "[", "phi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Cos", "[", "psi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{"Cos", "[", "theta", "]"}], " ", 
+         RowBox[{"Sin", "[", "psi", "]"}]}]},
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Cos", "[", "phi", "]"}], " ", 
+          RowBox[{"Cos", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Cos", "[", "phi", "]"}]}], " ", 
+          RowBox[{"Sin", "[", "psi", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"Cos", "[", "psi", "]"}], " ", 
+          RowBox[{"Sin", "[", "phi", "]"}], " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}]}], 
+        RowBox[{
+         RowBox[{"Cos", "[", "psi", "]"}], " ", 
+         RowBox[{"Cos", "[", "theta", "]"}]}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["m = \n", 
+   MatrixForm[{{
+     Cos[$CellContext`phi] Cos[$CellContext`theta], Cos[$CellContext`theta] 
+      Sin[$CellContext`phi], -
+      Sin[$CellContext`theta]}, {-Cos[$CellContext`psi] Sin[$CellContext`phi] + 
+      Cos[$CellContext`phi] Sin[$CellContext`psi] Sin[$CellContext`theta], 
+      Cos[$CellContext`phi] Cos[$CellContext`psi] + 
+      Sin[$CellContext`phi] Sin[$CellContext`psi] Sin[$CellContext`theta], 
+      Cos[$CellContext`theta] Sin[$CellContext`psi]}, {
+     Sin[$CellContext`phi] Sin[$CellContext`psi] + 
+      Cos[$CellContext`phi] Cos[$CellContext`psi] Sin[$CellContext`theta], -
+       Cos[$CellContext`phi] Sin[$CellContext`psi] + 
+      Cos[$CellContext`psi] Sin[$CellContext`phi] Sin[$CellContext`theta], 
+      Cos[$CellContext`psi] Cos[$CellContext`theta]}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205463999186`*^9},ExpressionUUID->"68a951df-4e26-4974-b1a9-\
+340732af7881"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"ZmYmXp1 = \"\>", 
+   "\[InvisibleSpace]", "\<\"\\n[\\n    [\\n        cos(phi) * cos(theta)\\n  \
+      cos(theta) * sin(phi)\\n        -sin(theta)\\n    ]\\n    [\\n        \
+-(cos(psi) * sin(phi)) + cos(phi) * sin(psi) * sin(theta)\\n        cos(phi) \
+* cos(psi) + sin(phi) * sin(psi) * sin(theta)\\n        cos(theta) * sin(psi)\
+\\n    ]\\n    [\\n        sin(phi) * sin(psi) + cos(phi) * cos(psi) * \
+sin(theta)\\n        -(cos(phi) * sin(psi)) + cos(psi) * sin(phi) * \
+sin(theta)\\n        cos(psi) * cos(theta)\\n    ]\\n]\\n\"\>"}],
+  SequenceForm[
+  "ZmYmXp1 = ", 
+   "\n[\n    [\n        cos(phi) * cos(theta)\n        cos(theta) * sin(phi)\n\
+        -sin(theta)\n    ]\n    [\n        -(cos(psi) * sin(phi)) + cos(phi) \
+* sin(psi) * sin(theta)\n        cos(phi) * cos(psi) + sin(phi) * sin(psi) * \
+sin(theta)\n        cos(theta) * sin(psi)\n    ]\n    [\n        sin(phi) * \
+sin(psi) + cos(phi) * cos(psi) * sin(theta)\n        -(cos(phi) * sin(psi)) + \
+cos(psi) * sin(phi) * sin(theta)\n        cos(psi) * cos(theta)\n    ]\n]\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.746020546407386*^9},ExpressionUUID->"b98ffc17-448e-4a63-89db-\
+c19d9f096f4c"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "0", "0"},
+     {"0", "0", "0"},
+     {"0", "0", "0"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Print",
+ CellChangeTimes->{3.746000505455405*^9, 
+  3.7460205464098663`*^9},ExpressionUUID->"b8f6fc5c-dd22-4782-b6e8-\
+6d8546cfbb04"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -517,23 +880,37 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 10801, 286, 1201, "Input", "ExpressionUUID" -> \
+Cell[580, 22, 10886, 292, 1179, "Input", "ExpressionUUID" -> \
 "c8ad0c64-7196-44c4-bdc4-54df1b5fcfa0"],
-Cell[11384, 310, 896, 26, 86, "Output", "ExpressionUUID" -> \
-"c2da01e8-8fdc-4f26-a186-b38bff31d3f6"],
+Cell[11469, 316, 918, 26, 86, "Output", "ExpressionUUID" -> \
+"a41fd5c1-fdd9-42f9-b45a-6fe1cef233e9"],
 Cell[CellGroupData[{
-Cell[12305, 340, 1227, 34, 78, "Print", "ExpressionUUID" -> \
-"1789e980-4b1f-4ad9-93ca-eccac7f0a4c9"],
-Cell[13535, 376, 681, 15, 366, "Print", "ExpressionUUID" -> \
-"ed1d88df-6020-439b-a7d3-ae3ec15f4cae"],
-Cell[14219, 393, 1229, 34, 78, "Print", "ExpressionUUID" -> \
-"23f05a0f-8069-4365-9d57-aad58f72608d"],
-Cell[15451, 429, 679, 15, 366, "Print", "ExpressionUUID" -> \
-"6dc0f627-ae57-40a7-8718-b30b3510a239"],
-Cell[16133, 446, 1229, 34, 78, "Print", "ExpressionUUID" -> \
-"d953cf6b-48cc-4c34-a27b-178c8fec05df"],
-Cell[17365, 482, 681, 15, 366, "Print", "ExpressionUUID" -> \
-"d03642b0-48e1-41c0-bce4-6ed8640989cf"]
+Cell[12412, 346, 1251, 34, 78, "Print", "ExpressionUUID" -> \
+"14347594-66ec-4fca-b834-ad0d6a4c55c9"],
+Cell[13666, 382, 701, 15, 366, "Print", "ExpressionUUID" -> \
+"f26b7f99-c5de-4fb8-82bb-e6453b254904"],
+Cell[14370, 399, 1251, 34, 78, "Print", "ExpressionUUID" -> \
+"593bb803-449e-4e97-ab97-e5448318bfbc"],
+Cell[15624, 435, 698, 14, 366, "Print", "ExpressionUUID" -> \
+"49b1fed5-bbec-44b0-b1eb-6ad58eaff782"],
+Cell[16325, 451, 1251, 34, 78, "Print", "ExpressionUUID" -> \
+"76e7333e-0bcf-41ed-9b0c-460e1e8994c1"],
+Cell[17579, 487, 701, 15, 366, "Print", "ExpressionUUID" -> \
+"b947d365-5d0a-419d-9a3a-706131c261b5"],
+Cell[18283, 504, 3426, 87, 78, "Print", "ExpressionUUID" -> \
+"eea36efa-5561-49f8-bdaa-f4a11e5225e5"],
+Cell[21712, 593, 1253, 22, 366, "Print", "ExpressionUUID" -> \
+"611cdf3b-a9a0-440c-b9f0-2171d53be8a6"],
+Cell[22968, 617, 3439, 86, 78, "Print", "ExpressionUUID" -> \
+"bb074ccc-fa1e-415b-b28e-890b258cd720"],
+Cell[26410, 705, 1253, 21, 366, "Print", "ExpressionUUID" -> \
+"eae11524-8a1b-4fad-a6d1-18649a95cd93"],
+Cell[27666, 728, 3439, 86, 78, "Print", "ExpressionUUID" -> \
+"68a951df-4e26-4974-b1a9-340732af7881"],
+Cell[31108, 816, 1253, 21, 366, "Print", "ExpressionUUID" -> \
+"b98ffc17-448e-4a63-89db-c19d9f096f4c"],
+Cell[32364, 839, 742, 21, 56, "Print", "ExpressionUUID" -> \
+"b8f6fc5c-dd22-4782-b6e8-6d8546cfbb04"]
 }, Open  ]]
 }, Open  ]]
 }

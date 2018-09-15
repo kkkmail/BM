@@ -93,9 +93,32 @@ module MathNetNumericsMath =
                 let (RealMatrix v) = this
                 v.[i, j]
 
+        static member create (a : #seq<#seq<double>>) = matrix a |> RealMatrix
+
+        static member (*) (RealMatrix a, RealMatrix b) = 
+            (a * b) |> RealMatrix
+
+        static member (*) ((a : double), RealMatrix b) = 
+            (a * b) |> RealMatrix
+
+        static member (*) (a : RealMatrix, b : double) = b * a
+
+        static member (+) (RealMatrix a, RealMatrix b) = 
+            (a + b) |> RealMatrix
+
+        static member (-) (RealMatrix a, RealMatrix b) = 
+            (a - b) |> RealMatrix
+
+        static member (*) (RealVector a, RealMatrix b) : RealVector = 
+            a * b |> RealVector
+
+        static member (*) (RealMatrix a, RealVector b) : RealVector = 
+            a * b |> RealVector
+
 
     type ComplexMatrix = 
         | ComplexMatrix of Matrix<Complex>
+
         static member (*) (ComplexMatrix a, ComplexMatrix b) = 
             (a * b) |> ComplexMatrix
 
@@ -116,8 +139,7 @@ module MathNetNumericsMath =
         static member (*) (ComplexMatrix a, ComplexVector b) : ComplexVector = 
             a * b |> ComplexVector
 
-        static member create (a : #seq<#seq<Complex>>) = 
-            matrix a |> ComplexMatrix
+        static member create (a : #seq<#seq<Complex>>) = matrix a |> ComplexMatrix
 
         static member fromRe (a : #seq<#seq<double>>) = 
             a
@@ -146,5 +168,9 @@ module MathNetNumericsMath =
             m.Determinant()
 
 
-    let diagonalMatrix (n : int) (e : Complex) = 
+    let realDiagonalMatrix (n : int) (e : double) = 
+        DiagonalMatrix.create n e |> RealMatrix
+
+
+    let complexDiagonalMatrix (n : int) (e : Complex) = 
         DiagonalMatrix.create n e |> ComplexMatrix

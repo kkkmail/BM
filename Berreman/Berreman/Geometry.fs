@@ -14,15 +14,22 @@ module Geometry =
         | None -> None
 
 
-    let comlpexIdentityMatrix n = diagonalMatrix n (cplx 1.0)
-    let comlpexZeroMatrix n = diagonalMatrix n (cplx 0.0)
+    let realIdentityMatrix n = realDiagonalMatrix n 1.0
+    let realZeroMatrix n = realDiagonalMatrix n 0.0
+
+    let comlpexIdentityMatrix n = complexDiagonalMatrix n (cplx 1.0)
+    let comlpexZeroMatrix n = complexDiagonalMatrix n (cplx 0.0)
 
 
-    // We don't really want to guess if 0.0 is an angle or something else.
     type Angle =
         | Angle of double
         static member degree a = a * degree |> Angle
         static member radian r = r |> Angle
+        static member pi = Angle.radian MathNetNumericsMath.pi
+        static member piDivideByTwo = Angle.radian (MathNetNumericsMath.pi / 2.0)
+        static member (+) (Angle a, Angle b) = a + b |> Angle
+        static member (-) (Angle a, Angle b) = a - b |> Angle
+        static member (~-) (Angle a) = -a |> Angle
 
 
     type RealVector3 =
@@ -199,8 +206,26 @@ module Geometry =
         | RealMatrix3x3 of RealMatrix
         member this.Item
             with get(i, j) =
-                let (RealMatrix4x4 v) = this
+                let (RealMatrix3x3 v) = this
                 v.[i, j]
+
+        static member create a = a |> RealMatrix.create |> RealMatrix3x3
+        static member identity = realIdentityMatrix 3 |> RealMatrix3x3
+
+        static member (*) (RealMatrix3x3 a, RealMatrix3x3 b) : RealMatrix3x3 = 
+            a * b |> RealMatrix3x3
+
+        static member (*) (a : double, RealMatrix3x3 b) : RealMatrix3x3 = 
+            a * b |> RealMatrix3x3
+
+        static member (*) (RealMatrix3x3 a, b : double) : RealMatrix3x3 = 
+            a * b |> RealMatrix3x3
+
+        static member (*) (RealVector3 a, RealMatrix3x3 b) : RealVector3 = 
+            a * b |> RealVector3
+
+        static member (*) (RealMatrix3x3 a, RealVector3 b) : RealVector3 = 
+            a * b |> RealVector3
 
 
     type RealMatrix4x4 = 
@@ -310,77 +335,84 @@ module Geometry =
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
 
-    type RotationX =
-        int
 
+    // Rotation around x axis.
+    let xRotation (Angle xAngle) = 
+        [
+            [ 1.; 0.; 0. ]
+            [ 0.; cos(xAngle); -sin(xAngle) ]
+            [ 0.; sin(xAngle); cos(xAngle) ]
+        ]
+        |> RealMatrix3x3.create
+
+
+    // Rotation around y axis.
+    let yRotation (Angle yAngle) = 
+        [
+            [ cos(yAngle); 0.; sin(yAngle) ]
+            [ 0.; 1.; 0. ]
+            [ -sin(yAngle); 0.; cos(yAngle) ]
+        ]
+        |> RealMatrix3x3.create
+
+
+    // Rotation around z axis.
+    let zRotation (Angle zAngle) = 
+        [
+            [ cos(zAngle); -sin(zAngle); 0. ]
+            [ sin(zAngle); cos(zAngle); 0. ]
+            [ 0.; 0.; 1. ]
+        ]
+        |> RealMatrix3x3.create
+
+
+    /// Rotation in opposite direction is marked with "-".
+    /// Rotation for angle (Pi - z) means rotating for the angle (Pi - alphaZ) around z axis.
     type RotationConvention = 
-        | ZmXpZm of RotationX * RotationX //of (Rotation.zRotation, Rotation.xRotation) // Rotation around (-z), (x'), (-z'')
-        | ZmYmXp // Rotation around (-z), (-y'), (x'')
+        | ZmXpZm // Rotation around (-z), (x'), (-z'')
+        | ZmYpXp // Rotation around (-z), (y'), (x'')
+
+        // For compatibility with Mathematica code.
+        | PiZmXpPiZm //Rotation around (Pi - z), (x'), (Pi - z'') = Euler angles in Mathematica code.
+
+        static member conventionMapping convention = 
+            match convention with
+            | ZmXpZm -> [ (fun a -> zRotation (-a)); xRotation; (fun a -> zRotation (-a)) ]
+            | ZmYpXp -> [ zRotation; yRotation; xRotation]
+            | PiZmXpPiZm -> [ (fun a -> zRotation (Angle.pi - a)); xRotation; (fun a -> zRotation (Angle.pi - a)) ]
+
 
     and Rotation = 
         | Rotation of RealMatrix3x3
 
-        // Rotation around x axis.
-        static member xRotation (Angle xAngle) = 
-            [
-                [
-                    1.
-                    0.
-                    0.
-                ]
-                [
-                    0.
-                    cos(xAngle)
-                    -sin(xAngle)
-                ]
-                [
-                    0.
-                    sin(xAngle)
-                    cos(xAngle)
-                ]
-            ]
+        //// Rotation around x axis.
+        //static member xRotation (Angle xAngle) = 
+        //    [
+        //        [ 1.; 0.; 0. ]
+        //        [ 0.; cos(xAngle); -sin(xAngle) ]
+        //        [ 0.; sin(xAngle); cos(xAngle) ]
+        //    ]
+        //    |> RealMatrix3x3.create
 
 
-        // Rotation around y axis.
-        static member yRotation (Angle yAngle) = 
-            [
-                [
-                    cos(yAngle)
-                    0.
-                    sin(yAngle)
-                ]
-                [
-                    0.
-                    1.
-                    0.
-                ]
-                [
-                    -sin(yAngle)
-                    0.
-                    cos(yAngle)
-                ]
-            ]
+        //// Rotation around y axis.
+        //static member yRotation (Angle yAngle) = 
+        //    [
+        //        [ cos(yAngle); 0.; sin(yAngle) ]
+        //        [ 0.; 1.; 0. ]
+        //        [ -sin(yAngle); 0.; cos(yAngle) ]
+        //    ]
+        //    |> RealMatrix3x3.create
 
 
-        // Rotation around z axis.
-        static member zRotation (Angle zAngle) = 
-            [
-                [
-                    cos(zAngle)
-                    -sin(zAngle)
-                    0.
-                ]
-                [
-                    sin(zAngle)
-                    cos(zAngle)
-                    0.
-                ]
-                [
-                    0.
-                    0.
-                    1.
-                ]
-            ]
+        //// Rotation around z axis.
+        //static member zRotation (Angle zAngle) = 
+        //    [
+        //        [ cos(zAngle); -sin(zAngle); 0. ]
+        //        [ sin(zAngle); cos(zAngle); 0. ]
+        //        [ 0.; 0.; 1. ]
+        //    ]
+        //    |> RealMatrix3x3.create
 
 
         // Generated, do not modify.
