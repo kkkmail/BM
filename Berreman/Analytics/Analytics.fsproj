@@ -42,6 +42,7 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Variables.fs" />
     <Compile Include="Charting.fs" />
     <None Include="TestChart.fsx" />
     <Content Include="packages.config" />

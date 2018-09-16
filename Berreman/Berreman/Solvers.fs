@@ -152,3 +152,8 @@ module Solvers =
         member __.freeTbl = freeTblVal
         member __.cfm = cfmVal
         member __.emSys = ems
+
+
+    /// TODO kk:20180916 Implement in full.
+    type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo) = 
+        inherit BaseOpticalSystemSolver(system.baseSystem, info)

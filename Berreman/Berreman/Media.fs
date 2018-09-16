@@ -37,3 +37,19 @@ module Media =
             substrate : Layer option
             lower : OpticalProperties
         }
+
+        member this.baseSystem = 
+            match this.substrate with
+            | None -> 
+                {
+                    upper = this.upper
+                    films = this.films
+                    lower = this.lower
+                }
+            | Some s -> 
+                {
+                    upper = this.upper
+                    films = this.films
+                    lower = s.properties
+                }
+
