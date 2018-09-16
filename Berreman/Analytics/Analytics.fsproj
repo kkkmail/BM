@@ -51,9 +51,15 @@
       <HintPath>..\packages\FSharp.Charting.2.1.0\lib\net45\FSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.5.2\lib\net45\FSharp.Core.dll</HintPath>
+      <HintPath>..\packages\FSharp.Plotly.1.1.21\lib\net47\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Plotly">
+      <HintPath>..\packages\FSharp.Plotly.1.1.21\lib\net47\FSharp.Plotly.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\FSharp.Plotly.1.1.21\lib\net47\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
