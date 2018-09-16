@@ -11,6 +11,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "OpticalProperties", "Optica
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Analytics", "Analytics\Analytics.fsproj", "{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Numerics", "..\MathNetNumerics\src\Numerics\Numerics.csproj", "{97F61634-4E8A-441B-B5AB-CE0150476BA6}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp", "..\MathNetNumerics\src\FSharp\FSharp.fsproj", "{883F0730-3A47-4176-B521-A93B57B1A678}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E33CEBE8-BE13-4D9B-9331-0BED73519DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F61634-4E8A-441B-B5AB-CE0150476BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F61634-4E8A-441B-B5AB-CE0150476BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F61634-4E8A-441B-B5AB-CE0150476BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F61634-4E8A-441B-B5AB-CE0150476BA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883F0730-3A47-4176-B521-A93B57B1A678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883F0730-3A47-4176-B521-A93B57B1A678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883F0730-3A47-4176-B521-A93B57B1A678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883F0730-3A47-4176-B521-A93B57B1A678}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

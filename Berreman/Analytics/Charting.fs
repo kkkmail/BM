@@ -12,6 +12,7 @@ open Berreman.Geometry
 open Berreman.MaterialProperties
 open Berreman.Media
 open Berreman.Solvers
+open Berreman.FieldFunctions
 open OpticalProperties.Standard
 open Berreman
 
@@ -53,14 +54,15 @@ module Charting =
             }
 
         let getSol a = 
-            printfn "a = %A" a
+            //printfn "a = %A" a
             let sol = BaseOpticalSystemSolver(system, getLight a)
-            printfn "sol = %A" sol
-            sol.reflectedLight.s.z
+            //printfn "sol = %A" sol
+            sol.emSys.rp
 
 
-        [| for i in 7..2..19 -> (float i, (float i |> Angle.degree |> getSol)) |]
+        [| for i in 0..89 -> (float i, (float i |> Angle.degree |> getSol)) |]
 
     let plot() = 
         Chart.Line(gePlotData1())
+        |> Chart.WithXAxis(Enabled = true, Title = "incidence angle", Min = 0.0, Max = 90.0)
         |> Chart.Show

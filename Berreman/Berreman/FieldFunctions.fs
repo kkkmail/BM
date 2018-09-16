@@ -10,6 +10,7 @@ module FieldFunctions =
     open Fields
     open Media
     open BerremanMatrix
+    open System.ComponentModel
 
     type EmField
         with
@@ -45,6 +46,7 @@ module FieldFunctions =
 
     type EmFieldSystem
         with 
+        [<Description("")>]
         member this.i = this.incident.intensity this.incident
         member this.ip = this.incident.intensityX this.incident
         member this.is = this.incident.intensityY this.incident
