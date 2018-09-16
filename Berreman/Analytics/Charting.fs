@@ -1,5 +1,6 @@
 ﻿namespace Analytics
 
+open FSharp.Collections.ParallelSeq
 open System.Numerics
 open MathNet.Numerics.LinearAlgebra
 open Berreman.MathNetNumericsMath
@@ -18,6 +19,7 @@ open Berreman
 
 //open FSharp.Charting
 open FSharp.Plotly
+//open XPlot.Plotly
 
 module Charting = 
 
@@ -81,29 +83,67 @@ module Charting =
         //|> Chart.WithLegend(InsideArea = true) // Docking = ChartTypes.Docking.Left, Title = "Title"
         //|> Chart.Show
 
+         //FSharp.Plotly
         Chart.Combine (f |> List.map (fun e -> Chart.Line(getFuncData e, Name = e.info.fullName)))
-        |> Chart.withX_AxisStyle("incidence angle", MinMax = (0.0, 90.0))
+        |> Chart.withX_AxisStyle(@"$\Phi$", MinMax = (0.0, 90.0))
+        |> Chart.Show
+
+        // Xplot.Plotly
+        //Chart.Combine (f |> List.map (fun e -> Chart.Line(getFuncData e, Name = e.info.fullName)))
+        //|> Chart.withX_AxisStyle(@"$\Phi$", MinMax = (0.0, 90.0))
+        //|> Chart.Show
+
+        //let lineTrace1 =
+        //    Scatter(
+        //        x = [1; 2; 3; 4],
+        //        y = [10; 15; 13; 17],
+        //        mode = "markers",
+        //        name = "n1"
+        //    )
+
+        //let lineTrace2 =
+        //    Scatter(
+        //        x = [2; 3; 4; 5],
+        //        y = [16; 5; 11; 9],
+        //        mode = "lines",
+        //        name = "n2"
+        //    )
+
+        //let lineTrace3 =
+        //    Scatter(
+        //        x = [1; 2; 3; 4],
+        //        y = [12; 9; 15; 12],
+        //        mode = "lines+markers",
+        //        name = "$n_3$"
+        //    )
+
+        //[lineTrace1; lineTrace2; lineTrace3]
+        //|> Chart.Plot
+        //|> Chart.WithWidth 700
+        //|> Chart.WithHeight 500
+        //|> Chart.Show
+
+        //|> Chart.withY_AxisStyle(f.info.fullName)
         //|> Chart.WithXAxis(Enabled = true, Title = "incidence angle", Min = 0.0, Max = 90.0)
         //|> Chart.WithLegend(InsideArea = true) // Docking = ChartTypes.Docking.Left, Title = "Title"
-        |> Chart.Show
+
 
 
     let plotAbc3D (f : OpticalFunction) (g : Ellipticity -> Angle -> EmFieldSystem) =
-        //let subData (Ellipticity e) = [| for i in 0..89 -> (e, float i, (float i |> Angle.degree |> g (Ellipticity e))) |]
-        //let data = [| for i in 0..100 -> (((float i) / 100.0) |> Ellipticity.create|> subData) |]
-
         let subData (Ellipticity e) = [| for i in 0..89 -> (float i |> Angle.degree |> g (Ellipticity e)).func f |]
-        let data = [| for i in 0..100 -> (((float i) / 100.0) |> Ellipticity.create|> subData) |]
+        let data = 
+            [| for i in 0..100 -> i |]
+            |> PSeq.map (fun i -> (((float i) / 100.0) |> Ellipticity.create|> subData))
+            |> Array.ofSeq
 
         let getFuncData (e : OpticalFunction) = data |> Array.map (fun x -> x |> Array.map (fun y -> y))
 
         Chart.Surface(data)
+        |> Chart.withX_AxisStyle("$\Phi$", MinMax = (0.0, 90.0))
+        |> Chart.withY_AxisStyle("e", MinMax = (0.0, 1.0))
+        |> Chart.withZ_AxisStyle(f.info.fullName)
         |> Chart.Show
 
 
     let plot() = plotAbc [ Rp; Tp ] (getEmSys Ellipticity.defaultValue)
-        //Chart.Line(gePlotData1())
-        //|> Chart.WithXAxis(Enabled = true, Title = "incidence angle", Min = 0.0, Max = 90.0)
-        //|> Chart.Show
-
     let plot3D() = plotAbc3D Rp getEmSys
