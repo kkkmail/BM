@@ -82,6 +82,52 @@ namespace MathNet.Numerics.UnitTests.LinearAlgebraTests.Complex32.Factorization
         }
 
         [Test]
+        public void CanFactorizeDoesNotHangWhenComplex()
+        {
+            Complex[,] data =
+            {
+                {new Complex(0.0, 0.0), new Complex(1.0, 0.0), new Complex(0.0, 0.0), new Complex(0.0, 0.0)},
+                {new Complex(2.25, 0.0), new Complex(0.0, 0.0), new Complex(0.0, 0.0), new Complex(0.0, 0.0)},
+                {new Complex(0.0, 0.0), new Complex(0.0, 0.0), new Complex(0.0, 0.0), new Complex(1.0, 0.0)},
+                {new Complex(0.0, 0.0), new Complex(0.0, 0.0), new Complex(2.25, 0.0), new Complex(0.0, 0.0)}
+            };
+
+            var A = Matrix<Complex>.Build.DenseOfArray(data);
+
+            var factorEvd = A.Evd();
+            var V = factorEvd.EigenVectors;
+            var λ = factorEvd.D;
+
+            // Verify A*V = λ*V
+            var Av = A * V;
+            var Lv = V * λ;
+            AssertHelpers.AlmostEqual(Av, Lv, 4);
+        }
+
+        [Test]
+        public void CanFactorizeDoesNotHangWhenDouble()
+        {
+            double[,] data =
+            {
+                {0.0, 1.0, 0.0, 0.0},
+                {2.25, 0.0, 0.0, 0.0},
+                {0.0, 0.0, 0.0, 1.0,},
+                {0.0, 0.0, 2.25,0.0}
+            };
+
+            var A = Matrix<double>.Build.DenseOfArray(data);
+
+            var factorEvd = A.Evd();
+            var V = factorEvd.EigenVectors;
+            var λ = factorEvd.D;
+
+            // Verify A*V = λ*V
+            var Av = A * V;
+            var Lv = V * λ;
+            AssertHelpers.AlmostEqual(Av, Lv, 4);
+        }
+
+        [Test]
         public void CanFactorizeRandomSymmetricMatrix([Values(1, 2, 5, 10, 50, 100)] int order)
         {
             var A = Matrix<Complex32>.Build.RandomPositiveDefinite(order, 1);

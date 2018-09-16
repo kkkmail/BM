@@ -665,11 +665,32 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                         var im1O = im1*order;
                         var im1Oim1 = im1O + im1;
                         s = matrixH[im1O + i].Real;
+
+                        // TODO kk:20180916 Sometimes the norm comes as exact zero. Then the algorithm hangs.
                         norm = SpecialFunctions.Hypotenuse(matrixH[im1Oim1].Magnitude, s.Real);
-                        x = matrixH[im1Oim1]/norm;
-                        vectorV[i - 1] = x;
-                        matrixH[im1Oim1] = norm;
-                        matrixH[im1O + i] = new Complex(0.0, s.Real/norm);
+
+                        // Original code
+                        //x = matrixH[im1Oim1] / norm;
+                        //vectorV[i - 1] = x;
+                        //matrixH[im1Oim1] = norm;
+                        //matrixH[im1O + i] = new Complex(0.0, s.Real / norm);
+
+                        // kk:20180916 Start of modified code.
+                        if (norm != 0.0)
+                        {
+                            x = matrixH[im1Oim1] / norm;
+                            vectorV[i - 1] = x;
+                            matrixH[im1Oim1] = norm;
+                            matrixH[im1O + i] = new Complex(0.0, s.Real / norm);
+                        }
+                        else
+                        {
+                            x = 1.0;
+                            vectorV[i - 1] = x;
+                            matrixH[im1Oim1] = norm;
+                            matrixH[im1O + i] = new Complex(0.0, 0.0);
+                        }
+                        // kk:20180916 End of modified code.
 
                         for (var j = i; j < order; j++)
                         {
