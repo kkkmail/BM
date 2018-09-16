@@ -12,6 +12,18 @@ module FieldFunctions =
     open BerremanMatrix
     open System.ComponentModel
 
+
+    type FunctionNameAttribute (name : string) = 
+        inherit System.Attribute()
+
+        member val name = name with get
+        member val subscript : string Option = None with get, set
+        member val description : string Option = None with get, set
+
+        member this.subscr with set (value) = this.subscript <- Some value
+        member this.descr with set (value) = this.description <- Some value
+
+
     type EmField
         with
         member em.stokesVector =
@@ -46,16 +58,32 @@ module FieldFunctions =
 
     type EmFieldSystem
         with 
-        [<Description("")>]
+        [<FunctionName("I")>]
         member this.i = this.incident.intensity this.incident
+
+        [<FunctionName("I", subscr = "p")>]
         member this.ip = this.incident.intensityX this.incident
+
+        [<FunctionName("I", subscr = "s")>]
         member this.is = this.incident.intensityY this.incident
 
+
+        [<FunctionName("R")>]
         member this.r = this.reflected.intensity this.incident
+
+        [<FunctionName("R", subscr = "p")>]
         member this.rp = this.reflected.intensityX this.incident
+
+        [<FunctionName("R", subscr = "s")>]
         member this.rs = this.reflected.intensityY this.incident
 
+
+        [<FunctionName("T")>]
         member this.t = this.transmitted.intensity this.incident
+
+        [<FunctionName("T", subscr = "p")>]
         member this.tp = this.transmitted.intensityX this.incident
+
+        [<FunctionName("T", subscr = "s")>]
         member this.ts = this.transmitted.intensityY this.incident
 
