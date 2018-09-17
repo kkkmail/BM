@@ -2,6 +2,8 @@
 module Geometry = 
 
     //open ExtremeNumericsMath
+    //open MathNet.Numerics
+    //open MathNet.Numerics.LinearAlgebra
 
     open System.Numerics
     open MathNetNumericsMath
@@ -200,6 +202,31 @@ module Geometry =
         static member create a = a |> ComplexVector.create |> ComplexVector4
         static member fromRe a = a |> ComplexVector.fromRe |> ComplexVector4
         static member fromIm a = a |> ComplexVector.fromIm |> ComplexVector4
+
+
+    //type RealMatrix2x2 = 
+    //    | RealMatrix2x2 of Matrix<double>
+
+    //    static member private createInternal (a : #seq<#seq<double>>) = matrix a |> RealMatrix2x2
+
+    //    static member create
+    //        (
+    //            (a11, a12),
+    //            (a21, a22)
+    //        ) = 
+    //        RealMatrix2x2.createInternal 
+    //            [| 
+    //                [| a11; a12|]
+    //                [| a21; a22|]
+    //            |]
+
+
+    //let m2 = 
+    //        (
+    //            (1., 2.),
+    //            (3., 4.)
+    //        )
+    //        |> RealMatrix2x2.create
 
 
     type RealMatrix3x3 = 
