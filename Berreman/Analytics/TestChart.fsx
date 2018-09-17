@@ -33,6 +33,8 @@ open Berreman
 open Analytics.Charting
 
 //===========================================================
-plot ()
+//plot ()
 //plot3D ()
+
+plot2 ()
 printfn "Completed."

@@ -17,6 +17,8 @@ open Berreman.FieldFunctions
 open OpticalProperties.Standard
 open Berreman
 
+open Analytics.Variables
+
 //open FSharp.Charting
 open FSharp.Plotly
 //open XPlot.Plotly
@@ -147,3 +149,28 @@ module Charting =
 
     let plot() = plotAbc [ Rp; Tp ] (getEmSys Ellipticity.defaultValue)
     let plot3D() = plotAbc3D Rp getEmSys
+
+
+    ///////////////////////////////////////
+
+    let plotAbcNew (fn : List<OpticalFunction>) (f : FixedInfo) (v : RangedVariable) =
+        let data = calculate f v
+        let getFuncData (e : OpticalFunction) = data |> List.map (fun (x, s) -> (x, s.func e)) |> Array.ofList
+
+         //FSharp.Plotly
+        Chart.Combine (fn |> List.map (fun e -> Chart.Line(getFuncData e, Name = e.info.fullName)))
+        |> Chart.withX_AxisStyle(v.name, MinMax = (v.plotMinValue, v.plotMaxValue))
+        |> Chart.Show
+
+
+    let v1 = IncidenceAngleRange (Range<_>.create IncidenceAngle.normal IncidenceAngle.maxValue)
+    let v2 = EllipticityRange (Range<_>.create Ellipticity.defaultValue Ellipticity.maxValue)
+    let info1 = WaveLength.nm 600.0 |> IncidentLightInfo.create
+    let info2 = IncidentLightInfo.createInclined (WaveLength.nm 600.0) (Angle.degree 59.0 |> IncidenceAngle.create)
+    let f1 = { incidentLightInfo = info1; opticalSystem = system.fullSystem } : FixedInfo
+    let f2 = { incidentLightInfo = info2; opticalSystem = system.fullSystem } : FixedInfo
+    //let fn = [ Rp; Rs; Tp; Ts ]
+    let fn = [ R; T ]
+
+    let plot1() = plotAbcNew fn f1 v1
+    let plot2() = plotAbcNew fn f2 v2

@@ -29,8 +29,16 @@ module Media =
             lower : OpticalProperties
         }
 
+        member this.fullSystem = 
+            {
+                upper = this.upper
+                films = this.films
+                substrate = None
+                lower = this.lower
+            }
 
-    type OpticalSystem = 
+
+    and OpticalSystem = 
         {
             upper : OpticalProperties
             films : List<Layer>

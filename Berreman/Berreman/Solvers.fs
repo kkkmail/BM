@@ -155,5 +155,5 @@ module Solvers =
 
 
     /// TODO kk:20180916 Implement in full.
-    type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo) = 
+    and OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo) = 
         inherit BaseOpticalSystemSolver(system.baseSystem, info)

@@ -25,6 +25,7 @@ module Fields =
             Ellipticity (max (min e 1.0) -1.0)
 
         static member defaultValue = Ellipticity 0.0
+        static member maxValue = Ellipticity 1.0
 
 
     type Polarization = 
@@ -48,7 +49,8 @@ module Fields =
         static member create (Angle p) =
             (p % (pi / 2.0) + pi) % (pi / 2.0) |> Angle |> IncidenceAngle
 
-        static member normal = IncidenceAngle.create (Angle 0.0)
+        static member normal = IncidenceAngle.create (Angle.degree 0.0)
+        static member maxValue = IncidenceAngle.create (Angle.degree 89.0)
 
 
     // n1 * sin(fita), where fita is the incidence angle and n1 is the refraction index of upper media.
@@ -105,6 +107,24 @@ module Fields =
             let (IncidenceAngle (Angle a)) = this.incidenceAngle
             let (RefractionIndex n) = this.refractionIndex
             n * (sin a) |> N1SinFita
+
+        static member create w = 
+            {
+                wavelength = w
+                refractionIndex = RefractionIndex.vacuum
+                incidenceAngle = IncidenceAngle.normal
+                polarization = Polarization.defaultValue
+                ellipticity = Ellipticity.defaultValue
+            }
+
+        static member createInclined w a = 
+            {
+                wavelength = w
+                refractionIndex = RefractionIndex.vacuum
+                incidenceAngle = a
+                polarization = Polarization.defaultValue
+                ellipticity = Ellipticity.defaultValue
+            }
 
 
     type EmFieldXY =
