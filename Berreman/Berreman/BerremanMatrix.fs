@@ -37,7 +37,8 @@ module BerremanMatrix =
     // [ Ex, Hy, Ey, -Hx ]
     type BerremanFieldEH = 
         | BerremanFieldEH of ComplexVector4
-        member private this.eh = 
+
+        member private this.eh =
             let (BerremanFieldEH v) = this
             v
 
@@ -162,8 +163,8 @@ module BerremanMatrix =
                     wavelength = this.wavelength
                     n1SinFita = this.n1SinFita
                     opticalProperties = this.opticalProperties
-                    e = [ this.eX; this.eY ] |> ComplexVector2.create
-                    h = [ this.hX; this.hY ] |> ComplexVector2.create
+                    e = [ this.eX; this.eY ] |> E2.create
+                    h = [ this.hX; this.hY ] |> H2.create
                 } : EmFieldXY
 
             BerremanMatrix.createEmField this.opticalProperties emXY

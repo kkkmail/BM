@@ -19,8 +19,6 @@ module MaterialProperties =
     type Eps = 
         | Eps of ComplexMatrix3x3
 
-        static member (*) (ComplexVector3 a, Eps (ComplexMatrix3x3 b)) : ComplexVector3 = a * b |> ComplexVector3
-        static member (*) (Eps (ComplexMatrix3x3 a), ComplexVector3 b) : ComplexVector3 = a * b |> ComplexVector3
         static member create a = a |> ComplexMatrix3x3.create |> Eps
         static member fromRe a = a |> ComplexMatrix3x3.fromRe |> Eps
         static member vacuum = ComplexMatrix3x3.identity |> Eps

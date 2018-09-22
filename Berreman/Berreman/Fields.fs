@@ -1,8 +1,10 @@
 ﻿namespace Berreman
 
 module Fields = 
+
     //open ExtremeNumericsMath
 
+    open System.Numerics
     open MathNetNumericsMath
 
     open Geometry
@@ -10,6 +12,137 @@ module Fields =
     open Constants
 
     // CGS usits are used.
+    // TODO kk:20180922 - Get rid of boilier plate code below.
+
+
+    /// Electromagnetic field E.
+    type E =
+        | E of ComplexVector3
+
+        static member (*) (Eps (ComplexMatrix3x3 a), E (ComplexVector3 b)) = a * b |> ComplexVector3 |> D
+        static member (*) (RhoT (ComplexMatrix3x3 a), E (ComplexVector3 b)) = a * b |> ComplexVector3 |> B
+
+        static member (+) (E (ComplexVector3 a), E (ComplexVector3 b)) : E = a + b |> ComplexVector3 |> E
+
+        static member (*) (a : Complex, E (ComplexVector3 b)) = a * b |> ComplexVector3 |> E
+        static member (*) (E (ComplexVector3 a), b : Complex) = a * b |> ComplexVector3 |> E
+
+        member this.x =
+            let (E a) = this
+            a.x
+
+        member this.y =
+            let (E a) = this
+            a.y
+
+        member this.z =
+            let (E a) = this
+            a.z
+
+
+    /// Electromagnetic field H.
+    and H =
+        | H of ComplexVector3
+
+        static member (*) (Rho (ComplexMatrix3x3 a), H (ComplexVector3 b)) = a * b |> ComplexVector3 |> D
+        static member (*) (Mu (ComplexMatrix3x3 a), H (ComplexVector3 b)) = a * b |> ComplexVector3 |> B
+
+        static member (+) (H (ComplexVector3 a), H (ComplexVector3 b)) : H = a + b |> ComplexVector3 |> H
+
+        static member (*) (a : Complex, H (ComplexVector3 b)) = a * b |> ComplexVector3 |> H
+        static member (*) (H (ComplexVector3 a), b : Complex) = a * b |> ComplexVector3 |> H
+
+        member this.x =
+            let (H a) = this
+            a.x
+
+        member this.y =
+            let (H a) = this
+            a.y
+
+        member this.z =
+            let (H a) = this
+            a.z
+
+
+    /// Electromagnetic field D.
+    and D =
+        | D of ComplexVector3
+
+        static member (+) (D (ComplexVector3 a), D (ComplexVector3 b)) : D = a + b |> ComplexVector3 |> D
+
+        static member (*) (a : Complex, D (ComplexVector3 b)) = a * b |> ComplexVector3 |> D
+        static member (*) (D (ComplexVector3 a), b : Complex) = a * b |> ComplexVector3 |> D
+
+
+        member this.x =
+            let (D a) = this
+            a.x
+
+        member this.y =
+            let (D a) = this
+            a.y
+
+        member this.z =
+            let (D a) = this
+            a.z
+
+
+    /// Electromagnetic field B.
+    and B =
+        | B of ComplexVector3
+
+        static member (+) (B (ComplexVector3 a), B (ComplexVector3 b)) : B = a + b |> ComplexVector3 |> B
+
+        static member (*) (a : Complex, B (ComplexVector3 b)) = a * b |> ComplexVector3 |> B
+        static member (*) (B (ComplexVector3 a), b : Complex) = a * b |> ComplexVector3 |> B
+
+        member this.x =
+            let (B a) = this
+            a.x
+
+        member this.y =
+            let (B a) = this
+            a.y
+
+        member this.z =
+            let (B a) = this
+            a.z
+
+
+    /// Poynting vector S.
+    type S = 
+        | S of RealVector3
+
+
+    /// Two component of electromagnetic field E.
+    type E2 =
+        | E2 of ComplexVector2
+
+        member this.x =
+            let (E2 a) = this
+            a.x
+
+        member this.y =
+            let (E2 a) = this
+            a.y
+
+        static member create a = a |> ComplexVector2.create |> E2
+
+
+    /// Two component of electromagnetic field H.
+    and H2 =
+        | H2 of ComplexVector2
+
+        member this.x =
+            let (H2 a) = this
+            a.x
+
+        member this.y =
+            let (H2 a) = this
+            a.y
+
+        static member create a = a |> ComplexVector2.create |> H2
 
 
     type WaveLength = 
@@ -28,7 +161,7 @@ module Fields =
         static member maxValue = Ellipticity 1.0
 
 
-    type Polarization = 
+    type Polarization =
         | Polarization of Angle
         static member create (Angle p) =
             p % (pi / 2.0) |> Angle |> Polarization
@@ -53,8 +186,8 @@ module Fields =
         static member maxValue = IncidenceAngle.create (Angle.degree 89.0)
 
 
-    // n1 * sin(fita), where fita is the incidence angle and n1 is the refraction index of upper media.
-    // This is an invariant and it deserves a type.
+    /// n1 * sin(fita), where fita is the incidence angle and n1 is the refraction index of upper media.
+    /// This is an invariant and it deserves a type.
     type N1SinFita =
         | N1SinFita of double
 
@@ -84,8 +217,8 @@ module Fields =
                     sin(beta) |> cplx
                     -cos(beta) * sin(fita) |> cplx
                 ]
-                |> ComplexVector.create
-                |> ComplexVector3
+                |> ComplexVector3.create
+                |> E
 
             let h =
                 [
@@ -93,8 +226,8 @@ module Fields =
                     n1 * cos(beta) |> cplx
                     n1 * sin(beta) * sin(fita) |> cplx
                 ]
-                |> ComplexVector.create
-                |> ComplexVector3
+                |> ComplexVector3.create
+                |> H
 
             (e, h)
 
@@ -132,8 +265,8 @@ module Fields =
             wavelength : WaveLength
             n1SinFita : N1SinFita
             opticalProperties : OpticalProperties
-            e : ComplexVector2
-            h : ComplexVector2
+            e : E2
+            h : H2
         }
 
 
@@ -142,20 +275,24 @@ module Fields =
             wavelength : WaveLength
             n1SinFita : N1SinFita
             opticalProperties : OpticalProperties
-            e : ComplexVector3
-            h : ComplexVector3
+            e : E
+            h : H
         }
         member this.d = this.opticalProperties.eps * this.e + this.opticalProperties.rho * this.h
         member this.b = this.opticalProperties.rhoT * this.e + this.opticalProperties.mu * this.h
 
         // Poynting vector
-        member this.s = (ComplexVector3.cross this.e this.h.conjugate).re
+        member this.s =
+            let (E e) = this.e
+            let (H h) = this.h
+            (ComplexVector3.cross e h.conjugate).re |> S
 
-        member this.normal = 
-            let norm = this.s.norm
+        member this.normal : RealVector3 option = 
+            let (S s) = this.s
+            let norm = s.norm
 
             if norm > almostZero
-            then Some (this.s / norm)
+            then Some (s / norm)
             else None
 
         member this.complexNormal = thread this.normal (fun n -> [ cplx n.x; cplx n.y; cplx n.z ] |> ComplexVector3.create)
@@ -167,13 +304,13 @@ module Fields =
             let cy = [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
             thread this.complexNormal (fun cz -> { cX = ComplexVector3.cross cy cz; cY = cy; cZ = cz})
 
-        static member create (emXY : EmFieldXY, eZ, hZ) = 
+        static member create (emXY : EmFieldXY, eZ, hZ) =
             { 
                 wavelength = emXY.wavelength 
                 n1SinFita = emXY.n1SinFita 
                 opticalProperties = emXY.opticalProperties
-                e = [ emXY.e.x; emXY.e.y; eZ ] |> ComplexVector.create |> ComplexVector3
-                h = [ emXY.h.x; emXY.h.y; hZ ] |> ComplexVector.create |> ComplexVector3
+                e = [ emXY.e.x; emXY.e.y; eZ ] |> ComplexVector.create |> ComplexVector3 |> E
+                h = [ emXY.h.x; emXY.h.y; hZ ] |> ComplexVector.create |> ComplexVector3 |> H
             }
 
         static member create (info : IncidentLightInfo, o : OpticalProperties) = 
