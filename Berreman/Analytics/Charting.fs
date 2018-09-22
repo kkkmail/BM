@@ -45,33 +45,19 @@ module Charting =
         |> Array.ofSeq
 
 
-    let plot3D (fn : OpticalFunction) (f : FixedInfo) (x : RangedVariable) (y : RangedVariable) =
-        let xRange = [ x.plotMinValue; x.plotMaxValue ]
-        let yRange = [ y.plotMinValue; y.plotMaxValue ]
+    let plot3D (f : FixedInfo) (x : RangedVariable) (y : RangedVariable) (fn : List<OpticalFunction>) =
+        let xVal = x.plotPoints
+        let yVal = y.plotPoints
         let data = calculate3D f x y
-        let zVal = mapFun fn data
 
-        //Chart.Surface(zVal, xRange, yRange)
-        //|> Chart.Show
+        let plotFun e = 
+            let zVal = mapFun e data
 
-        Chart.Surface(zVal)
-        |> Chart.withX_AxisStyle(x.name, MinMax = (x.plotMinValue, x.plotMaxValue))
-        |> Chart.withY_AxisStyle(y.name, MinMax = (y.plotMinValue, y.plotMaxValue))
-        |> Chart.withZ_AxisStyle(fn.info.name)
-        |> Chart.Show
+            // kk:20180922 The axes are somehow mysteriouly reversed. Here we swap X with Y for both the data and the names.
+            Chart.Surface(zVal, yVal, xVal, Opacity = 0.7, Contours = Contours.initXyz(Show = true), Name = e.info.name)
+            |> Chart.withX_AxisStyle(y.name)
+            |> Chart.withY_AxisStyle(x.name)
+            |> Chart.withZ_AxisStyle(e.info.name)
+            |> Chart.Show
 
-
-    //let plotAbc3D (f : OpticalFunction) (g : Ellipticity -> Angle -> EmFieldSystem) =
-    //    let subData (Ellipticity e) = [| for i in 0..89 -> (float i |> Angle.degree |> g (Ellipticity e)).func f |]
-    //    let data = 
-    //        [| for i in 0..100 -> i |]
-    //        |> PSeq.map (fun i -> (((float i) / 100.0) |> Ellipticity.create|> subData))
-    //        |> Array.ofSeq
-
-    //    let getFuncData (e : OpticalFunction) = data |> Array.map (fun x -> x |> Array.map (fun y -> y))
-
-    //    Chart.Surface(data)
-    //    |> Chart.withX_AxisStyle("$\Phi$", MinMax = (0.0, 90.0))
-    //    |> Chart.withY_AxisStyle("e", MinMax = (0.0, 1.0))
-    //    |> Chart.withZ_AxisStyle(f.info.fullName)
-    //    |> Chart.Show
+        fn |> List.map (fun e -> plotFun e)

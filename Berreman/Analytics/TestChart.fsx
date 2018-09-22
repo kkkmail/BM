@@ -11,6 +11,7 @@
 #r "../packages/System.ValueTuple.4.5.0/lib/net47/System.ValueTuple.dll"
 //#r "../packages/FSharp.Charting.2.1.0/lib/net45/FSharp.Charting.dll"
 //#r "../packages/XPlot.Plotly.1.5.0/lib/net45/XPlot.Plotly.dll"
+#r "../packages/FSharp.Plotly.1.1.21/lib/net47/FSharp.Plotly.dll"
 //===========================================================
 #r "./bin/Debug/Berreman.dll"
 #r "./bin/Debug/Analytics.dll"
@@ -35,17 +36,15 @@ open Analytics.Charting
 open Analytics.StandardSystems
 open MathNet.Numerics
 
-//===========================================================
-//plot ()
-//plot3D ()
+open FSharp.Plotly
 
+//===========================================================
 #time
 let fn = [R; T]
 
-//plot fn transpGlass600nmNormalLPs incidenceAngleRange
-//plot fn (transpGlass600nmInclindedLPs 59.0) ellipticityRange
-
-plot3D T transpGlass600nmNormalLPs incidenceAngleRange ellipticityRange
+plot fn transpGlass600nmNormalLPs incidenceAngleRange
+plot fn (transpGlass600nmInclindedLPs 59.0) ellipticityRange
+plot3D transpGlass600nmNormalLPs ellipticityRange incidenceAngleRange fn
 #time
 
 printfn "Completed."
