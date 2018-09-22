@@ -16,7 +16,11 @@ module Standard =
 
     type OpticalProperties
         with 
-        static member transparentGlass = 1.52 |> RefractionIndex.create |> OpticalProperties.defaultValue
+        
+        /// Standard trnasparent glass with refractive index 1.52.
+        static member transparentGlass = 1.52 |> RefractionIndex.create |> OpticalProperties.fromRefractionIndex
+
+        static member standardUniaxialCrystalEps = 0
 
 
     /// Standard vacuum / transparent glass system.
@@ -27,7 +31,7 @@ module Standard =
             lower = OpticalProperties.transparentGlass
         }
 
-    let private wl600nm = 600.0
+    let private w600nm = 600.0
 
-    let light600nmNormalLPs = WaveLength.nm wl600nm |> IncidentLightInfo.create
-    let light600nmInclinedDegreelLPs angleDegree = IncidentLightInfo.createInclined (WaveLength.nm wl600nm) (Angle.degree angleDegree |> IncidenceAngle.create)
+    let light600nmNormalLPs = WaveLength.nm w600nm |> IncidentLightInfo.create
+    let light600nmInclinedDegreelLPs angleDegree = IncidentLightInfo.createInclined (WaveLength.nm w600nm) (Angle.degree angleDegree |> IncidenceAngle.create)

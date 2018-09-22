@@ -30,7 +30,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 thinFilms =
                     [
                         {
-                            properties = 1.52 |> RefractionIndex.create |> OpticalProperties.defaultValue
+                            properties = 1.52 |> RefractionIndex.create |> OpticalProperties.fromRefractionIndex
                             thickness = Thickness.nm 75.0
                         }
                     ]
@@ -57,7 +57,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                 thinFilms =
                     [
                         {
-                            properties = 1.52 |> RefractionIndex.create |> OpticalProperties.defaultValue
+                            properties = 1.52 |> RefractionIndex.create |> OpticalProperties.fromRefractionIndex
                             thickness = Thickness.nm 75.0
                         }
                     ]
@@ -92,9 +92,9 @@ type ThinFilmTests(output : ITestOutputHelper) =
                                             [ -0.13274761403308766; 3.381257622001705; -0.6979528788314281 ]
                                             [ -0.46073345815011235; -0.697952878831428; 4.5371548045970345 ]
                                         ]
-                                        |> ComplexMatrix3x3.fromRe
-                                    mu = ComplexMatrix3x3.identity
-                                    rho = ComplexMatrix3x3.zero
+                                        |> Eps.fromRe
+                                    mu = Mu.vacuum
+                                    rho = Rho.vacuum
                                 }
                             thickness = Thickness.nm 227.0
                         }
@@ -130,21 +130,21 @@ type ThinFilmTests(output : ITestOutputHelper) =
                                             [ createComplex 0.1448188382704858 0.0008342604453034346; createComplex 4.395445093161517 0.004762172783970623; createComplex 0.01455357523209506 -0.00008366130786027271 ]
                                             [ createComplex 0.0421100441439744 -0.0008311798560446706; createComplex 0.01455357523209506 -0.0000836613078602726; createComplex 1.0673056268307946 0.005955215513141588 ]
                                         ]
-                                        |> ComplexMatrix3x3.create
+                                        |> Eps.create
                                     mu = 
                                         [
                                             [ createComplex 0.9582047927795885 0.0; createComplex 0.002456702160523204 0.0; createComplex -0.023259102856946406 0.0 ]
                                             [ createComplex 0.002456702160523218 0.0; createComplex 1.0480733247992344 0.0; createComplex 0.012816054669739748 0.0 ]
                                             [ createComplex -0.02325910285694638 0.0; createComplex 0.012816054669739748 0.0; createComplex 1.0726398036824272 0.0 ]
                                         ]
-                                        |> ComplexMatrix3x3.create
+                                        |> Mu.create
                                     rho = 
                                         [
                                             [ createComplex 0. -0.044424020098732225; createComplex 0. 0.020697425762887564; createComplex 0. 0.05026489175739626 ]
                                             [ createComplex 0. 0.020697425762887564; createComplex 0. -0.029357526291481178; createComplex 0. 0.07178570497243361 ]
                                             [ createComplex 0. 0.05026489175739626; createComplex 0. 0.07178570497243361; createComplex 0. 0.01603950250386385 ]
                                         ]
-                                        |> ComplexMatrix3x3.create
+                                        |> Rho.create
                                 }
                             thickness = Thickness.nm 168.0
                         }
@@ -180,9 +180,9 @@ type ThinFilmTests(output : ITestOutputHelper) =
                                             [ 0.0; 4.; 0.0 ]
                                             [ 0.0; 0.0; 3.0625 ]
                                         ]
-                                        |> ComplexMatrix3x3.fromRe
-                                    mu = ComplexMatrix3x3.identity
-                                    rho = ComplexMatrix3x3.zero
+                                        |> Eps.fromRe
+                                    mu = Mu.vacuum
+                                    rho = Rho.vacuum
                                 }
                             thickness = Thickness.nm 75.0
                         }
@@ -196,15 +196,15 @@ type ThinFilmTests(output : ITestOutputHelper) =
                                             [ 0.0; 2.25; 0.0 ]
                                             [ 0.0; 0.0; 4. ]
                                         ]
-                                        |> ComplexMatrix3x3.fromRe
-                                    mu = ComplexMatrix3x3.identity
+                                        |> Eps.fromRe
+                                    mu = Mu.vacuum
                                     rho = 
                                         [
                                             [ createComplex 0. 0.0019; createComplex 0. -0.0035; createComplex 0.0 0.0 ]
                                             [ createComplex 0. 0.0035; createComplex 0. 0.0019; createComplex 0.0 0.0 ]
                                             [ createComplex 0.0 0.0; createComplex 0.0 0.0; createComplex 0. -0.0057 ]
                                         ]
-                                        |> ComplexMatrix3x3.create
+                                        |> Rho.create
                                 }
                             thickness = Thickness.nm 100.0
                         }
@@ -240,21 +240,21 @@ type ThinFilmTests(output : ITestOutputHelper) =
                                             [ createComplex -0.012875560449085471 -0.0018573990732654617; createComplex 2.2410029463497887 0.006256075978668986; createComplex 0.4998570259368046 -0.0010734607231248966 ]
                                             [ createComplex 0.01140303906526267 -0.0007114143338732871; createComplex 0.49985702593680437 -0.0010734607231248966; createComplex 3.274581737837376 0.00790862579383793 ]
                                         ]
-                                        |> ComplexMatrix3x3.create
+                                        |> Eps.create
                                     mu = 
                                         [
                                             [ 1.0752234830197742; 0.0013550391998404174; -0.011020254808265406 ]
                                             [ 0.0013550391998404174; 1.0814019591272515; -0.003564423558419294 ]
                                             [ -0.011020254808265406; -0.0035644235584192524; 1.0379932189480254 ]
                                         ]
-                                        |> ComplexMatrix3x3.fromRe
+                                        |> Mu.fromRe
                                     rho = 
                                         [
                                             [ 0.029844968141584625; -0.028763456042956777; 0.02967893641567288 ]
                                             [ -0.028763456042956777; 0.08086531310521229; -0.008102599261662975 ]
                                             [ 0.029678936415672878; -0.008102599261662971; -0.002768651477557617 ]
                                         ]
-                                        |> ComplexMatrix3x3.fromIm
+                                        |> Rho.fromIm
                                 }
                             thickness = Thickness.nm 137.0
                         }
@@ -268,21 +268,21 @@ type ThinFilmTests(output : ITestOutputHelper) =
                                             [ createComplex -0.439073499725523 0.0007297634441781455; createComplex 3.470984197432937 0.005853023141142169; createComplex 0.12069703508523659 -0.0005644826514393578 ]
                                             [ createComplex 0.1660634074510728 0.0009007821122230149; createComplex 0.12069703508523656 -0.0005644826514393578; createComplex 1.048122711751765 0.006030083363077285 ]
                                         ]
-                                        |> ComplexMatrix3x3.create
+                                        |> Eps.create
                                     mu = 
                                         [
                                             [ 1.0611136888365906; 0.02673834542393358; 0.013429064297689877 ]
                                             [ 0.02673834542393355; 0.9263839240886705; -0.0012911236702604911 ]
                                             [ 0.013429064297689877; -0.0012911236702604911; 0.9587673756718665 ]
                                         ]
-                                        |> ComplexMatrix3x3.fromRe
+                                        |> Mu.fromRe
                                     rho = 
                                         [
                                             [ -0.054014619992991966; 0.006888036849500936; 0.04764456404037003 ]
                                             [ 0.006888036849500938; 0.07760464614164607; 0.015470784063986442 ]
                                             [ 0.04764456404037003; 0.015470784063986439; 0.03178409630852125 ]
                                         ]
-                                        |> ComplexMatrix3x3.fromIm
+                                        |> Rho.fromIm
                                 }
                             thickness = Thickness.nm 108.0
                         }

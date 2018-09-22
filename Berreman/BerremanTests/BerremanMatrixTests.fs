@@ -26,7 +26,7 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
         [|
             {
                 description = "Homegenious media, normal incidence angle."
-                opticalProperties = 1.5 |> RefractionIndex.create |> OpticalProperties.defaultValue
+                opticalProperties = 1.5 |> RefractionIndex.create |> OpticalProperties.fromRefractionIndex
                 n1SinFita = N1SinFita.create 1.0 (Angle.degree 0.0 |> IncidenceAngle)
 
                 expected = 
@@ -49,9 +49,9 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
                                 [ 0.4399678152485267; 3.409521940849067; 0.8817720799949946 ]
                                 [ 0.24937829248903232; 0.8817720799949945; 1.7317211303338491 ]
                             ]
-                            |> ComplexMatrix3x3.fromRe
-                        mu = ComplexMatrix3x3.identity
-                        rho = ComplexMatrix3x3.zero
+                            |> Eps.fromRe
+                        mu = Mu.vacuum
+                        rho = Rho.vacuum
                     }
                 n1SinFita = N1SinFita.create 1.0 (Angle.degree 19.0 |> IncidenceAngle)
 
@@ -75,21 +75,21 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
                                 [ createComplex 0.391797238769246 -0.0008306597873681833; createComplex 2.516781571187761 0.00448394268988372; createComplex -0.20562344050069822 0.0014226568145231013 ]
                                 [ createComplex -0.335467070282716 -0.0003185282981231219; createComplex -0.20562344050069867 0.0014226568145231018; createComplex 2.8990427550750897 0.005012161886697677 ]
                             ]
-                            |> ComplexMatrix3x3.create
+                            |> Eps.create
                         mu = 
                             [
                                 [ 0.9927965096102219; 0.004679182260859449; -0.01523408689474312 ]
                                 [ 0.004679182260859449; 0.9940450496409975; -0.02910824169850346 ]
                                 [ -0.01523408689474312; -0.029108241698503456; 1.0657422460670098 ]
                             ]
-                            |> ComplexMatrix3x3.fromRe
+                            |> Mu.fromRe
                         rho = 
                             [
                                 [ -0.00022136713805367622; 0.06166773157320616; 0.005379370844434909 ]
                                 [ 0.061667731573206166; -0.035619418563562225; 0.004056865541623645 ]
                                 [ 0.005379370844434909; 0.004056865541623645; -0.08246553212362771 ]
                             ]
-                            |> ComplexMatrix3x3.fromIm
+                            |> Rho.fromIm
                     }
                 n1SinFita = N1SinFita.create 1.0 (Angle.degree 48.0 |> IncidenceAngle)
 
@@ -102,7 +102,6 @@ type BerremanMatrixTests(output : ITestOutputHelper) =
                     ]
                     |> ComplexMatrix.create
             }
-
         |]
 
     // Calculated and expected Berreman matrix.
