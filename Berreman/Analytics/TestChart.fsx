@@ -39,8 +39,13 @@ open MathNet.Numerics
 //plot ()
 //plot3D ()
 
+#time
 let fn = [R; T]
 
-plot fn transpGlass600nmNormalLPs incidenceAngleRange
-plot fn (transpGlass600nmInclindedLPs 59.0) ellipticityRange
+//plot fn transpGlass600nmNormalLPs incidenceAngleRange
+//plot fn (transpGlass600nmInclindedLPs 59.0) ellipticityRange
+
+plot3D T transpGlass600nmNormalLPs incidenceAngleRange ellipticityRange
+#time
+
 printfn "Completed."
