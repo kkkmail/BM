@@ -1,6 +1,6 @@
 ﻿namespace Berreman
 
-module FieldFunctions = 
+module FieldFunctions =
 
     open System.Numerics
     open MathNetNumericsMath

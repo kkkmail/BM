@@ -106,28 +106,28 @@ module Variables =
                 e |> toNanometers
 
 
-    let getWaveLength (l : IncidentLightInfo) (v : RangedVariable) i = 
+    let getWaveLength (v : RangedVariable) i = 
         match v with
-        | WaveLengthRange _ -> v.value i |> WaveLength
-        | _ -> l.wavelength
+        | WaveLengthRange _ -> v.value i |> WaveLength |> Some
+        | _ -> None
 
 
-    let getIncidenceAngle (l : IncidentLightInfo) (v : RangedVariable) i = 
+    let getIncidenceAngle (v : RangedVariable) i = 
         match v with 
-        | IncidenceAngleRange _ -> v.value i |> Angle |> IncidenceAngle
-        | _ -> l.incidenceAngle
+        | IncidenceAngleRange _ -> v.value i |> Angle |> IncidenceAngle |> Some
+        | _ -> None
 
 
-    let getPolarization (l : IncidentLightInfo) (v : RangedVariable) i = 
+    let getPolarization (v : RangedVariable) i = 
         match v with 
-        | PolarizationRange _ -> v.value i |> Angle |> Polarization
-        | _ -> l.polarization
+        | PolarizationRange _ -> v.value i |> Angle |> Polarization |> Some
+        | _ -> None
 
 
-    let getEllipticity (l : IncidentLightInfo) (v : RangedVariable) i = 
+    let getEllipticity (v : RangedVariable) i = 
         match v with 
-        | EllipticityRange _ -> v.value i |> Ellipticity
-        | _ -> l.ellipticity
+        | EllipticityRange _ -> v.value i |> Ellipticity |> Some
+        | _ -> None
 
 
     type FixedInfo =
@@ -138,22 +138,57 @@ module Variables =
 
 
     let calculate (f: FixedInfo) (x : RangedVariable) = 
+        let l = f.incidentLightInfo
+
+        let getValue d g i = 
+            match g x i with 
+            | Some v -> v
+            | None -> d
 
         let getLight i = 
             {
-                wavelength = getWaveLength f.incidentLightInfo x i
-                refractionIndex = f.incidentLightInfo.refractionIndex
-                incidenceAngle = getIncidenceAngle f.incidentLightInfo x i
-                polarization = getPolarization f.incidentLightInfo x i
-                ellipticity = getEllipticity f.incidentLightInfo x i
+                wavelength = getValue l.wavelength getWaveLength i
+                refractionIndex = l.refractionIndex
+                incidenceAngle = getValue l.incidenceAngle getIncidenceAngle i
+                polarization = getValue l.polarization getPolarization i
+                ellipticity = getValue l.ellipticity getEllipticity i
             }
 
         // TODO kk:20180917 - Implement.
         let getOpticalSystem i = 
             f.opticalSystem
 
-        let getEmSys i = 
-            let sol = OpticalSystemSolver(getOpticalSystem i , getLight i)
-            sol.emSys
+        let getEmSys i = OpticalSystemSolver(getOpticalSystem i, getLight i).emSys
+        [| for i in 0..x.length -> (x.plotValue i, getEmSys i) |]
 
-        [ for i in 0..x.length -> (x.plotValue i, getEmSys i) ]
+
+    let calculate3D (f: FixedInfo) (x : RangedVariable) (y : RangedVariable) =
+        let l = f.incidentLightInfo
+
+        let getValue d g i j = 
+            match g x i with 
+            | Some v -> v
+            | None ->
+                match g y j with 
+                | Some w -> w
+                | None -> d
+
+        let getLight i j = 
+            {
+                wavelength = getValue l.wavelength getWaveLength i j
+                refractionIndex = l.refractionIndex
+                incidenceAngle = getValue l.incidenceAngle getIncidenceAngle i j
+                polarization = getValue l.polarization getPolarization i j
+                ellipticity = getValue l.ellipticity getEllipticity i j
+            }
+
+        // TODO kk:20180922 - Implement.
+        let getOpticalSystem i j = 
+            f.opticalSystem
+
+        let getEmSys i j = OpticalSystemSolver(getOpticalSystem i j, getLight i j).emSys
+
+        [| for i in 0..x.length -> i |]
+        |> PSeq.map (fun i -> [| for j in 0..y.length -> (x.plotValue i, y.plotValue j, getEmSys i j) |])
+        |> Array.ofSeq
+

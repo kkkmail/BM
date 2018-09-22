@@ -28,13 +28,19 @@ open Berreman.Geometry
 open Berreman.MaterialProperties
 open Berreman.Media
 open Berreman.Solvers
+open Berreman.FieldFunctions
 open OpticalProperties.Standard
 open Berreman
 open Analytics.Charting
+open Analytics.StandardSystems
+open MathNet.Numerics
 
 //===========================================================
 //plot ()
 //plot3D ()
 
-plot2 ()
+let fn = [R; T]
+
+plot fn transpGlass600nmNormalLPs incidenceAngleRange
+plot fn (transpGlass600nmInclindedLPs 59.0) ellipticityRange
 printfn "Completed."
