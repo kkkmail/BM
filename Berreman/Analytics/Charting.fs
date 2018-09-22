@@ -29,7 +29,7 @@ open FSharp.Plotly
 
 module Charting =
 
-    let plot (fn : List<OpticalFunction>) (f : FixedInfo) (x : RangedVariable) =
+    let plot (f : FixedInfo) (x : RangedVariable) (fn : List<OpticalFunction>) =
         let data = calculate f x
         let getFuncData (e : OpticalFunction) = data |> Array.map (fun (v, s) -> (v, s.func e))
 
@@ -39,7 +39,7 @@ module Charting =
         |> Chart.Show
 
 
-    let mapFun (fn : OpticalFunction) (data : #seq<#seq<double * double * EmFieldSystem>>) = 
+    let mapFun (data : #seq<#seq<double * double * EmFieldSystem>>) (fn : OpticalFunction) = 
         data
         |> Seq.map (fun r -> r |> Seq.map (fun (_, _, e) -> e.func fn) |> Array.ofSeq)
         |> Array.ofSeq
@@ -51,7 +51,7 @@ module Charting =
         let data = calculate3D f x y
 
         let plotFun e = 
-            let zVal = mapFun e data
+            let zVal = mapFun data e
 
             // kk:20180922 The axes are somehow mysteriouly reversed. Here we swap X with Y for both the data and the names.
             Chart.Surface(zVal, yVal, xVal, Opacity = 0.7, Contours = Contours.initXyz(Show = true), Name = e.info.name)

@@ -108,7 +108,6 @@ module Variables =
         member this.plotPoints = [| for i in 0..this.length -> this.plotValue i |]
 
 
-
     let getWaveLength (v : RangedVariable) i = 
         match v with
         | WaveLengthRange _ -> v.value i |> WaveLength |> Some
@@ -180,10 +179,7 @@ module Variables =
             {
                 wavelength = getValue l.wavelength getWaveLength i j
                 refractionIndex = l.refractionIndex
-                incidenceAngle = 
-                    let r = getValue l.incidenceAngle getIncidenceAngle i j
-                    //printfn "getLight::i = %A, j = %A, r = %A" i j r
-                    r
+                incidenceAngle = getValue l.incidenceAngle getIncidenceAngle i j
                 polarization = getValue l.polarization getPolarization i j
                 ellipticity = getValue l.ellipticity getEllipticity i j
             }
@@ -195,13 +191,5 @@ module Variables =
         let getEmSys i j = OpticalSystemSolver(getOpticalSystem i j, getLight i j).emSys
 
         [| for i in 0..x.length -> i |]
-        |> Seq.map (fun i -> [| for j in 0..y.length -> 
-                                (
-                                    x.plotValue i, y.plotValue j, 
-                                    let r = getEmSys i j
-
-                                    //printfn "x.plotValue i = %A, y.plotValue j = %A, emSys = %A\n====================\n" (x.plotValue i) (y.plotValue j) r
-                                    r
-                                ) |])
+        |> PSeq.map (fun i -> [| for j in 0..y.length -> (x.plotValue i, y.plotValue j, getEmSys i j) |])
         |> Array.ofSeq
-

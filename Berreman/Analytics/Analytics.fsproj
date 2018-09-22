@@ -49,6 +49,7 @@
     <Content Include="packages.config" />
     <Content Include="Google.DataTable.Net.Wrapper.XML" />
     <Compile Include="Charting_old.fs" />
+    <None Include="References.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Charting">
