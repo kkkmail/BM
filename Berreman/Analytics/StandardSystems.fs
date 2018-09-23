@@ -29,8 +29,10 @@ module StandardSystems =
     let polarizationRange = PolarizationRange (Range<_>.create Polarization.s Polarization.p)
 
     /// Vacuum / standard transparent glass system with s polarized light falling at normal.
-    let transpGlass600nmNormalLPs = { incidentLightInfo = light600nmNormalLPs; opticalSystem = transparentGlassSystem.fullSystem }
+    let transpGlass600nmNormalLPs = 
+        { incidentLightInfo = light600nmNormalLPs; opticalSystem = BaseOpticalSystem.transparentGlassSystem.fullSystem }
 
     /// Vacuum / standard transparent glass system with s polarized light falling at angleDegree.
-    let transpGlass600nmInclindedLPs angleDegree = { incidentLightInfo = light600nmInclinedDegreelLPs angleDegree; opticalSystem = transparentGlassSystem.fullSystem }
+    let transpGlass600nmInclindedLPs angleDegree = 
+        { incidentLightInfo = light600nmInclinedDegreelLPs angleDegree; opticalSystem = BaseOpticalSystem.transparentGlassSystem.fullSystem }
 
