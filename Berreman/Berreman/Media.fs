@@ -24,6 +24,7 @@ module Media =
 
     type BaseOpticalSystem = 
         {
+            description : string option
             upper : OpticalProperties
             films : List<Layer>
             lower : OpticalProperties
@@ -31,6 +32,7 @@ module Media =
 
         member this.fullSystem = 
             {
+                description = this.description
                 upper = this.upper
                 films = this.films
                 substrate = None
@@ -40,6 +42,7 @@ module Media =
 
     and OpticalSystem = 
         {
+            description : string option
             upper : OpticalProperties
             films : List<Layer>
             substrate : Layer option
@@ -50,12 +53,14 @@ module Media =
             match this.substrate with
             | None -> 
                 {
+                    description = this.description
                     upper = this.upper
                     films = this.films
                     lower = this.lower
                 }
             | Some s -> 
                 {
+                    description = this.description
                     upper = this.upper
                     films = this.films
                     lower = s.properties

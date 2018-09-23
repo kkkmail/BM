@@ -2,9 +2,9 @@
 
 module MatrixComparison =
     open System.Numerics
-    open MathNet.Numerics
     open Berreman.MathNetNumericsMath
     open Berreman.Geometry
+    open Berreman.MaterialProperties
     open Berreman.Fields
     open Xunit
     open Xunit.Abstractions
@@ -31,6 +31,8 @@ module MatrixComparison =
         output.WriteLine ("norm = {0}", norm)
         output.WriteLine ("diffValue = {0}", diffNorm)
         Assert.True(diffNorm / norm < allowedDiff)
+
+    let verifyMatrixEqualityEps o (Eps (ComplexMatrix3x3 r)) (Eps (ComplexMatrix3x3 e)) = verifyMatrixEquality o r e
 
 
     let verifyVectorEquality (output : ITestOutputHelper) (msg : string) (ComplexVector3 (ComplexVector result)) (ComplexVector3 (ComplexVector expected)) =

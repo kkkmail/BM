@@ -68,6 +68,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
             description = description
             opticalSystem = 
                 {
+                    description = Some description
                     upper = OpticalProperties.vacuum
                     films =
                         [
@@ -159,6 +160,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
             description = "Random 1-layer film (r04)."
             opticalSystem = 
                 {
+                    description = None
                     upper = OpticalProperties.vacuum
                     films =
                         [
@@ -249,7 +251,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
         }
 
 
-    member __.runTest (d : BaseOpticalSystemTestData) (c : ResultComparisionType) = 
+    let runTest (d : BaseOpticalSystemTestData) (c : ResultComparisionType) = 
         output.WriteLine d.description
         let solver = BaseOpticalSystemSolver (d.opticalSystem, d.info)
 
@@ -300,16 +302,16 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
 
     [<Fact>]
-    member this.basicSolverTest0 () = this.runTest (data.[0]) Field
+    member __.basicSolverTest0 () = runTest (data.[0]) Field
 
     [<SkippableFact>]
-    member this.basicSolverTest1 () = this.runTest (data.[1]) Intensity
+    member __.basicSolverTest1 () = runTest (data.[1]) Intensity
 
     [<SkippableFact>]
-    member this.basicSolverTest2 () = this.runTest (data.[2]) Intensity
+    member __.basicSolverTest2 () = runTest (data.[2]) Intensity
 
     [<SkippableFact>]
-    member this.basicSolverTest3 () = this.runTest (data.[3]) Intensity
+    member __.basicSolverTest3 () = runTest (data.[3]) Intensity
 
     [<Fact>]
-    member this.basicSolverTestRandom () = this.runTest randomData Field
+    member __.basicSolverTestRandom () = runTest randomData Field

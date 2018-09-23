@@ -12,6 +12,7 @@ module MathNetNumericsMath =
     let toDegree r = r * 180.0 / Constants.Pi
 
     let cplx r = Complex(r, 0.0)
+    let cplx0 = Complex(0.0, 0.0)
     let createComplex r i = Complex(r, i)
 
 

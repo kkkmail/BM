@@ -28,6 +28,17 @@ module MaterialProperties =
                 let (Eps (ComplexMatrix3x3 v)) = this
                 v.[i, j]
 
+        static member fromRefractionIndex (RefractionIndex n) = 
+            (n * n |> cplx) * ComplexMatrix3x3.identity |> Eps
+
+        static member fromRefractionIndex (RefractionIndex n1, RefractionIndex n2, RefractionIndex n3) = 
+            [
+                [ n1 * n1; 0.; 0. ]
+                [ 0.; n2 * n2; 0. ]
+                [ 0.; 0.; n3 * n3 ]
+            ]
+            |> Eps.fromRe
+
 
     type Mu = 
         | Mu of ComplexMatrix3x3
@@ -89,10 +100,9 @@ module MaterialProperties =
                 rho = ComplexMatrix3x3.zero |> Rho
             }
 
-        static member fromRefractionIndex (RefractionIndex n) = 
-            (n * n |> cplx) * ComplexMatrix3x3.identity |> Eps |> OpticalProperties.fromEpsion
-
-        static member vacuum = RefractionIndex.vacuum |> OpticalProperties.fromRefractionIndex
+        static member fromRefractionIndex n = Eps.fromRefractionIndex n |> OpticalProperties.fromEpsion
+        static member fromRefractionIndex (n1, n2, n3) = Eps.fromRefractionIndex(n1, n2, n3) |> OpticalProperties.fromEpsion
+        static member vacuum = Eps.vacuum |> OpticalProperties.fromEpsion
 
         member this.rotate (Rotation r) = 
             let c = r.toComplex()
