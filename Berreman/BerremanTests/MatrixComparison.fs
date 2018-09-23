@@ -5,6 +5,7 @@ module MatrixComparison =
     open MathNet.Numerics
     open Berreman.MathNetNumericsMath
     open Berreman.Geometry
+    open Berreman.Fields
     open Xunit
     open Xunit.Abstractions
 
@@ -44,6 +45,10 @@ module MatrixComparison =
         output.WriteLine ("norm = {0}", norm)
         output.WriteLine ("diffValue = {0}", diffNorm)
         Assert.True(diffNorm / norm < allowedDiff)
+
+
+    let verifyVectorEqualityE o m (E r) (E e) = verifyVectorEquality o m r e
+    let verifyVectorEqualityH o m (H r) (H e) = verifyVectorEquality o m r e
 
 
     // Compares one pair of complex basis (value + vector) for equality.

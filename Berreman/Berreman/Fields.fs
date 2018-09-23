@@ -27,6 +27,9 @@ module Fields =
         static member (*) (a : Complex, E (ComplexVector3 b)) = a * b |> ComplexVector3 |> E
         static member (*) (E (ComplexVector3 a), b : Complex) = a * b |> ComplexVector3 |> E
 
+        static member create a = a |> ComplexVector3.create |> E
+        static member fromRe a = a |> ComplexVector3.fromRe |> E
+
         member this.x =
             let (E a) = this
             a.x
@@ -51,6 +54,9 @@ module Fields =
 
         static member (*) (a : Complex, H (ComplexVector3 b)) = a * b |> ComplexVector3 |> H
         static member (*) (H (ComplexVector3 a), b : Complex) = a * b |> ComplexVector3 |> H
+
+        static member create a = a |> ComplexVector3.create |> H
+        static member fromRe a = a |> ComplexVector3.fromRe |> H
 
         member this.x =
             let (H a) = this

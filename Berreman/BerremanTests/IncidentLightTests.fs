@@ -51,10 +51,10 @@ type IncidentLightTests(output : ITestOutputHelper) =
                                 opticalProperties = OpticalProperties.vacuum
                                 e = 
                                     [ 0.992546151641322; 0.; -0.12186934340514745 ]
-                                    |> ComplexVector3.fromRe
+                                    |> E.fromRe
                                 h = 
                                     [ 0.; 0.9999999999999998; 0. ]
-                                    |> ComplexVector3.fromRe
+                                    |> H.fromRe
                             }
                 }
             )
@@ -81,10 +81,10 @@ type IncidentLightTests(output : ITestOutputHelper) =
                                 opticalProperties = OpticalProperties.vacuum
                                 e = 
                                     [ createComplex 0.97327157603087 0.; createComplex 0. 0.19611613513818404; createComplex -0.11950272310222826 0. ]
-                                    |> ComplexVector3.create
+                                    |> E.create
                                 h = 
                                     [ createComplex 0. -0.194654315206174; createComplex 0.9805806756909199 0.; createComplex 0. 0.02390054462044566 ]
-                                    |> ComplexVector3.create
+                                    |> H.create
                             }
                 }
             )
@@ -112,10 +112,10 @@ type IncidentLightTests(output : ITestOutputHelper) =
                                 opticalProperties = OpticalProperties.vacuum
                                 e = 
                                     [ 0.8995523062257899; 0.42261826174069944; -0.11045113492912874 ]
-                                    |> ComplexVector3.fromRe
+                                    |> E.fromRe
                                 h = 
                                     [ -0.4194681293040762; 0.9063077870366498; 0.0515042100693638 ]
-                                    |> ComplexVector3.fromRe
+                                    |> H.fromRe
                             }
                 }
             )
@@ -126,8 +126,8 @@ type IncidentLightTests(output : ITestOutputHelper) =
 
         let i = EmField.create(d.info, OpticalProperties.vacuum)
 
-        verifyVectorEquality output "eI" i.e d.expected.e
-        verifyVectorEquality output "hI" i.h d.expected.h
+        verifyVectorEqualityE output "eI" i.e d.expected.e
+        verifyVectorEqualityH output "hI" i.h d.expected.h
 
     [<Fact>]
     member this.incidentLightTest0 () = this.runTest (data.[0])
