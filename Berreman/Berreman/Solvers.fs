@@ -205,6 +205,12 @@ module Solvers =
             }
 
         let currentResult (current : StepData) : (StepData * BaseOpticalSystemSolver) = 
+            let x = 
+                match current.step with 
+                | FirstStep -> DownStep
+                | DownStep -> UpStep
+                | UpStep -> DownStep
+
             failwith ""
 
         let next (current : StepData) results =
