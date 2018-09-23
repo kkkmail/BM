@@ -172,38 +172,51 @@ module Solvers =
     type StepData =
         {
             step : SolutionStep
-            data : EmFieldInfo
+            substrate : Layer
+            data : BaseOpticalSystemSolver
         }
 
-        //member this.nextStep =
-        //    match this.step with
-        //    | FirstStep -> DownStep
-        //    | DownStep -> UpStep
-        //    | UpStep -> DownStep
-
-        member this.nextStepData (d : StepData) : StepData = 
+        member this.nextStep =
             match this.step with
-            | FirstStep -> failwith ""
-            | DownStep -> failwith ""
-            | UpStep -> failwith ""
+            | FirstStep -> DownStep
+            | DownStep -> UpStep
+            | UpStep -> DownStep
 
-        static member start (system: OpticalSystem) (info : IncidentLightInfo) : StepData = 
+        //member this.nextStepData (d : StepData) : StepData = 
+        //    match this.step with
+        //    | FirstStep -> failwith ""
+        //    | DownStep -> failwith ""
+        //    | UpStep -> failwith ""
+
+        //static member start (system: BaseOpticalSystem) (info : IncidentLightInfo) (substrate : Layer) : StepData =
+        //    {
+        //        step = FirstStep
+        //        substrate = substrate
+        //        data = BaseOpticalSystemSolver(system, info)
+        //    }
+
+
+    type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo, parameters : SolverParameters) = 
+        let start system substrate =
+            {
+                step = FirstStep
+                substrate = substrate
+                data = BaseOpticalSystemSolver(system, info)
+            }
+
+        let currentResult (current : StepData) : (StepData * BaseOpticalSystemSolver) = 
             failwith ""
 
+        let next (current : StepData) results =
+            let (nextData, result) = currentResult current
+            (nextData, result :: results)
 
-    /// TODO kk:20180916 Implement in full.
-    type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo, parameters : SolverParameters) = 
-        //inherit BaseOpticalSystemSolver(system.baseSystem, info)
-
-        let next step results =
-            (step, results)
-
-        let sol = 
+        let sol =
             match system.substrate with
             | None -> BaseOpticalSystemSolver(system.baseSystem, info) |> Single
             | Some s -> 
                 [ for i in 0..parameters.numberOfReflections -> i ]
-                |> List.fold (fun (step, results : List<BaseOpticalSystemSolver>) _ -> next step results) (StepData.start system info, [])
+                |> List.fold (fun (current, results) _ -> next current results) (start system.baseSystem s, [])
                 |> snd
                 |> Multiple
 
