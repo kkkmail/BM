@@ -20,7 +20,7 @@ let fn = [R; T]
 
 let thickness = Thickness.nm 200.
 
-let thickness1 = Thickness.nm (600.0 / 1.52 / 4.0)
+let thickness1 = Thickness.nm (600.0 / 1.52 / 2.0)
 let thickness2 = Thickness.nm (600.0 / 1.00 / 4.0)
 
 //plot (biaxialCrystalFilm600nmNormalLPs thickness) incidenceAngleRange fn
@@ -40,16 +40,16 @@ let system =
         films = 
             [ 
                 { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
             ]
         lower = OpticalProperties.vacuum
     }
@@ -58,7 +58,7 @@ let f = { incidentLightInfo = light600nmNormalLPs; opticalSystem = system.fullSy
 //plot f incidenceAngleRange fn
 plot f wavelength200to800Range fn
 //plot3D f polarizationRange incidenceAngleRange fn
-//plot3D f wavelength500to700Range incidenceAngleRange fn
+plot3D f wavelength500to700Range incidenceAngleRange fn
 #time
 
 printfn "Completed."

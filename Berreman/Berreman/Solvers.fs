@@ -13,50 +13,44 @@ module Solvers =
     open BerremanMatrix
 
 
-    type BaseOpticalSystemSolver (system: BaseOpticalSystem, info : IncidentLightInfo) = 
-        let fixB1 (b : FullEigenBasis) = 
+    type SolverParameters =
+        {
+            /// Number of reflections to use when there is a thick substrate plate.
+            numberOfReflections : int
+        }
+
+        static member defaultValue = 
             {
-                down = 
-                    {
-                        v0 = b.down.v1
-                        v1 = b.down.v0
-                        e0 = b.down.e1
-                        e1 = b.down.e0
-                    }
-                up = 
-                    {
-                        v0 = b.up.v1
-                        v1 = b.up.v0
-                        e0 = b.up.e1
-                        e1 = b.up.e0
-                    }
+                numberOfReflections = 5
             }
 
-        let fixB2 (b : FullEigenBasis) = 
-            {
-                down = 
-                    {
-                        v0 = b.down.v1
-                        v1 = b.down.v0
-                        e0 = b.down.e1
-                        e1 = b.down.e0
-                    }
-                up = 
-                    {
-                        v0 = b.up.v0
-                        v1 = b.up.v1
-                        e0 = b.up.e0 * (-1.0 |> cplx)
-                        e1 = b.up.e1
-                    }
-            }
-            
-        let i : EmField = EmField.create (info, system.upper)
-        let m1 = BerremanMatrix.create system.upper info.n1SinFita
-        let m2 = BerremanMatrix.create system.lower info.n1SinFita
+
+    type EmFieldInfo = 
+        {
+            emField : EmField
+            m1 : BerremanMatrix
+            m2 : BerremanMatrix
+            waveLength : WaveLength
+            n1SinFita : N1SinFita
+        }
+
+
+    type InputData =
+        | InfoBased of IncidentLightInfo
+        | EmFieldBased of EmFieldInfo
+
+
+    type BaseOpticalSystemSolver private (system: BaseOpticalSystem, input : InputData) = 
+        let i, m1, m2, waveLength, n1SinFita =
+            match input with 
+            | InfoBased info ->
+                let bm = BerremanMatrix.create info.n1SinFita
+                EmField.create (info, system.upper), bm system.upper, bm system.lower, info.waveLength, info.n1SinFita
+            | EmFieldBased e -> e.emField, e.m1, e.m2, e.waveLength, e.n1SinFita
+
         let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.films, i)
-        let evd = p.eigenBasis ()
-        let b1 = m1.eigenBasis () // |> fixB1
-        let b2 = m2.eigenBasis () // |> fixB2
+        let b1 = m1.eigenBasis ()
+        let b2 = m2.eigenBasis ()
 
         // Generated, do not modify.
         let coeffTblVal = 
@@ -121,16 +115,16 @@ module Solvers =
 
         let r = 
             {
-                wavelength = info.wavelength
-                n1SinFita = info.n1SinFita
+                wavelength = waveLength
+                n1SinFita = n1SinFita
                 opticalProperties = system.upper
                 eh = ehr |> BerremanFieldEH
             }.toEmField ()
 
         let t = 
             {
-                wavelength = info.wavelength
-                n1SinFita = info.n1SinFita
+                wavelength = waveLength
+                n1SinFita = n1SinFita
                 opticalProperties = system.lower
                 eh = eht |> BerremanFieldEH
             }.toEmField ()
@@ -142,18 +136,75 @@ module Solvers =
                 transmitted = t
             }
 
-        member __.reflectedLight = r
-        member __.transmittedLight = t
-        member __.incidentLight = i
-        member __.eigenBasisFilm = evd
-        member __.eigenBasisUpper = b1
-        member __.eigenBasisLower = b2
-        member __.coeffTbl = coeffTblVal
-        member __.freeTbl = freeTblVal
+        // None of that seems currently needed
+        //member __.reflectedLight = r
+        //member __.transmittedLight = t
+        //member __.incidentLight = i
+        //member __.eigenBasisFilm = evd
+        //member __.eigenBasisUpper = b1
+        //member __.eigenBasisLower = b2
+        //member __.coeffTbl = coeffTblVal
+        //member __.freeTbl = freeTblVal
+
         member __.cfm = cfmVal
         member __.emSys = ems
 
+        new (system: BaseOpticalSystem, info : IncidentLightInfo) = BaseOpticalSystemSolver (system, InfoBased info)
+        new (system: BaseOpticalSystem, emfInfo : EmFieldInfo) = BaseOpticalSystemSolver (system, EmFieldBased emfInfo)
+
+
+    type Solution = 
+        | Single of BaseOpticalSystemSolver
+        | Multiple of List<BaseOpticalSystemSolver>
+
+
+    /// First step is when we solve the base system where the upper semi-indefinite media is a substrate.
+    /// Down step is the transmitted light from the first step OR _______ ...
+    /// Up step is the light reflected from lower semi-infinite media going up toward thin films.
+    /// We use BaseOpticalSystemSolver at each step.
+    /// The steps go as follows: FirstStep, DownStep, UpStep, DownStep, UpStep, ...
+    type SolutionStep =
+        | FirstStep
+        | DownStep
+        | UpStep
+
+
+    type StepData =
+        {
+            step : SolutionStep
+            data : EmFieldInfo
+        }
+
+        //member this.nextStep =
+        //    match this.step with
+        //    | FirstStep -> DownStep
+        //    | DownStep -> UpStep
+        //    | UpStep -> DownStep
+
+        member this.nextStepData (d : StepData) : StepData = 
+            match this.step with
+            | FirstStep -> failwith ""
+            | DownStep -> failwith ""
+            | UpStep -> failwith ""
+
+        static member start (system: OpticalSystem) (info : IncidentLightInfo) : StepData = 
+            failwith ""
+
 
     /// TODO kk:20180916 Implement in full.
-    and OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo) = 
-        inherit BaseOpticalSystemSolver(system.baseSystem, info)
+    type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo, parameters : SolverParameters) = 
+        //inherit BaseOpticalSystemSolver(system.baseSystem, info)
+
+        let next step results =
+            (step, results)
+
+        let sol = 
+            match system.substrate with
+            | None -> BaseOpticalSystemSolver(system.baseSystem, info) |> Single
+            | Some s -> 
+                [ for i in 0..parameters.numberOfReflections -> i ]
+                |> List.fold (fun (step, results : List<BaseOpticalSystemSolver>) _ -> next step results) (StepData.start system info, [])
+                |> snd
+                |> Multiple
+
+        member __.solution = sol

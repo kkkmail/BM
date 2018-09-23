@@ -66,7 +66,7 @@ module BerremanMatrix =
 
         static member create (info : IncidentLightInfo) (o : OpticalProperties) (eh : ComplexVector4) = 
             {
-                wavelength = info.wavelength
+                wavelength = info.waveLength
                 n1SinFita = info.n1SinFita
                 opticalProperties = o
                 eh = eh |> BerremanFieldEH
@@ -80,7 +80,7 @@ module BerremanMatrix =
             opticalProperties : OpticalProperties
         }
 
-        static member create (o : OpticalProperties) (N1SinFita nsf) =
+        static member create (N1SinFita nsf) (o : OpticalProperties) =
             let n1SinFita = cplx nsf
 
             // Generated, do not modify.
@@ -119,7 +119,7 @@ module BerremanMatrix =
                 opticalProperties = o
             }
 
-        static member identity = BerremanMatrix.create OpticalProperties.vacuum N1SinFita.normal
+        static member identity = BerremanMatrix.create N1SinFita.normal OpticalProperties.vacuum
 
         // Generated, do not modify.
         static member createEmField (o : OpticalProperties) (emXY : EmFieldXY) = 
@@ -139,7 +139,7 @@ module BerremanMatrix =
         | BerremanMatrixPropagated of ComplexMatrix4x4
 
         static member propagateLayer (l : Layer) (em : EmField) = 
-            let m = BerremanMatrix.create l.properties em.n1SinFita
+            let m = BerremanMatrix.create em.n1SinFita l.properties
             let (WaveLength w) = em.wavelength
             
             match l.thickness with 

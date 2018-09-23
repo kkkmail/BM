@@ -207,7 +207,7 @@ module Fields =
 
     type IncidentLightInfo = 
         {
-            wavelength : WaveLength
+            waveLength : WaveLength
             refractionIndex : RefractionIndex
             incidenceAngle : IncidenceAngle
             polarization : Polarization
@@ -249,7 +249,7 @@ module Fields =
 
         static member create w = 
             {
-                wavelength = w
+                waveLength = w
                 refractionIndex = RefractionIndex.vacuum
                 incidenceAngle = IncidenceAngle.normal
                 polarization = Polarization.defaultValue
@@ -258,7 +258,7 @@ module Fields =
 
         static member createInclined w a = 
             {
-                wavelength = w
+                waveLength = w
                 refractionIndex = RefractionIndex.vacuum
                 incidenceAngle = a
                 polarization = Polarization.defaultValue
@@ -327,7 +327,7 @@ module Fields =
             let (e90, h90) = info.eh90
 
             {
-                wavelength = info.wavelength
+                wavelength = info.waveLength
                 n1SinFita = info.n1SinFita
                 opticalProperties = o
                 e = a0 * e0 + cplxI * a90 * e90
