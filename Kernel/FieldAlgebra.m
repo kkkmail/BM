@@ -290,16 +290,23 @@ IFullBase[FullSol_] :=
       (*retVal=Re[ExH1vec[[3]]];*)If[ignoreZeroI == True && retVal < ZEROIFULLBASECUTOFF, If[pdi == True, Print["IFullBase:: Near zero retval is being replaced. Old retval = ", retVal];];
       retVal = zeroIFullReplVal;];
 
+      (*
       Print["IFullBase::Efield = ", Efield];
       Print["IFullBase::Hfield = ", Hfield];
       Print["IFullBase::ExHvec = ", ExHvec];
       Print["IFullBase::retVal = ", retVal];
+      *)
 
-      If[pdi == True, (Print["E = ", Efield // MatrixForm, ", H = ", Hfield // MatrixForm, ", D = ", Dfield // MatrixForm, ", B = ", Bfield // MatrixForm];
-      Print["E x B = ", ExBvec // MatrixForm, ", E x Conjugate[H] = ", ExHvec // MatrixForm, ", E x H = ", ExH1vec // MatrixForm];
-      Print["retVal = ", retVal];
-      Print["IFullBase completed."];
-      Print["   "];)];
+      If[pdi == True,
+        (
+          Print["E = ", Efield // MatrixForm, ", H = ", Hfield // MatrixForm, ", D = ", Dfield // MatrixForm, ", B = ", Bfield // MatrixForm];
+          Print["E x B = ", ExBvec // MatrixForm, ", E x Conjugate[H] = ", ExHvec // MatrixForm, ", E x H = ", ExH1vec // MatrixForm];
+          Print["retVal = ", retVal];
+          Print["IFullBase completed."];
+          Print["   "];
+        )
+      ];
+
       Return[retVal];
     ];
 (* ============================================== *)
@@ -475,15 +482,23 @@ Tx[FullSol_] :=
       ExH1vec = Efield\[Cross]Hfield;
       ExHvecRe = Re[ExHvec];
       ExEHvecRe = Efield.ExHvecRe;
-      If[pdi == True, Print["E = ", Efield // MatrixForm, ", H = ", Hfield // MatrixForm, ", D = ", Dfield // MatrixForm, ", B = ", Bfield // MatrixForm];
-      Print["E x B = ", ExBvec // MatrixForm, ", E x Conjugate[H] = ", ExHvec // MatrixForm, ", E x H = ", ExH1vec // MatrixForm];
-      Print["E * Re[E x Conjugate[H]] = ", ExEHvecRe // MatrixForm, ", E * (E x Conjugate[H]) = ", (Flatten[Efield].ExHvec) // MatrixForm];];
+
+      If[pdi == True,
+        Print["E = ", Efield // MatrixForm, ", H = ", Hfield // MatrixForm, ", D = ", Dfield // MatrixForm, ", B = ", Bfield // MatrixForm];
+        Print["E x B = ", ExBvec // MatrixForm, ", E x Conjugate[H] = ", ExHvec // MatrixForm, ", E x H = ", ExH1vec // MatrixForm];
+        Print["E * Re[E x Conjugate[H]] = ", ExEHvecRe // MatrixForm, ", E * (E x Conjugate[H]) = ", (Flatten[Efield].ExHvec) // MatrixForm];
+      ];
+
       retVal = If[Abs[Ibase] > 0, Re[ExHvec[[3]]] / Ibase, 0, 0];
+
+      (*
       Print["TX::Ibase = ", Ibase];
       Print["TX::ExHvec = ", ExHvec];
       Print["TX::Efield = ", Efield];
       Print["TX::Hfield = ", Hfield];
       Print["TX::retVal = ", retVal];
+      *)
+
       (*retVal=Re[ExH1vec[[3]]]/Ibase;*)
       Return[retVal];
     ];

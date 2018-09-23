@@ -67,22 +67,31 @@ module Standard =
                 lower = OpticalProperties.biaxialCrystal
             }
 
-        /// Standard vacuum / uniaxial crystal film / transparent glass system.
-        static member uniaxialCrystalFilmSystem = 
+        /// Standard vacuum / transparent glass film / vacuum system.
+        static member transparentGlasslFilmSystem thickness = 
+            {
+                description = Some "Standard vacuum / transparent glass film / vacuum system."
+                upper = OpticalProperties.vacuum
+                films = [ { properties = OpticalProperties.transparentGlass; thickness = thickness } ]
+                lower = OpticalProperties.vacuum
+            }
+
+        /// Standard vacuum / uniaxial crystal film / vacuum system.
+        static member uniaxialCrystalFilmSystem thickness = 
             {
                 description = Some "Standard vacuum / uniaxial crystal film / transparent glass system."
                 upper = OpticalProperties.vacuum
-                films = []
-                lower = OpticalProperties.uniaxialCrystal
+                films = [ { properties = OpticalProperties.uniaxialCrystal; thickness = thickness } ]
+                lower = OpticalProperties.vacuum
             }
 
-        /// Standard vacuum / biaxial crystal film / transparent glass system.
-        static member biaxialCrystalFilmSystem = 
+        /// Standard vacuum / biaxial crystal film / vacuum system.
+        static member biaxialCrystalFilmSystem thickness = 
             {
                 description = Some "Standard vacuum / biaxial crystal film / transparent glass system."
                 upper = OpticalProperties.vacuum
-                films = []
-                lower = OpticalProperties.biaxialCrystal
+                films = [ { properties = OpticalProperties.biaxialCrystal; thickness = thickness } ]
+                lower = OpticalProperties.vacuum
             }
 
     let private w600nm = 600.0

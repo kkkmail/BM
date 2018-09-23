@@ -10,14 +10,16 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     11881,        324]
-NotebookOptionsPosition[     11543,        309]
-NotebookOutlinePosition[     11918,        325]
-CellTagsIndexPosition[     11875,        322]
+NotebookDataLength[     19375,        535]
+NotebookOptionsPosition[     18250,        502]
+NotebookOutlinePosition[     18625,        518]
+CellTagsIndexPosition[     18582,        515]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+
+Cell[CellGroupData[{
 Cell[BoxData[{
  RowBox[{
   RowBox[{
@@ -305,7 +307,198 @@ Cell[BoxData[{
   3.746020543779386*^9}, {3.746020574736518*^9, 3.746020594433575*^9}, {
   3.7460251171729193`*^9, 
   3.7460251209134626`*^9}},ExpressionUUID->"c8ad0c64-7196-44c4-bdc4-\
-54df1b5fcfa0"]
+54df1b5fcfa0"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0", "0"},
+     {"0", 
+      RowBox[{"Cos", "[", "theta", "]"}], 
+      RowBox[{"Sin", "[", "theta", "]"}]},
+     {"0", 
+      RowBox[{"-", 
+       RowBox[{"Sin", "[", "theta", "]"}]}], 
+      RowBox[{"Cos", "[", "theta", "]"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.746025188234215*^9},ExpressionUUID->"bbcf20cc-15fd-4b25-a7b0-\
+76b2b8c6cc80"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m = \\n\"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {"0", 
+        RowBox[{"Cos", "[", "xAngle", "]"}], 
+        RowBox[{"-", 
+         RowBox[{"Sin", "[", "xAngle", "]"}]}]},
+       {"0", 
+        RowBox[{"Sin", "[", "xAngle", "]"}], 
+        RowBox[{"Cos", "[", "xAngle", "]"}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["m = \n", 
+   MatrixForm[{{1, 0, 0}, {0, 
+      Cos[$CellContext`xAngle], -Sin[$CellContext`xAngle]}, {0, 
+      Sin[$CellContext`xAngle], 
+      Cos[$CellContext`xAngle]}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.746025188238183*^9},ExpressionUUID->"1946f776-2be3-42f0-a43d-\
+ade9bd9bde9d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"xRot = \"\>", 
+   "\[InvisibleSpace]", "\<\"\\n[\\n    [\\n        1\\n        0\\n        0\
+\\n    ]\\n    [\\n        0\\n        cos(xAngle)\\n        -sin(xAngle)\\n  \
+  ]\\n    [\\n        0\\n        sin(xAngle)\\n        cos(xAngle)\\n    \
+]\\n]\\n\"\>"}],
+  SequenceForm[
+  "xRot = ", 
+   "\n[\n    [\n        1\n        0\n        0\n    ]\n    [\n        0\n    \
+    cos(xAngle)\n        -sin(xAngle)\n    ]\n    [\n        0\n        \
+sin(xAngle)\n        cos(xAngle)\n    ]\n]\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.7460251882421527`*^9},ExpressionUUID->"66001bad-6897-492c-a762-\
+a14091ea36a6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m = \\n\"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        RowBox[{"Cos", "[", "yAngle", "]"}], "0", 
+        RowBox[{"Sin", "[", "yAngle", "]"}]},
+       {"0", "1", "0"},
+       {
+        RowBox[{"-", 
+         RowBox[{"Sin", "[", "yAngle", "]"}]}], "0", 
+        RowBox[{"Cos", "[", "yAngle", "]"}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["m = \n", 
+   MatrixForm[{{
+      Cos[$CellContext`yAngle], 0, 
+      Sin[$CellContext`yAngle]}, {0, 1, 0}, {-Sin[$CellContext`yAngle], 0, 
+      Cos[$CellContext`yAngle]}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.7460251882476063`*^9},ExpressionUUID->"233d9e0f-3a04-4030-9dd9-\
+5525bc84813c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"yRot = \"\>", 
+   "\[InvisibleSpace]", "\<\"\\n[\\n    [\\n        cos(yAngle)\\n        \
+0\\n        sin(yAngle)\\n    ]\\n    [\\n        0\\n        1\\n        \
+0\\n    ]\\n    [\\n        -sin(yAngle)\\n        0\\n        cos(yAngle)\\n \
+   ]\\n]\\n\"\>"}],
+  SequenceForm[
+  "yRot = ", 
+   "\n[\n    [\n        cos(yAngle)\n        0\n        sin(yAngle)\n    ]\n  \
+  [\n        0\n        1\n        0\n    ]\n    [\n        -sin(yAngle)\n    \
+    0\n        cos(yAngle)\n    ]\n]\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.746025188251576*^9},ExpressionUUID->"2e9a8457-e78a-44d9-8379-\
+34c532c22c89"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m = \\n\"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        RowBox[{"Cos", "[", "zAngle", "]"}], 
+        RowBox[{"-", 
+         RowBox[{"Sin", "[", "zAngle", "]"}]}], "0"},
+       {
+        RowBox[{"Sin", "[", "zAngle", "]"}], 
+        RowBox[{"Cos", "[", "zAngle", "]"}], "0"},
+       {"0", "0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}],
+  SequenceForm["m = \n", 
+   MatrixForm[{{
+      Cos[$CellContext`zAngle], -Sin[$CellContext`zAngle], 0}, {
+      Sin[$CellContext`zAngle], 
+      Cos[$CellContext`zAngle], 0}, {0, 0, 1}}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.746025188254055*^9},ExpressionUUID->"622f31e2-44b2-4cc1-afaf-\
+bf5ec6077952"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"zRot = \"\>", 
+   "\[InvisibleSpace]", "\<\"\\n[\\n    [\\n        cos(zAngle)\\n        \
+-sin(zAngle)\\n        0\\n    ]\\n    [\\n        sin(zAngle)\\n        \
+cos(zAngle)\\n        0\\n    ]\\n    [\\n        0\\n        0\\n        \
+1\\n    ]\\n]\\n\"\>"}],
+  SequenceForm[
+  "zRot = ", 
+   "\n[\n    [\n        cos(zAngle)\n        -sin(zAngle)\n        0\n    ]\n \
+   [\n        sin(zAngle)\n        cos(zAngle)\n        0\n    ]\n    [\n     \
+   0\n        0\n        1\n    ]\n]\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.7460251882580633`*^9},ExpressionUUID->"ac91f8eb-791b-43d8-9699-\
+93eeb402afc6"]
+}, Open  ]]
+}, Open  ]]
 },
 WindowSize->{1212, 697},
 WindowMargins->{{Automatic, 33}, {-66, Automatic}},
@@ -324,8 +517,26 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 10981, 287, 1201, "Input", "ExpressionUUID" -> \
-"c8ad0c64-7196-44c4-bdc4-54df1b5fcfa0"]
+Cell[CellGroupData[{
+Cell[580, 22, 10981, 287, 1201, "Input", "ExpressionUUID" -> \
+"c8ad0c64-7196-44c4-bdc4-54df1b5fcfa0"],
+Cell[11564, 311, 894, 26, 86, "Output", "ExpressionUUID" -> \
+"bbcf20cc-15fd-4b25-a7b0-76b2b8c6cc80"],
+Cell[CellGroupData[{
+Cell[12483, 341, 1227, 34, 78, "Print", "ExpressionUUID" -> \
+"1946f776-2be3-42f0-a43d-ade9bd9bde9d"],
+Cell[13713, 377, 681, 15, 366, "Print", "ExpressionUUID" -> \
+"66001bad-6897-492c-a762-a14091ea36a6"],
+Cell[14397, 394, 1229, 34, 78, "Print", "ExpressionUUID" -> \
+"233d9e0f-3a04-4030-9dd9-5525bc84813c"],
+Cell[15629, 430, 679, 15, 366, "Print", "ExpressionUUID" -> \
+"2e9a8457-e78a-44d9-8379-34c532c22c89"],
+Cell[16311, 447, 1227, 34, 78, "Print", "ExpressionUUID" -> \
+"622f31e2-44b2-4cc1-afaf-bf5ec6077952"],
+Cell[17541, 483, 681, 15, 366, "Print", "ExpressionUUID" -> \
+"ac91f8eb-791b-43d8-9699-93eeb402afc6"]
+}, Open  ]]
+}, Open  ]]
 }
 ]
 *)
