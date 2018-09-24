@@ -27,6 +27,7 @@ module Geometry =
         | Angle of double
         static member degree a = a * degree |> Angle
         static member radian r = r |> Angle
+        static member zero = Angle.radian 0.0
         static member pi = Angle.radian MathNetNumericsMath.pi
         static member piDivideByTwo = Angle.radian (MathNetNumericsMath.pi / 2.0)
         static member (+) (Angle a, Angle b) = a + b |> Angle
@@ -406,3 +407,4 @@ module Geometry =
         static member createZmXpZm = Rotation.create ZmXpZm
         static member createZmYpXp = Rotation.create ZmYpXp
         static member createPiZmXpPiZm = Rotation.create PiZmXpPiZm
+        static member rotatePiX = Rotation.createZmXpZm Angle.zero Angle.pi Angle.zero |> Rotation

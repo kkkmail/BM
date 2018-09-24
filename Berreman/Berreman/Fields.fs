@@ -334,6 +334,9 @@ module Fields =
                 h = a0 * h0 + cplxI * a90 * h90
             }
 
+        member this.rotate (r : Rotation) : EmField = 
+            failwith ""
+
 
     type EmFieldSystem =
         {

@@ -3,6 +3,8 @@
 module Media =
 
     open MaterialProperties
+    open Fields
+    open Geometry
 
 
     type Thickness = 
@@ -20,6 +22,9 @@ module Media =
             properties : OpticalProperties
             thickness : Thickness
         }
+
+        member this.rotate (r : Rotation) : Layer = 
+            failwith ""
 
 
     type BaseOpticalSystem = 
@@ -65,4 +70,3 @@ module Media =
                     films = this.films
                     lower = s.properties
                 }
-

@@ -155,7 +155,7 @@ module Solvers =
 
     type Solution = 
         | Single of BaseOpticalSystemSolver
-        | Multiple of List<BaseOpticalSystemSolver>
+        | Multiple of List<EmFieldSystem>
 
 
     /// First step is when we solve the base system where the upper semi-indefinite media is a substrate.
@@ -163,22 +163,29 @@ module Solvers =
     /// Up step is the light reflected from lower semi-infinite media going up toward thin films.
     /// We use BaseOpticalSystemSolver at each step.
     /// The steps go as follows: FirstStep, DownStep, UpStep, DownStep, UpStep, ...
-    type SolutionStep =
-        | FirstStep
+    type SolutionNextStep =
         | DownStep
         | UpStep
 
 
+    type SystemData =
+        {
+            thickness : Thickness
+            down : BaseOpticalSystem
+            up : BaseOpticalSystem
+        }
+
+
     type StepData =
         {
-            step : SolutionStep
-            substrate : Layer
-            data : BaseOpticalSystemSolver
+            step : SolutionNextStep
+            systemData : SystemData
+            ems : EmFieldSystem
         }
 
         member this.nextStep =
             match this.step with
-            | FirstStep -> DownStep
+            //| FirstStep -> DownStep
             | DownStep -> UpStep
             | UpStep -> DownStep
 
@@ -197,32 +204,70 @@ module Solvers =
 
 
     type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo, parameters : SolverParameters) = 
-        let start system substrate =
-            {
-                step = FirstStep
-                substrate = substrate
-                data = BaseOpticalSystemSolver(system, info)
-            }
+        let start system systemData =
+            let data = 
+                {
+                    step = DownStep
+                    systemData = systemData
+                    ems = BaseOpticalSystemSolver(system, info).emSys
+                }
+            data //, [ data.solver ]
 
-        let currentResult (current : StepData) : (StepData * BaseOpticalSystemSolver) = 
+        let currentResult (current : StepData) : (StepData * EmFieldSystem) = 
             let x = 
-                match current.step with 
-                | FirstStep -> DownStep
-                | DownStep -> UpStep
-                | UpStep -> DownStep
+                match current.step with
+                | DownStep ->
+                    //let x = BaseOpticalSystemSolver(current.systemData.down, failwith "")
+                    UpStep
+                | UpStep -> 
+                    failwith ""
 
             failwith ""
 
+        let nextLight (step: SolutionNextStep) (s : Layer) (ems : EmFieldSystem) : EmFieldInfo = 
+            match step with 
+            | DownStep -> 
+                {
+                    emField = ems.transmitted.propagate s
+                    m1 = s.properties |> BerremanMatrix.create info.n1SinFita
+                    m2 = system.lower |> BerremanMatrix.create info.n1SinFita
+                    waveLength = info.waveLength
+                    n1SinFita = info.n1SinFita
+                }
+            | UpStep -> 
+                let sRotated = s.rotate Rotation.rotatePiX
+                {
+                    emField = (ems.reflected.rotate Rotation.rotatePiX).propagate sRotated
+                    m1 = sRotated.properties |> BerremanMatrix.create info.n1SinFita
+                    m2 = system.upper.rotate Rotation.rotatePiX |> BerremanMatrix.create info.n1SinFita
+                    waveLength = info.waveLength
+                    n1SinFita = info.n1SinFita
+                }
+
         let next (current : StepData) results =
             let (nextData, result) = currentResult current
-            (nextData, result :: results)
+            (nextData, current.ems :: results)
 
         let sol =
             match system.substrate with
             | None -> BaseOpticalSystemSolver(system.baseSystem, info) |> Single
             | Some s -> 
+                let systemData =
+                    {
+                        thickness = s.thickness
+                        down = { system.baseSystem with upper = s.properties; films = []}
+                        up = 
+                            let r = Rotation.rotatePiX
+
+                            let newFilms = 
+                                system.films
+                                |> List.map (fun f -> { f with properties = f.properties.rotate r })
+                                |> List.rev
+
+                            { upper = s.properties.rotate r; films = newFilms; lower = system.upper.rotate r; description = None}
+                    }
                 [ for i in 0..parameters.numberOfReflections -> i ]
-                |> List.fold (fun (current, results) _ -> next current results) (start system.baseSystem s, [])
+                |> List.fold (fun (current, results) _ -> next current results) (start system.baseSystem systemData, [])
                 |> snd
                 |> Multiple
 

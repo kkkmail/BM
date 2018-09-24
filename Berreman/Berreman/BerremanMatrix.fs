@@ -229,3 +229,8 @@ module BerremanMatrix =
             let (BerremanMatrixPropagated p) = this
             p.eigenBasis ()
 
+
+    type EmField
+        with 
+        member this.propagate (s : Layer) : EmField = 
+            failwith ""
