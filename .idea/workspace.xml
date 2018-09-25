@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Analytics/StandardSystems.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Analytics/StandardSystems.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Analytics/TestChart.fsx" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Analytics/TestChart.fsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/OpticalProperties/Standard.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/OpticalProperties/Standard.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/Example_06_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/Example_06_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/BerremanCommon.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/BerremanCommon.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RotationConventions__001.nb" beforeDir="false" afterPath="$PROJECT_DIR$/RotationConventions__001.nb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -171,8 +164,8 @@
       <file leaf-file-name="BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
+            <state relative-caret-position="102">
+              <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -781,8 +774,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
+        <state relative-caret-position="102">
+          <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
         </state>
       </provider>
     </entry>
