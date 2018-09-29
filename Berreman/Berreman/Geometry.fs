@@ -342,6 +342,12 @@ module Geometry =
         static member (*) (ComplexMatrix4x4 a, b : Complex) : ComplexMatrix4x4 = 
             a * b |> ComplexMatrix4x4
 
+        static member (*) (ComplexVector4 a, ComplexMatrix4x4 b) : ComplexVector4 = 
+            a * b |> ComplexVector4
+
+        static member (*) (ComplexMatrix4x4 a, ComplexVector4 b) : ComplexVector4 = 
+            a * b |> ComplexVector4
+
         member this.matrixExp (x : Complex) : ComplexMatrix4x4 = 
             let (ComplexMatrix4x4 v) = this * x
             v.matrixExp () |> ComplexMatrix4x4

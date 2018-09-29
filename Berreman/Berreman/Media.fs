@@ -23,9 +23,7 @@ module Media =
             thickness : Thickness
         }
 
-        member this.rotate (r : Rotation) : Layer = 
-            failwith ""
-
+        member this.rotate (r : Rotation) : Layer = { this with properties = this.properties.rotate r}
         member this.rotatePiX = this.rotate Rotation.rotatePiX
 
 

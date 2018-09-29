@@ -40,25 +40,38 @@ let system =
         films = 
             [ 
                 { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                { properties = OpticalProperties.vacuum; thickness = thickness2 }
-                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                { properties = OpticalProperties.vacuum; thickness = thickness2 }
-                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                { properties = OpticalProperties.vacuum; thickness = thickness2 }
-                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                { properties = OpticalProperties.vacuum; thickness = thickness2 }
-                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                { properties = OpticalProperties.vacuum; thickness = thickness2 }
-                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
+                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
+                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
+                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
+                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
+                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
             ]
         lower = OpticalProperties.vacuum
     }
+
+let systemWithSubstrate s = { system.fullSystem with substrate = s }
 
 let f = { incidentLightInfo = light600nmNormalLPs; opticalSystem = system.fullSystem }
 //plot f incidenceAngleRange fn
 plot f wavelength200to800Range fn
 //plot3D f polarizationRange incidenceAngleRange fn
-plot3D f wavelength500to700Range incidenceAngleRange fn
+//plot3D f wavelength500to700Range incidenceAngleRange fn
+
+let vacuumSubstrate = 
+    {
+        thickness = Thickness.nm 500.0
+        properties = OpticalProperties.vacuum
+    }
+    |> Some
+
+let f1 = { f with opticalSystem = systemWithSubstrate vacuumSubstrate}
+plot f1 wavelength200to800Range fn
+
 #time
 
 printfn "Completed."

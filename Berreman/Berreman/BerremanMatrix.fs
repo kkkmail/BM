@@ -135,26 +135,6 @@ module BerremanMatrix =
             EmField.create (emXY, eZ, hZ)
 
 
-    type BerremanMatrixPropagated = 
-        | BerremanMatrixPropagated of ComplexMatrix4x4
-
-        static member propagateLayer (l : Layer) (em : EmField) = 
-            let m = BerremanMatrix.create em.n1SinFita l.properties
-            let (WaveLength w) = em.waveLength
-            
-            match l.thickness with 
-            | Thickness t -> m.berremanMatrix.matrixExp (Complex(0.0, (2.0 * pi * t / w))) |> BerremanMatrixPropagated
-            | Infinity -> failwith "TODO Implelement infinite thickness by making that layer the output media."
-
-        static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 
-            ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagateLayer r em) * acc) BerremanMatrixPropagated.identity
-
-        static member identity = ComplexMatrix4x4.identity |> BerremanMatrixPropagated
-
-        static member (*) (BerremanMatrixPropagated a, BerremanMatrixPropagated b) = 
-            (a * b) |> BerremanMatrixPropagated
-
-
     type BerremanField
         with
         member this.toEmField () = 
@@ -179,6 +159,26 @@ module BerremanMatrix =
                 opticalProperties = this.opticalProperties
                 eh = [ this.e.x; this.h.y; this.e.y; -this.h.x ] |> ComplexVector.create |> ComplexVector4 |> BerremanFieldEH
             }
+
+
+    type BerremanMatrixPropagated = 
+        | BerremanMatrixPropagated of ComplexMatrix4x4
+
+        static member propagateLayer (l : Layer) (em : EmField) : BerremanMatrixPropagated = 
+            let m = BerremanMatrix.create em.n1SinFita l.properties
+            let (WaveLength w) = em.waveLength
+            
+            match l.thickness with 
+            | Thickness t -> m.berremanMatrix.matrixExp (Complex(0.0, (2.0 * pi * t / w))) |> BerremanMatrixPropagated
+            | Infinity -> failwith "TODO Implelement infinite thickness by making that layer the output media."
+
+        static member propagate (ls : List<Layer>, em : EmField) : BerremanMatrixPropagated = 
+            ls |> List.fold (fun acc r -> (BerremanMatrixPropagated.propagateLayer r em) * acc) BerremanMatrixPropagated.identity
+
+        static member identity = ComplexMatrix4x4.identity |> BerremanMatrixPropagated
+
+        static member (*) (BerremanMatrixPropagated a, BerremanMatrixPropagated b) = 
+            (a * b) |> BerremanMatrixPropagated
 
 
     type ComplexMatrix4x4 
@@ -233,4 +233,8 @@ module BerremanMatrix =
     type EmField
         with 
         member this.propagate (s : Layer) : EmField = 
-            failwith ""
+            let (BerremanMatrixPropagated bmp) = BerremanMatrixPropagated.propagateLayer s this
+            let b = this.toBerremanField ()
+            let (BerremanFieldEH beh) = b.eh
+            let bp = { b with eh = bmp * beh |> BerremanFieldEH }
+            bp.toEmField()
