@@ -26,6 +26,16 @@ module Media =
         member this.rotate (r : Rotation) : Layer = 
             failwith ""
 
+        member this.rotatePiX = this.rotate Rotation.rotatePiX
+
+
+    /// Use when upper system is coming with incident light EmField
+    type ShortOpticalSystem = 
+        {
+            films : List<Layer>
+            lower : OpticalProperties
+        }
+
 
     type BaseOpticalSystem = 
         {
@@ -70,3 +80,8 @@ module Media =
                     films = this.films
                     lower = s.properties
                 }
+
+        member this.rotate (Rotation r) : OpticalSystem = 
+            failwith ""
+
+        member this.rotatePiX = this.rotate Rotation.rotatePiX

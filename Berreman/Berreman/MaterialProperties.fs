@@ -120,3 +120,5 @@ module MaterialProperties =
                     let (Rho a) = this.rho
                     a |> rotate |> Rho
             }
+
+        member this.rotatePiX = this.rotate Rotation.rotatePiX

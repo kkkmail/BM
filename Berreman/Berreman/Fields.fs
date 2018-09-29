@@ -268,17 +268,17 @@ module Fields =
 
     type EmFieldXY =
         {
-            wavelength : WaveLength
+            waveLength : WaveLength
             n1SinFita : N1SinFita
             opticalProperties : OpticalProperties
-            e : E2
-            h : H2
+            e2 : E2
+            h2 : H2
         }
 
 
     type EmField =
         {
-            wavelength : WaveLength
+            waveLength : WaveLength
             n1SinFita : N1SinFita
             opticalProperties : OpticalProperties
             e : E
@@ -310,16 +310,16 @@ module Fields =
             let cy = [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
             thread this.complexNormal (fun cz -> { cX = ComplexVector3.cross cy cz; cY = cy; cZ = cz})
 
-        static member create (emXY : EmFieldXY, eZ, hZ) =
-            { 
-                wavelength = emXY.wavelength 
+        static member create (emXY : EmFieldXY, eZ, hZ) : EmField =
+            {
+                waveLength = emXY.waveLength 
                 n1SinFita = emXY.n1SinFita 
                 opticalProperties = emXY.opticalProperties
-                e = [ emXY.e.x; emXY.e.y; eZ ] |> ComplexVector.create |> ComplexVector3 |> E
-                h = [ emXY.h.x; emXY.h.y; hZ ] |> ComplexVector.create |> ComplexVector3 |> H
+                e = [ emXY.e2.x; emXY.e2.y; eZ ] |> ComplexVector.create |> ComplexVector3 |> E
+                h = [ emXY.h2.x; emXY.h2.y; hZ ] |> ComplexVector.create |> ComplexVector3 |> H
             }
 
-        static member create (info : IncidentLightInfo, o : OpticalProperties) = 
+        static member create (info : IncidentLightInfo, o : OpticalProperties) : EmField = 
             let (Ellipticity e) = info.ellipticity
             let a0 = 1.0 / sqrt(1.0 + e * e) |> cplx
             let a90 = e / sqrt(1.0 + e * e) |> cplx
@@ -327,7 +327,7 @@ module Fields =
             let (e90, h90) = info.eh90
 
             {
-                wavelength = info.waveLength
+                waveLength = info.waveLength
                 n1SinFita = info.n1SinFita
                 opticalProperties = o
                 e = a0 * e0 + cplxI * a90 * e90
@@ -337,12 +337,23 @@ module Fields =
         member this.rotate (r : Rotation) : EmField = 
             failwith ""
 
+        member this.rotatePiX = this.rotate Rotation.rotatePiX
+
 
     type EmFieldSystem =
         {
             incident : EmField
             reflected : EmField
             transmitted : EmField
+        }
+
+
+    type MultipleEmFieldSystem =
+        {
+            incident : EmField
+
+            /// List of reflected * transmitted
+            rt : List<EmField option * EmField option>
         }
 
 

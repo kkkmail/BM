@@ -11,6 +11,7 @@ module Solvers =
     open Fields
     open Media
     open BerremanMatrix
+    open MaterialProperties
 
 
     type SolverParameters =
@@ -25,30 +26,30 @@ module Solvers =
             }
 
 
-    type EmFieldInfo = 
-        {
-            emField : EmField
-            m1 : BerremanMatrix
-            m2 : BerremanMatrix
-            waveLength : WaveLength
-            n1SinFita : N1SinFita
-        }
+
+    //type EmFieldInfo = 
+    //    {
+    //        emField : EmField
+    //        shortSystem : ShortOpticalSystem
+    //    }
 
 
     type InputData =
-        | InfoBased of IncidentLightInfo
-        | EmFieldBased of EmFieldInfo
+        | InfoBased of IncidentLightInfo * BaseOpticalSystem
+        | EmFieldBased of EmField * ShortOpticalSystem
 
 
-    type BaseOpticalSystemSolver private (system: BaseOpticalSystem, input : InputData) = 
-        let i, m1, m2, waveLength, n1SinFita =
+    type BaseOpticalSystemSolver private (input : InputData) = 
+        let i, m1, m2, waveLength, n1SinFita, films, upper, lower =
             match input with 
-            | InfoBased info ->
+            | InfoBased (info, system) ->
                 let bm = BerremanMatrix.create info.n1SinFita
-                EmField.create (info, system.upper), bm system.upper, bm system.lower, info.waveLength, info.n1SinFita
-            | EmFieldBased e -> e.emField, e.m1, e.m2, e.waveLength, e.n1SinFita
+                EmField.create (info, system.upper), bm system.upper, bm system.lower, info.waveLength, info.n1SinFita, system.films, system.upper, system.lower
+            | EmFieldBased (e, system) ->
+                let bm = BerremanMatrix.create e.n1SinFita
+                e, bm e.opticalProperties, bm system.lower, e.waveLength, e.n1SinFita, system.films, e.opticalProperties, system.lower
 
-        let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (system.films, i)
+        let (BerremanMatrixPropagated p) = BerremanMatrixPropagated.propagate (films, i)
         let b1 = m1.eigenBasis ()
         let b2 = m2.eigenBasis ()
 
@@ -117,7 +118,7 @@ module Solvers =
             {
                 wavelength = waveLength
                 n1SinFita = n1SinFita
-                opticalProperties = system.upper
+                opticalProperties = upper
                 eh = ehr |> BerremanFieldEH
             }.toEmField ()
 
@@ -125,7 +126,7 @@ module Solvers =
             {
                 wavelength = waveLength
                 n1SinFita = n1SinFita
-                opticalProperties = system.lower
+                opticalProperties = lower
                 eh = eht |> BerremanFieldEH
             }.toEmField ()
 
@@ -149,13 +150,20 @@ module Solvers =
         member __.cfm = cfmVal
         member __.emSys = ems
 
-        new (system: BaseOpticalSystem, info : IncidentLightInfo) = BaseOpticalSystemSolver (system, InfoBased info)
-        new (system: BaseOpticalSystem, emfInfo : EmFieldInfo) = BaseOpticalSystemSolver (system, EmFieldBased emfInfo)
+        new (info : IncidentLightInfo, system : BaseOpticalSystem) = BaseOpticalSystemSolver (InfoBased (info, system))
+        new (emf : EmField, system : ShortOpticalSystem) = BaseOpticalSystemSolver (EmFieldBased (emf, system))
 
 
     type Solution = 
         | Single of BaseOpticalSystemSolver
-        | Multiple of List<EmFieldSystem>
+        | Multiple of MultipleEmFieldSystem
+
+        static member create i rt = 
+            {
+                incident = i
+                rt = rt
+            }
+            |> Multiple
 
 
     /// First step is when we solve the base system where the upper semi-indefinite media is a substrate.
@@ -167,27 +175,31 @@ module Solvers =
         | DownStep
         | UpStep
 
-
-    type SystemData =
-        {
-            thickness : Thickness
-            down : BaseOpticalSystem
-            up : BaseOpticalSystem
-        }
-
-
-    type StepData =
-        {
-            step : SolutionNextStep
-            systemData : SystemData
-            ems : EmFieldSystem
-        }
-
-        member this.nextStep =
-            match this.step with
-            //| FirstStep -> DownStep
+        member this.next = 
+            match this with 
             | DownStep -> UpStep
             | UpStep -> DownStep
+
+
+    //type SystemData =
+    //    {
+    //        thickness : Thickness
+    //        down : BaseOpticalSystem
+    //        up : BaseOpticalSystem
+    //    }
+
+
+    //type StepData =
+    //    {
+    //        step : SolutionNextStep
+    //        systemData : SystemData
+    //        ems : EmFieldSystem
+    //    }
+
+    //    member this.nextStep =
+    //        match this.step with
+    //        | DownStep -> UpStep
+    //        | UpStep -> DownStep
 
         //member this.nextStepData (d : StepData) : StepData = 
         //    match this.step with
@@ -204,71 +216,108 @@ module Solvers =
 
 
     type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo, parameters : SolverParameters) = 
-        let start system systemData =
-            let data = 
-                {
-                    step = DownStep
-                    systemData = systemData
-                    ems = BaseOpticalSystemSolver(system, info).emSys
-                }
-            data //, [ data.solver ]
+        //let start system systemData =
+        //    let data = 
+        //        {
+        //            step = DownStep
+        //            systemData = systemData
+        //            ems = BaseOpticalSystemSolver(system, info).emSys
+        //        }
+        //    data //, [ data.solver ]
 
-        let currentResult (current : StepData) : (StepData * EmFieldSystem) = 
-            let x = 
-                match current.step with
-                | DownStep ->
-                    //let x = BaseOpticalSystemSolver(current.systemData.down, failwith "")
-                    UpStep
-                | UpStep -> 
-                    failwith ""
+        //let currentResult (current : StepData) : (StepData * EmFieldSystem) = 
+        //    let x = 
+        //        match current.step with
+        //        | DownStep ->
+        //            //let x = BaseOpticalSystemSolver(current.systemData.down, failwith "")
+        //            UpStep
+        //        | UpStep -> 
+        //            failwith ""
 
-            failwith ""
+        //    failwith ""
 
-        let nextLight (step: SolutionNextStep) (s : Layer) (ems : EmFieldSystem) : EmFieldInfo = 
-            match step with 
-            | DownStep -> 
-                {
-                    emField = ems.transmitted.propagate s
-                    m1 = s.properties |> BerremanMatrix.create info.n1SinFita
-                    m2 = system.lower |> BerremanMatrix.create info.n1SinFita
-                    waveLength = info.waveLength
-                    n1SinFita = info.n1SinFita
-                }
-            | UpStep -> 
-                let sRotated = s.rotate Rotation.rotatePiX
-                {
-                    emField = (ems.reflected.rotate Rotation.rotatePiX).propagate sRotated
-                    m1 = sRotated.properties |> BerremanMatrix.create info.n1SinFita
-                    m2 = system.upper.rotate Rotation.rotatePiX |> BerremanMatrix.create info.n1SinFita
-                    waveLength = info.waveLength
-                    n1SinFita = info.n1SinFita
-                }
+        //let nextLight (step: SolutionNextStep) (s : Layer) (ems : EmFieldSystem) : EmFieldInfo = 
+        //    match step with 
+        //    | DownStep -> 
+        //        {
+        //            emField = ems.transmitted.propagate s
+        //            m1 = s.properties |> BerremanMatrix.create info.n1SinFita
+        //            m2 = system.lower |> BerremanMatrix.create info.n1SinFita
+        //            waveLength = info.waveLength
+        //            n1SinFita = info.n1SinFita
+        //        }
+        //    | UpStep -> 
+        //        let sRotated = s.rotate Rotation.rotatePiX
+        //        {
+        //            emField = (ems.reflected.rotate Rotation.rotatePiX).propagate sRotated
+        //            m1 = sRotated.properties |> BerremanMatrix.create info.n1SinFita
+        //            m2 = system.upper.rotate Rotation.rotatePiX |> BerremanMatrix.create info.n1SinFita
+        //            waveLength = info.waveLength
+        //            n1SinFita = info.n1SinFita
+        //        }
 
-        let next (current : StepData) results =
-            let (nextData, result) = currentResult current
-            (nextData, current.ems :: results)
+        //let next (current : StepData) results =
+        //    let (nextData, result) = currentResult current
+        //    (nextData, current.ems :: results)
 
         let sol =
             match system.substrate with
-            | None -> BaseOpticalSystemSolver(system.baseSystem, info) |> Single
+            | None -> BaseOpticalSystemSolver(info, system.baseSystem) |> Single
             | Some s -> 
-                let systemData =
+                //let systemData =
+                //    {
+                //        thickness = s.thickness
+                //        down = { system.baseSystem with upper = s.properties; films = []}
+                //        up = 
+                //            let r = Rotation.rotatePiX
+
+                //            let newFilms = 
+                //                system.films
+                //                |> List.map (fun f -> { f with properties = f.properties.rotate r })
+                //                |> List.rev
+
+                //            { upper = s.properties.rotate r; films = newFilms; lower = system.upper.rotate r; description = None}
+                //    }
+
+                let firstSys : BaseOpticalSystem = system.baseSystem
+                let firstOut (ems : EmFieldSystem) : EmField = ems.transmitted.propagate s
+                let firstAcc (ems : EmFieldSystem) : (EmField option * EmField option) = (Some ems.reflected, None)
+
+                let downSys : ShortOpticalSystem = 
                     {
-                        thickness = s.thickness
-                        down = { system.baseSystem with upper = s.properties; films = []}
-                        up = 
-                            let r = Rotation.rotatePiX
-
-                            let newFilms = 
-                                system.films
-                                |> List.map (fun f -> { f with properties = f.properties.rotate r })
-                                |> List.rev
-
-                            { upper = s.properties.rotate r; films = newFilms; lower = system.upper.rotate r; description = None}
+                        films = []
+                        lower = system.lower
                     }
+
+                let downOut (ems : EmFieldSystem) : EmField = ems.reflected.rotatePiX.propagate s.rotatePiX
+                let downAcc (ems : EmFieldSystem) : (EmField option * EmField option) = (None, Some ems.transmitted)
+
+                let upSys : ShortOpticalSystem = 
+                    {
+                        films = system.rotatePiX.films |> List.rev // TODO Make it clear what's going on here.
+                        lower = system.upper.rotatePiX
+                    }
+
+                let upOut (ems : EmFieldSystem) : EmField = ems.reflected.rotatePiX.propagate s
+                let upAcc (ems : EmFieldSystem) : (EmField option * EmField option) = (Some (ems.transmitted.rotatePiX), None)
+
+                let first, incidentLight = 
+                    let ems = BaseOpticalSystemSolver(info, firstSys).emSys
+                    ((DownStep, ems |> firstOut), [ ems |> firstAcc ]), ems.incident
+
+                let makeStep ((nextStep : SolutionNextStep, emf : EmField), acc) = 
+                    match nextStep with 
+                    | DownStep -> 
+                        let ems = BaseOpticalSystemSolver(emf, downSys).emSys
+                        (UpStep, ems |> downOut), (ems |> downAcc) :: acc
+                    | UpStep -> 
+                        let ems = BaseOpticalSystemSolver(emf, upSys).emSys
+                        (DownStep, ems |> upOut), (ems |> upAcc) :: acc
+
+
                 [ for i in 0..parameters.numberOfReflections -> i ]
-                |> List.fold (fun (current, results) _ -> next current results) (start system.baseSystem systemData, [])
+                |> List.fold (fun next _ -> makeStep next) (first)
                 |> snd
-                |> Multiple
+                |> Solution.create incidentLight
 
         member __.solution = sol
