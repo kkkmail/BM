@@ -22,7 +22,7 @@ module Solvers =
 
         static member defaultValue = 
             {
-                numberOfReflections = 5
+                numberOfReflections = 1
             }
 
 

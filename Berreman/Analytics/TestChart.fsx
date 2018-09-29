@@ -33,7 +33,15 @@ let thickness2 = Thickness.nm (600.0 / 1.00 / 4.0)
 
 // biaxialFilm600nmNormalLPs
 
-let system = 
+let baseSystem = 
+    {
+        description = None
+        upper = OpticalProperties.vacuum
+        films = []
+        lower = OpticalProperties.transparentGlass
+    }
+
+let filmSystem = 
     {
         description = None
         upper = OpticalProperties.vacuum
@@ -54,23 +62,40 @@ let system =
         lower = OpticalProperties.vacuum
     }
 
-let systemWithSubstrate s = { system.fullSystem with substrate = s }
-
-let f = { incidentLightInfo = light600nmNormalLPs; opticalSystem = system.fullSystem }
-//plot f incidenceAngleRange fn
-plot f wavelength200to800Range fn
-//plot3D f polarizationRange incidenceAngleRange fn
-//plot3D f wavelength500to700Range incidenceAngleRange fn
-
-let vacuumSubstrate = 
+let vacuumSubstrate =
     {
         thickness = Thickness.nm 500.0
         properties = OpticalProperties.vacuum
     }
-    |> Some
 
-let f1 = { f with opticalSystem = systemWithSubstrate vacuumSubstrate}
+let transparentGlassSubstrate =
+    {
+        thickness = Thickness.nm 0.0
+        properties = OpticalProperties.transparentGlass
+    }
+
+//let substrate = 
+//    {
+//        thickness = Thickness.nm 1000.0
+//        properties = OpticalProperties.biaxialCrystal
+//    }
+
+let filmSystemWithSubstrate s = { filmSystem.fullSystem with substrate = Some s }
+
+let f0 = { incidentLightInfo = light600nmNormalLPs; opticalSystem = baseSystem.fullSystem }
+let f1 = { f0 with opticalSystem = filmSystem.fullSystem }
+let f2 = { f0 with opticalSystem = filmSystemWithSubstrate vacuumSubstrate}
+let f3 = { f0 with opticalSystem = filmSystemWithSubstrate transparentGlassSubstrate}
+
+//plot f incidenceAngleRange fn
+
+plot f0 wavelength200to800Range fn
 plot f1 wavelength200to800Range fn
+plot f2 wavelength200to800Range fn
+plot f3 wavelength200to800Range fn
+
+//plot3D f polarizationRange incidenceAngleRange fn
+//plot3D f wavelength500to700Range incidenceAngleRange fn
 
 #time
 
