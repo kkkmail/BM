@@ -116,7 +116,7 @@ module Solvers =
 
         let r = 
             {
-                wavelength = waveLength
+                waveLength = waveLength
                 n1SinFita = n1SinFita
                 opticalProperties = upper
                 eh = ehr |> BerremanFieldEH
@@ -124,7 +124,7 @@ module Solvers =
 
         let t = 
             {
-                wavelength = waveLength
+                waveLength = waveLength
                 n1SinFita = n1SinFita
                 opticalProperties = lower
                 eh = eht |> BerremanFieldEH

@@ -53,7 +53,7 @@ module BerremanMatrix =
 
     type BerremanField =
         {
-            wavelength : WaveLength
+            waveLength : WaveLength
             n1SinFita : N1SinFita
             opticalProperties : OpticalProperties
             eh : BerremanFieldEH
@@ -66,7 +66,7 @@ module BerremanMatrix =
 
         static member create (info : IncidentLightInfo) (o : OpticalProperties) (eh : ComplexVector4) = 
             {
-                wavelength = info.waveLength
+                waveLength = info.waveLength
                 n1SinFita = info.n1SinFita
                 opticalProperties = o
                 eh = eh |> BerremanFieldEH
@@ -126,10 +126,10 @@ module BerremanMatrix =
             let (N1SinFita nsf) = emXY.n1SinFita
             let n1SinFita = cplx nsf
 
-            let eX = emXY.e.x
-            let eY = emXY.e.y
-            let hX = emXY.h.x
-            let hY = emXY.h.y
+            let eX = emXY.e2.x
+            let eY = emXY.e2.y
+            let hX = emXY.h2.x
+            let hY = emXY.h2.y
             let eZ = ((-(o.eps.[2, 0] * o.mu.[2, 2]) + o.rho.[2, 2] * o.rhoT.[2, 0]) * eX - o.eps.[2, 1] * o.mu.[2, 2] * eY + o.rho.[2, 2] * o.rhoT.[2, 1] * eY - o.rho.[2, 2] * n1SinFita * eY - o.mu.[2, 2] * o.rho.[2, 0] * hX + o.mu.[2, 0] * o.rho.[2, 2] * hX + (o.mu.[2, 1] * o.rho.[2, 2] - o.mu.[2, 2] * (o.rho.[2, 1] + n1SinFita)) * hY)/(o.eps.[2, 2] * o.mu.[2, 2] - o.rho.[2, 2] * o.rhoT.[2, 2])
             let hZ = ((-(o.eps.[2, 2] * o.rhoT.[2, 0]) + o.eps.[2, 0] * o.rhoT.[2, 2]) * eX - o.eps.[2, 2] * o.rhoT.[2, 1] * eY + o.eps.[2, 1] * o.rhoT.[2, 2] * eY + o.eps.[2, 2] * n1SinFita * eY - o.eps.[2, 2] * o.mu.[2, 0] * hX + o.rho.[2, 0] * o.rhoT.[2, 2] * hX + (-(o.eps.[2, 2] * o.mu.[2, 1]) + o.rhoT.[2, 2] * (o.rho.[2, 1] + n1SinFita)) * hY)/(o.eps.[2, 2] * o.mu.[2, 2] - o.rho.[2, 2] * o.rhoT.[2, 2])
             EmField.create (emXY, eZ, hZ)
@@ -140,7 +140,7 @@ module BerremanMatrix =
 
         static member propagateLayer (l : Layer) (em : EmField) = 
             let m = BerremanMatrix.create em.n1SinFita l.properties
-            let (WaveLength w) = em.wavelength
+            let (WaveLength w) = em.waveLength
             
             match l.thickness with 
             | Thickness t -> m.berremanMatrix.matrixExp (Complex(0.0, (2.0 * pi * t / w))) |> BerremanMatrixPropagated
@@ -160,11 +160,11 @@ module BerremanMatrix =
         member this.toEmField () = 
             let emXY = 
                 {
-                    wavelength = this.wavelength
+                    waveLength = this.waveLength
                     n1SinFita = this.n1SinFita
                     opticalProperties = this.opticalProperties
-                    e = [ this.eX; this.eY ] |> E2.create
-                    h = [ this.hX; this.hY ] |> H2.create
+                    e2 = [ this.eX; this.eY ] |> E2.create
+                    h2 = [ this.hX; this.hY ] |> H2.create
                 } : EmFieldXY
 
             BerremanMatrix.createEmField this.opticalProperties emXY
@@ -174,7 +174,7 @@ module BerremanMatrix =
         with 
         member this.toBerremanField () : BerremanField = 
             {
-                wavelength = this.wavelength
+                waveLength = this.waveLength
                 n1SinFita = this.n1SinFita
                 opticalProperties = this.opticalProperties
                 eh = [ this.e.x; this.h.y; this.e.y; -this.h.x ] |> ComplexVector.create |> ComplexVector4 |> BerremanFieldEH

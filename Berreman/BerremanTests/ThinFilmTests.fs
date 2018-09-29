@@ -36,7 +36,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                     ]
                 light = 
                     {
-                        wavelength = WaveLength.nm 600.0
+                        waveLength = WaveLength.nm 600.0
                         refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 0.0 |> IncidenceAngle
                         polarization = Polarization.defaultValue
@@ -63,7 +63,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                     ]
                 light = 
                     {
-                        wavelength = WaveLength.nm 600.0
+                        waveLength = WaveLength.nm 600.0
                         refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 85.0 |> IncidenceAngle
                         polarization = Polarization.defaultValue
@@ -101,7 +101,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                     ]
                 light = 
                     {
-                        wavelength = WaveLength.nm 687.0
+                        waveLength = WaveLength.nm 687.0
                         refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 53.0 |> IncidenceAngle
                         polarization = Angle.degree 50.0 |> Polarization
@@ -151,7 +151,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                     ]
                 light = 
                     {
-                        wavelength = WaveLength.nm 504.0
+                        waveLength = WaveLength.nm 504.0
                         refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 41.0 |> IncidenceAngle
                         polarization = Angle.degree 64.0 |> Polarization
@@ -211,7 +211,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                     ]
                 light = 
                     {
-                        wavelength = WaveLength.nm 600.0
+                        waveLength = WaveLength.nm 600.0
                         refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 35.0 |> IncidenceAngle
                         polarization = Angle.degree 0.0 |> Polarization
@@ -289,7 +289,7 @@ type ThinFilmTests(output : ITestOutputHelper) =
                     ]
                 light = 
                     {
-                        wavelength = WaveLength.nm 553.0
+                        waveLength = WaveLength.nm 553.0
                         refractionIndex = RefractionIndex.vacuum
                         incidenceAngle = Angle.degree 63.0 |> IncidenceAngle
                         polarization = Angle.degree 60.0 |> Polarization

@@ -38,7 +38,7 @@ type IncidentLightTests(output : ITestOutputHelper) =
                     description = "Linear polarization, 0 degrees polarization angle."
                     info = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             refractionIndex = RefractionIndex.vacuum
                             incidenceAngle = incidenceAngle
                             polarization = Polarization.defaultValue
@@ -46,7 +46,7 @@ type IncidentLightTests(output : ITestOutputHelper) =
                         }
                     expected = 
                             {
-                                wavelength = waveLength
+                                waveLength = waveLength
                                 n1SinFita = n1SinFita
                                 opticalProperties = OpticalProperties.vacuum
                                 e = 
@@ -68,7 +68,7 @@ type IncidentLightTests(output : ITestOutputHelper) =
                     description = "Elliptic polarization (0.2), 0 degrees polarization angle."
                     info = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             refractionIndex = RefractionIndex.vacuum
                             incidenceAngle = incidenceAngle
                             polarization = Polarization.defaultValue
@@ -76,7 +76,7 @@ type IncidentLightTests(output : ITestOutputHelper) =
                         }
                     expected = 
                             {
-                                wavelength = waveLength
+                                waveLength = waveLength
                                 n1SinFita = n1SinFita
                                 opticalProperties = OpticalProperties.vacuum
                                 e = 
@@ -99,7 +99,7 @@ type IncidentLightTests(output : ITestOutputHelper) =
                     description = "Linear polarization, 25 degrees polarization angle."
                     info = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             refractionIndex = RefractionIndex.vacuum
                             incidenceAngle = incidenceAngle
                             polarization = Polarization beta
@@ -107,7 +107,7 @@ type IncidentLightTests(output : ITestOutputHelper) =
                         }
                     expected = 
                             {
-                                wavelength = waveLength
+                                waveLength = waveLength
                                 n1SinFita = n1SinFita
                                 opticalProperties = OpticalProperties.vacuum
                                 e = 

@@ -149,7 +149,7 @@ module Variables =
 
         let getLight i = 
             {
-                wavelength = getValue l.wavelength getWaveLength i
+                waveLength = getValue l.waveLength getWaveLength i
                 refractionIndex = l.refractionIndex
                 incidenceAngle = getValue l.incidenceAngle getIncidenceAngle i
                 polarization = getValue l.polarization getPolarization i
@@ -160,8 +160,8 @@ module Variables =
         let getOpticalSystem i = 
             f.opticalSystem
 
-        let getEmSys i = OpticalSystemSolver(getOpticalSystem i, getLight i).emSys
-        [| for i in 0..x.length -> (x.plotValue i, getEmSys i) |]
+        let getSolution i = OpticalSystemSolver(getOpticalSystem i, getLight i, SolverParameters.defaultValue).solution
+        [| for i in 0..x.length -> (x.plotValue i, getSolution i) |]
 
 
     let calculate3D (f: FixedInfo) (x : RangedVariable) (y : RangedVariable) =
@@ -177,7 +177,7 @@ module Variables =
 
         let getLight i j = 
             {
-                wavelength = getValue l.wavelength getWaveLength i j
+                waveLength = getValue l.waveLength getWaveLength i j
                 refractionIndex = l.refractionIndex
                 incidenceAngle = getValue l.incidenceAngle getIncidenceAngle i j
                 polarization = getValue l.polarization getPolarization i j
@@ -188,8 +188,8 @@ module Variables =
         let getOpticalSystem i j = 
             f.opticalSystem
 
-        let getEmSys i j = OpticalSystemSolver(getOpticalSystem i j, getLight i j).emSys
+        let getSolution i j = OpticalSystemSolver(getOpticalSystem i j, getLight i j, SolverParameters.defaultValue).solution
 
         [| for i in 0..x.length -> i |]
-        |> PSeq.map (fun i -> [| for j in 0..y.length -> (x.plotValue i, y.plotValue j, getEmSys i j) |])
+        |> PSeq.map (fun i -> [| for j in 0..y.length -> (x.plotValue i, y.plotValue j, getSolution i j) |])
         |> Array.ofSeq

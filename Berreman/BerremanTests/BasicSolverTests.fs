@@ -77,7 +77,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                 }
             info = 
                 {
-                    wavelength = waveLength
+                    waveLength = waveLength
                     refractionIndex = RefractionIndex.vacuum
                     incidenceAngle = incidenceAngle
                     polarization = Polarization.defaultValue
@@ -87,7 +87,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                 {
                     incident = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             n1SinFita = n1SinFita
                             opticalProperties = OpticalProperties.vacuum
                             e = 
@@ -99,7 +99,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                         }
                     reflected = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             n1SinFita = n1SinFita
                             opticalProperties = OpticalProperties.vacuum
                             e = 
@@ -111,7 +111,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                         }
                     transmitted = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             n1SinFita = n1SinFita
                             opticalProperties = opticalProperties
                             e = 
@@ -196,7 +196,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                 }
             info = 
                 {
-                    wavelength = waveLength
+                    waveLength = waveLength
                     refractionIndex = RefractionIndex.vacuum
                     incidenceAngle = incidenceAngle
                     polarization = Polarization beta
@@ -206,7 +206,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                 {
                     incident = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             n1SinFita = n1SinFita
                             opticalProperties = OpticalProperties.vacuum
                             e = 
@@ -218,7 +218,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                         }
                     reflected = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             n1SinFita = n1SinFita
                             opticalProperties = OpticalProperties.vacuum
                             e = 
@@ -230,7 +230,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
                         }
                     transmitted = 
                         {
-                            wavelength = waveLength
+                            waveLength = waveLength
                             n1SinFita = n1SinFita
                             opticalProperties = opticalProperties
                             e = 
@@ -253,7 +253,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
     let runTest (d : BaseOpticalSystemTestData) (c : ResultComparisionType) = 
         output.WriteLine d.description
-        let solver = BaseOpticalSystemSolver (d.opticalSystem, d.info)
+        let solver = BaseOpticalSystemSolver (d.info, d.opticalSystem)
 
         //output.WriteLine("eigenBasisUpper = {0}\n", solver.eigenBasisUpper)
         //output.WriteLine("eigenBasisFilm = {0}\n", solver.eigenBasisFilm)
@@ -262,9 +262,9 @@ type BasicSolverTests(output : ITestOutputHelper) =
         //output.WriteLine("freeTbl = {0}\n", solver.freeTbl)
         //output.WriteLine("cfm = {0}\n", solver.cfm)
 
-        output.WriteLine("stokesVector (I) = {0}\n", solver.incidentLight.stokesVector)
-        output.WriteLine("stokesVector (R) = {0}\n", solver.reflectedLight.stokesVector)
-        output.WriteLine("stokesVector (T) = {0}\n", solver.transmittedLight.stokesVector)
+        output.WriteLine("stokesVector (I) = {0}\n", solver.emSys.incident.stokesVector)
+        output.WriteLine("stokesVector (R) = {0}\n", solver.emSys.reflected.stokesVector)
+        output.WriteLine("stokesVector (T) = {0}\n", solver.emSys.transmitted.stokesVector)
 
         output.WriteLine("I = {0}\n", solver.emSys.i)
         output.WriteLine("Ip = {0}\n", solver.emSys.ip)
@@ -278,14 +278,14 @@ type BasicSolverTests(output : ITestOutputHelper) =
         output.WriteLine("Tp = {0}\n", solver.emSys.tp)
         output.WriteLine("Ts = {0}\n", solver.emSys.ts)
 
-        let eI = solver.incidentLight.e
-        let hI = solver.incidentLight.h
+        let eI = solver.emSys.incident.e
+        let hI = solver.emSys.incident.h
 
-        let eR = solver.reflectedLight.e
-        let hR = solver.reflectedLight.h
+        let eR = solver.emSys.reflected.e
+        let hR = solver.emSys.reflected.h
 
-        let eT = solver.transmittedLight.e
-        let hT = solver.transmittedLight.h
+        let eT = solver.emSys.transmitted.e
+        let hT = solver.emSys.transmitted.h
 
         match c with 
         | Field -> 

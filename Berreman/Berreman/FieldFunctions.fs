@@ -12,6 +12,7 @@ module FieldFunctions =
     open BerremanMatrix
     open System.ComponentModel
     open System.Net.Configuration
+    open Solvers
 
 
     type EmField
@@ -118,3 +119,22 @@ module FieldFunctions =
             | T -> this.t
             | Tp -> this.tp
             | Ts -> this.ts
+
+
+    type Solution
+        with
+        member this.func f = 
+            match this with 
+            | Single b -> b.emSys.func f
+            | Multiple m -> failwith ""
+                //match f with
+                //| I -> this.i
+                //| Ip -> this.ip
+                //| Is -> this.is
+                //| R -> this.r
+                //| Rp -> this.rp
+                //| Rs -> this.rs
+                //| T -> this.t
+                //| Tp -> this.tp
+                //| Ts -> this.ts
+
