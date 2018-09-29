@@ -334,8 +334,13 @@ module Fields =
                 h = a0 * h0 + cplxI * a90 * h90
             }
 
-        member this.rotate (r : Rotation) : EmField = 
-            failwith ""
+        member emf.rotate (Rotation r) : EmField = 
+            let c = r.toComplex()
+            let cInv = c.inverse
+
+            let (E e) = emf.e
+            let (H h) = emf.h
+            { emf with e = cInv * e |> E; h = cInv * h |> H; opticalProperties = emf.opticalProperties.rotate (Rotation r) }
 
         member this.rotatePiX = this.rotate Rotation.rotatePiX
 

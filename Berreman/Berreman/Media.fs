@@ -54,6 +54,16 @@ module Media =
                 lower = this.lower
             }
 
+        member system.rotate (r : Rotation) : BaseOpticalSystem = 
+            let newFilms = 
+                system.films
+                |> List.map (fun f -> { f with properties = f.properties.rotate r })
+                |> List.rev
+
+            { system with upper = system.upper.rotate r; films = newFilms; lower = system.lower.rotate r }
+
+        member system.rotatePiX = system.rotate Rotation.rotatePiX
+
 
     and OpticalSystem = 
         {
@@ -81,7 +91,12 @@ module Media =
                     lower = s.properties
                 }
 
-        member this.rotate (Rotation r) : OpticalSystem = 
-            failwith ""
+        member system.rotate (r : Rotation) : OpticalSystem = 
+            let sr = (system.baseSystem.rotate r).fullSystem
+
+            match system.substrate with 
+            | Some s -> { sr with substrate = s.rotate r |> Some}
+            | None -> sr
 
         member this.rotatePiX = this.rotate Rotation.rotatePiX
+

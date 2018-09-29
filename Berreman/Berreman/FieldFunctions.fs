@@ -125,16 +125,19 @@ module FieldFunctions =
         with
         member this.func f = 
             match this with 
-            | Single b -> b.emSys.func f
-            | Multiple m -> failwith ""
-                //match f with
-                //| I -> this.i
-                //| Ip -> this.ip
-                //| Is -> this.is
-                //| R -> this.r
-                //| Rp -> this.rp
-                //| Rs -> this.rs
-                //| T -> this.t
-                //| Tp -> this.tp
-                //| Ts -> this.ts
+            | Single b -> b.emSys.func f |> Some
+            | Multiple m -> 
+                let r () = m.rt |> List.choose (fun (r, _) -> r)
+                let t () = m.rt |> List.choose (fun (_, t) -> t)
+                let fn g l = l |> List.fold (fun acc e -> acc + g e m.incident) 0.0 |> Some
 
+                match f with
+                | I -> m.incident.intensity m.incident |> Some
+                | Ip -> m.incident.intensityX m.incident |> Some
+                | Is -> m.incident.intensityY m.incident |> Some
+                | R -> r() |> fn (fun e -> e.intensity)
+                | Rp -> r() |> fn (fun e -> e.intensityX)
+                | Rs -> r() |> fn (fun e -> e.intensityY)
+                | T -> t() |> fn (fun e -> e.intensity)
+                | Tp -> t() |> fn (fun e -> e.intensityX)
+                | Ts -> t() |> fn (fun e -> e.intensityY)

@@ -31,7 +31,11 @@ module Charting =
 
     let plot (f : FixedInfo) (x : RangedVariable) (fn : List<OpticalFunction>) =
         let data = calculate f x
-        let getFuncData (e : OpticalFunction) = data |> Array.map (fun (v, s) -> (v, s.func e))
+
+        let getFuncData (e : OpticalFunction) = 
+            data 
+            |> Array.map (fun (v, s) -> (v, s.func e))
+            |> Array.choose (fun (x, yo) -> match yo with | Some y -> Some (x, y) | None -> None )
 
          //FSharp.Plotly
         Chart.Combine (fn |> List.map (fun e -> Chart.Line(getFuncData e, Name = e.info.fullName)))
@@ -39,9 +43,9 @@ module Charting =
         |> Chart.Show
 
 
-    let mapFun (data : #seq<#seq<double * double * EmFieldSystem>>) (fn : OpticalFunction) = 
+    let mapFun (data : #seq<#seq<double * double * Solution>>) (fn : OpticalFunction) = 
         data
-        |> Seq.map (fun r -> r |> Seq.map (fun (_, _, e) -> e.func fn) |> Array.ofSeq)
+        |> Seq.map (fun r -> r |> Seq.map (fun (_, _, e) -> e.func fn) |> Seq.choose id |> Array.ofSeq)
         |> Array.ofSeq
 
 
