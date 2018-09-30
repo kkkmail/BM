@@ -399,7 +399,7 @@ module Fields =
     type MuellerMatrix = 
         | MuellerMatrix of RealMatrix4x4
 
-        static member create (rSS : Complex) (rPP : Complex) (rPS : Complex) (rSP : Complex) =
+        static member create (rSS : Complex) (rSP : Complex) (rPS : Complex) (rPP : Complex) =
             (
                 [
                     [

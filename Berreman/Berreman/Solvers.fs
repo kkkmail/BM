@@ -220,23 +220,17 @@ module Solvers =
             let sS = solS()
             let sP = solP()
 
-            let x = 
-                match sS.solution, sP.solution with 
-                | Single s, Single p -> 
-                    let e = 0
-                    failwith ""
-                | _ -> failwith "No implemented yet!"
+            match sS.solution, sP.solution with 
+            | Single s, Single p -> 
+                let rSS = s.emSys.reflected.amplitudeX
+                let rSP = s.emSys.reflected.amplitudeY
 
-            failwith ""
+                let rPS = p.emSys.reflected.amplitudeX
+                let rPP = p.emSys.reflected.amplitudeY
+                MuellerMatrix.create rSS rSP rPS rPP
+            | _ -> failwith "No implemented yet!"
 
         member __.solution = sol
-        member __.solutionS () = solS ()
-        member __.solutionP () = solP ()
-
-        //member this.muellerMatrixR () : MuellerMatrix = 
-        //    let solS = this.solutionS ()
-        //    let solP = this.solutionP ()
-
-        //    let rSS = solS.solution
-
-        //    failwith ""
+        //member __.solutionS () = solS ()
+        //member __.solutionP () = solP ()
+        member __.muellerMatrixR () : MuellerMatrix = mR ()
