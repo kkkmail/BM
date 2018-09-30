@@ -241,6 +241,8 @@ module Geometry =
                 let (RealMatrix4x4 v) = this
                 v.[i, j]
 
+        static member create a = RealMatrix.create a |> RealMatrix4x4
+
 
     type ComplexMatrix3x3 = 
         | ComplexMatrix3x3 of ComplexMatrix
@@ -358,6 +360,16 @@ module Geometry =
             v.matrixExp () |> ComplexMatrix4x4
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
+
+        member this.re () = 
+            let (ComplexMatrix4x4 (ComplexMatrix m)) = this
+            let len = m.RowCount
+            [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Real |] |] |> RealMatrix4x4.create
+
+        member this.im () = 
+            let (ComplexMatrix4x4 (ComplexMatrix m)) = this
+            let len = m.RowCount
+            [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Imaginary |] |] |> RealMatrix4x4.create
 
 
     // Rotation around x axis.

@@ -17,6 +17,39 @@ module FieldFunctions =
     open Geometry
 
 
+    let muellerMatrix (rSS : Complex) (rPP : Complex) (rPS : Complex) (rSP : Complex) =
+        (
+            [
+                [
+                    (rPP * rPP.conjugate + rPS * rPS.conjugate + rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
+                    (rPP * rPP.conjugate + rPS * rPS.conjugate - rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
+                    (rSP * rPP.conjugate + rSS * rPS.conjugate + rPP * rSP.conjugate + rPS * rSS.conjugate) / (cplx 2.0)
+                    (complexI / (cplx 2.0)) * (rSP * rPP.conjugate + rSS * rPS.conjugate - rPP * rSP.conjugate - rPS * rSS.conjugate)
+                ]
+                [
+                    (rPP * rPP.conjugate - rPS * rPS.conjugate + rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
+                    (rPP * rPP.conjugate - rPS * rPS.conjugate - rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
+                    (rSP * rPP.conjugate - rSS * rPS.conjugate + rPP * rSP.conjugate - rPS * rSS.conjugate) / (cplx 2.0)
+                    (complexI / (cplx 2.0)) * (rSP * rPP.conjugate - rSS * rPS.conjugate - rPP * rSP.conjugate + rPS * rSS.conjugate)
+                ]
+                [
+                    (rPS * rPP.conjugate + rPP * rPS.conjugate + rSS * rSP.conjugate + rSP * rSS.conjugate) / (cplx 2.0)
+                    (rPS * rPP.conjugate + rPP * rPS.conjugate - rSS * rSP.conjugate - rSP * rSS.conjugate) / (cplx 2.0)
+                    (rSS * rPP.conjugate + rSP * rPS.conjugate + rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
+                    (complexI / (cplx 2.0)) * (rSS * rPP.conjugate + rSP * rPS.conjugate - rPS * rSP.conjugate - rPP * rSS.conjugate)
+                ]
+                [
+                    (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate - rSS * rSP.conjugate + rSP * rSS.conjugate)
+                    (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate + rSS * rSP.conjugate - rSP * rSS.conjugate)
+                    (complexI / (cplx 2.0)) * (-(rSS * rPP.conjugate) + rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate)
+                    (rSS * rPP.conjugate - rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
+                ]
+            ]
+            |> ComplexMatrix4x4.create
+        ).re
+
+
+
     type ComplexVector3
         with
         /// I.V. Lindell: Methods for Electromagnetic Field Analysis, Chaptr 1, Vector p.

@@ -1066,7 +1066,35 @@ Return[retval];];
 
 (* ============================================== *)
 (*s\[Equal]y,p\[Equal]x (after rotation to get rid of z)*)
-MuellerMatrix[rSS_, rPP_, rPS_, rSP_] := Re[{{(rPP * Conjugate[rPP] + rPS * Conjugate[rPS] + rSP * Conjugate[rSP] + rSS * Conjugate[rSS]) / 2, (rPP * Conjugate[rPP] + rPS * Conjugate[rPS] - rSP * Conjugate[rSP] - rSS * Conjugate[rSS]) / 2, (rSP * Conjugate[rPP] + rSS * Conjugate[rPS] + rPP * Conjugate[rSP] + rPS * Conjugate[rSS]) / 2, (I / 2) * (rSP * Conjugate[rPP] + rSS * Conjugate[rPS] - rPP * Conjugate[rSP] - rPS * Conjugate[rSS])}, {(rPP * Conjugate[rPP] - rPS * Conjugate[rPS] + rSP * Conjugate[rSP] - rSS * Conjugate[rSS]) / 2, (rPP * Conjugate[rPP] - rPS * Conjugate[rPS] - rSP * Conjugate[rSP] + rSS * Conjugate[rSS]) / 2, (rSP * Conjugate[rPP] - rSS * Conjugate[rPS] + rPP * Conjugate[rSP] - rPS * Conjugate[rSS]) / 2, (I / 2) * (rSP * Conjugate[rPP] - rSS * Conjugate[rPS] - rPP * Conjugate[rSP] + rPS * Conjugate[rSS])}, {(rPS * Conjugate[rPP] + rPP * Conjugate[rPS] + rSS * Conjugate[rSP] + rSP * Conjugate[rSS]) / 2, (rPS * Conjugate[rPP] + rPP * Conjugate[rPS] - rSS * Conjugate[rSP] - rSP * Conjugate[rSS]) / 2, (rSS * Conjugate[rPP] + rSP * Conjugate[rPS] + rPS * Conjugate[rSP] + rPP * Conjugate[rSS]) / 2, (I / 2) * (rSS * Conjugate[rPP] + rSP * Conjugate[rPS] - rPS * Conjugate[rSP] - rPP * Conjugate[rSS])}, {(I / 2) * (-(rPS * Conjugate[rPP]) + rPP * Conjugate[rPS] - rSS * Conjugate[rSP] + rSP * Conjugate[rSS]), (I / 2) * (-(rPS * Conjugate[rPP]) + rPP * Conjugate[rPS] + rSS * Conjugate[rSP] - rSP * Conjugate[rSS]), (I / 2) * (-(rSS * Conjugate[rPP]) + rSP * Conjugate[rPS] - rPS * Conjugate[rSP] + rPP * Conjugate[rSS]), (rSS * Conjugate[rPP] - rSP * Conjugate[rPS] - rPS * Conjugate[rSP] + rPP * Conjugate[rSS]) / 2}}];
+MuellerMatrix[rSS_, rPP_, rPS_, rSP_] :=
+    Re[
+      {
+        {
+          (rPP * Conjugate[rPP] + rPS * Conjugate[rPS] + rSP * Conjugate[rSP] + rSS * Conjugate[rSS]) / 2,
+          (rPP * Conjugate[rPP] + rPS * Conjugate[rPS] - rSP * Conjugate[rSP] - rSS * Conjugate[rSS]) / 2,
+          (rSP * Conjugate[rPP] + rSS * Conjugate[rPS] + rPP * Conjugate[rSP] + rPS * Conjugate[rSS]) / 2,
+          (I / 2) * (rSP * Conjugate[rPP] + rSS * Conjugate[rPS] - rPP * Conjugate[rSP] - rPS * Conjugate[rSS])
+        },
+        {
+          (rPP * Conjugate[rPP] - rPS * Conjugate[rPS] + rSP * Conjugate[rSP] - rSS * Conjugate[rSS]) / 2,
+          (rPP * Conjugate[rPP] - rPS * Conjugate[rPS] - rSP * Conjugate[rSP] + rSS * Conjugate[rSS]) / 2,
+          (rSP * Conjugate[rPP] - rSS * Conjugate[rPS] + rPP * Conjugate[rSP] - rPS * Conjugate[rSS]) / 2,
+          (I / 2) * (rSP * Conjugate[rPP] - rSS * Conjugate[rPS] - rPP * Conjugate[rSP] + rPS * Conjugate[rSS])
+        },
+        {
+          (rPS * Conjugate[rPP] + rPP * Conjugate[rPS] + rSS * Conjugate[rSP] + rSP * Conjugate[rSS]) / 2,
+          (rPS * Conjugate[rPP] + rPP * Conjugate[rPS] - rSS * Conjugate[rSP] - rSP * Conjugate[rSS]) / 2,
+          (rSS * Conjugate[rPP] + rSP * Conjugate[rPS] + rPS * Conjugate[rSP] + rPP * Conjugate[rSS]) / 2,
+          (I / 2) * (rSS * Conjugate[rPP] + rSP * Conjugate[rPS] - rPS * Conjugate[rSP] - rPP * Conjugate[rSS])
+        },
+        {
+          (I / 2) * (-(rPS * Conjugate[rPP]) + rPP * Conjugate[rPS] - rSS * Conjugate[rSP] + rSP * Conjugate[rSS]),
+          (I / 2) * (-(rPS * Conjugate[rPP]) + rPP * Conjugate[rPS] + rSS * Conjugate[rSP] - rSP * Conjugate[rSS]),
+          (I / 2) * (-(rSS * Conjugate[rPP]) + rSP * Conjugate[rPS] - rPS * Conjugate[rSP] + rPP * Conjugate[rSS]),
+          (rSS * Conjugate[rPP] - rSP * Conjugate[rPS] - rPS * Conjugate[rSP] + rPP * Conjugate[rSS]) / 2
+        }
+      }
+    ];
 (* ============================================== *)
 CalculateEllipsometricData[FullSol_] := Module[{solBeta0, solBeta90, eBeta0fieldR, eBeta90fieldR, eBeta0fieldT, eBeta90fieldT, fita, retVal},
 
