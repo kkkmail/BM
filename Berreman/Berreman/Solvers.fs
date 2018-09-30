@@ -12,6 +12,7 @@ module Solvers =
     open Media
     open BerremanMatrix
     open MaterialProperties
+    open System.Numerics
 
 
     type SolverParameters =
@@ -234,3 +235,5 @@ module Solvers =
         //member __.solutionS () = solS ()
         //member __.solutionP () = solP ()
         member __.muellerMatrixR () : MuellerMatrix = mR ()
+
+        new (info : IncidentLightInfo, system: OpticalSystem) = OpticalSystemSolver (info, system, SolverParameters.defaultValue)

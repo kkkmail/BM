@@ -301,6 +301,12 @@ type BasicSolverTests(output : ITestOutputHelper) =
             Skip.If(true, "Intensity based checks are not implemented yet.")
 
 
+    let runTestMuellerMatrixR (d : BaseOpticalSystemTestData) =
+        let solver = OpticalSystemSolver(d.info, d.opticalSystem.fullSystem)
+        let i = solver.solution
+        failwith ""
+
+
     [<Fact>]
     member __.basicSolverTest0 () = runTest (data.[0]) Field
 
@@ -315,3 +321,6 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
     [<Fact>]
     member __.basicSolverTestRandom () = runTest randomData Field
+
+    [<Fact>]
+    member __.muellerMatrixR_Test0 () = runTestMuellerMatrixR (data.[0])

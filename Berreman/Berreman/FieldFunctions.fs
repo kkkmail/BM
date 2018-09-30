@@ -225,6 +225,23 @@ module FieldFunctions =
         //    0
 
 
+        member this.stokesI : StokesVector = 
+            match this with 
+            | Single b -> 
+                match b.emSys.incident.stokesVector with
+                | Some v -> v
+                | None -> failwith "We should never be here. Refactor..."
+            | Multiple m -> failwith "Not implemented yet..."
+
+
+        member this.stokesR : StokesVector = 
+            match this with 
+            | Single b -> 
+                match b.emSys.reflected.stokesVector with
+                | Some v -> v
+                | None -> failwith "We should never be here. Refactor..."
+            | Multiple m -> failwith "Not implemented yet..."
+
 
     //type OpticalSystemSolver
     //    with 
