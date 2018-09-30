@@ -267,3 +267,9 @@ module FieldFunctions =
                 | T -> t() |> fn (fun e -> e.intensity)
                 | Tp -> t() |> fn (fun e -> e.intensityX)
                 | Ts -> t() |> fn (fun e -> e.intensityY)
+
+                // These ones must be calculated via sum of Stokes vectors.
+                | EllipticityR -> None
+                | EllipticityT -> None
+                | AzimuthR -> None
+                | AzimuthT -> None

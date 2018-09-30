@@ -160,7 +160,7 @@ module Variables =
         let getOpticalSystem i = 
             f.opticalSystem
 
-        let getSolution i = OpticalSystemSolver(getOpticalSystem i, getLight i, SolverParameters.defaultValue).solution
+        let getSolution i = OpticalSystemSolver(getLight i, getOpticalSystem i, SolverParameters.defaultValue).solution
         [| for i in 0..x.length -> (x.plotValue i, getSolution i) |]
 
 
@@ -188,7 +188,7 @@ module Variables =
         let getOpticalSystem i j = 
             f.opticalSystem
 
-        let getSolution i j = OpticalSystemSolver(getOpticalSystem i j, getLight i j, SolverParameters.defaultValue).solution
+        let getSolution i j = OpticalSystemSolver(getLight i j, getOpticalSystem i j, SolverParameters.defaultValue).solution
 
         [| for i in 0..x.length -> i |]
         |> PSeq.map (fun i -> [| for j in 0..y.length -> (x.plotValue i, y.plotValue j, getSolution i j) |])
