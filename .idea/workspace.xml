@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Constants.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Constants.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" beforeDir="false" afterPath="$PROJECT_DIR$/Kernel/FieldAlgebra.m" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,7 +86,7 @@
       <file leaf-file-name="BerremanCommon.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
+            <state relative-caret-position="13413">
               <caret line="789" selection-start-line="789" selection-end-line="789" />
               <folding>
                 <element signature="e#1260#1719#0" />
@@ -107,7 +112,7 @@
       <file leaf-file-name="BerremanInit.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
+            <state relative-caret-position="833">
               <caret line="49" column="157" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="157" />
             </state>
           </provider>
@@ -152,20 +157,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="493" column="8" selection-start-line="493" selection-start-column="8" selection-end-line="493" selection-end-column="8" />
+            <state relative-caret-position="508">
+              <caret line="720" column="10" selection-start-line="720" selection-start-column="10" selection-end-line="720" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+            <state relative-caret-position="510">
+              <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -201,7 +206,6 @@
       <find>EGVal1Hlp</find>
       <find>toFSharpMatrix</find>
       <find>IFull</find>
-      <find>Elt</find>
       <find>FieldEllipticity</find>
       <find>pVector</find>
       <find>StokesVector</find>
@@ -213,6 +217,7 @@
       <find>RotationMatrix3D</find>
       <find>SolutionNewBase::ODEG1</find>
       <find>TX::Ibase</find>
+      <find>Elt</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -270,8 +275,8 @@
         <option value="$PROJECT_DIR$/Kernel/FSharpHelpers.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_01_Snell_Law.m" />
         <option value="$PROJECT_DIR$/Kernel/BerremanCommon.m" />
-        <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
         <option value="$PROJECT_DIR$/Examples/BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m" />
+        <option value="$PROJECT_DIR$/Kernel/FieldAlgebra.m" />
       </list>
     </option>
   </component>
@@ -285,18 +290,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
               <item name="BM" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BM" type="462c0819:PsiDirectoryNode" />
-              <item name="Examples" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BM" type="b2602c69:ProjectViewProjectNode" />
@@ -313,6 +312,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -455,18 +455,18 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2917505" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1750503" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Nl-Palette" order="6" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info id="Nl-Palette" order="6" />
+      <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -477,12 +477,13 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25319007" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Nl-Palette" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info anchor="right" id="Properties" order="6" />
@@ -493,10 +494,9 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Capture Tool" order="5" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info id="Favorites" order="7" side_tool="true" />
     </layout-to-restore>
@@ -736,14 +736,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanInit.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
+        <state relative-caret-position="833">
           <caret line="49" column="157" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="157" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
+        <state relative-caret-position="13413">
           <caret line="789" selection-start-line="789" selection-end-line="789" />
           <folding>
             <element signature="e#1260#1719#0" />
@@ -765,17 +765,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
+    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="493" column="8" selection-start-line="493" selection-start-column="8" selection-end-line="493" selection-end-column="8" />
+        <state relative-caret-position="510">
+          <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/BM_603_Example_06d_1L_Thin_Film_GlassBetweenVacuum.m">
+    <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+        <state relative-caret-position="508">
+          <caret line="720" column="10" selection-start-line="720" selection-start-column="10" selection-end-line="720" selection-end-column="10" />
         </state>
       </provider>
     </entry>

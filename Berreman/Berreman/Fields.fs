@@ -163,7 +163,9 @@ module Fields =
         static member create (e : double) =
             Ellipticity (max (min e 1.0) -1.0)
 
+        static member (~-) (Ellipticity a) = -a |> Ellipticity
         static member defaultValue = Ellipticity 0.0
+        static member minValue = Ellipticity -1.0
         static member maxValue = Ellipticity 1.0
 
 

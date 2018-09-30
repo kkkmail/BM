@@ -64,6 +64,8 @@ module Geometry =
             ]
             |> RealVector3.create
 
+        static member zeroVector = [ 0.; 0.; 0. ] |> RealVector3.create
+
 
     /// Orthonormal real basis
     type RealBasis3 = 
@@ -155,6 +157,9 @@ module Geometry =
 
         static member (*) (ComplexVector3 a, b : Complex) = 
             a * b |> ComplexVector3
+
+        static member (/) (ComplexVector3 a, b : Complex) = 
+            (a * (complexOne / b)) |> ComplexVector3
 
         member this.norm = 
             let (ComplexVector3 v) = this

@@ -562,37 +562,41 @@ Ry[FullSol_] :=
       Return[-retVal];
     ];
 (* ============================================== *)
-Ty[FullSol_] := Module[{Efield, Dfield, Hfield, Bfield, retVal, ExBvec, ExHvec, Ibase, ExH1vec, pdi, pdil, ExHvecRe, ExEHvecRe}, opts = GetSolOptions[FullSol];
-pdi = PrintFunctionDebugInfo /. opts /. Options[FieldAlgebra];
-pdil = PrintFunctionDebugInfoLevel /. opts /. Options[FieldAlgebra];
-If[pdi == True, Print["Ty..."]];
-Ibase = IFullBase[FullSol];
-Efield = GetSolTransmittedLightE[FullSol];
-Dfield = GetSolTransmittedLightD[FullSol];
-Hfield = GetSolTransmittedLightH[FullSol];
-Bfield = GetSolTransmittedLightB[FullSol];
-Efield = Flatten[Efield];
-Dfield = Flatten[Dfield];
-Hfield = Flatten[Hfield];
-Bfield = Flatten[Bfield];
-Efield[[1]] = 0;
-Efield[[3]] = 0;
-Hfield[[2]] = 0;
-Hfield[[3]] = 0;
-ExBvec = Efield\[Cross]Conjugate[Bfield];
-ExHvec = Efield\[Cross]Conjugate[Hfield];
-ExH1vec = Efield\[Cross]Hfield;
-ExHvecRe = Re[ExHvec];
-ExEHvecRe = Efield.ExHvecRe;
-If[pdi == True, Print["E = ", Efield // MatrixForm, ", H = ", Hfield // MatrixForm, ", D = ", Dfield // MatrixForm, ", B = ", Bfield // MatrixForm];
-Print["E x B = ", ExBvec // MatrixForm, ", E x Conjugate[H] = ", ExHvec // MatrixForm, ", E x H = ", ExH1vec // MatrixForm];
-Print["E * Re[E x Conjugate[H]] = ", ExEHvecRe // MatrixForm, ", E * (E x Conjugate[H]) = ", (Flatten[Efield].ExHvec) // MatrixForm];];
-retVal = If[Abs[Ibase] > 0, Re[ExHvec[[3]]] / Ibase, 0, 0];
-(*retVal=Re[ExH1vec[[3]]]/Ibase;*)Return[retVal];];
+Ty[FullSol_] :=
+    Module[{Efield, Dfield, Hfield, Bfield, retVal, ExBvec, ExHvec, Ibase, ExH1vec, pdi, pdil, ExHvecRe, ExEHvecRe},
+      opts = GetSolOptions[FullSol];
+      pdi = PrintFunctionDebugInfo /. opts /. Options[FieldAlgebra];
+      pdil = PrintFunctionDebugInfoLevel /. opts /. Options[FieldAlgebra];
+      If[pdi == True, Print["Ty..."]];
+      Ibase = IFullBase[FullSol];
+      Efield = GetSolTransmittedLightE[FullSol];
+      Dfield = GetSolTransmittedLightD[FullSol];
+      Hfield = GetSolTransmittedLightH[FullSol];
+      Bfield = GetSolTransmittedLightB[FullSol];
+      Efield = Flatten[Efield];
+      Dfield = Flatten[Dfield];
+      Hfield = Flatten[Hfield];
+      Bfield = Flatten[Bfield];
+      Efield[[1]] = 0;
+      Efield[[3]] = 0;
+      Hfield[[2]] = 0;
+      Hfield[[3]] = 0;
+      ExBvec = Efield\[Cross]Conjugate[Bfield];
+      ExHvec = Efield\[Cross]Conjugate[Hfield];
+      ExH1vec = Efield\[Cross]Hfield;
+      ExHvecRe = Re[ExHvec];
+      ExEHvecRe = Efield.ExHvecRe;
+      If[pdi == True, Print["E = ", Efield // MatrixForm, ", H = ", Hfield // MatrixForm, ", D = ", Dfield // MatrixForm, ", B = ", Bfield // MatrixForm];
+      Print["E x B = ", ExBvec // MatrixForm, ", E x Conjugate[H] = ", ExHvec // MatrixForm, ", E x H = ", ExH1vec // MatrixForm];
+      Print["E * Re[E x Conjugate[H]] = ", ExEHvecRe // MatrixForm, ", E * (E x Conjugate[H]) = ", (Flatten[Efield].ExHvec) // MatrixForm];];
+      retVal = If[Abs[Ibase] > 0, Re[ExHvec[[3]]] / Ibase, 0, 0];
+      (*retVal=Re[ExH1vec[[3]]]/Ibase;*)
+      Return[retVal];
+    ];
 (* ============================================== *)
 pVector[vec : {_, _, _}] :=
     Module[{retval},
-      If[(I * vec.Conjugate[vec]) == 0, {0, 0, 0}, retval = -Re[Cross[vec, Conjugate[vec]] / (I * vec.Conjugate[vec])];];
+      retval = If[(I * vec.Conjugate[vec]) == 0, {0, 0, 0}, -Re[Cross[vec, Conjugate[vec]] / (I * vec.Conjugate[vec])];];
       Return[retval];
     ];
 (* ============================================== *)
@@ -606,8 +610,14 @@ pVectorElliplicity[vec : {_, _, _}] :=
       Return[retval];
     ];
 (* ============================================== *)
-qVector[vec : {_, _, _}] := Module[{retval}, If[(vec.Conjugate[vec]) == 0 || (vec.vec) == 0, retval = {0, 0, 0}, retval = Re[(Abs[vec.vec] / (vec.Conjugate[vec])) * (Re[vec / Sqrt[vec.vec]] / Sqrt[Re[vec / Sqrt[vec.vec]].Re[vec / Sqrt[vec.vec]]])]];
-Return[retval];];
+qVector[vec : {_, _, _}] :=
+    Module[{retval},
+      If[(vec.Conjugate[vec]) == 0 || (vec.vec) == 0,
+        retval = {0, 0, 0},
+        retval = Re[(Abs[vec.vec] / (vec.Conjugate[vec])) * (Re[vec / Sqrt[vec.vec]] / Sqrt[Re[vec / Sqrt[vec.vec]].Re[vec / Sqrt[vec.vec]]])]
+      ];
+      Return[retval];
+    ];
 (* ============================================== *)
 FieldEllipticity[ehField : {_, _, _, _, _, _}, setSign_, useZAxis_, direction_] :=
     Module[{retval, eField, hField},
@@ -677,47 +687,69 @@ FieldAzimuth[eField : {_, _, _}, hField : {_, _, _}, setSign_, useZAxis_, direct
     ];
 
 FieldAzimuth[eField : {_, _, _}, hField : {_, _, _}, setSign_, useZAxis_, direction_, elpCutOff_] :=
-    Module[{retval, pVec, qVec, poyntVec, pVecDpountVec, eyVec, epVec, eqVec, eaVec, aVec, cosFi, rVec, erVec, eaVecDeqVec, fiAngle, elpCutOffVar, fieldElp}, (*Print["   "];*)
+    Module[{retval, pVec, qVec, poyntVec, pVecDpountVec, eyVec, epVec, eqVec, eaVec, aVec, cosFi, rVec, erVec, eaVecDeqVec, fiAngle, elpCutOffVar, fieldElp},
+    (*Print["   "];*)
       elpCutOffVar = If[Re[elpCutOff] < 0, 2, Re[elpCutOff], 2];
       fieldElp = FieldEllipticity[eField, hField, setSign, useZAxis, direction];
-      If[fieldElp > elpCutOffVar, (*When ellipticily is too close to 1 we cannot determine the azimyth precisely.So we use cut off to return 0 in that case.*)retval = 0, (eyVec = If[direction == True, {0, 1, 0}, {0, -1, 0}, {0, 1, 0}];
-      pVec = pVector[eField];
-      poyntVec = PoyntingVector[eField, hField];
-      pVecDpountVec = pVec.poyntVec;
-      pVec = If[pVecDpountVec < 0, -pVec, pVec, pVec];
-      (*Print["FieldAzimuth:: eField = ",eField,", pVec = ",pVec,", poyntVec = ",poyntVec];*)If[pVec.pVec < PVECTORTOLERANCE, pVec = poyntVec];
-      epVec = If[pVec.pVec > 0, pVec / Sqrt[pVec.pVec], {0, 0, 0}];
-      qVec = qVector[eField];
-      eqVec = If[qVec.qVec > 0, qVec / Sqrt[qVec.qVec], {0, 0, 0}];
-      rVec = Cross[epVec, eqVec];
-      erVec = If[rVec.rVec > 0, rVec / Sqrt[rVec.rVec], {0, 0, 0}];
-      aVec = Cross[eyVec, pVec];
-      eaVec = If[aVec.aVec > 0, aVec / Sqrt[aVec.aVec], {0, 0, 0}];
-      (*Print["FieldAzimuth:: epVec = ",epVec,", eqVec = ",eqVec,", erVec = ",erVec,", eaVec = ",eaVec];*)eaVecDeqVec = eaVec.eqVec;
-      eaVec = If[eaVecDeqVec < 0, -eaVec, eaVec, eaVec];
-      (*Print["FieldAzimuth:: eaVecXeqVec = ",eaVecDeqVec,", new eaVec = ",eaVec];*)eaVecDeqVec = eaVec.eqVec;
-      cosFi = Max[Min[eaVecDeqVec, 1], -1];
-      fiAngle = Re[ArcCos[cosFi]];
-      retval = If[(Cross[eaVec, eqVec].Cross[erVec, eqVec]) > 0, -fiAngle, fiAngle, fiAngle];), retval = 0];
+      If[fieldElp > elpCutOffVar,
+      (*When ellipticily is too close to 1 we cannot determine the azimyth precisely.So we use cut off to return 0 in that case.*)
+        retval = 0,
+        (
+          eyVec = If[direction == True, {0, 1, 0}, {0, -1, 0}, {0, 1, 0}];
+
+          pVec = pVector[eField];
+          poyntVec = PoyntingVector[eField, hField];
+          pVecDpountVec = pVec.poyntVec;
+
+          pVec = If[pVecDpountVec < 0, -pVec, pVec, pVec];
+
+          (*Print["FieldAzimuth:: eField = ",eField,", pVec = ",pVec,", poyntVec = ",poyntVec];*)
+
+          If[pVec.pVec < PVECTORTOLERANCE, pVec = poyntVec];
+
+          epVec = If[pVec.pVec > 0, pVec / Sqrt[pVec.pVec], {0, 0, 0}];
+          qVec = qVector[eField];
+          eqVec = If[qVec.qVec > 0, qVec / Sqrt[qVec.qVec], {0, 0, 0}];
+          rVec = Cross[epVec, eqVec];
+          erVec = If[rVec.rVec > 0, rVec / Sqrt[rVec.rVec], {0, 0, 0}];
+          aVec = Cross[eyVec, pVec];
+          eaVec = If[aVec.aVec > 0, aVec / Sqrt[aVec.aVec], {0, 0, 0}];
+          (*Print["FieldAzimuth:: epVec = ",epVec,", eqVec = ",eqVec,", erVec = ",erVec,", eaVec = ",eaVec];*)
+          eaVecDeqVec = eaVec.eqVec;
+          eaVec = If[eaVecDeqVec < 0, -eaVec, eaVec, eaVec];
+          (*Print["FieldAzimuth:: eaVecXeqVec = ",eaVecDeqVec,", new eaVec = ",eaVec];*)
+          eaVecDeqVec = eaVec.eqVec;
+          cosFi = Max[Min[eaVecDeqVec, 1], -1];
+          fiAngle = Re[ArcCos[cosFi]];
+          retval = If[(Cross[eaVec, eqVec].Cross[erVec, eqVec]) > 0, -fiAngle, fiAngle, fiAngle];
+        ),
+        retval = 0
+      ];
       (*Print["FieldAzimuth:: eaVecDeqVec = ",eaVecDeqVec,", fiAngle = ",fiAngle,", cosFi = ",cosFi,", retval = ",retval];*)
       Return[retval];
 
     ];
 (* ============================================== *)
-Elt[FullSol_] := Module[{ehField, retval, opts, setElctSgn, useZAxis}, opts = GetSolOptions[FullSol];
-setElctSgn = SetEllipticitySignT /. opts /. Options[FieldAlgebra];
-useZAxis = UseZAxisForEllipticityT /. opts /. Options[FieldAlgebra];
-ehField = GetSolTransmittedLight[FullSol];
-retval = FieldEllipticity[ehField, setElctSgn, useZAxis, True];
-Return[retval];];
+Elt[FullSol_] :=
+    Module[{ehField, retval, opts, setElctSgn, useZAxis},
+      opts = GetSolOptions[FullSol];
+      setElctSgn = SetEllipticitySignT /. opts /. Options[FieldAlgebra];
+      useZAxis = UseZAxisForEllipticityT /. opts /. Options[FieldAlgebra];
+      ehField = GetSolTransmittedLight[FullSol];
+      retval = FieldEllipticity[ehField, setElctSgn, useZAxis, True];
+      Return[retval];
+    ];
 
-Xit[FullSol_] := Module[{ehField, retval, opts, setElctSgn, useZAxis, elpCutOff}, opts = GetSolOptions[FullSol];
-setElctSgn = SetEllipticitySignT /. opts /. Options[FieldAlgebra];
-useZAxis = UseZAxisForEllipticityT /. opts /. Options[FieldAlgebra];
-elpCutOff = EllipticityCutOffForAzimyth /. Options[FieldAlgebra];
-ehField = GetSolTransmittedLight[FullSol];
-retval = FieldAzimuth[ehField, setElctSgn, useZAxis, True, elpCutOff];
-Return[retval];];
+Xit[FullSol_] :=
+    Module[{ehField, retval, opts, setElctSgn, useZAxis, elpCutOff},
+      opts = GetSolOptions[FullSol];
+      setElctSgn = SetEllipticitySignT /. opts /. Options[FieldAlgebra];
+      useZAxis = UseZAxisForEllipticityT /. opts /. Options[FieldAlgebra];
+      elpCutOff = EllipticityCutOffForAzimyth /. Options[FieldAlgebra];
+      ehField = GetSolTransmittedLight[FullSol];
+      retval = FieldAzimuth[ehField, setElctSgn, useZAxis, True, elpCutOff];
+      Return[retval];
+    ];
 
 CosXit[FullSol_] := Cos[Xit[FullSol]];
 SinXit[FullSol_] := Sin[Xit[FullSol]];

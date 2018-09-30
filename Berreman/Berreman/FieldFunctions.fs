@@ -6,6 +6,7 @@ module FieldFunctions =
     open MathNetNumericsMath
     open MatrixExp
 
+    open Constants
     open Geometry
     open Fields
     open Media
@@ -13,6 +14,32 @@ module FieldFunctions =
     open System.ComponentModel
     open System.Net.Configuration
     open Solvers
+    open Geometry
+
+
+    type ComplexVector3
+        with
+        /// I.V. Lindell: Methods for Electromagnetic Field Analysis, Chaptr 1, Vector p.
+        member this.pVector = 
+            let n = this.norm
+
+            if n < almostZero then RealVector3.zeroVector
+            else ((ComplexVector3.cross this this.conjugate) / (createComplex 0.0 (n * n))).re
+
+        /// I.V. Lindell: Methods for Electromagnetic Field Analysis, Chaptr 1, Vector q.
+        member a.qVector = 
+            let n = a.norm
+
+            if n < almostZero then RealVector3.zeroVector
+            else 
+                let aa = a * a
+                let r = (a / (sqrt aa)).re
+                (aa.abs / (n * n)) * (r / r.norm)
+
+        member this.ellipticity : Ellipticity = 
+            let v = this.pVector.norm
+            if v < almostZero then Ellipticity.defaultValue
+            else (1.0 - sqrt(1.0 - v * v)) / v |> Ellipticity
 
 
     type EmField
@@ -47,11 +74,25 @@ module FieldFunctions =
             let (S is) = i.s
             (ComplexVector3.cross (ComplexBasis3.defaultValue.toY e) h.conjugate).re.norm / is.z
 
-        member em.ellipticity : Ellipticity = 
-            failwith ""
 
-        member em.azimuth : Angle = 
-            failwith ""
+        member em.ellipticity : Ellipticity = 
+            let (E e) = em.e
+            let (S s) = em.s
+            let p = e.pVector
+
+            if p * s >= 0.0 then e.ellipticity
+            else -e.ellipticity
+
+        member em.azimuth : Polarization = 
+            let (E e) = em.e
+            let q = e.pVector
+
+            let n = q.norm
+            if n < almostZero then Polarization.defaultValue
+            else 
+                let v = (q / q.norm) * RealBasis3.defaultValue.vY
+                let a = asin v
+                a |> Angle |> Polarization
 
         member em.muellerMatrix : MuellerMatrix = 
             failwith ""
