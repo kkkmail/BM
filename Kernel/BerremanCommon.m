@@ -471,7 +471,9 @@ IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] :=
 
       ehField = ehField1 + ehField2;
 
-      EHI = {ehField[[1]], ehField[[2]], ehField[[3]], ehField[[4]], ehField[[5]], ehField[[6]], True};
+      EHI = { ehField[[1]], ehField[[2]], ehField[[3]], ehField[[4]], ehField[[5]], ehField[[6]], True };
+
+      Print["E, H = ", N[ehField] // toFSharpEH];
       Return[{lambda, fita, beta, EHI, ellipticity, n1, Ampl}];
     ];
 

@@ -63,6 +63,7 @@
     <Compile Include="IncidentLightTests.fs" />
     <Compile Include="ThinFilmTests.fs" />
     <Compile Include="RotationTests.fs" />
+    <Compile Include="FieldFunctionTests.fs" />
     <Compile Include="BasicSolverTests.fs" />
     <Content Include="packages.config" />
   </ItemGroup>

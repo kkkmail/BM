@@ -80,3 +80,13 @@ module MatrixComparison =
 
         let diffMin = min diff diffAlt
         Assert.True(diffMin < allowedDiff)
+
+    let verifyPolarizationEquality (output : ITestOutputHelper) (msg : string) (Polarization (Angle result)) (Polarization (Angle expected)) = 
+        outputData output msg result expected
+        let diff = abs (result - expected)
+        Assert.True(diff < allowedDiff)
+
+    let verifyEllipticityEquality (output : ITestOutputHelper) (msg : string) (Ellipticity result) (Ellipticity expected) = 
+        outputData output msg result expected
+        let diff = abs (result - expected)
+        Assert.True(diff < allowedDiff)

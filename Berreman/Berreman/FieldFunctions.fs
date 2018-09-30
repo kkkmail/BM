@@ -80,12 +80,12 @@ module FieldFunctions =
             let (S s) = em.s
             let p = e.pVector
 
-            if p * s >= 0.0 then e.ellipticity
-            else -e.ellipticity
+            if p * s >= 0.0 then -e.ellipticity
+            else e.ellipticity
 
         member em.azimuth : Polarization = 
             let (E e) = em.e
-            let q = e.pVector
+            let q = e.qVector
 
             let n = q.norm
             if n < almostZero then Polarization.defaultValue

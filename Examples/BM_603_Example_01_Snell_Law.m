@@ -73,10 +73,10 @@ Print["Параметры падающего света..."];
 nUpper = 1;
 
 lambda = {600, 600, 1, "λ", nm};
-fita = {7, 7, 85, "ϕ", Degree};
-beta = {0, 0, 30, "β", Degree};
+fita = {11, 11, 85, "ϕ", Degree};
+beta = {-34, -34, 30, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
-ellipt = {0, 0, 0.5, "e"};
+ellipt = {0.38, 0.38, 0.5, "e"};
 
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];
