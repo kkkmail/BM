@@ -107,23 +107,19 @@ module FieldFunctions =
             let (S is) = i.s
             (ComplexVector3.cross (ComplexBasis3.defaultValue.toY e) h.conjugate).re.norm / is.z
 
-        member em.amplitudeX (i : EmField) = 
+        member em.amplitudeX = 
             let cZ = 
                 match em.complexNormal with 
                 | Some z -> z
-                | None -> ComplexBasis3.defaultValue.cZ
+                | None -> ComplexBasis3.defaultValue.cZ // If the value is too small, then we don't care about the direction.
 
             let cX = ComplexVector3.cross ComplexBasis3.defaultValue.cY cZ
-
             let (E e) = em.e
-            let (S is) = i.s
-            (ComplexBasis3.defaultValue.cX * e) / (sqrt is.z |> cplx)
+            (cX * e)
 
-        member em.amplitudeY (i : EmField) = 
+        member em.amplitudeY = 
             let (E e) = em.e
-            let (S is) = i.s
-            (ComplexBasis3.defaultValue.cY * e) // / (sqrt is.z |> cplx)
-
+            (ComplexBasis3.defaultValue.cY * e)
 
         member em.ellipticity : Ellipticity = 
             let (E e) = em.e
@@ -170,6 +166,11 @@ module FieldFunctions =
         | T
         | Tp
         | Ts
+        | EllipticityR
+        | EllipticityT
+        | AzimuthR
+        | AzimuthT
+
 
         member this.info = 
             match this with
@@ -182,6 +183,10 @@ module FieldFunctions =
             | T -> { name = "T"; subscript = None; description = None }
             | Tp -> { name = "T"; subscript = Some "p"; description = None }
             | Ts -> { name = "T"; subscript = Some "s"; description = None }
+            | EllipticityR -> { name = "elT"; subscript = None; description = None }
+            | EllipticityT -> { name = "elR"; subscript = None; description = None }
+            | AzimuthR -> { name = "pR"; subscript = None; description = None }
+            | AzimuthT -> { name = "pT"; subscript = None; description = None }
 
 
     type EmFieldSystem
@@ -199,6 +204,22 @@ module FieldFunctions =
         member this.tp = this.transmitted.intensityX this.incident
         member this.ts = this.transmitted.intensityY this.incident
 
+        member this.ellipticityR = 
+            let (Ellipticity e) = this.reflected.ellipticity
+            e
+
+        member this.ellipticityT = 
+            let (Ellipticity e) = this.transmitted.ellipticity
+            e
+
+        member this.azimuthR = 
+            let (Polarization (Angle a)) = this.reflected.azimuth
+            a
+
+        member this.azimuthT = 
+            let (Polarization (Angle a)) = this.transmitted.azimuth
+            a
+
         member this.func f = 
             match f with
             | I -> this.i
@@ -210,12 +231,18 @@ module FieldFunctions =
             | T -> this.t
             | Tp -> this.tp
             | Ts -> this.ts
+            | EllipticityR -> this.ellipticityR
+            | EllipticityT -> this.ellipticityT
+            | AzimuthR -> this.azimuthR
+            | AzimuthT -> this.azimuthT
 
 
     type OpticalSystemSolver
         with 
-        member this.muellerMatrix : MuellerMatrix = 
+        member this.muellerMatrixR : MuellerMatrix = 
             let solS = this.solutionS
+
+            let rSS = solS
 
             failwith ""
 

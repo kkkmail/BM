@@ -26,14 +26,6 @@ module Solvers =
             }
 
 
-
-    //type EmFieldInfo = 
-    //    {
-    //        emField : EmField
-    //        shortSystem : ShortOpticalSystem
-    //    }
-
-
     type InputData =
         | InfoBased of IncidentLightInfo * BaseOpticalSystem
         | EmFieldBased of EmField * ShortOpticalSystem
