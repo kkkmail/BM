@@ -170,8 +170,8 @@ type IncidentLightTests(output : ITestOutputHelper) =
         output.WriteLine (sprintf "d.info = \n%A" d.info)
         output.WriteLine (sprintf "el, = %A, p = %A" el p)
 
-        verifyPolarizationEquality output "" (d.info.polarization) p
-        verifyEllipticityEquality output "" (d.info.ellipticity) el
+        verifyPolarizationEquality output "Polarization" (d.info.polarization) p
+        verifyEllipticityEquality output "Ellipticity" (d.info.ellipticity) el
 
     [<Fact>]
     member this.incidentLightTest0 () = this.runTest (data.[0])
