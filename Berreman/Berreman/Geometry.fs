@@ -361,12 +361,12 @@ module Geometry =
 
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
 
-        member this.re () = 
+        member this.re = 
             let (ComplexMatrix4x4 (ComplexMatrix m)) = this
             let len = m.RowCount
             [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Real |] |] |> RealMatrix4x4.create
 
-        member this.im () = 
+        member this.im = 
             let (ComplexMatrix4x4 (ComplexMatrix m)) = this
             let len = m.RowCount
             [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Imaginary |] |] |> RealMatrix4x4.create

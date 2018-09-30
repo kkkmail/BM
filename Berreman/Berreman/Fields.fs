@@ -267,6 +267,24 @@ module Fields =
                 ellipticity = Ellipticity.defaultValue
             }
 
+        member this.s = 
+            {
+                waveLength = this.waveLength
+                refractionIndex = this.refractionIndex
+                incidenceAngle = this.incidenceAngle
+                polarization = Polarization.s
+                ellipticity = Ellipticity.defaultValue
+            }
+
+        member this.p = 
+            {
+                waveLength = this.waveLength
+                refractionIndex = this.refractionIndex
+                incidenceAngle = this.incidenceAngle
+                polarization = Polarization.p
+                ellipticity = Ellipticity.defaultValue
+            }
+
 
     type EmFieldXY =
         {

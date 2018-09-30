@@ -47,7 +47,7 @@ module FieldFunctions =
             ]
             |> ComplexMatrix4x4.create
         ).re
-
+        |> MuellerMatrix
 
 
     type ComplexVector3
@@ -106,6 +106,23 @@ module FieldFunctions =
             let (H h) = em.h
             let (S is) = i.s
             (ComplexVector3.cross (ComplexBasis3.defaultValue.toY e) h.conjugate).re.norm / is.z
+
+        member em.amplitudeX (i : EmField) = 
+            let cZ = 
+                match em.complexNormal with 
+                | Some z -> z
+                | None -> ComplexBasis3.defaultValue.cZ
+
+            let cX = ComplexVector3.cross ComplexBasis3.defaultValue.cY cZ
+
+            let (E e) = em.e
+            let (S is) = i.s
+            (ComplexBasis3.defaultValue.cX * e) / (sqrt is.z |> cplx)
+
+        member em.amplitudeY (i : EmField) = 
+            let (E e) = em.e
+            let (S is) = i.s
+            (ComplexBasis3.defaultValue.cY * e) // / (sqrt is.z |> cplx)
 
 
         member em.ellipticity : Ellipticity = 
@@ -193,6 +210,14 @@ module FieldFunctions =
             | T -> this.t
             | Tp -> this.tp
             | Ts -> this.ts
+
+
+    type OpticalSystemSolver
+        with 
+        member this.muellerMatrix : MuellerMatrix = 
+            let solS = this.solutionS
+
+            failwith ""
 
 
     type Solution

@@ -181,104 +181,11 @@ module Solvers =
             | UpStep -> DownStep
 
 
-    //type SystemData =
-    //    {
-    //        thickness : Thickness
-    //        down : BaseOpticalSystem
-    //        up : BaseOpticalSystem
-    //    }
-
-
-    //type StepData =
-    //    {
-    //        step : SolutionNextStep
-    //        systemData : SystemData
-    //        ems : EmFieldSystem
-    //    }
-
-    //    member this.nextStep =
-    //        match this.step with
-    //        | DownStep -> UpStep
-    //        | UpStep -> DownStep
-
-        //member this.nextStepData (d : StepData) : StepData = 
-        //    match this.step with
-        //    | FirstStep -> failwith ""
-        //    | DownStep -> failwith ""
-        //    | UpStep -> failwith ""
-
-        //static member start (system: BaseOpticalSystem) (info : IncidentLightInfo) (substrate : Layer) : StepData =
-        //    {
-        //        step = FirstStep
-        //        substrate = substrate
-        //        data = BaseOpticalSystemSolver(system, info)
-        //    }
-
-
-    type OpticalSystemSolver (system: OpticalSystem, info : IncidentLightInfo, parameters : SolverParameters) = 
-        //let start system systemData =
-        //    let data = 
-        //        {
-        //            step = DownStep
-        //            systemData = systemData
-        //            ems = BaseOpticalSystemSolver(system, info).emSys
-        //        }
-        //    data //, [ data.solver ]
-
-        //let currentResult (current : StepData) : (StepData * EmFieldSystem) = 
-        //    let x = 
-        //        match current.step with
-        //        | DownStep ->
-        //            //let x = BaseOpticalSystemSolver(current.systemData.down, failwith "")
-        //            UpStep
-        //        | UpStep -> 
-        //            failwith ""
-
-        //    failwith ""
-
-        //let nextLight (step: SolutionNextStep) (s : Layer) (ems : EmFieldSystem) : EmFieldInfo = 
-        //    match step with 
-        //    | DownStep -> 
-        //        {
-        //            emField = ems.transmitted.propagate s
-        //            m1 = s.properties |> BerremanMatrix.create info.n1SinFita
-        //            m2 = system.lower |> BerremanMatrix.create info.n1SinFita
-        //            waveLength = info.waveLength
-        //            n1SinFita = info.n1SinFita
-        //        }
-        //    | UpStep -> 
-        //        let sRotated = s.rotate Rotation.rotatePiX
-        //        {
-        //            emField = (ems.reflected.rotate Rotation.rotatePiX).propagate sRotated
-        //            m1 = sRotated.properties |> BerremanMatrix.create info.n1SinFita
-        //            m2 = system.upper.rotate Rotation.rotatePiX |> BerremanMatrix.create info.n1SinFita
-        //            waveLength = info.waveLength
-        //            n1SinFita = info.n1SinFita
-        //        }
-
-        //let next (current : StepData) results =
-        //    let (nextData, result) = currentResult current
-        //    (nextData, current.ems :: results)
-
+    type OpticalSystemSolver (info : IncidentLightInfo, system: OpticalSystem, parameters : SolverParameters) = 
         let sol =
             match system.substrate with
             | None -> BaseOpticalSystemSolver(info, system.baseSystem) |> Single
             | Some s -> 
-                //let systemData =
-                //    {
-                //        thickness = s.thickness
-                //        down = { system.baseSystem with upper = s.properties; films = []}
-                //        up = 
-                //            let r = Rotation.rotatePiX
-
-                //            let newFilms = 
-                //                system.films
-                //                |> List.map (fun f -> { f with properties = f.properties.rotate r })
-                //                |> List.rev
-
-                //            { upper = s.properties.rotate r; films = newFilms; lower = system.upper.rotate r; description = None}
-                //    }
-
                 let firstSys : BaseOpticalSystem = system.baseSystem
                 let firstOut (ems : EmFieldSystem) : EmField = ems.transmitted.propagate s
                 let firstAcc (ems : EmFieldSystem) : (EmField option * EmField option) = (Some ems.reflected, None)
@@ -320,4 +227,12 @@ module Solvers =
                 |> snd
                 |> Solution.create incidentLight
 
+        let is = info.s
+        let ip = info.p
+
+        let solS = OpticalSystemSolver (is, system, parameters)
+        let solP = OpticalSystemSolver (ip, system, parameters)
+
         member __.solution = sol
+        member __.solutionS = solS
+        member __.solutionP = solP
