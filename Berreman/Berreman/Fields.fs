@@ -304,31 +304,31 @@ module Fields =
             e : E
             h : H
         }
-        member this.d = this.opticalProperties.eps * this.e + this.opticalProperties.rho * this.h
-        member this.b = this.opticalProperties.rhoT * this.e + this.opticalProperties.mu * this.h
+        member emf.d = emf.opticalProperties.eps * emf.e + emf.opticalProperties.rho * emf.h
+        member emf.b = emf.opticalProperties.rhoT * emf.e + emf.opticalProperties.mu * emf.h
 
         // Poynting vector
-        member this.s =
-            let (E e) = this.e
-            let (H h) = this.h
+        member emf.s =
+            let (E e) = emf.e
+            let (H h) = emf.h
             (ComplexVector3.cross e h.conjugate).re |> S
 
-        member this.normal : RealVector3 option = 
-            let (S s) = this.s
+        member emf.normal : RealVector3 option = 
+            let (S s) = emf.s
             let norm = s.norm
 
             if norm > almostZero
             then Some (s / norm)
             else None
 
-        member this.complexNormal = thread this.normal (fun n -> [ cplx n.x; cplx n.y; cplx n.z ] |> ComplexVector3.create)
+        member emf.complexNormal = thread emf.normal (fun n -> [ cplx n.x; cplx n.y; cplx n.z ] |> ComplexVector3.create)
 
         /// Basis in the system of coordinates where ez is the directon of propagation,
         /// ey lays in the plane of media boundary and is orthogonal to directon of propagation,
         /// and ex = cross ey ez.
-        member this.complexBasis = 
+        member emf.complexBasis = 
             let cy = [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
-            thread this.complexNormal (fun cz -> { cX = ComplexVector3.cross cy cz; cY = cy; cZ = cz})
+            thread emf.complexNormal (fun cz -> { cX = ComplexVector3.cross cy cz; cY = cy; cZ = cz})
 
         static member create (emXY : EmFieldXY, eZ, hZ) : EmField =
             {
@@ -362,7 +362,21 @@ module Fields =
             let (H h) = emf.h
             { emf with e = cInv * e |> E; h = cInv * h |> H; opticalProperties = emf.opticalProperties.rotate (Rotation r) }
 
-        member this.rotatePiX = this.rotate Rotation.rotatePiX
+        member emf.rotatePiX = emf.rotate Rotation.rotatePiX
+
+        member emf.amplitudeX =
+            let cZ = 
+                match emf.complexNormal with 
+                | Some z -> z
+                | None -> ComplexBasis3.defaultValue.cZ // If the value is too small, then we don't care about the direction.
+
+            let cX = ComplexVector3.cross ComplexBasis3.defaultValue.cY cZ
+            let (E e) = emf.e
+            (cX * e)
+
+        member emf.amplitudeY = 
+            let (E e) = emf.e
+            (ComplexBasis3.defaultValue.cY * e)
 
 
     type EmFieldSystem =
@@ -384,6 +398,38 @@ module Fields =
 
     type MuellerMatrix = 
         | MuellerMatrix of RealMatrix4x4
+
+        static member create (rSS : Complex) (rPP : Complex) (rPS : Complex) (rSP : Complex) =
+            (
+                [
+                    [
+                        (rPP * rPP.conjugate + rPS * rPS.conjugate + rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
+                        (rPP * rPP.conjugate + rPS * rPS.conjugate - rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
+                        (rSP * rPP.conjugate + rSS * rPS.conjugate + rPP * rSP.conjugate + rPS * rSS.conjugate) / (cplx 2.0)
+                        (complexI / (cplx 2.0)) * (rSP * rPP.conjugate + rSS * rPS.conjugate - rPP * rSP.conjugate - rPS * rSS.conjugate)
+                    ]
+                    [
+                        (rPP * rPP.conjugate - rPS * rPS.conjugate + rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
+                        (rPP * rPP.conjugate - rPS * rPS.conjugate - rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
+                        (rSP * rPP.conjugate - rSS * rPS.conjugate + rPP * rSP.conjugate - rPS * rSS.conjugate) / (cplx 2.0)
+                        (complexI / (cplx 2.0)) * (rSP * rPP.conjugate - rSS * rPS.conjugate - rPP * rSP.conjugate + rPS * rSS.conjugate)
+                    ]
+                    [
+                        (rPS * rPP.conjugate + rPP * rPS.conjugate + rSS * rSP.conjugate + rSP * rSS.conjugate) / (cplx 2.0)
+                        (rPS * rPP.conjugate + rPP * rPS.conjugate - rSS * rSP.conjugate - rSP * rSS.conjugate) / (cplx 2.0)
+                        (rSS * rPP.conjugate + rSP * rPS.conjugate + rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
+                        (complexI / (cplx 2.0)) * (rSS * rPP.conjugate + rSP * rPS.conjugate - rPS * rSP.conjugate - rPP * rSS.conjugate)
+                    ]
+                    [
+                        (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate - rSS * rSP.conjugate + rSP * rSS.conjugate)
+                        (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate + rSS * rSP.conjugate - rSP * rSS.conjugate)
+                        (complexI / (cplx 2.0)) * (-(rSS * rPP.conjugate) + rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate)
+                        (rSS * rPP.conjugate - rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
+                    ]
+                ]
+                |> ComplexMatrix4x4.create
+            ).re
+            |> MuellerMatrix
 
 
     type StokesVector = 

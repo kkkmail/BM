@@ -17,39 +17,6 @@ module FieldFunctions =
     open Geometry
 
 
-    let muellerMatrix (rSS : Complex) (rPP : Complex) (rPS : Complex) (rSP : Complex) =
-        (
-            [
-                [
-                    (rPP * rPP.conjugate + rPS * rPS.conjugate + rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
-                    (rPP * rPP.conjugate + rPS * rPS.conjugate - rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
-                    (rSP * rPP.conjugate + rSS * rPS.conjugate + rPP * rSP.conjugate + rPS * rSS.conjugate) / (cplx 2.0)
-                    (complexI / (cplx 2.0)) * (rSP * rPP.conjugate + rSS * rPS.conjugate - rPP * rSP.conjugate - rPS * rSS.conjugate)
-                ]
-                [
-                    (rPP * rPP.conjugate - rPS * rPS.conjugate + rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
-                    (rPP * rPP.conjugate - rPS * rPS.conjugate - rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
-                    (rSP * rPP.conjugate - rSS * rPS.conjugate + rPP * rSP.conjugate - rPS * rSS.conjugate) / (cplx 2.0)
-                    (complexI / (cplx 2.0)) * (rSP * rPP.conjugate - rSS * rPS.conjugate - rPP * rSP.conjugate + rPS * rSS.conjugate)
-                ]
-                [
-                    (rPS * rPP.conjugate + rPP * rPS.conjugate + rSS * rSP.conjugate + rSP * rSS.conjugate) / (cplx 2.0)
-                    (rPS * rPP.conjugate + rPP * rPS.conjugate - rSS * rSP.conjugate - rSP * rSS.conjugate) / (cplx 2.0)
-                    (rSS * rPP.conjugate + rSP * rPS.conjugate + rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
-                    (complexI / (cplx 2.0)) * (rSS * rPP.conjugate + rSP * rPS.conjugate - rPS * rSP.conjugate - rPP * rSS.conjugate)
-                ]
-                [
-                    (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate - rSS * rSP.conjugate + rSP * rSS.conjugate)
-                    (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate + rSS * rSP.conjugate - rSP * rSS.conjugate)
-                    (complexI / (cplx 2.0)) * (-(rSS * rPP.conjugate) + rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate)
-                    (rSS * rPP.conjugate - rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
-                ]
-            ]
-            |> ComplexMatrix4x4.create
-        ).re
-        |> MuellerMatrix
-
-
     type ComplexVector3
         with
         /// I.V. Lindell: Methods for Electromagnetic Field Analysis, Chaptr 1, Vector p.
@@ -106,20 +73,6 @@ module FieldFunctions =
             let (H h) = em.h
             let (S is) = i.s
             (ComplexVector3.cross (ComplexBasis3.defaultValue.toY e) h.conjugate).re.norm / is.z
-
-        member em.amplitudeX = 
-            let cZ = 
-                match em.complexNormal with 
-                | Some z -> z
-                | None -> ComplexBasis3.defaultValue.cZ // If the value is too small, then we don't care about the direction.
-
-            let cX = ComplexVector3.cross ComplexBasis3.defaultValue.cY cZ
-            let (E e) = em.e
-            (cX * e)
-
-        member em.amplitudeY = 
-            let (E e) = em.e
-            (ComplexBasis3.defaultValue.cY * e)
 
         member em.ellipticity : Ellipticity = 
             let (E e) = em.e
@@ -237,16 +190,6 @@ module FieldFunctions =
             | AzimuthT -> this.azimuthT
 
 
-    type OpticalSystemSolver
-        with 
-        member this.muellerMatrixR : MuellerMatrix = 
-            let solS = this.solutionS
-
-            let rSS = solS
-
-            failwith ""
-
-
     type Solution
         with
         member this.func f = 
@@ -273,3 +216,28 @@ module FieldFunctions =
                 | EllipticityT -> None
                 | AzimuthR -> None
                 | AzimuthT -> None
+
+        //member this.m = 
+        //    let x = 
+        //        match this with 
+        //        | Single s -> failwith ""
+        //        | Multiple m -> failwith ""
+        //    0
+
+
+
+    //type OpticalSystemSolver
+    //    with 
+    //    //member this.muellerMatrixR : MuellerMatrix = 
+    //    //    let solS = this.solutionS
+
+    //    //    let rSS = solS
+
+    //    //    failwith ""
+    //    member this.muellerMatrixR () : MuellerMatrix = 
+    //        let solS = this.solutionS ()
+    //        let solP = this.solutionP ()
+
+    //        let rSS = solS.solution.func 
+
+    //        failwith ""

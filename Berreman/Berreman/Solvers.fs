@@ -129,16 +129,6 @@ module Solvers =
                 transmitted = t
             }
 
-        // None of that seems currently needed
-        //member __.reflectedLight = r
-        //member __.transmittedLight = t
-        //member __.incidentLight = i
-        //member __.eigenBasisFilm = evd
-        //member __.eigenBasisUpper = b1
-        //member __.eigenBasisLower = b2
-        //member __.coeffTbl = coeffTblVal
-        //member __.freeTbl = freeTblVal
-
         member __.cfm = cfmVal
         member __.emSys = ems
 
@@ -167,8 +157,8 @@ module Solvers =
         | DownStep
         | UpStep
 
-        member this.next = 
-            match this with 
+        member this.next =
+            match this with
             | DownStep -> UpStep
             | UpStep -> DownStep
 
@@ -222,9 +212,31 @@ module Solvers =
         let is = info.s
         let ip = info.p
 
-        let solS = OpticalSystemSolver (is, system, parameters)
-        let solP = OpticalSystemSolver (ip, system, parameters)
+        // These must be functions as otherwise we will have an infinite loop.
+        let solS () = OpticalSystemSolver (is, system, parameters)
+        let solP () = OpticalSystemSolver (ip, system, parameters)
+
+        let mR () : MuellerMatrix = 
+            let sS = solS()
+            let sP = solP()
+
+            let x = 
+                match sS.solution, sP.solution with 
+                | Single s, Single p -> 
+                    let e = 0
+                    failwith ""
+                | _ -> failwith "No implemented yet!"
+
+            failwith ""
 
         member __.solution = sol
-        member __.solutionS = solS
-        member __.solutionP = solP
+        member __.solutionS () = solS ()
+        member __.solutionP () = solP ()
+
+        //member this.muellerMatrixR () : MuellerMatrix = 
+        //    let solS = this.solutionS ()
+        //    let solP = this.solutionP ()
+
+        //    let rSS = solS.solution
+
+        //    failwith ""
