@@ -4,8 +4,9 @@
     <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/FieldFunctions.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Fields.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Geometry.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/MathNetNumericsMath.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Berreman/Solvers.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/BerremanTests/BasicSolverTests.fs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -108,10 +109,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FSharpHelpers.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FSharpHelpers.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
+            <state relative-caret-position="572">
               <caret line="90" column="10" selection-start-line="90" selection-end-line="90" selection-end-column="10" />
             </state>
           </provider>
@@ -144,11 +145,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FieldAlgebra.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="1131" column="26" selection-start-line="1131" selection-end-line="1131" selection-end-column="26" />
+            <state relative-caret-position="152">
+              <caret line="1076" column="10" lean-forward="true" selection-start-line="1076" selection-start-column="10" selection-end-line="1076" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -725,13 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="90" column="10" selection-start-line="90" selection-end-line="90" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/BerremanCommon.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
@@ -750,8 +744,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/FieldAlgebra.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="1131" column="26" selection-start-line="1131" selection-end-line="1131" selection-end-column="26" />
+        <state relative-caret-position="152">
+          <caret line="1076" column="10" lean-forward="true" selection-start-line="1076" selection-start-column="10" selection-end-line="1076" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kernel/FSharpHelpers.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="90" column="10" selection-start-line="90" selection-end-line="90" selection-end-column="10" />
         </state>
       </provider>
     </entry>

@@ -141,6 +141,11 @@ module Solvers =
         | Single of BaseOpticalSystemSolver
         | Multiple of MultipleEmFieldSystem
 
+        member sol.stSys = 
+            match sol with 
+            | Single s -> s.emSys
+            | Multiple m -> failwith ""
+
         static member create i rt = 
             {
                 incident = i

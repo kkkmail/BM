@@ -24,7 +24,7 @@ module MathNetNumericsMath =
     type Complex
         with 
         member this.conjugate
-            with get () = this
+            with get () = Complex.Conjugate this
 
         member this.abs
             with get () = Complex.Abs this

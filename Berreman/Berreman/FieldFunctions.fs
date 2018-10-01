@@ -217,14 +217,6 @@ module FieldFunctions =
                 | AzimuthR -> None
                 | AzimuthT -> None
 
-        //member this.m = 
-        //    let x = 
-        //        match this with 
-        //        | Single s -> failwith ""
-        //        | Multiple m -> failwith ""
-        //    0
-
-
         member this.stokesI : StokesVector = 
             match this with 
             | Single b -> 
@@ -241,20 +233,3 @@ module FieldFunctions =
                 | Some v -> v
                 | None -> failwith "We should never be here. Refactor..."
             | Multiple m -> failwith "Not implemented yet..."
-
-
-    //type OpticalSystemSolver
-    //    with 
-    //    //member this.muellerMatrixR : MuellerMatrix = 
-    //    //    let solS = this.solutionS
-
-    //    //    let rSS = solS
-
-    //    //    failwith ""
-    //    member this.muellerMatrixR () : MuellerMatrix = 
-    //        let solS = this.solutionS ()
-    //        let solP = this.solutionP ()
-
-    //        let rSS = solS.solution.func 
-
-    //        failwith ""

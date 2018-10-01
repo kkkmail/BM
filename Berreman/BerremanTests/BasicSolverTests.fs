@@ -157,7 +157,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
         let ellipticity = Ellipticity 0.41378575406900664
 
         {
-            description = "Random 1-layer film (r04)."
+            description = "Random 1-layer film (r04), incidence angle 50 degrees."
             opticalSystem = 
                 {
                     description = None
@@ -302,9 +302,18 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
 
     let runTestMuellerMatrixR (d : BaseOpticalSystemTestData) =
+        output.WriteLine d.description
         let solver = OpticalSystemSolver(d.info, d.opticalSystem.fullSystem)
-        let i = solver.solution
-        failwith ""
+        let mr = solver.muellerMatrixR()
+        let i = solver.solution.stokesI
+        let r = solver.solution.stokesR
+
+        let r1 = mr * i
+
+        output.WriteLine("stokesVector (I)  = {0}\n", i)
+        output.WriteLine("stokesVector (R)  = {0}\n", r)
+        output.WriteLine("stokesVector (R1) = {0}\n", r1)
+        output.WriteLine("muellerMatrix (R) = {0}\n", mr)
 
 
     [<Fact>]
@@ -324,3 +333,15 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
     [<Fact>]
     member __.muellerMatrixR_Test0 () = runTestMuellerMatrixR (data.[0])
+
+    //[<Fact>]
+    //member __.muellerMatrixR_Test1 () = runTestMuellerMatrixR (data.[1])
+
+    //[<Fact>]
+    //member __.muellerMatrixR_Test2 () = runTestMuellerMatrixR (data.[2])
+
+    //[<Fact>]
+    //member __.muellerMatrixR_Test3 () = runTestMuellerMatrixR (data.[3])
+
+    [<Fact>]
+    member __.muellerMatrixR_Random () = runTestMuellerMatrixR randomData
