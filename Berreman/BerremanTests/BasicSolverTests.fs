@@ -319,6 +319,12 @@ type BasicSolverTests(output : ITestOutputHelper) =
         output.WriteLine("stokesVector (R1) = {0}\n", r1)
         output.WriteLine("muellerMatrix (R) = {0}\n", mr)
 
+        match solver.solution with 
+        | Single s -> 
+            output.WriteLine(sprintf "incident.complexBasis = %A" (s.emSys.incident.complexBasis))
+            output.WriteLine(sprintf "reflected.complexBasis = %A" (s.emSys.reflected.complexBasis))
+        | Multiple _ -> failwith "Multiple solution is not supported yet."
+
         verifyVectorEqualityStokes output "[Stokes vector R] vs mR * [Stokes vector I]" r r1
 
 
