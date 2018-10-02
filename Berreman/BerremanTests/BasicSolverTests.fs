@@ -251,6 +251,10 @@ type BasicSolverTests(output : ITestOutputHelper) =
         }
 
 
+    /// Random optical properties are in the film there.
+    let randomProperties = randomData.opticalSystem.films.Head.properties
+
+
     let runTest (d : BaseOpticalSystemTestData) (c : ResultComparisionType) = 
         output.WriteLine d.description
         let solver = BaseOpticalSystemSolver (d.info, d.opticalSystem)
@@ -407,3 +411,27 @@ type BasicSolverTests(output : ITestOutputHelper) =
         let descr = "Biaxial Crystal 100 nm, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
         let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
         runTestMuellerMatrixR descr info (BaseOpticalSystem.transparentGlasslFilmSystem (Thickness.nm 100.))
+
+    [<Fact>]
+    member __.muellerMatrixR_RandomAbsorbingSystem_Polarized_WithEllipticity () = 
+        let descr = "Random absorbing system, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+
+        let sys = { BaseOpticalSystem.transparentGlassSystem with lower = { BaseOpticalSystem.transparentGlassSystem.lower with eps = randomProperties.eps }}
+        runTestMuellerMatrixR descr info sys
+
+    [<Fact>]
+    member __.muellerMatrixR_RandomMagneticSystem_Polarized_WithEllipticity () = 
+        let descr = "Random magnetic system, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+
+        let sys = { BaseOpticalSystem.transparentGlassSystem with lower = { BaseOpticalSystem.transparentGlassSystem.lower with mu = randomProperties.mu }}
+        runTestMuellerMatrixR descr info sys
+
+    [<Fact>]
+    member __.muellerMatrixR_RandomOpticallyActiveSystem_Polarized_WithEllipticity () = 
+        let descr = "Random optically active system, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+
+        let sys = { BaseOpticalSystem.transparentGlassSystem with lower = { BaseOpticalSystem.transparentGlassSystem.lower with rho = randomProperties.rho }}
+        runTestMuellerMatrixR descr info sys
