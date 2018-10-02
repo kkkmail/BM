@@ -23,9 +23,9 @@ module MaterialProperties =
         static member fromRe a = a |> ComplexMatrix3x3.fromRe |> Eps
         static member vacuum = ComplexMatrix3x3.identity |> Eps
 
-        member this.Item
+        member eps.Item
             with get(i, j) =
-                let (Eps (ComplexMatrix3x3 v)) = this
+                let (Eps (ComplexMatrix3x3 v)) = eps
                 v.[i, j]
 
         static member fromRefractionIndex (RefractionIndex n) = 
@@ -38,6 +38,10 @@ module MaterialProperties =
                 [ 0.; 0.; n3 * n3 ]
             ]
             |> Eps.fromRe
+
+        member eps.re =
+            let (Eps e) = eps
+            e.re.toComplex() |> Eps
 
 
     type Mu = 

@@ -427,6 +427,17 @@ type BasicSolverTests(output : ITestOutputHelper) =
         runTestMuellerMatrixR descr info sys
 
     [<Fact>]
+    member __.muellerMatrixR_RandomSystem_Polarized_WithEllipticity () = 
+        let descr = "Random absorbing system, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+
+        let eps = randomProperties.eps.re
+        let sys = { BaseOpticalSystem.transparentGlassSystem with lower = { BaseOpticalSystem.transparentGlassSystem.lower with eps = eps }}
+        output.WriteLine(sprintf "eps = %A" eps)
+        output.WriteLine(sprintf "sys = %A" sys)
+        runTestMuellerMatrixR descr info sys
+
+    [<Fact>]
     member __.muellerMatrixR_RandomMagneticSystem_Polarized_WithEllipticity () = 
         let descr = "Random magnetic system, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
         let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }

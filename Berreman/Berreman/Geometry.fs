@@ -276,6 +276,14 @@ module Geometry =
             let (ComplexMatrix3x3 m) = this
             m.inverse |> ComplexMatrix3x3
 
+        member this.re = 
+            let (ComplexMatrix3x3 m) = this
+            m.re |> RealMatrix3x3
+
+        member this.im = 
+            let (ComplexMatrix3x3 m) = this
+            m.im |> RealMatrix3x3
+
 
     type RealMatrix3x3
         with 
@@ -362,14 +370,12 @@ module Geometry =
         static member identity = comlpexIdentityMatrix 4 |> ComplexMatrix4x4
 
         member this.re = 
-            let (ComplexMatrix4x4 (ComplexMatrix m)) = this
-            let len = m.RowCount
-            [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Real |] |] |> RealMatrix4x4.create
+            let (ComplexMatrix4x4 m) = this
+            m.re |> RealMatrix4x4
 
         member this.im = 
-            let (ComplexMatrix4x4 (ComplexMatrix m)) = this
-            let len = m.RowCount
-            [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Imaginary |] |] |> RealMatrix4x4.create
+            let (ComplexMatrix4x4 m) = this
+            m.im |> RealMatrix4x4
 
 
     // Rotation around x axis.

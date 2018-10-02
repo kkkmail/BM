@@ -174,6 +174,16 @@ module MathNetNumericsMath =
             let (ComplexMatrix m) = this
             m.Determinant()
 
+        member this.re = 
+            let (ComplexMatrix m) = this
+            let len = m.RowCount
+            [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Real |] |] |> RealMatrix.create
+
+        member this.im = 
+            let (ComplexMatrix m) = this
+            let len = m.RowCount
+            [| for i in 0..(len-1) -> [| for j in 0..(len-1) -> m.[i, j].Imaginary |] |] |> RealMatrix.create
+
 
     let realDiagonalMatrix (n : int) (e : double) = 
         DiagonalMatrix.create n e |> RealMatrix
