@@ -96,7 +96,9 @@ module Standard =
 
     let private w600nm = 600.0
 
+    /// 600 nm light falling at normal.
     let light600nmNormalLPs = WaveLength.nm w600nm |> IncidentLightInfo.create
 
+    /// 600 nm light falling at some incidence angle (in degrees).
     let light600nmInclinedDegreelLPs angleDegree = 
         IncidentLightInfo.createInclined (WaveLength.nm w600nm) (Angle.degree angleDegree |> IncidenceAngle.create)

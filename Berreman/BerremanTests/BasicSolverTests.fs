@@ -301,9 +301,9 @@ type BasicSolverTests(output : ITestOutputHelper) =
             Skip.If(true, "Intensity based checks are not implemented yet.")
 
 
-    let runTestMuellerMatrixR (d : BaseOpticalSystemTestData) =
-        output.WriteLine d.description
-        let solver = OpticalSystemSolver(d.info, d.opticalSystem.fullSystem)
+    let runTestMuellerMatrixR descr info (sys : BaseOpticalSystem) =
+        output.WriteLine descr
+        let solver = OpticalSystemSolver(info, sys.fullSystem)
         let mr = solver.muellerMatrixR()
         let i = solver.solution.stokesI
         let r = solver.solution.stokesR
@@ -314,6 +314,12 @@ type BasicSolverTests(output : ITestOutputHelper) =
         output.WriteLine("stokesVector (R)  = {0}\n", r)
         output.WriteLine("stokesVector (R1) = {0}\n", r1)
         output.WriteLine("muellerMatrix (R) = {0}\n", mr)
+
+        verifyVectorEqualityStokes output "[Stokes vector R] vs mR * [Stokes vector I]" r r1
+
+
+    let runTestMuellerMatrixR1 (d : BaseOpticalSystemTestData) = 
+        runTestMuellerMatrixR d.description d.info d.opticalSystem
 
 
     [<Fact>]
@@ -332,8 +338,9 @@ type BasicSolverTests(output : ITestOutputHelper) =
     member __.basicSolverTestRandom () = runTest randomData Field
 
     [<Fact>]
-    member __.muellerMatrixR_Test0 () = runTestMuellerMatrixR (data.[0])
+    member __.muellerMatrixR_Test0 () = runTestMuellerMatrixR1 (data.[0])
 
+    // Useless
     //[<Fact>]
     //member __.muellerMatrixR_Test1 () = runTestMuellerMatrixR (data.[1])
 
@@ -343,5 +350,60 @@ type BasicSolverTests(output : ITestOutputHelper) =
     //[<Fact>]
     //member __.muellerMatrixR_Test3 () = runTestMuellerMatrixR (data.[3])
 
+    // Does not work yet.
+    //[<Fact>]
+    //member __.muellerMatrixR_Random () = runTestMuellerMatrixR1 randomData
+
     [<Fact>]
-    member __.muellerMatrixR_Random () = runTestMuellerMatrixR randomData
+    member __.muellerMatrixR_TransparentGlassSystem () = 
+        let descr = "Transparent glass, inclined 19 degrees incident light."
+        let info = light600nmInclinedDegreelLPs 19.0
+        runTestMuellerMatrixR descr info BaseOpticalSystem.transparentGlassSystem
+
+    [<Fact>]
+    member __.muellerMatrixR_BiaxialCrystalSystem () = 
+        let descr = "Biaxial Crystal, inclined 19 degrees incident light."
+        let info = light600nmInclinedDegreelLPs 19.0
+        runTestMuellerMatrixR descr info BaseOpticalSystem.biaxialCrystalSystem
+
+    [<Fact>]
+    member __.muellerMatrixR_TransparentGlassFilmSystem () = 
+        let descr = "Transparent glass 100 nm thin flim, inclined 19 degrees incident light."
+        let info = light600nmInclinedDegreelLPs 19.0
+        runTestMuellerMatrixR descr info (BaseOpticalSystem.transparentGlasslFilmSystem (Thickness.nm 100.))
+
+    [<Fact>]
+    member __.muellerMatrixR_TransparentGlassSystem_Polarized () = 
+        let descr = "Transparent glass, inclined 19 degrees incident light, 27 degrees polarization plane angle."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization }
+        runTestMuellerMatrixR descr info BaseOpticalSystem.transparentGlassSystem
+
+    [<Fact>]
+    member __.muellerMatrixR_BiaxialCrystalSystem_Polarized () = 
+        let descr = "Biaxial Crystal, inclined 19 degrees incident light, 27 degrees polarization plane angle."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization }
+        runTestMuellerMatrixR descr info BaseOpticalSystem.biaxialCrystalSystem
+
+    [<Fact>]
+    member __.muellerMatrixR_TransparentGlassFilmSystem_Polarized () = 
+        let descr = "Transparent glass 100 nm thin flim, inclined 19 degrees incident light, 27 degrees polarization plane angle."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization }
+        runTestMuellerMatrixR descr info (BaseOpticalSystem.transparentGlasslFilmSystem (Thickness.nm 100.))
+
+    [<Fact>]
+    member __.muellerMatrixR_TransparentGlassSystem_Polarized_WithEllipticity () = 
+        let descr = "Transparent glass, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+        runTestMuellerMatrixR descr info BaseOpticalSystem.transparentGlassSystem
+
+    [<Fact>]
+    member __.muellerMatrixR_BiaxialCrystalSystem_Polarized_WithEllipticity () = 
+        let descr = "Biaxial Crystal, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+        runTestMuellerMatrixR descr info BaseOpticalSystem.biaxialCrystalSystem
+
+    [<Fact>]
+    member __.muellerMatrixR_BiaxialCrystalFilmSystem_Polarized_WithEllipticity () = 
+        let descr = "Biaxial Crystal 100 nm, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+        runTestMuellerMatrixR descr info (BaseOpticalSystem.transparentGlasslFilmSystem (Thickness.nm 100.))
