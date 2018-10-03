@@ -308,7 +308,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
     let runTestMuellerMatrixR descr info (sys : BaseOpticalSystem) =
         output.WriteLine descr
         let solver = OpticalSystemSolver(info, sys.fullSystem)
-        let mr = solver.muellerMatrixR(output.WriteLine)
+        let mr = solver.muellerMatrixR()
         let i = solver.solution.stokesI
         let r = solver.solution.stokesR
 

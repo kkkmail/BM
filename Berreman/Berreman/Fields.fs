@@ -427,70 +427,10 @@ module Fields =
 
     type MuellerMatrix = 
         | MuellerMatrix of RealMatrix4x4
-
-        //static member create (rSS : Complex) (rSP : Complex) (rPS : Complex) (rPP : Complex) =
-        //    (
-        //        [
-        //            [
-        //                (rPP * rPP.conjugate + rPS * rPS.conjugate + rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
-        //                (rPP * rPP.conjugate + rPS * rPS.conjugate - rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
-        //                (rSP * rPP.conjugate + rSS * rPS.conjugate + rPP * rSP.conjugate + rPS * rSS.conjugate) / (cplx 2.0)
-        //                (complexI / (cplx 2.0)) * (rSP * rPP.conjugate + rSS * rPS.conjugate - rPP * rSP.conjugate - rPS * rSS.conjugate)
-        //            ]
-        //            [
-        //                (rPP * rPP.conjugate - rPS * rPS.conjugate + rSP * rSP.conjugate - rSS * rSS.conjugate) / (cplx 2.0)
-        //                (rPP * rPP.conjugate - rPS * rPS.conjugate - rSP * rSP.conjugate + rSS * rSS.conjugate) / (cplx 2.0)
-        //                (rSP * rPP.conjugate - rSS * rPS.conjugate + rPP * rSP.conjugate - rPS * rSS.conjugate) / (cplx 2.0)
-        //                (complexI / (cplx 2.0)) * (rSP * rPP.conjugate - rSS * rPS.conjugate - rPP * rSP.conjugate + rPS * rSS.conjugate)
-        //            ]
-        //            [
-        //                (rPS * rPP.conjugate + rPP * rPS.conjugate + rSS * rSP.conjugate + rSP * rSS.conjugate) / (cplx 2.0)
-        //                (rPS * rPP.conjugate + rPP * rPS.conjugate - rSS * rSP.conjugate - rSP * rSS.conjugate) / (cplx 2.0)
-        //                (rSS * rPP.conjugate + rSP * rPS.conjugate + rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
-        //                (complexI / (cplx 2.0)) * (rSS * rPP.conjugate + rSP * rPS.conjugate - rPS * rSP.conjugate - rPP * rSS.conjugate)
-        //            ]
-        //            [
-        //                (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate - rSS * rSP.conjugate + rSP * rSS.conjugate)
-        //                (complexI / (cplx 2.0)) * (-(rPS * rPP.conjugate) + rPP * rPS.conjugate + rSS * rSP.conjugate - rSP * rSS.conjugate)
-        //                (complexI / (cplx 2.0)) * (-(rSS * rPP.conjugate) + rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate)
-        //                (rSS * rPP.conjugate - rSP * rPS.conjugate - rPS * rSP.conjugate + rPP * rSS.conjugate) / (cplx 2.0)
-        //            ]
-        //        ]
-        //        |> ComplexMatrix4x4.create
-        //    ).re
-        //    |> MuellerMatrix
-
-        static member create (o) (kSS : Complex) (kSP : Complex) (kPS : Complex) (kPP : Complex) = 
+        static member create (kSS : Complex) (kSP : Complex) (kPS : Complex) (kPP : Complex) = 
             let conjugate (a : Complex) = a.conjugate
-            o (sprintf "kSS = %A, kSP = %A, kPS = %A, kPP = %A" kSS kSP kPS kPP)
 
             (
-                //[
-                //    [
-                //        (kPP * conjugate(kPP) + kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                //        (-(kPP * conjugate(kPP)) + kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                //        (kPS * conjugate(kPP) + kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
-                //        (-complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) + kSS * conjugate(kSP) - kSP * conjugate(kSS))
-                //    ]
-                //    [
-                //        (-(kPP * conjugate(kPP)) - kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                //        (kPP * conjugate(kPP) - kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                //        (-(kPS * conjugate(kPP)) - kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
-                //        (complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) - kSS * conjugate(kSP) + kSP * conjugate(kSS))
-                //    ]
-                //    [
-                //        (kSP * conjugate(kPP) + kSS * conjugate(kPS) + kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
-                //        (-(kSP * conjugate(kPP)) + kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
-                //        (kSS * conjugate(kPP) + kSP * conjugate(kPS) + kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
-                //        (-complexI/(cplx 2.0)) * (kSS * conjugate(kPP) - kSP * conjugate(kPS) + kPS * conjugate(kSP) - kPP * conjugate(kSS))
-                //    ]
-                //    [
-                //        (complexI/(cplx 2.0)) * (kSP * conjugate(kPP) + kSS * conjugate(kPS) - kPP * conjugate(kSP) - kPS * conjugate(kSS))
-                //        (-complexI/(cplx 2.0)) * (kSP * conjugate(kPP) - kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))
-                //        (complexI/(cplx 2.0)) * (kSS * conjugate(kPP) + kSP * conjugate(kPS) - kPS * conjugate(kSP) - kPP * conjugate(kSS))
-                //        (kSS * conjugate(kPP) - kSP * conjugate(kPS) - kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
-                //    ]
-                //]
                 [
                     [
                         (kPP * conjugate(kPP) + kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
