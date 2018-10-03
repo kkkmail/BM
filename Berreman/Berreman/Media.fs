@@ -61,6 +61,9 @@ module Media =
             { system with upper = system.upper.rotate r; films = newFilms; lower = system.lower.rotate r }
 
         member system.rotatePiX = system.rotate Rotation.rotatePiX
+        member system.rotateX a = Rotation.rotateX a |> system.rotate
+        member system.rotateY a = Rotation.rotateY a |> system.rotate
+        member system.rotateZ a = Rotation.rotateZ a |> system.rotate
 
 
     and OpticalSystem = 

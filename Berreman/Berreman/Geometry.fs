@@ -413,6 +413,7 @@ module Geometry =
     type RotationConvention = 
         | ZmXpZm // Rotation around (-z), (x'), (-z'')
         | ZmYpXp // Rotation around (-z), (y'), (x'')
+        | ZpYpXp // Rotation around (z), (y'), (x'')
 
         // For compatibility with Mathematica code.
         | PiZmXpPiZm //Rotation around (Pi - z), (x'), (Pi - z'') = Euler angles in Mathematica code.
@@ -420,7 +421,8 @@ module Geometry =
         static member conventionMapping convention = 
             match convention with
             | ZmXpZm -> [ (fun a -> zRotation (-a)); xRotation; (fun a -> zRotation (-a)) ]
-            | ZmYpXp -> [ zRotation; yRotation; xRotation]
+            | ZmYpXp -> [ (fun a -> zRotation (-a)); yRotation; xRotation]
+            | ZpYpXp -> [ zRotation; yRotation; xRotation]
             | PiZmXpPiZm -> [ (fun a -> zRotation (Angle.pi - a)); xRotation; (fun a -> zRotation (Angle.pi - a)) ]
 
 
@@ -435,5 +437,9 @@ module Geometry =
 
         static member createZmXpZm = Rotation.create ZmXpZm
         static member createZmYpXp = Rotation.create ZmYpXp
+        static member createZpYpXp = Rotation.create ZpYpXp
         static member createPiZmXpPiZm = Rotation.create PiZmXpPiZm
         static member rotatePiX = Rotation.createZmXpZm Angle.zero Angle.pi Angle.zero |> Rotation
+        static member rotateX a = Rotation.createZmYpXp Angle.zero Angle.zero a |> Rotation
+        static member rotateY a = Rotation.createZmYpXp Angle.zero a Angle.zero |> Rotation
+        static member rotateZ a = Rotation.createZmYpXp a Angle.zero Angle.zero |> Rotation

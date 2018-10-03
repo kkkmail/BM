@@ -126,3 +126,6 @@ module MaterialProperties =
             }
 
         member this.rotatePiX = this.rotate Rotation.rotatePiX
+        member this.rotateX a = Rotation.rotateX a |> this.rotate
+        member this.rotateY a = Rotation.rotateY a |> this.rotate
+        member this.rotateZ a = Rotation.rotateZ a |> this.rotate

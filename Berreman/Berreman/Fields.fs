@@ -323,12 +323,21 @@ module Fields =
 
         member emf.complexNormal = thread emf.normal (fun n -> [ cplx n.x; cplx n.y; cplx n.z ] |> ComplexVector3.create)
 
-        /// Basis in the system of coordinates where ez is the directon of propagation,
+        /// Basis in the system of coordinates where ez is the directon of propagation of incident light,
         /// ey lays in the plane of media boundary and is orthogonal to directon of propagation,
         /// and ex = cross ey ez.
         member emf.complexBasis = 
-            let cy = [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
-            thread emf.complexNormal (fun cz -> { cX = ComplexVector3.cross cy cz; cY = cy; cZ = cz})
+            thread emf.complexNormal (fun cz -> 
+                let cy = 
+                    if (cz * ComplexBasis3.defaultValue.cZ).Real >= 0.0
+                    then [ cplx 0.0; cplx 1.0; cplx 0.0 ] |> ComplexVector3.create
+                    else  [ cplx 0.0; cplx -1.0; cplx 0.0 ] |> ComplexVector3.create
+
+                {
+                    cX = ComplexVector3.cross cy cz
+                    cY = cy
+                    cZ = cz
+                })
 
         static member create (emXY : EmFieldXY, eZ, hZ) : EmField =
             {
@@ -364,19 +373,25 @@ module Fields =
 
         member emf.rotatePiX = emf.rotate Rotation.rotatePiX
 
-        member emf.amplitudeX =
-            let cZ = 
-                match emf.complexNormal with 
-                | Some z -> z
-                | None -> ComplexBasis3.defaultValue.cZ // If the value is too small, then we don't care about the direction.
+        /// s = x', x' must look in the same direction as x, so that projection of x' on x is positive.
+        member emf.amplitudeS =
+            let cX = 
+                match emf.complexBasis with 
+                | Some b -> b.cX
+                | None -> ComplexBasis3.defaultValue.cX // If the value is too small, then we don't care about the direction.
 
-            let cX = ComplexVector3.cross ComplexBasis3.defaultValue.cY cZ
             let (E e) = emf.e
             (cX * e)
 
-        member emf.amplitudeY = 
+        /// p = y' for transmitted but -y' for reflected.
+        member emf.amplitudeP = 
+            let cY = 
+                match emf.complexBasis with 
+                | Some b -> b.cY
+                | None -> ComplexBasis3.defaultValue.cY // If the value is too small, then we don't care about the direction.
+
             let (E e) = emf.e
-            (ComplexBasis3.defaultValue.cY * e)
+            (cY * e)
 
 
     type EmFieldSystem =
@@ -445,36 +460,64 @@ module Fields =
         //    ).re
         //    |> MuellerMatrix
 
-        static member create (kSS : Complex) (kSP : Complex) (kPS : Complex) (kPP : Complex) = 
+        static member create (o) (kSS : Complex) (kSP : Complex) (kPS : Complex) (kPP : Complex) = 
             let conjugate (a : Complex) = a.conjugate
+            o (sprintf "kSS = %A, kSP = %A, kPS = %A, kPP = %A" kSS kSP kPS kPP)
 
             (
+                //[
+                //    [
+                //        (kPP * conjugate(kPP) + kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+                //        (-(kPP * conjugate(kPP)) + kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+                //        (kPS * conjugate(kPP) + kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
+                //        (-complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) + kSS * conjugate(kSP) - kSP * conjugate(kSS))
+                //    ]
+                //    [
+                //        (-(kPP * conjugate(kPP)) - kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+                //        (kPP * conjugate(kPP) - kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+                //        (-(kPS * conjugate(kPP)) - kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
+                //        (complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) - kSS * conjugate(kSP) + kSP * conjugate(kSS))
+                //    ]
+                //    [
+                //        (kSP * conjugate(kPP) + kSS * conjugate(kPS) + kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
+                //        (-(kSP * conjugate(kPP)) + kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
+                //        (kSS * conjugate(kPP) + kSP * conjugate(kPS) + kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
+                //        (-complexI/(cplx 2.0)) * (kSS * conjugate(kPP) - kSP * conjugate(kPS) + kPS * conjugate(kSP) - kPP * conjugate(kSS))
+                //    ]
+                //    [
+                //        (complexI/(cplx 2.0)) * (kSP * conjugate(kPP) + kSS * conjugate(kPS) - kPP * conjugate(kSP) - kPS * conjugate(kSS))
+                //        (-complexI/(cplx 2.0)) * (kSP * conjugate(kPP) - kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))
+                //        (complexI/(cplx 2.0)) * (kSS * conjugate(kPP) + kSP * conjugate(kPS) - kPS * conjugate(kSP) - kPP * conjugate(kSS))
+                //        (kSS * conjugate(kPP) - kSP * conjugate(kPS) - kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
+                //    ]
+                //]
                 [
                     [
                         (kPP * conjugate(kPP) + kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                        (-(kPP * conjugate(kPP)) + kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                        (kPS * conjugate(kPP) + kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
-                        (-complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) + kSS * conjugate(kSP) - kSP * conjugate(kSS))
-                    ]
-                    [
                         (-(kPP * conjugate(kPP)) - kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                        (kPP * conjugate(kPP) - kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
-                        (-(kPS * conjugate(kPP)) - kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
-                        (complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) - kSS * conjugate(kSP) + kSP * conjugate(kSS))
-                    ]
-                    [
                         (kSP * conjugate(kPP) + kSS * conjugate(kPS) + kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
-                        (-(kSP * conjugate(kPP)) + kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
-                        (kSS * conjugate(kPP) + kSP * conjugate(kPS) + kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
-                        (-complexI/(cplx 2.0)) * (kSS * conjugate(kPP) - kSP * conjugate(kPS) + kPS * conjugate(kSP) - kPP * conjugate(kSS))
+                        (-complexI/(cplx 2.0)) * (kSP * conjugate(kPP) + kSS * conjugate(kPS) - kPP * conjugate(kSP) - kPS * conjugate(kSS))
                     ]
                     [
-                        (complexI/(cplx 2.0)) * (kSP * conjugate(kPP) + kSS * conjugate(kPS) - kPP * conjugate(kSP) - kPS * conjugate(kSS))
-                        (-complexI/(cplx 2.0)) * (kSP * conjugate(kPP) - kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))
-                        (complexI/(cplx 2.0)) * (kSS * conjugate(kPP) + kSP * conjugate(kPS) - kPS * conjugate(kSP) - kPP * conjugate(kSS))
+                        (-(kPP * conjugate(kPP)) + kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+                        (kPP * conjugate(kPP) - kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+                        (-(kSP * conjugate(kPP)) + kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
+                        (complexI/(cplx 2.0)) * (kSP * conjugate(kPP) - kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))
+                    ]
+                    [
+                        (kPS * conjugate(kPP) + kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
+                        (-(kPS * conjugate(kPP)) - kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
+                        (kSS * conjugate(kPP) + kSP * conjugate(kPS) + kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
+                        (-complexI/(cplx 2.0)) * (kSS * conjugate(kPP) + kSP * conjugate(kPS) - kPS * conjugate(kSP) - kPP * conjugate(kSS))
+                    ]
+                    [
+                        (complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) + kSS * conjugate(kSP) - kSP * conjugate(kSS))
+                        (-complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) - kSS * conjugate(kSP) + kSP * conjugate(kSS))
+                        (complexI/(cplx 2.0)) * (kSS * conjugate(kPP) - kSP * conjugate(kPS) + kPS * conjugate(kSP) - kPP * conjugate(kSS))
                         (kSS * conjugate(kPP) - kSP * conjugate(kPS) - kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
                     ]
                 ]
+
                 |> ComplexMatrix4x4.create
             ).re
             |> MuellerMatrix

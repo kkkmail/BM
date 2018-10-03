@@ -308,7 +308,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
     let runTestMuellerMatrixR descr info (sys : BaseOpticalSystem) =
         output.WriteLine descr
         let solver = OpticalSystemSolver(info, sys.fullSystem)
-        let mr = solver.muellerMatrixR()
+        let mr = solver.muellerMatrixR(output.WriteLine)
         let i = solver.solution.stokesI
         let r = solver.solution.stokesR
 
@@ -413,6 +413,39 @@ type BasicSolverTests(output : ITestOutputHelper) =
         runTestMuellerMatrixR descr info BaseOpticalSystem.biaxialCrystalSystem
 
     [<Fact>]
+    member __.muellerMatrixR_BiaxialCrystalSystemRotatedX_Polarized_WithEllipticity () = 
+        let descr = "Biaxial Crystal, rotated around X, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+
+        let eps = (BaseOpticalSystem.biaxialCrystalSystem.lower.rotateX (Angle.degree 30.0)).eps
+        let sys = { BaseOpticalSystem.biaxialCrystalSystem with lower = { BaseOpticalSystem.biaxialCrystalSystem.lower with eps = eps }}
+        output.WriteLine(sprintf "eps = %A" eps)
+        output.WriteLine(sprintf "sys = %A" sys)
+        runTestMuellerMatrixR descr info sys
+
+    [<Fact>]
+    member __.muellerMatrixR_BiaxialCrystalSystemRotatedY_Polarized_WithEllipticity () = 
+        let descr = "Biaxial Crystal, rotated around Y, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+
+        let eps = (BaseOpticalSystem.biaxialCrystalSystem.lower.rotateY (Angle.degree 30.0)).eps
+        let sys = { BaseOpticalSystem.biaxialCrystalSystem with lower = { BaseOpticalSystem.biaxialCrystalSystem.lower with eps = eps }}
+        output.WriteLine(sprintf "eps = %A" eps)
+        output.WriteLine(sprintf "sys = %A" sys)
+        runTestMuellerMatrixR descr info sys
+
+    [<Fact>]
+    member __.muellerMatrixR_BiaxialCrystalSystemRotatedZ_Polarized_WithEllipticity () = 
+        let descr = "Biaxial Crystal, rotated around Z, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
+
+        let eps = (BaseOpticalSystem.biaxialCrystalSystem.lower.rotateZ (Angle.degree 30.0)).eps
+        let sys = { BaseOpticalSystem.biaxialCrystalSystem with lower = { BaseOpticalSystem.biaxialCrystalSystem.lower with eps = eps }}
+        output.WriteLine(sprintf "eps = %A" eps)
+        output.WriteLine(sprintf "sys = %A" sys)
+        runTestMuellerMatrixR descr info sys
+
+    [<Fact>]
     member __.muellerMatrixR_BiaxialCrystalFilmSystem_Polarized_WithEllipticity () = 
         let descr = "Biaxial Crystal 100 nm, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
         let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
@@ -428,7 +461,7 @@ type BasicSolverTests(output : ITestOutputHelper) =
 
     [<Fact>]
     member __.muellerMatrixR_RandomSystem_Polarized_WithEllipticity () = 
-        let descr = "Random absorbing system, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
+        let descr = "Random system, inclined 19 degrees incident light, 27 degrees polarization plane angle, with ellipticity 0.58."
         let info = { light600nmInclinedDegreelLPs 19.0 with polarization = Angle.degree 27.0 |> Polarization; ellipticity = Ellipticity 0.58 }
 
         let eps = randomProperties.eps.re

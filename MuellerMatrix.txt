@@ -1,0 +1,200 @@
+In[1]:= (* s  x, p  y *)
+S0 [Ex_, Ey_]:= Ex * Conjugate[Ex] + Ey * Conjugate[Ey];
+S1[Ex_, Ey_]:= Ex * Conjugate[Ex] - Ey * Conjugate[Ey];
+S2[Ex_, Ey_]:= Ex * Conjugate[Ey] + Ey * Conjugate[Ex];
+S3[Ex_, Ey_]:= I*(Ex * Conjugate[Ey] - Ey * Conjugate[Ex]);
+stokes [Ex_, Ey_]:= {S0[Ex, Ey], S1[Ex, Ey], S2[Ex, Ey], S3[Ex, Ey]};
+stokes[e_?VectorQ]:=stokes[e[[1]], e[[2]]];
+
+toFSharpMatrix[m_?MatrixQ]:=
+Module[{s,nn,mm,ii,jj, r},
+s="\n[\n";
+nn=Length[m];
+mm=Length[m[[1]]];
+Print["m = \n",m//MatrixForm];
+
+Do[
+(
+If[mm>1,s=s<>"    [\n"];
+Do[
+(
+If[mm>1,s=s<>"    "];
+r=ToString[InputForm[m[[ii,jj]]]];
+r=StringReplace[StringReplace[StringReplace[StringReplace[StringReplace[StringReplace[r,"Conjugate"->"conjugate"], "[" -> "("], "]" -> ")"],"*" -> " * " ], "I" -> "complexI"], "2" -> "(cplx 2.0)"];
+s=s<>"    "<>r<>"\n";
+),{jj,1,mm}
+];
+If[mm>1,s=s<>"    ]\n"];
+),{ii,1,nn}
+];
+
+s=StringReplace[s<>"]\n","\""->""];
+Return[s];
+];
+
+k = {{kSS, kPS},{kSP, kPP}};
+
+mm={{m11, m12, m13, m14},{m21, m22, m23, m24},{m31, m32, m33, m34},{m41, m42, m43, m44}};
+
+EI={ESI, EPI};
+
+k .EI // MatrixForm
+
+sRule = {ESI -> 1, EPI -> 0};
+pRule = {ESI -> 0, EPI -> 1};
+cPlusRule = {ESI -> 1, EPI ->1+ I};
+cMinusRule = {ESI -> 1, EPI -> 1 -I/2};
+
+Print["E in"]
+iS = EI /.sRule
+iP = EI /.pRule
+iPlus = EI /.cPlusRule
+iMinus = EI /.cMinusRule
+
+Print["Stokes in"]
+stokes[iS]
+stokes[iP]
+stokes[ iPlus]
+stokes[iMinus]
+
+Print["Stokes out"];
+oS = stokes[k . iS]
+oP = stokes[k . iP]
+oPlus = stokes[k . iPlus]
+oMinus = stokes[k . iMinus]
+
+Print["Stokes out using m"];
+moS = mm . stokes[iS]
+moP =  mm . stokes[iP]
+moPlus =  mm .stokes[iPlus]
+moMinus = mm . stokes[iMinus]
+
+getEq[a_?VectorQ, b_?VectorQ]:=Table[a[[i]]==b[[i]],{i, 1,4}];
+eq=Flatten[{getEq[oS, moS],getEq[oP, moP],getEq[oPlus, moPlus],getEq[oMinus, moMinus]}];
+
+Print["eq"];
+Print[Transpose[{eq}] // MatrixForm];
+var = Flatten[mm];
+
+Print["sol"];
+sol = Solve[eq, var];
+Print[{sol} // MatrixForm];
+
+mm /. sol[[1]]// toFSharpMatrix
+
+
+(*
+stockesIn = stokes[ESI, EPI] 
+
+{eX, eY}=k . EI ;
+conjRule={Conjugate[EPI kPP+ESI kPS]  Conjugate[EPI]*Conjugate[kPP] + Conjugate[ESI]* Conjugate[kPS], Conjugate[EPI kSP+ESI kSS]  Conjugate[EPI]*Conjugate[kSP]  + Conjugate[ESI]*Conjugate[kSS]}; 
+
+stokesOut = FullSimplify[stokes[eX, eY] /. conjRule]
+m=MuellerMatrix[kSS,kSP,kPS,kPP];
+
+stokesOutMueller = FullSimplify[m . stockesIn]
+
+Print["Diff"];
+FullSimplify[(stokesOut - stokesOutMueller)/. sRule]  // MatrixForm
+FullSimplify[(stokesOut - stokesOutMueller)/. pRule]  // MatrixForm
+*)
+
+
+
+
+Out[11]//MatrixForm= (EPI kPS+ESI kSS
+EPI kPP+ESI kSP
+
+)
+During evaluation of In[1]:= E in
+Out[17]= {1,0}
+Out[18]= {0,1}
+Out[19]= {1,1+I}
+Out[20]= {1,1-I/2}
+During evaluation of In[1]:= Stokes in
+Out[22]= {1,1,0,0}
+Out[23]= {1,-1,0,0}
+Out[24]= {3,-1,2,2}
+Out[25]= {9/4,-(1/4),2,-1}
+During evaluation of In[1]:= Stokes out
+Out[27]= {kSP Conjugate[kSP]+kSS Conjugate[kSS],-kSP Conjugate[kSP]+kSS Conjugate[kSS],kSS Conjugate[kSP]+kSP Conjugate[kSS],I (kSS Conjugate[kSP]-kSP Conjugate[kSS])}
+Out[28]= {kPP Conjugate[kPP]+kPS Conjugate[kPS],-kPP Conjugate[kPP]+kPS Conjugate[kPS],kPS Conjugate[kPP]+kPP Conjugate[kPS],I (kPS Conjugate[kPP]-kPP Conjugate[kPS])}
+Out[29]= {((1+I) kPP+kSP) ((1-I) Conjugate[kPP]+Conjugate[kSP])+((1+I) kPS+kSS) ((1-I) Conjugate[kPS]+Conjugate[kSS]),-((1+I) kPP+kSP) ((1-I) Conjugate[kPP]+Conjugate[kSP])+((1+I) kPS+kSS) ((1-I) Conjugate[kPS]+Conjugate[kSS]),((1+I) kPS+kSS) ((1-I) Conjugate[kPP]+Conjugate[kSP])+((1+I) kPP+kSP) ((1-I) Conjugate[kPS]+Conjugate[kSS]),I (((1+I) kPS+kSS) ((1-I) Conjugate[kPP]+Conjugate[kSP])-((1+I) kPP+kSP) ((1-I) Conjugate[kPS]+Conjugate[kSS]))}
+Out[30]= {((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])+((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPS]+Conjugate[kSS]),-((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])+((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPS]+Conjugate[kSS]),((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])+((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPS]+Conjugate[kSS]),I (((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])-((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPS]+Conjugate[kSS]))}
+During evaluation of In[1]:= Stokes out using m
+Out[32]= {m11+m12,m21+m22,m31+m32,m41+m42}
+Out[33]= {m11-m12,m21-m22,m31-m32,m41-m42}
+Out[34]= {3 m11-m12+2 m13+2 m14,3 m21-m22+2 m23+2 m24,3 m31-m32+2 m33+2 m34,3 m41-m42+2 m43+2 m44}
+Out[35]= {(9 m11)/4-m12/4+2 m13-m14,(9 m21)/4-m22/4+2 m23-m24,(9 m31)/4-m32/4+2 m33-m34,(9 m41)/4-m42/4+2 m43-m44}
+During evaluation of In[1]:= eq
+During evaluation of In[1]:= (kSP Conjugate[kSP]+kSS Conjugate[kSS]==m11+m12
+-kSP Conjugate[kSP]+kSS Conjugate[kSS]==m21+m22
+kSS Conjugate[kSP]+kSP Conjugate[kSS]==m31+m32
+I (kSS Conjugate[kSP]-kSP Conjugate[kSS])==m41+m42
+kPP Conjugate[kPP]+kPS Conjugate[kPS]==m11-m12
+-kPP Conjugate[kPP]+kPS Conjugate[kPS]==m21-m22
+kPS Conjugate[kPP]+kPP Conjugate[kPS]==m31-m32
+I (kPS Conjugate[kPP]-kPP Conjugate[kPS])==m41-m42
+((1+I) kPP+kSP) ((1-I) Conjugate[kPP]+Conjugate[kSP])+((1+I) kPS+kSS) ((1-I) Conjugate[kPS]+Conjugate[kSS])==3 m11-m12+2 m13+2 m14
+-((1+I) kPP+kSP) ((1-I) Conjugate[kPP]+Conjugate[kSP])+((1+I) kPS+kSS) ((1-I) Conjugate[kPS]+Conjugate[kSS])==3 m21-m22+2 m23+2 m24
+((1+I) kPS+kSS) ((1-I) Conjugate[kPP]+Conjugate[kSP])+((1+I) kPP+kSP) ((1-I) Conjugate[kPS]+Conjugate[kSS])==3 m31-m32+2 m33+2 m34
+I (((1+I) kPS+kSS) ((1-I) Conjugate[kPP]+Conjugate[kSP])-((1+I) kPP+kSP) ((1-I) Conjugate[kPS]+Conjugate[kSS]))==3 m41-m42+2 m43+2 m44
+((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])+((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPS]+Conjugate[kSS])==(9 m11)/4-m12/4+2 m13-m14
+-((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])+((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPS]+Conjugate[kSS])==(9 m21)/4-m22/4+2 m23-m24
+((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])+((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPS]+Conjugate[kSS])==(9 m31)/4-m32/4+2 m33-m34
+I (((1-I/2) kPS+kSS) ((1+I/2) Conjugate[kPP]+Conjugate[kSP])-((1-I/2) kPP+kSP) ((1+I/2) Conjugate[kPS]+Conjugate[kSS]))==(9 m41)/4-m42/4+2 m43-m44
+
+)
+During evaluation of In[1]:= sol
+During evaluation of In[1]:= ((m11->1/2 (kPP Conjugate[kPP]+kPS Conjugate[kPS]+kSP Conjugate[kSP]+kSS Conjugate[kSS])
+m12->1/2 (-kPP Conjugate[kPP]-kPS Conjugate[kPS]+kSP Conjugate[kSP]+kSS Conjugate[kSS])
+m13->1/2 (kSP Conjugate[kPP]+kSS Conjugate[kPS]+kPP Conjugate[kSP]+kPS Conjugate[kSS])
+m14->-(1/2) I (kSP Conjugate[kPP]+kSS Conjugate[kPS]-kPP Conjugate[kSP]-kPS Conjugate[kSS])
+m21->1/2 (-kPP Conjugate[kPP]+kPS Conjugate[kPS]-kSP Conjugate[kSP]+kSS Conjugate[kSS])
+m22->1/2 (kPP Conjugate[kPP]-kPS Conjugate[kPS]-kSP Conjugate[kSP]+kSS Conjugate[kSS])
+m23->1/2 (-kSP Conjugate[kPP]+kSS Conjugate[kPS]-kPP Conjugate[kSP]+kPS Conjugate[kSS])
+m24->1/2 I (kSP Conjugate[kPP]-kSS Conjugate[kPS]-kPP Conjugate[kSP]+kPS Conjugate[kSS])
+m31->1/2 (kPS Conjugate[kPP]+kPP Conjugate[kPS]+kSS Conjugate[kSP]+kSP Conjugate[kSS])
+m32->1/2 (-kPS Conjugate[kPP]-kPP Conjugate[kPS]+kSS Conjugate[kSP]+kSP Conjugate[kSS])
+m33->1/2 (kSS Conjugate[kPP]+kSP Conjugate[kPS]+kPS Conjugate[kSP]+kPP Conjugate[kSS])
+m34->-(1/2) I (kSS Conjugate[kPP]+kSP Conjugate[kPS]-kPS Conjugate[kSP]-kPP Conjugate[kSS])
+m41->1/2 I (kPS Conjugate[kPP]-kPP Conjugate[kPS]+kSS Conjugate[kSP]-kSP Conjugate[kSS])
+m42->-(1/2) I (kPS Conjugate[kPP]-kPP Conjugate[kPS]-kSS Conjugate[kSP]+kSP Conjugate[kSS])
+m43->1/2 I (kSS Conjugate[kPP]-kSP Conjugate[kPS]+kPS Conjugate[kSP]-kPP Conjugate[kSS])
+m44->1/2 (kSS Conjugate[kPP]-kSP Conjugate[kPS]-kPS Conjugate[kSP]+kPP Conjugate[kSS])
+
+))
+During evaluation of In[1]:= m = 
+(1/2 (kPP Conjugate[kPP]+kPS Conjugate[kPS]+kSP Conjugate[kSP]+kSS Conjugate[kSS])	1/2 (-kPP Conjugate[kPP]-kPS Conjugate[kPS]+kSP Conjugate[kSP]+kSS Conjugate[kSS])	1/2 (kSP Conjugate[kPP]+kSS Conjugate[kPS]+kPP Conjugate[kSP]+kPS Conjugate[kSS])	-(1/2) I (kSP Conjugate[kPP]+kSS Conjugate[kPS]-kPP Conjugate[kSP]-kPS Conjugate[kSS])
+1/2 (-kPP Conjugate[kPP]+kPS Conjugate[kPS]-kSP Conjugate[kSP]+kSS Conjugate[kSS])	1/2 (kPP Conjugate[kPP]-kPS Conjugate[kPS]-kSP Conjugate[kSP]+kSS Conjugate[kSS])	1/2 (-kSP Conjugate[kPP]+kSS Conjugate[kPS]-kPP Conjugate[kSP]+kPS Conjugate[kSS])	1/2 I (kSP Conjugate[kPP]-kSS Conjugate[kPS]-kPP Conjugate[kSP]+kPS Conjugate[kSS])
+1/2 (kPS Conjugate[kPP]+kPP Conjugate[kPS]+kSS Conjugate[kSP]+kSP Conjugate[kSS])	1/2 (-kPS Conjugate[kPP]-kPP Conjugate[kPS]+kSS Conjugate[kSP]+kSP Conjugate[kSS])	1/2 (kSS Conjugate[kPP]+kSP Conjugate[kPS]+kPS Conjugate[kSP]+kPP Conjugate[kSS])	-(1/2) I (kSS Conjugate[kPP]+kSP Conjugate[kPS]-kPS Conjugate[kSP]-kPP Conjugate[kSS])
+1/2 I (kPS Conjugate[kPP]-kPP Conjugate[kPS]+kSS Conjugate[kSP]-kSP Conjugate[kSS])	-(1/2) I (kPS Conjugate[kPP]-kPP Conjugate[kPS]-kSS Conjugate[kSP]+kSP Conjugate[kSS])	1/2 I (kSS Conjugate[kPP]-kSP Conjugate[kPS]+kPS Conjugate[kSP]-kPP Conjugate[kSS])	1/2 (kSS Conjugate[kPP]-kSP Conjugate[kPS]-kPS Conjugate[kSP]+kPP Conjugate[kSS])
+
+)
+Out[44]= 
+[
+    [
+        (kPP * conjugate(kPP) + kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+        (-(kPP * conjugate(kPP)) - kPS * conjugate(kPS) + kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+        (kSP * conjugate(kPP) + kSS * conjugate(kPS) + kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
+        (-complexI/(cplx 2.0)) * (kSP * conjugate(kPP) + kSS * conjugate(kPS) - kPP * conjugate(kSP) - kPS * conjugate(kSS))
+    ]
+    [
+        (-(kPP * conjugate(kPP)) + kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+        (kPP * conjugate(kPP) - kPS * conjugate(kPS) - kSP * conjugate(kSP) + kSS * conjugate(kSS))/(cplx 2.0)
+        (-(kSP * conjugate(kPP)) + kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))/(cplx 2.0)
+        (complexI/(cplx 2.0)) * (kSP * conjugate(kPP) - kSS * conjugate(kPS) - kPP * conjugate(kSP) + kPS * conjugate(kSS))
+    ]
+    [
+        (kPS * conjugate(kPP) + kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
+        (-(kPS * conjugate(kPP)) - kPP * conjugate(kPS) + kSS * conjugate(kSP) + kSP * conjugate(kSS))/(cplx 2.0)
+        (kSS * conjugate(kPP) + kSP * conjugate(kPS) + kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
+        (-complexI/(cplx 2.0)) * (kSS * conjugate(kPP) + kSP * conjugate(kPS) - kPS * conjugate(kSP) - kPP * conjugate(kSS))
+    ]
+    [
+        (complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) + kSS * conjugate(kSP) - kSP * conjugate(kSS))
+        (-complexI/(cplx 2.0)) * (kPS * conjugate(kPP) - kPP * conjugate(kPS) - kSS * conjugate(kSP) + kSP * conjugate(kSS))
+        (complexI/(cplx 2.0)) * (kSS * conjugate(kPP) - kSP * conjugate(kPS) + kPS * conjugate(kSP) - kPP * conjugate(kSS))
+        (kSS * conjugate(kPP) - kSP * conjugate(kPS) - kPS * conjugate(kSP) + kPP * conjugate(kSS))/(cplx 2.0)
+    ]
+]

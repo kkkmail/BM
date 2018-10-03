@@ -52,7 +52,7 @@ module FieldFunctions =
                 let s0 = (ex * ex.conjugate + ey * ey.conjugate).Real
                 let s1 = (ex * ex.conjugate - ey * ey.conjugate).Real
                 let s2 = (ex * ey.conjugate + ey * ex.conjugate).Real
-                let s3 = ((createComplex 0.0 1.0) * (ex * ey.conjugate - ey * ex.conjugate)).Real
+                let s3 = (complexI * (ex * ey.conjugate - ey * ex.conjugate)).Real
                 [ s0; s1; s2; s3 ] |> StokesVector.create
 
             thread em.complexBasis stokes

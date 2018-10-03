@@ -222,23 +222,23 @@ module Solvers =
         let solS () = OpticalSystemSolver (is, system, parameters)
         let solP () = OpticalSystemSolver (ip, system, parameters)
 
-        let mR () : MuellerMatrix = 
+        let mR (o) : MuellerMatrix = 
             let sS = solS()
             let sP = solP()
 
             match sS.solution, sP.solution with 
             | Single s, Single p -> 
-                let rSS = s.emSys.reflected.amplitudeX
-                let rSP = s.emSys.reflected.amplitudeY
+                let rSS = s.emSys.reflected.amplitudeS
+                let rSP = s.emSys.reflected.amplitudeP
 
-                let rPS = p.emSys.reflected.amplitudeX
-                let rPP = p.emSys.reflected.amplitudeY
-                MuellerMatrix.create rSS rSP rPS rPP
+                let rPS = p.emSys.reflected.amplitudeS
+                let rPP = p.emSys.reflected.amplitudeP
+                MuellerMatrix.create o rSS rSP rPS rPP
             | _ -> failwith "No implemented yet!"
 
         member __.solution = sol
         //member __.solutionS () = solS ()
         //member __.solutionP () = solP ()
-        member __.muellerMatrixR () : MuellerMatrix = mR ()
+        member __.muellerMatrixR (o) : MuellerMatrix = mR (o)
 
         new (info : IncidentLightInfo, system: OpticalSystem) = OpticalSystemSolver (info, system, SolverParameters.defaultValue)
