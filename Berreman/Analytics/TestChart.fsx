@@ -10,9 +10,10 @@ open Analytics.StandardSystems
 open Analytics.Variables
 open Berreman.Media
 open Berreman.Fields
+open Berreman.Dispersion
 //===========================================================
 #time
-let fn = [R; T]
+let fn = [ R; T ]
 
 //plot transpGlass600nmNormalLPs incidenceAngleRange fn
 //plot (transpGlass600nmInclindedLPs 59.0) ellipticityRange fn
@@ -20,7 +21,7 @@ let fn = [R; T]
 
 let thickness = Thickness.nm 200.
 
-let thickness1 = Thickness.nm (600.0 / 1.52 / 2.0)
+let thickness1 = Thickness.nm (600.0 / 1.52 / 4.0)
 let thickness2 = Thickness.nm (600.0 / 1.00 / 4.0)
 
 //plot (biaxialCrystalFilm600nmNormalLPs thickness) incidenceAngleRange fn
@@ -48,16 +49,46 @@ let filmSystem =
         films = 
             [ 
                 { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
-                //{ properties = OpticalProperties.vacuum; thickness = thickness2 }
-                //{ properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
+                { properties = OpticalProperties.vacuum; thickness = thickness2 }
+                { properties = OpticalProperties.transparentGlass; thickness = thickness1 }
             ]
         lower = OpticalProperties.vacuum
     }
@@ -82,20 +113,21 @@ let transparentGlassSubstrate =
 
 let filmSystemWithSubstrate s = { filmSystem.fullSystem with substrate = Some s }
 
-let f0 = { incidentLightInfo = light600nmNormalLPs; opticalSystem = baseSystem.fullSystem }
-let f1 = { f0 with opticalSystem = filmSystem.fullSystem }
-let f2 = { f0 with opticalSystem = filmSystemWithSubstrate vacuumSubstrate}
-let f3 = { f0 with opticalSystem = filmSystemWithSubstrate transparentGlassSubstrate}
+let f0 = { incidentLightInfo = light600nmNormalLPs; opticalSystem = baseSystem.fullSystem.dispersive }
+let f1 = { f0 with opticalSystem = filmSystem.fullSystem.dispersive }
+//let f2 = { f0 with opticalSystem = (filmSystemWithSubstrate vacuumSubstrate).dispersive }
+//let f3 = { f0 with opticalSystem = (filmSystemWithSubstrate transparentGlassSubstrate).dispersive }
 
 //plot f incidenceAngleRange fn
 
-plot f0 wavelength200to800Range fn
+//plot f0 wavelength200to800Range fn
 plot f1 wavelength200to800Range fn
-plot f2 wavelength200to800Range fn
-plot f3 wavelength200to800Range fn
+plot f1 wavelength500to700Range fn
+//plot f2 wavelength200to800Range fn
+//plot f3 wavelength200to800Range fn
 
-//plot3D f polarizationRange incidenceAngleRange fn
-//plot3D f wavelength500to700Range incidenceAngleRange fn
+//plot3D f0 polarizationRange incidenceAngleRange fn
+plot3D f1 wavelength500to700Range incidenceAngleRange fn
 
 #time
 

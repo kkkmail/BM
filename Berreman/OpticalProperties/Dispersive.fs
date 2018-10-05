@@ -97,8 +97,6 @@ module Dispersive =
                 rhoWithDisp = rhoLa3Ga5SiO14 |> RhoWithDisp
             }
 
-//(* ============================================== *)
-//(* ============================================== *)
 
     type Silicon () =
         inherit DispersiveMaterial()
