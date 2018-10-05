@@ -189,5 +189,17 @@ module MathNetNumericsMath =
         DiagonalMatrix.create n e |> RealMatrix
 
 
+    let realFromDiagonal (d : #seq<double>) =
+        d
+        |> Array.ofSeq
+        |> DiagonalMatrix.ofDiagArray
+
+
     let complexDiagonalMatrix (n : int) (e : Complex) = 
         DiagonalMatrix.create n e |> ComplexMatrix
+
+
+    let complexFromDiagonal (d : #seq<Complex>) =
+        d
+        |> Array.ofSeq
+        |> DiagonalMatrix.ofDiagArray

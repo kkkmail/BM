@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Standard.fs" />
+    <Compile Include="Dispersive.fs" />
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>
@@ -66,6 +67,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MathNetNumerics\src\FSharp\FSharp.fsproj">
+      <Name>FSharp</Name>
+      <Project>{883f0730-3a47-4176-b521-a93b57b1a678}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MathNetNumerics\src\Numerics\Numerics.csproj">
+      <Name>Numerics</Name>
+      <Project>{97f61634-4e8a-441b-b5ab-ce0150476ba6}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Berreman\Berreman.fsproj">
       <Name>Berreman</Name>
       <Project>{790fdd25-2db2-4a42-9a19-4855fbb5f850}</Project>

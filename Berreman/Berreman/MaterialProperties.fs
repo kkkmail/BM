@@ -16,6 +16,12 @@ module MaterialProperties =
         static member vacuum = RefractionIndex.create 1.0
 
 
+    type ComplexRefractionIndex = 
+        ComplexRefractionIndex of Complex
+        with 
+        static member create n = ComplexRefractionIndex n
+
+
     type Eps = 
         | Eps of ComplexMatrix3x3
 
@@ -38,6 +44,14 @@ module MaterialProperties =
                 [ 0.; 0.; n3 * n3 ]
             ]
             |> Eps.fromRe
+
+        static member fromComplexRefractionIndex (ComplexRefractionIndex n1, ComplexRefractionIndex n2, ComplexRefractionIndex n3) = 
+            [
+                [ n1 * n1; complexZero; complexZero ]
+                [ complexZero; n2 * n2; complexZero ]
+                [ complexZero; complexZero; n3 * n3 ]
+            ]
+            |> Eps.create
 
         member eps.re =
             let (Eps e) = eps

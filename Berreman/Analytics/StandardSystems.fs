@@ -48,7 +48,7 @@ module StandardSystems =
 
     /// Vacuum / standard transparent glass film / vacuum system with s polarized light falling at angleDegree.
     let transparentGassFilm600nmInclindedLPs angleDegree thickness = 
-        { incidentLightInfo = light600nmInclinedDegreelLPs angleDegree; opticalSystem =  (BaseOpticalSystem.transparentGlasslFilmSystem thickness).fullSystem.dispersive }
+        { incidentLightInfo = light600nmInclinedDegreelLPs angleDegree; opticalSystem = (BaseOpticalSystem.transparentGlasslFilmSystem thickness).fullSystem.dispersive }
 
     /// Vacuum / standard biaxial thin film / vacuum system with s polarized light falling at normal.
     let biaxialCrystalFilm600nmNormalLPs thickness = 
