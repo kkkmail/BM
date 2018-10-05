@@ -8,6 +8,7 @@ open Berreman.Geometry
 open Berreman.Media
 open Berreman.Fields
 open Berreman.MaterialProperties
+open Berreman.Dispersion
 open Berreman.BerremanMatrix
 
 module Dispersive =
@@ -40,10 +41,10 @@ module Dispersive =
 
     [<AbstractClass>]
     type DispersiveMaterial() = 
-        abstract member opticalProperties : WaveLength -> OpticalProperties
+        abstract member opticalProperties : OpticalPropertiesWithDisp
 
 
-    // La3Ga5SiO14
+    /// La3Ga5SiO14
     type Langasite () =
         inherit DispersiveMaterial()
 
@@ -89,36 +90,40 @@ module Dispersive =
             |> Rho
 
 
-        override __.opticalProperties w =
+        override __.opticalProperties=
             {
-                eps = epsLa3Ga5SiO14 w
-                mu = Mu.vacuum
-                rho = rhoLa3Ga5SiO14 w
+                epsWithDisp = epsLa3Ga5SiO14 |> EpsWithDisp
+                muWithDisp = Mu.vacuum.dispersive
+                rhoWithDisp = rhoLa3Ga5SiO14 |> RhoWithDisp
             }
 
 //(* ============================================== *)
 //(* ============================================== *)
-//(* Si *)
 
-//(* Refraction Index *)
-//L$Si[lambda_] := 1 / ((lambda / mkm)^2 - 0.028);
+    type Silicon () =
+        inherit DispersiveMaterial()
 
-//A$Si = 3.41696;
-//B$Si = 0.138497;
-//C1$Si = 0.013924;
-//D1$Si = -0.0000209;
-//E1$Si = 0.000000148;
+        let mkmVal = 1.0e-6
 
-//n$Si[lambda_] := A$Si + B$Si * L$Si[lambda] + C1$Si * L$Si[lambda]^2 + D1$Si * (lambda / mkm)^2 + E1$Si * (lambda / mkm)^4;
-//(* ============================================== *)
-//(* Absorption Coefficient *)
+        /// Refraction index.
+        let lSi lambda = 1.0 / ((lambda / mkmVal) ** 2.0 - 0.028)
 
-//lambda1$Si = 0.3757 * mkm;
-//kappa1$Si = 1.32;
-//lambda2$Si = 0.589 * mkm;
-//kappa2$Si = 0.030104;
+        let aSi = 3.41696
+        let bSi = 0.138497
+        let c1Si = 0.013924
+        let d1Si = -0.0000209
+        let e1Si = 0.000000148
 
-//xi$Si[lambda_, Ko_, lambda0_, eps_] := Ko * (lambda / mkm)^2 / (eps + ((lambda / mkm)^2 - (lambda0 / mkm)^2)^2);
+        let nSi (WaveLength lambda) = aSi + bSi * (lSi lambda) + c1Si * (lSi lambda) ** 2.0 + d1Si * (lambda / mkmVal) ** 2.0 + e1Si * (lambda / mkmVal) ** 4.0;
+
+        /// Absorption Coefficient.
+
+        let lambda1Si = WaveLength.mkm 0.3757
+        let kappa1Si = 1.32
+        let lambda2Si = WaveLength.mkm 0.589
+        let kappa2Si = 0.030104
+
+        let xiSi lambda ko lambda0 eps = ko * (lambda / mkmVal) ** 2.0 / (eps + ((lambda / mkmVal) ** 2.0 - (lambda0 / mkmVal) ** 2.0) * 2.0)
 
 //sol$Si =
 //    Solve[
@@ -139,3 +144,11 @@ module Dispersive =
 //      epsRet = EpsilonFromN[refrIndex$Si[lambda]];
 //      Return[N[epsRet]];
 //    ];
+
+        override __.opticalProperties=
+            {
+                epsWithDisp = failwith "" // epsLa3Ga5SiO14 |> EpsWithDisp
+                muWithDisp = Mu.vacuum.dispersive
+                rhoWithDisp = failwith "" // rhoLa3Ga5SiO14 |> RhoWithDisp
+            }
+
