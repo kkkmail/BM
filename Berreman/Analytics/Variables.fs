@@ -13,6 +13,7 @@ open Berreman.Geometry
 open Berreman.MaterialProperties
 open Berreman.Media
 open Berreman.Solvers
+open Berreman.Dispersion
 open Berreman.FieldFunctions
 open OpticalProperties.Standard
 open Berreman
@@ -135,7 +136,7 @@ module Variables =
     type FixedInfo =
          {
             incidentLightInfo : IncidentLightInfo
-            opticalSystem : OpticalSystem
+            opticalSystem : OpticalSystemWithDisp
          }
 
 
@@ -158,7 +159,8 @@ module Variables =
 
         // TODO kk:20180917 - Implement.
         let getOpticalSystem i = 
-            f.opticalSystem
+            let w = getValue l.waveLength getWaveLength i
+            f.opticalSystem.getSystem w
 
         let getSolution i = OpticalSystemSolver(getLight i, getOpticalSystem i, SolverParameters.defaultValue).solution
         [| for i in 0..x.length -> (x.plotValue i, getSolution i) |]
@@ -186,7 +188,8 @@ module Variables =
 
         // TODO kk:20180922 - Implement.
         let getOpticalSystem i j = 
-            f.opticalSystem
+            let w = getValue l.waveLength getWaveLength i j
+            f.opticalSystem.getSystem w
 
         let getSolution i j = OpticalSystemSolver(getLight i j, getOpticalSystem i j, SolverParameters.defaultValue).solution
 
