@@ -67,9 +67,25 @@ module Charting =
 
         fn |> List.map (fun e -> plotFun e)
 
-        //Range<WaveLength>
 
-    let plotOpticalComp (c : OpticalPropertyComponent) (i : Index) (j : Index) (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
-        let f w = 
-            ((o.getProperties w).opticalComponent c).[i, j]
-        0
+//(r : Range<WaveLength>)
+//calculateEps11Re
+    let plotEsp11Re (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
+        let data = calculateEps11Re o r
+
+        let x = r |> WaveLengthRange
+
+         //FSharp.Plotly
+        Chart.Line(data, Name = "Re[e11]")
+        |> Chart.withX_AxisStyle(x.name, MinMax = (x.plotMinValue, x.plotMaxValue))
+        |> Chart.Show
+
+    let plotEsp11Im (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
+        let data = calculateEps11Im o r
+
+        let x = r |> WaveLengthRange
+
+         //FSharp.Plotly
+        Chart.Line(data, Name = "Im[e11]")
+        |> Chart.withX_AxisStyle(x.name, MinMax = (x.plotMinValue, x.plotMaxValue))
+        |> Chart.Show

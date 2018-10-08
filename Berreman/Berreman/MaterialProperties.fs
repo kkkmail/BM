@@ -17,6 +17,12 @@ module MaterialProperties =
         | RhoComp
 
 
+    /// DU to be used for choosing re or im.
+    type UseReIm = 
+        | UseRe
+        | UseIm
+
+
     // Covers only real refraction indices.
     type RefractionIndex = 
         RefractionIndex of double

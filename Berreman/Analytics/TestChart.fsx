@@ -11,6 +11,7 @@ open Analytics.Variables
 open Berreman.Media
 open Berreman.Fields
 open Berreman.Dispersion
+open OpticalProperties.Dispersive
 //===========================================================
 #time
 let fn = [ R; T ]
@@ -121,13 +122,17 @@ let f1 = { f0 with opticalSystem = filmSystem.fullSystem.dispersive }
 //plot f incidenceAngleRange fn
 
 //plot f0 wavelength200to800Range fn
-plot f1 wavelength200to800Range fn
-plot f1 wavelength500to700Range fn
+//plot f1 wavelength200to800Range fn
+//plot f1 wavelength500to700Range fn
 //plot f2 wavelength200to800Range fn
 //plot f3 wavelength200to800Range fn
 
 //plot3D f0 polarizationRange incidenceAngleRange fn
-plot3D f1 wavelength500to700Range incidenceAngleRange fn
+//plot3D f1 wavelength500to700Range incidenceAngleRange fn
+
+let (WaveLengthRange w) = wavelength200to800Range
+plotEsp11Re (Silicon().opticalProperties) w
+plotEsp11Im (Silicon().opticalProperties) w
 
 #time
 

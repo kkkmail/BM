@@ -109,9 +109,25 @@ module Variables =
         member this.plotPoints = [| for i in 0..this.length -> this.plotValue i |]
 
 
+    let getWaveLengthValue (v : Range<WaveLength>) i = 
+        (WaveLengthRange v).value i |> WaveLength
+
+
+    let waveLengthPlotMinValue (v : Range<WaveLength>) = 
+        (WaveLengthRange v).plotMinValue
+
+
+    let waveLengthPlotMaxValue (v : Range<WaveLength>) = 
+        (WaveLengthRange v).plotMaxValue
+
+
+    let waveLengthPlotPoints (v : Range<WaveLength>) = 
+        (WaveLengthRange v).plotPoints
+
+
     let getWaveLength (v : RangedVariable) i = 
         match v with
-        | WaveLengthRange _ -> v.value i |> WaveLength |> Some
+        | WaveLengthRange w -> getWaveLengthValue w i |> Some
         | _ -> None
 
 
@@ -196,3 +212,26 @@ module Variables =
         [| for i in 0..x.length -> i |]
         |> PSeq.map (fun i -> [| for j in 0..y.length -> (x.plotValue i, y.plotValue j, getSolution i j) |])
         |> Array.ofSeq
+
+        //Range<WaveLength>
+
+    let calculateOpticalProp 
+        (c : OpticalPropertyComponent) 
+        (u : UseReIm)
+        (i : Index) 
+        (j : Index) 
+        (o : OpticalPropertiesWithDisp) 
+        (r : Range<WaveLength>) = 
+
+        let f w = 
+            let p =((o.getProperties w).opticalComponent c).[i, j]
+            match u with 
+            | UseRe -> p.Real
+            | UseIm -> p.Imaginary
+
+        let l = WaveLengthRange r
+        [| for i in 0..l.length -> (l.plotValue i, getWaveLengthValue r i |> f) |]
+
+
+    let calculateEps11Re = calculateOpticalProp EpsComp UseRe One One
+    let calculateEps11Im = calculateOpticalProp EpsComp UseIm One One
