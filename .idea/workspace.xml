@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Berreman/Analytics/StandardSystems.fs" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/Analytics/StandardSystems.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Berreman/OpticalProperties/OpticalProperties.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/Berreman/OpticalProperties/OpticalProperties.fsproj" afterDir="false" />
-    </list>
+    <list default="true" id="c12bca39-2f20-4470-aa46-1987da09955e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -118,7 +115,9 @@
       <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-306" />
+            <state relative-caret-position="425">
+              <caret line="106" selection-start-line="106" selection-end-line="106" selection-end-column="113" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -761,7 +760,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306" />
+        <state relative-caret-position="425">
+          <caret line="106" selection-start-line="106" selection-end-line="106" selection-end-column="113" />
+        </state>
       </provider>
     </entry>
   </component>

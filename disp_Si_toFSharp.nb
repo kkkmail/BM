@@ -1,0 +1,341 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13770,        333]
+NotebookOptionsPosition[     12812,        305]
+NotebookOutlinePosition[     13158,        320]
+CellTagsIndexPosition[     13115,        317]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mkm", "=", 
+   RowBox[{"10", "^", 
+    RowBox[{"-", "6"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"lambdaOneSi", "=", 
+   RowBox[{"0.3757", "*", "mkm"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kappaOneSi", "=", "1.32"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lambdaTwoSi", "=", 
+   RowBox[{"0.589", "*", "mkm"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"kappaTwoSi", "=", "0.030104"}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"xi$Si", "[", 
+     RowBox[{"lambda_", ",", "Ko_", ",", "lambda0_", ",", "eps_"}], "]"}], ":=", 
+    RowBox[{"Ko", "*", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"lambda", "/", "mkm"}], ")"}], "^", "2"}], "/", 
+      RowBox[{"(", 
+       RowBox[{"eps", "+", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"lambda", "/", "mkm"}], ")"}], "^", "2"}], "-", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"lambda0", "/", "mkm"}], ")"}], "^", "2"}]}], ")"}], "^",
+          "2"}]}], ")"}]}]}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"sol$Si", "=", 
+    RowBox[{"FullSimplify", "[", 
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"xi$Si", "[", 
+           RowBox[{
+           "lambdaOneSi", ",", "koSi", ",", "lambdaZeroSi", ",", "epsSi"}], 
+           "]"}], "\[Equal]", "kappaOneSi"}], ",", 
+         RowBox[{
+          RowBox[{"xi$Si", "[", 
+           RowBox[{
+           "lambdaTwoSi", ",", "koSi", ",", "lambdaZeroSi", ",", "epsSi"}], 
+           "]"}], "\[Equal]", "kappaTwoSi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"koSi", ",", "lambdaZeroSi"}], "}"}]}], "]"}], "]"}]}], ";"}],
+   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"sol$Si", "/.", " ", 
+    RowBox[{"{", 
+     RowBox[{"epsSi", " ", "\[Rule]", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "4"}]}]}], "}"}]}], " ", "//", " ", "MatrixForm"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"replace", "[", 
+    RowBox[{"s_", "?", "StringQ"}], "]"}], ":=", " ", 
+   RowBox[{"StringReplace", "[", 
+    RowBox[{"s", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<*\>\"", " ", "\[Rule]", " ", "\"\< * \>\""}], ",", " ", 
+       RowBox[{"\"\<^\>\"", " ", "\[Rule]", " ", "\"\<**\>\""}], ",", " ", 
+       RowBox[{"\"\<2\>\"", " ", "\[Rule]", " ", "\"\<2.0\>\""}], ",", " ", 
+       RowBox[{"\"\<3\>\"", " ", "\[Rule]", " ", "\"\<3.0\>\""}], ",", " ", 
+       RowBox[{"\"\<4\>\"", " ", "\[Rule]", " ", "\"\<4.0\>\""}], ",", " ", 
+       RowBox[{"\"\<[\>\"", " ", "\[Rule]", " ", "\"\<(\>\""}], ",", " ", 
+       RowBox[{"\"\<]\>\"", " ", "\[Rule]", " ", "\"\<)\>\""}], ",", " ", 
+       RowBox[{"\"\<Sqrt\>\"", " ", "\[Rule]", " ", "\"\<sqrt\>\""}]}], 
+      "}"}]}], "]"}]}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{"s1koSi", " ", "=", " ", 
+  RowBox[{"\"\<let s1koSi = \>\"", " ", "<>", " ", 
+   RowBox[{"replace", "[", 
+    RowBox[{"ToString", "[", 
+     RowBox[{"InputForm", "[", 
+      RowBox[{"koSi", " ", "/.", " ", 
+       RowBox[{"sol$Si", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"s1lambdaZeroSi", " ", "=", " ", 
+   RowBox[{"\"\<let s1lambdaZeroSi = \>\"", " ", "<>", " ", 
+    RowBox[{"replace", "[", 
+     RowBox[{"ToString", "[", 
+      RowBox[{"InputForm", "[", 
+       RowBox[{"lambdaZeroSi", " ", "/.", " ", 
+        RowBox[{"sol$Si", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], "]"}]}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"s2koSi", " ", "=", " ", 
+  RowBox[{"\"\<let s2koSi = \>\"", " ", "<>", " ", 
+   RowBox[{"replace", "[", 
+    RowBox[{"ToString", "[", 
+     RowBox[{"InputForm", "[", 
+      RowBox[{"koSi", " ", "/.", " ", 
+       RowBox[{"sol$Si", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"s2lambdaZeroSi", " ", "=", " ", 
+   RowBox[{"\"\<let s2lambdaZeroSi = \>\"", " ", "<>", " ", 
+    RowBox[{"replace", "[", 
+     RowBox[{"ToString", "[", 
+      RowBox[{"InputForm", "[", 
+       RowBox[{"lambdaZeroSi", " ", "/.", " ", 
+        RowBox[{"sol$Si", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "]"}]}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"xi$Si", "[", 
+      RowBox[{"lambda_", ",", "epsValue_"}], "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"xi$Si", "[", 
+          RowBox[{"lambda", ",", "koSi", ",", "lambdaZeroSi", ",", "eps$Si"}],
+           "]"}], "/.", 
+         RowBox[{"sol$Si", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{"eps$Si", "\[Rule]", "epsValue"}], "}"}]}], ")"}]}], ";", 
+    "\n", 
+    RowBox[{
+     RowBox[{"xi$Si", "[", "lambda_", "]"}], ":=", 
+     RowBox[{"xi$Si", "[", 
+      RowBox[{"lambda", ",", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "4"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"N", "[", 
+      RowBox[{"ExpandAll", "[", 
+       RowBox[{"xi$Si", "[", 
+        RowBox[{"lambda", ",", "epsValue"}], "]"}], "]"}], "]"}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"xi$Si", "[", "lambda", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.747987081371747*^9, 3.7479871361453133`*^9}, {
+  3.7479871819987297`*^9, 3.7479871863092055`*^9}, {3.747987226979477*^9, 
+  3.7479873366103926`*^9}, {3.74798737928331*^9, 3.7479875278692856`*^9}, {
+  3.747987604832531*^9, 3.7479877041188188`*^9}, {3.7479877502444944`*^9, 
+  3.747987791928055*^9}, {3.747987902831602*^9, 3.747987987019533*^9}, {
+  3.7479880207177124`*^9, 3.747988160814767*^9}, {3.7479886599074564`*^9, 
+  3.747988676256752*^9}, {3.7479887254947786`*^9, 3.7479887261141224`*^9}, {
+  3.7479887660294266`*^9, 3.7479887688059916`*^9}, {3.747988864290722*^9, 
+  3.7479888782304544`*^9}, {3.747988990791812*^9, 
+  3.7479890218846903`*^9}},ExpressionUUID->"fb3d176f-31c5-402f-8b06-\
+4ef7b0c64f80"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Solve","ratnz",
+   "\"Solve was unable to solve the system with inexact coefficients. The \
+answer was obtained by solving a corresponding exact system and numericizing \
+the result.\"",2,198,15,25053591405608588234,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.747987947451352*^9, 3.7479879881963882`*^9}, {
+   3.7479880658636107`*^9, 3.7479880967181273`*^9}, {3.7479881355782347`*^9, 
+   3.747988162357642*^9}, 3.747988664564007*^9, 3.747988726876087*^9, 
+   3.74798876986516*^9, 3.747988879526989*^9, {3.7479890072907033`*^9, 
+   3.7479890226486464`*^9}},ExpressionUUID->"36fa3041-697b-46cb-97e6-\
+7552307efad9"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{"koSi", "\[Rule]", "0.004402681698765213`"}], 
+      RowBox[{"lambdaZeroSi", "\[Rule]", 
+       RowBox[{"-", "3.491341053759574`*^-7"}]}]},
+     {
+      RowBox[{"koSi", "\[Rule]", "0.004402681698765213`"}], 
+      RowBox[{"lambdaZeroSi", "\[Rule]", "3.491341053759574`*^-7"}]},
+     {
+      RowBox[{"koSi", "\[Rule]", "0.0031534306057963606`"}], 
+      RowBox[{"lambdaZeroSi", "\[Rule]", 
+       RowBox[{"-", "3.9566639204322233`*^-7"}]}]},
+     {
+      RowBox[{"koSi", "\[Rule]", "0.0031534306057963606`"}], 
+      RowBox[{"lambdaZeroSi", "\[Rule]", "3.9566639204322233`*^-7"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.7479872815476313`*^9, 3.7479873370442467`*^9, 3.747987532745267*^9, {
+   3.7479876074415593`*^9, 3.747987624003312*^9}, 3.747987669065812*^9, 
+   3.7479877055828915`*^9, 3.7479879097371407`*^9, {3.7479879474882154`*^9, 
+   3.7479879882203245`*^9}, {3.7479880659005103`*^9, 
+   3.7479880967380714`*^9}, {3.7479881356031685`*^9, 3.747988162384569*^9}, 
+   3.747988664590936*^9, 3.7479887269179754`*^9, 3.747988769892087*^9, 
+   3.7479888795499296`*^9, {3.7479890073206253`*^9, 
+   3.7479890226726103`*^9}},ExpressionUUID->"7231578b-63e8-45c7-be4e-\
+178b742aaa68"],
+
+Cell[BoxData["\<\"let s1koSi = 0.003.0778056152.02.0807866 + \
+4.0.4.094.04.02.086802.06514.02.0 * **-2.00 * \
+sqrt(2.0.574.0704.058171172.03.07 * **3.02.0 - \
+6.4.03.02.02.03.03.02.03.061092.082.0 * **3.05 * epsSi)\"\>"], "Output",
+ CellChangeTimes->{
+  3.7479872815476313`*^9, 3.7479873370442467`*^9, 3.747987532745267*^9, {
+   3.7479876074415593`*^9, 3.747987624003312*^9}, 3.747987669065812*^9, 
+   3.7479877055828915`*^9, 3.7479879097371407`*^9, {3.7479879474882154`*^9, 
+   3.7479879882203245`*^9}, {3.7479880659005103`*^9, 
+   3.7479880967380714`*^9}, {3.7479881356031685`*^9, 3.747988162384569*^9}, 
+   3.747988664590936*^9, 3.7479887269179754`*^9, 3.747988769892087*^9, 
+   3.7479888795499296`*^9, {3.7479890073206253`*^9, 
+   3.747989022676572*^9}},ExpressionUUID->"1218fe55-ef5a-4912-8542-\
+551a8cc446fd"],
+
+Cell[BoxData["\<\"let s1lambdaZeroSi = -4.0.1992.004.0768893.062.004.0 * \
+**-16 * sqrt(7.8954.064.0564.013.04.0176 * **17 - 7.0710678118654.0755 * \
+sqrt(2.0.574.0704.058171172.03.07 * **3.02.0 - \
+6.4.03.02.02.03.03.02.03.061092.082.0 * **3.05 * epsSi))\"\>"], "Output",
+ CellChangeTimes->{
+  3.7479872815476313`*^9, 3.7479873370442467`*^9, 3.747987532745267*^9, {
+   3.7479876074415593`*^9, 3.747987624003312*^9}, 3.747987669065812*^9, 
+   3.7479877055828915`*^9, 3.7479879097371407`*^9, {3.7479879474882154`*^9, 
+   3.7479879882203245`*^9}, {3.7479880659005103`*^9, 
+   3.7479880967380714`*^9}, {3.7479881356031685`*^9, 3.747988162384569*^9}, 
+   3.747988664590936*^9, 3.7479887269179754`*^9, 3.747988769892087*^9, 
+   3.7479888795499296`*^9, {3.7479890073206253`*^9, 
+   3.7479890226795635`*^9}},ExpressionUUID->"68b79523-1700-4907-a7e7-\
+c71e8eae767d"],
+
+Cell[BoxData["\<\"let s2koSi = 0.003.0778056152.02.0807866 + \
+4.0.4.094.04.02.086802.06514.02.0 * **-2.00 * \
+sqrt(2.0.574.0704.058171172.03.07 * **3.02.0 - \
+6.4.03.02.02.03.03.02.03.061092.082.0 * **3.05 * epsSi)\"\>"], "Output",
+ CellChangeTimes->{
+  3.7479872815476313`*^9, 3.7479873370442467`*^9, 3.747987532745267*^9, {
+   3.7479876074415593`*^9, 3.747987624003312*^9}, 3.747987669065812*^9, 
+   3.7479877055828915`*^9, 3.7479879097371407`*^9, {3.7479879474882154`*^9, 
+   3.7479879882203245`*^9}, {3.7479880659005103`*^9, 
+   3.7479880967380714`*^9}, {3.7479881356031685`*^9, 3.747988162384569*^9}, 
+   3.747988664590936*^9, 3.7479887269179754`*^9, 3.747988769892087*^9, 
+   3.7479888795499296`*^9, {3.7479890073206253`*^9, 
+   3.747989022685548*^9}},ExpressionUUID->"3759bd90-8382-4fed-8859-\
+632da2c3237f"],
+
+Cell[BoxData["\<\"let s2lambdaZeroSi = 4.0.1992.004.0768893.062.004.0 * **-16 \
+* sqrt(7.8954.064.0564.013.04.0176 * **17 - 7.0710678118654.0755 * \
+sqrt(2.0.574.0704.058171172.03.07 * **3.02.0 - \
+6.4.03.02.02.03.03.02.03.061092.082.0 * **3.05 * epsSi))\"\>"], "Output",
+ CellChangeTimes->{
+  3.7479872815476313`*^9, 3.7479873370442467`*^9, 3.747987532745267*^9, {
+   3.7479876074415593`*^9, 3.747987624003312*^9}, 3.747987669065812*^9, 
+   3.7479877055828915`*^9, 3.7479879097371407`*^9, {3.7479879474882154`*^9, 
+   3.7479879882203245`*^9}, {3.7479880659005103`*^9, 
+   3.7479880967380714`*^9}, {3.7479881356031685`*^9, 3.747988162384569*^9}, 
+   3.747988664590936*^9, 3.7479887269179754`*^9, 3.747988769892087*^9, 
+   3.7479888795499296`*^9, {3.7479890073206253`*^9, 
+   3.7479890226885405`*^9}},ExpressionUUID->"4767ca24-e1af-4c40-8d45-\
+335069b881d5"]
+}, Open  ]]
+},
+WindowSize->{1017, 697},
+WindowMargins->{{Automatic, 122}, {-17, Automatic}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (March 13, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 6438, 165, 639, "Input", "ExpressionUUID" -> \
+"fb3d176f-31c5-402f-8b06-4ef7b0c64f80"],
+Cell[7021, 189, 674, 12, 21, "Message", "ExpressionUUID" -> \
+"36fa3041-697b-46cb-97e6-7552307efad9"],
+Cell[7698, 203, 1739, 39, 159, "Output", "ExpressionUUID" -> \
+"7231578b-63e8-45c7-be4e-178b742aaa68"],
+Cell[9440, 244, 816, 13, 50, "Output", "ExpressionUUID" -> \
+"1218fe55-ef5a-4912-8542-551a8cc446fd"],
+Cell[10259, 259, 858, 13, 50, "Output", "ExpressionUUID" -> \
+"68b79523-1700-4907-a7e7-c71e8eae767d"],
+Cell[11120, 274, 816, 13, 50, "Output", "ExpressionUUID" -> \
+"3759bd90-8382-4fed-8859-632da2c3237f"],
+Cell[11939, 289, 857, 13, 50, "Output", "ExpressionUUID" -> \
+"4767ca24-e1af-4c40-8d45-335069b881d5"]
+}, Open  ]]
+}
+]
+*)
+

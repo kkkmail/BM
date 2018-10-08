@@ -115,38 +115,24 @@ module Dispersive =
         let nSi (WaveLength lambda) = aSi + bSi * (lSi lambda) + c1Si * (lSi lambda) ** 2.0 + d1Si * (lambda / mkmVal) ** 2.0 + e1Si * (lambda / mkmVal) ** 4.0;
 
         /// Absorption Coefficient.
+        //let lambda1Si = WaveLength.mkm 0.3757
+        //let kappa1Si = 1.32
+        //let lambda2Si = WaveLength.mkm 0.589
+        //let kappa2Si = 0.030104
 
-        let lambda1Si = WaveLength.mkm 0.3757
-        let kappa1Si = 1.32
-        let lambda2Si = WaveLength.mkm 0.589
-        let kappa2Si = 0.030104
+        let xiSi (WaveLength lambda) ko (WaveLength lambda0) eps = ko * (lambda / mkmVal) ** 2.0 / (eps + ((lambda / mkmVal) ** 2.0 - (lambda0 / mkmVal) ** 2.0) * 2.0)
 
-        let xiSi lambda ko lambda0 eps = ko * (lambda / mkmVal) ** 2.0 / (eps + ((lambda / mkmVal) ** 2.0 - (lambda0 / mkmVal) ** 2.0) * 2.0)
+        // For eps = 1.0e-4
+        let lambda0Si = WaveLength.mkm 0.349134
+        let koSi = 0.00440268
 
-//sol$Si =
-//    Solve[
-//      {
-//        xi$Si[lambda1$Si, Ko$Si, lambda0$Si, eps$Si] == kappa1$Si,
-//        xi$Si[lambda2$Si, Ko$Si, lambda0$Si, eps$Si] == kappa2$Si
-//      },
-//      {Ko$Si, lambda0$Si}
-//    ];
-
-//xi$Si[lambda_, epsValue_] := ((xi$Si[lambda, Ko$Si, lambda0$Si, eps$Si] /. sol$Si[[2]]) /. {eps$Si -> epsValue});
-//xi$Si[lambda_] := xi$Si[lambda, 10^-4];
-
-//refrIndex$Si[lambda_] := n$Si[lambda] + I * xi$Si[lambda];
-
-//eps$Si[lambda_] :=
-//    Module[{epsRet},
-//      epsRet = EpsilonFromN[refrIndex$Si[lambda]];
-//      Return[N[epsRet]];
-//    ];
+        let xiSiFinal lambda = xiSi lambda koSi lambda0Si 1.0e-4
+        let refrIndexSi lambda = createComplex (nSi lambda) (xiSiFinal lambda) |> ComplexRefractionIndex
+        let epsSi lambda = refrIndexSi lambda |> Eps.fromComplexRefractionIndex
 
         override __.opticalProperties=
             {
-                epsWithDisp = failwith "" // epsLa3Ga5SiO14 |> EpsWithDisp
+                epsWithDisp = epsSi |> EpsWithDisp
                 muWithDisp = Mu.vacuum.dispersive
-                rhoWithDisp = failwith "" // rhoLa3Ga5SiO14 |> RhoWithDisp
+                rhoWithDisp = Rho.vacuum.dispersive
             }
-

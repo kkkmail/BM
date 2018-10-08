@@ -53,6 +53,8 @@ module MaterialProperties =
             ]
             |> Eps.create
 
+        static member fromComplexRefractionIndex n = Eps.fromComplexRefractionIndex (n, n, n)
+
         member eps.re =
             let (Eps e) = eps
             e.re.toComplex() |> Eps
