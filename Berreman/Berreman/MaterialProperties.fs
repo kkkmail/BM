@@ -7,6 +7,15 @@ module MaterialProperties =
     open MathNetNumericsMath
 
     open Geometry
+    open System.Numerics
+
+
+    /// DU indices to be used for choosing Eps / Mu / Rho.
+    type OpticalPropertyComponent = 
+        | EpsComp
+        | MuComp
+        | RhoComp
+
 
     // Covers only real refraction indices.
     type RefractionIndex = 
@@ -33,6 +42,11 @@ module MaterialProperties =
             with get(i, j) =
                 let (Eps (ComplexMatrix3x3 v)) = eps
                 v.[i, j]
+
+        member eps.Item
+            with get(i : Index, j : Index) =
+                let (Eps (ComplexMatrix3x3 v)) = eps
+                v.[i.numeric, j.numeric]
 
         static member fromRefractionIndex (RefractionIndex n) = 
             (n * n |> cplx) * ComplexMatrix3x3.identity |> Eps
@@ -69,10 +83,15 @@ module MaterialProperties =
         static member fromRe a = a |> ComplexMatrix3x3.fromRe |> Mu
         static member vacuum = ComplexMatrix3x3.identity |> Mu
 
-        member this.Item
+        member mu.Item
             with get(i, j) =
-                let (Mu (ComplexMatrix3x3 v)) = this
+                let (Mu (ComplexMatrix3x3 v)) = mu
                 v.[i, j]
+
+        member mu.Item
+            with get(i : Index, j : Index) =
+                let (Mu (ComplexMatrix3x3 v)) = mu
+                v.[i.numeric, j.numeric]
 
 
     type Rho = 
@@ -84,10 +103,15 @@ module MaterialProperties =
         static member fromIm a = a |> ComplexMatrix3x3.fromIm |> Rho
         static member vacuum = ComplexMatrix3x3.zero |> Rho
 
-        member this.Item
+        member rho.Item
             with get(i, j) =
-                let (Rho (ComplexMatrix3x3 v)) = this
+                let (Rho (ComplexMatrix3x3 v)) = rho
                 v.[i, j]
+
+        member rho.Item
+            with get(i : Index, j : Index) =
+                let (Rho (ComplexMatrix3x3 v)) = rho
+                v.[i.numeric, j.numeric]
 
 
     type RhoT = 
@@ -145,3 +169,15 @@ module MaterialProperties =
         member this.rotateX a = Rotation.rotateX a |> this.rotate
         member this.rotateY a = Rotation.rotateY a |> this.rotate
         member this.rotateZ a = Rotation.rotateZ a |> this.rotate
+
+        member this.opticalComponent c = 
+            match c with 
+            | EpsComp -> 
+                let (Eps eps) = this.eps
+                eps
+            | MuComp -> 
+                let (Mu mu) = this.mu
+                mu
+            | RhoComp -> 
+                let (Rho rho) = this.rho
+                rho

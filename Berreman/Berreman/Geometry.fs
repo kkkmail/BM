@@ -23,6 +23,19 @@ module Geometry =
     let comlpexZeroMatrix n = complexDiagonalMatrix n (cplx 0.0)
 
 
+    /// DU indices to be used in 3x3 matrices, like Eps, Mu, Rho.
+    type Index = 
+        | One
+        | Two
+        | Three
+
+        member this.numeric = 
+            match this with 
+            | One -> 0
+            | Two -> 1
+            | Three -> 2
+
+
     type Angle =
         | Angle of double
         static member degree a = a * degree |> Angle
@@ -215,6 +228,11 @@ module Geometry =
                 let (RealMatrix3x3 v) = this
                 v.[i, j]
 
+        member this.Item
+            with get(i : Index, j : Index) =
+                let (RealMatrix3x3 v) = this
+                v.[i.numeric, j.numeric]
+
         static member create a = a |> RealMatrix.create |> RealMatrix3x3
         static member identity = realIdentityMatrix 3 |> RealMatrix3x3
 
@@ -250,6 +268,11 @@ module Geometry =
             with get(i, j) =
                 let (ComplexMatrix3x3 v) = this
                 v.[i, j]
+
+        member this.Item
+            with get(i : Index, j : Index) =
+                let (ComplexMatrix3x3 v) = this
+                v.[i.numeric, j.numeric]
 
         static member (*) (ComplexMatrix3x3 a, ComplexMatrix3x3 b) : ComplexMatrix3x3 = 
             a * b |> ComplexMatrix3x3

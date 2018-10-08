@@ -14,6 +14,7 @@ open Berreman.MaterialProperties
 open Berreman.Media
 open Berreman.Solvers
 open Berreman.FieldFunctions
+open Berreman.Dispersion
 open OpticalProperties.Standard
 open Berreman
 open OpticalProperties
@@ -65,3 +66,10 @@ module Charting =
             |> Chart.Show
 
         fn |> List.map (fun e -> plotFun e)
+
+        //Range<WaveLength>
+
+    let plotOpticalComp (c : OpticalPropertyComponent) (i : Index) (j : Index) (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
+        let f w = 
+            ((o.getProperties w).opticalComponent c).[i, j]
+        0
