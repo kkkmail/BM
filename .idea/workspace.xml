@@ -115,8 +115,8 @@
       <file leaf-file-name="OpticalDispersion.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="106" selection-start-line="106" selection-end-line="106" selection-end-column="113" />
+            <state relative-caret-position="-102">
+              <caret line="84" column="16" selection-start-line="84" selection-start-column="10" selection-end-line="84" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -271,10 +271,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1830" />
-    <option name="width" value="2000" />
-    <option name="height" value="1970" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-3" />
+    <option name="y" value="2" />
+    <option name="width" value="3728" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -431,7 +432,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="796" extended-state="6" />
+    <frame x="-1" y="1" width="1491" height="411" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -446,7 +447,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18846412" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18846412" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -760,8 +761,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kernel/OpticalDispersion.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="106" selection-start-line="106" selection-end-line="106" selection-end-column="113" />
+        <state relative-caret-position="-102">
+          <caret line="84" column="16" selection-start-line="84" selection-start-column="10" selection-end-line="84" selection-end-column="16" />
         </state>
       </provider>
     </entry>

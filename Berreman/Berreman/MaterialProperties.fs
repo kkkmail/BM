@@ -8,6 +8,7 @@ module MaterialProperties =
 
     open Geometry
     open System.Numerics
+    open System.Numerics
 
 
     /// DU indices to be used for choosing Eps / Mu / Rho.
@@ -21,6 +22,17 @@ module MaterialProperties =
     type UseReIm = 
         | UseRe
         | UseIm
+
+
+    /// DU to be used for performing some transformation: for Eps we usually want to take a square root first.
+    type OpticalTransformation = 
+        | NoTransformation
+        | SquareRoot
+
+        member this.transform : (Complex -> Complex) = 
+            match this with
+            | NoTransformation -> id
+            | SquareRoot -> sqrt
 
 
     // Covers only real refraction indices.

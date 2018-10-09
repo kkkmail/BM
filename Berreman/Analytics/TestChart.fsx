@@ -131,8 +131,8 @@ let f1 = { f0 with opticalSystem = filmSystem.fullSystem.dispersive }
 //plot3D f1 wavelength500to700Range incidenceAngleRange fn
 
 let (WaveLengthRange w) = wavelength200to800Range
-plotEsp11Re (Silicon().opticalProperties) w
-plotEsp11Im (Silicon().opticalProperties) w
+plotN11 (Silicon().opticalProperties) w
+plotXi11 (Silicon().opticalProperties) w
 
 #time
 

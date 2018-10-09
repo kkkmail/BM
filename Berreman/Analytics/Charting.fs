@@ -68,10 +68,8 @@ module Charting =
         fn |> List.map (fun e -> plotFun e)
 
 
-//(r : Range<WaveLength>)
-//calculateEps11Re
-    let plotEsp11Re (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
-        let data = calculateEps11Re o r
+    let plotN11 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
+        let data = calculateN11Re o r
 
         let x = r |> WaveLengthRange
 
@@ -80,8 +78,9 @@ module Charting =
         |> Chart.withX_AxisStyle(x.name, MinMax = (x.plotMinValue, x.plotMaxValue))
         |> Chart.Show
 
-    let plotEsp11Im (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
-        let data = calculateEps11Im o r
+
+    let plotXi11 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
+        let data = calculateXi11Im o r
 
         let x = r |> WaveLengthRange
 

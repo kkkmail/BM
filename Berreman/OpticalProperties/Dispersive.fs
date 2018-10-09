@@ -112,7 +112,8 @@ module Dispersive =
         let d1Si = -0.0000209
         let e1Si = 0.000000148
 
-        let nSi (WaveLength lambda) = aSi + bSi * (lSi lambda) + c1Si * (lSi lambda) ** 2.0 + d1Si * (lambda / mkmVal) ** 2.0 + e1Si * (lambda / mkmVal) ** 4.0;
+        //let nSi (WaveLength lambda) = aSi + bSi * (lSi lambda) + c1Si * (lSi lambda) ** 2.0 + d1Si * (lambda / mkmVal) ** 2.0 + e1Si * (lambda / mkmVal) ** 4.0;
+        let nSi (WaveLength lmb) = 3.41696 - 2.09e7 * lmb ** 2.0 + 1.48e17 * lmb ** 4.0 + 0.013924/(-0.028 + 1.e12 * lmb ** 2.0) ** 2.0 + 0.138497/(-0.028 + 1.e12 * lmb ** 2.0)
 
         /// Absorption Coefficient.
         //let lambda1Si = WaveLength.mkm 0.3757
@@ -123,10 +124,12 @@ module Dispersive =
         let xiSi (WaveLength lambda) ko (WaveLength lambda0) eps = ko * (lambda / mkmVal) ** 2.0 / (eps + ((lambda / mkmVal) ** 2.0 - (lambda0 / mkmVal) ** 2.0) * 2.0)
 
         // For eps = 1.0e-4
-        let lambda0Si = WaveLength.mkm 0.349134
-        let koSi = 0.00440268
+        let lambda0Si = 3.491341053759574e-7 |> WaveLength
+        let koSi = 0.004402681698765213
 
-        let xiSiFinal lambda = xiSi lambda koSi lambda0Si 1.0e-4
+        //let xiSiFinal lambda = xiSi lambda koSi lambda0Si 1.0e-4
+        let xiSiFinal (WaveLength lmb) = (4.402681698765214e9 * lmb ** 2.0)/(0.0001 + (-0.12189462353667012 + 1.0e12 * lmb ** 2.0) ** 2.0)
+
         let refrIndexSi lambda = createComplex (nSi lambda) (xiSiFinal lambda) |> ComplexRefractionIndex
         let epsSi lambda = refrIndexSi lambda |> Eps.fromComplexRefractionIndex
 

@@ -213,18 +213,16 @@ module Variables =
         |> PSeq.map (fun i -> [| for j in 0..y.length -> (x.plotValue i, y.plotValue j, getSolution i j) |])
         |> Array.ofSeq
 
-        //Range<WaveLength>
-
     let calculateOpticalProp 
         (c : OpticalPropertyComponent) 
+        (t : OpticalTransformation)
+        (i : Index, j : Index)
         (u : UseReIm)
-        (i : Index) 
-        (j : Index) 
         (o : OpticalPropertiesWithDisp) 
         (r : Range<WaveLength>) = 
 
         let f w = 
-            let p =((o.getProperties w).opticalComponent c).[i, j]
+            let p =((o.getProperties w).opticalComponent c).[i, j] |> t.transform
             match u with 
             | UseRe -> p.Real
             | UseIm -> p.Imaginary
@@ -233,5 +231,5 @@ module Variables =
         [| for i in 0..l.length -> (l.plotValue i, getWaveLengthValue r i |> f) |]
 
 
-    let calculateEps11Re = calculateOpticalProp EpsComp UseRe One One
-    let calculateEps11Im = calculateOpticalProp EpsComp UseIm One One
+    let calculateN11Re = calculateOpticalProp EpsComp SquareRoot (One, One) UseRe
+    let calculateXi11Im = calculateOpticalProp EpsComp SquareRoot (One, One) UseIm
