@@ -15,6 +15,7 @@ open Berreman.Dispersion
 open Berreman.Solvers
 open Berreman.FieldFunctions
 open OpticalProperties.Standard
+open OpticalProperties.Dispersive
 open Berreman
 open Variables
 
@@ -57,3 +58,44 @@ module StandardSystems =
     /// Vacuum / standard biaxial thin film / vacuum system with s polarized light falling at angleDegree.
     let biaxialCrystalFilm600nmInclindedLPs angleDegree thickness = 
         { incidentLightInfo = light600nmInclinedDegreelLPs angleDegree; opticalSystem = (BaseOpticalSystem.biaxialCrystalFilmSystem thickness).fullSystem.dispersive }
+
+
+    let silicon = Silicon().opticalProperties
+    let langasite = Langasite().opticalProperties
+
+    let langasiteSubstrateOnSilicon angleDegree thickness = 
+        { 
+            incidentLightInfo = light600nmInclinedDegreelLPs angleDegree
+            opticalSystem = 
+            {
+                description = Some ""
+                upperWithDisp = OpticalProperties.vacuum.dispersive
+                filmsWithDisp = []
+                substrateWithDisp = 
+                    {
+                        thickness = thickness
+                        propertiesWithDisp = langasite
+                    }
+                    |> Some
+                lowerWithDisp = silicon
+            }
+        }
+
+    let langasiteFilmOnSilicon angleDegree thickness = 
+        { 
+            incidentLightInfo = light600nmInclinedDegreelLPs angleDegree
+            opticalSystem = 
+            {
+                description = Some ""
+                upperWithDisp = OpticalProperties.vacuum.dispersive
+                filmsWithDisp = 
+                    [
+                        {
+                            thickness = thickness
+                            propertiesWithDisp = langasite
+                        }
+                    ]
+                substrateWithDisp = None
+                lowerWithDisp = silicon
+            }
+        }
