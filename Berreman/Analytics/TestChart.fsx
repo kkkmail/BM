@@ -130,18 +130,18 @@ let fn = [ R; T ]
 ////plot3D f0 polarizationRange incidenceAngleRange fn
 ////plot3D f1 wavelength500to700Range incidenceAngleRange fn
 
-let (WaveLengthRange w) = wavelength250to600Range
-//plotN11 (Silicon().opticalProperties) w
-//plotXi11 (Silicon().opticalProperties) w
+//let (WaveLengthRange w) = wavelength250to600Range
+////plotN11 (Silicon().opticalProperties) w
+////plotXi11 (Silicon().opticalProperties) w
 
-plotN11 (Langasite().opticalProperties) w
-plotXi11 (Langasite().opticalProperties) w
+//plotN11 (Langasite().opticalProperties) w
+//plotXi11 (Langasite().opticalProperties) w
 
-plotN22 (Langasite().opticalProperties) w
-plotXi22 (Langasite().opticalProperties) w
+//plotN22 (Langasite().opticalProperties) w
+//plotXi22 (Langasite().opticalProperties) w
 
-plotRho11 (Langasite().opticalProperties) w
-plotRho33 (Langasite().opticalProperties) w
+//plotRho11 (Langasite().opticalProperties) w
+//plotRho33 (Langasite().opticalProperties) w
 
 //#time
 
@@ -149,12 +149,12 @@ plotRho33 (Langasite().opticalProperties) w
 
 ///////////////////////////////////////
 
-//let thickness = Thickness.mm 1.0
-//let f0 = langasiteFilmOnSilicon 0.0 thickness
-//let f1 = langasiteSubstrateOnSilicon 0.0 thickness
+let thickness = Thickness.mm 0.001
+let f0 = langasiteFilmOnSilicon 0.0 thickness
+let f1 = langasiteSubstrateOnSilicon 0.0 thickness
 
-//#time
-//plot f0 wavelength500to700Range fn
-//plot f1 wavelength500to700Range fn
-//#time
+#time
+plot f0 wavelength200to800Range fn
+plot f1 wavelength200to800Range fn
+#time
 
