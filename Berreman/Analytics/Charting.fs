@@ -68,23 +68,26 @@ module Charting =
         fn |> List.map (fun e -> plotFun e)
 
 
-    let plotN11 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
-        let data = calculateN11Re o r
-
+    let plotDispersion calc name (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
+        let data = calc o r
         let x = r |> WaveLengthRange
 
          //FSharp.Plotly
-        Chart.Line(data, Name = "Re[e11]")
+        Chart.Line(data, Name = name)
         |> Chart.withX_AxisStyle(x.name, MinMax = (x.plotMinValue, x.plotMaxValue))
         |> Chart.Show
 
 
-    let plotXi11 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = 
-        let data = calculateXi11Im o r
+    let plotN11 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateN11Re "Re[e11]" o r
+    let plotXi11 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateXi11Im "Im[e11]" o r
 
-        let x = r |> WaveLengthRange
+    let plotN22 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateN22Re "Re[e22]" o r
+    let plotXi22 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateXi22Im "Im[e22]" o r
 
-         //FSharp.Plotly
-        Chart.Line(data, Name = "Im[e11]")
-        |> Chart.withX_AxisStyle(x.name, MinMax = (x.plotMinValue, x.plotMaxValue))
-        |> Chart.Show
+    let plotN33 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateN33Re "Re[e33]" o r
+    let plotXi33 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateXi33Im "Im[e33]" o r
+
+
+    let plotRho11 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateRho11Im "rho11" o r
+    let plotRho22 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateRho22Im "rho22" o r
+    let plotRho33 (o : OpticalPropertiesWithDisp) (r : Range<WaveLength>) = plotDispersion calculateRho33Im "rho33" o r

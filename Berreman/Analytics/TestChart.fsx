@@ -130,12 +130,18 @@ let fn = [ R; T ]
 ////plot3D f0 polarizationRange incidenceAngleRange fn
 ////plot3D f1 wavelength500to700Range incidenceAngleRange fn
 
-let (WaveLengthRange w) = wavelength500to700Range
-plotN11 (Silicon().opticalProperties) w
-plotXi11 (Silicon().opticalProperties) w
+let (WaveLengthRange w) = wavelength250to600Range
+//plotN11 (Silicon().opticalProperties) w
+//plotXi11 (Silicon().opticalProperties) w
 
 plotN11 (Langasite().opticalProperties) w
 plotXi11 (Langasite().opticalProperties) w
+
+plotN22 (Langasite().opticalProperties) w
+plotXi22 (Langasite().opticalProperties) w
+
+plotRho11 (Langasite().opticalProperties) w
+plotRho33 (Langasite().opticalProperties) w
 
 //#time
 

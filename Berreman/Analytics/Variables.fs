@@ -233,3 +233,13 @@ module Variables =
 
     let calculateN11Re = calculateOpticalProp EpsComp SquareRoot (One, One) UseRe
     let calculateXi11Im = calculateOpticalProp EpsComp SquareRoot (One, One) UseIm
+
+    let calculateN22Re = calculateOpticalProp EpsComp SquareRoot (Two, Two) UseRe
+    let calculateXi22Im = calculateOpticalProp EpsComp SquareRoot (Two, Two) UseIm
+
+    let calculateN33Re = calculateOpticalProp EpsComp SquareRoot (Three, Three) UseRe
+    let calculateXi33Im = calculateOpticalProp EpsComp SquareRoot (Three, Three) UseIm
+
+    let calculateRho11Im = calculateOpticalProp RhoComp MultByMillion (One, One) UseIm
+    let calculateRho22Im = calculateOpticalProp RhoComp MultByMillion (Two, Two) UseIm
+    let calculateRho33Im = calculateOpticalProp RhoComp MultByMillion (Three, Three) UseIm

@@ -35,6 +35,9 @@ module StandardSystems =
     /// Wavelength variable from 500 to 700 nm.
     let wavelength500to700Range = WaveLengthRange (Range<_>.create (WaveLength.nm 500.0) (WaveLength.nm 700.0))
 
+    /// Wavelength variable from 250 to 600 nm.
+    let wavelength250to600Range = WaveLengthRange (Range<_>.create (WaveLength.nm 250.0) (WaveLength.nm 600.0))
+
     /// Vacuum / standard transparent glass system with s polarized light falling at normal.
     let transpGlass600nmNormalLPs = 
         { incidentLightInfo = light600nmNormalLPs; opticalSystem = BaseOpticalSystem.transparentGlassSystem.fullSystem.dispersive }

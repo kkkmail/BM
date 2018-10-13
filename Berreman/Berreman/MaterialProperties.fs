@@ -28,11 +28,13 @@ module MaterialProperties =
     type OpticalTransformation = 
         | NoTransformation
         | SquareRoot
+        | MultByMillion
 
         member this.transform : (Complex -> Complex) = 
             match this with
             | NoTransformation -> id
             | SquareRoot -> sqrt
+            | MultByMillion -> fun x -> x * (cplx 1000000.0)
 
 
     // Covers only real refraction indices.
