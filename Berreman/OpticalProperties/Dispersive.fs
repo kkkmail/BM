@@ -154,3 +154,7 @@ module Dispersive =
                 muWithDisp = Mu.vacuum.dispersive
                 rhoWithDisp = Rho.vacuum.dispersive
             }
+
+
+    let siliconOpticalProperties = Silicon().opticalProperties
+    let langasiteOpticalProperties = Langasite().opticalProperties

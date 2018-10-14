@@ -51,6 +51,9 @@
     <Content Include="Google.DataTable.Net.Wrapper.XML" />
     <Compile Include="Charting_old.fs" />
     <None Include="References.fsx" />
+    <None Include="Examples\References.fsx" />
+    <None Include="Examples\LangasiteOnSilicon_01.fsx" />
+    <None Include="Examples\MultilayerThinFilm_01.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Charting">

@@ -21,22 +21,25 @@ open Variables
 
 module StandardSystems = 
     /// Incident light variable from 0 to 89 degrees
-    let incidenceAngleRange = IncidenceAngleRange (Range<_>.create IncidenceAngle.normal IncidenceAngle.maxValue)
+    let incidenceAngleRange n = IncidenceAngleRange (Range<_>.create n IncidenceAngle.normal IncidenceAngle.maxValue)
 
     /// Ellipticity variable from 0 to 1.
-    let ellipticityRange = EllipticityRange (Range<_>.create Ellipticity.defaultValue Ellipticity.maxValue)
+    let ellipticityRange n = EllipticityRange (Range<_>.create n Ellipticity.defaultValue Ellipticity.maxValue)
 
     /// Polarization variable from 0 to 90 degrees.
-    let polarizationRange = PolarizationRange (Range<_>.create Polarization.s Polarization.p)
+    let polarizationRange n = PolarizationRange (Range<_>.create n Polarization.s Polarization.p)
 
     /// Wavelength variable from 200 to 800 nm.
-    let wavelength200to800Range = WaveLengthRange (Range<_>.create (WaveLength.nm 200.0) (WaveLength.nm 800.0))
+    let wavelength200to800 n = Range<_>.create n (WaveLength.nm 200.0) (WaveLength.nm 800.0)
+    let wavelength200to800Range n = WaveLengthRange (Range<_>.create n (WaveLength.nm 200.0) (WaveLength.nm 800.0))
 
     /// Wavelength variable from 500 to 700 nm.
-    let wavelength500to700Range = WaveLengthRange (Range<_>.create (WaveLength.nm 500.0) (WaveLength.nm 700.0))
+    let wavelength500to700 n = Range<_>.create n (WaveLength.nm 500.0) (WaveLength.nm 700.0)
+    let wavelength500to700Range n = WaveLengthRange (Range<_>.create n (WaveLength.nm 500.0) (WaveLength.nm 700.0))
 
     /// Wavelength variable from 250 to 600 nm.
-    let wavelength250to600Range = WaveLengthRange (Range<_>.create (WaveLength.nm 250.0) (WaveLength.nm 600.0))
+    let wavelength250to600 n = Range<_>.create n (WaveLength.nm 250.0) (WaveLength.nm 600.0)
+    let wavelength250to600Range n = WaveLengthRange (Range<_>.create n (WaveLength.nm 250.0) (WaveLength.nm 600.0))
 
     /// Vacuum / standard transparent glass system with s polarized light falling at normal.
     let transpGlass600nmNormalLPs = 
@@ -63,42 +66,48 @@ module StandardSystems =
         { incidentLightInfo = light600nmInclinedDegreelLPs angleDegree; opticalSystem = (BaseOpticalSystem.biaxialCrystalFilmSystem thickness).fullSystem.dispersive }
 
 
-    let silicon = Silicon().opticalProperties
-    let langasite = Langasite().opticalProperties
+    /// Langasite thick plate of silicon sbstrate.
+    let langasiteSubstrateOnSiliconSystem thickness = 
+        {
+            description = Some "Langasite thick plate of silicon sbstrate."
+            upperWithDisp = OpticalProperties.vacuum.dispersive
+            filmsWithDisp = []
+            substrateWithDisp = 
+                {
+                    thickness = thickness
+                    propertiesWithDisp = langasiteOpticalProperties
+                }
+                |> Some
+            lowerWithDisp = siliconOpticalProperties
+        }
 
+    /// Langasite thin film of silicon sbstrate.
+    let langasiteFilmOnSiliconSystem thickness = 
+        {
+            description = Some "Langasite thin film of silicon sbstrate."
+            upperWithDisp = OpticalProperties.vacuum.dispersive
+            filmsWithDisp = 
+                [
+                    {
+                        thickness = thickness
+                        propertiesWithDisp = langasiteOpticalProperties
+                    }
+                ]
+            substrateWithDisp = None
+            lowerWithDisp = siliconOpticalProperties
+        }
+
+
+    /// Langasite thick plate of silicon sbstrate.
     let langasiteSubstrateOnSilicon angleDegree thickness = 
         { 
             incidentLightInfo = light600nmInclinedDegreelLPs angleDegree
-            opticalSystem = 
-            {
-                description = Some ""
-                upperWithDisp = OpticalProperties.vacuum.dispersive
-                filmsWithDisp = []
-                substrateWithDisp = 
-                    {
-                        thickness = thickness
-                        propertiesWithDisp = langasite
-                    }
-                    |> Some
-                lowerWithDisp = silicon
-            }
+            opticalSystem = langasiteSubstrateOnSiliconSystem thickness
         }
+
 
     let langasiteFilmOnSilicon angleDegree thickness = 
         { 
             incidentLightInfo = light600nmInclinedDegreelLPs angleDegree
-            opticalSystem = 
-            {
-                description = Some ""
-                upperWithDisp = OpticalProperties.vacuum.dispersive
-                filmsWithDisp = 
-                    [
-                        {
-                            thickness = thickness
-                            propertiesWithDisp = langasite
-                        }
-                    ]
-                substrateWithDisp = None
-                lowerWithDisp = silicon
-            }
+            opticalSystem = langasiteFilmOnSiliconSystem thickness 
         }

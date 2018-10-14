@@ -27,7 +27,7 @@ module Variables =
             numberOfPoints : int
         }
 
-        static member create s e = { startValue = s; endValue = e; numberOfPoints = 2000 }
+        static member create n s e = { startValue = s; endValue = e; numberOfPoints = n }
 
 
     type RangedVariable = 
