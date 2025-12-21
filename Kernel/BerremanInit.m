@@ -25,7 +25,7 @@ Off[General::spell];
 Off[General::"obspkg"];
 Off[Solve::ifun];
 (* ============================================== *)
-UseRussianLanguageValue = True;
+UseRussianLanguageValue = False;
 (* ============================================== *)
 (*ProcessOptions ensures that options are in a flat list. It wraps List over raw options if necessary.*)
 ProcessOptions[rawOpts___] := Module[{opts},
@@ -93,6 +93,7 @@ InitializeBM[pathList_, useParallelTbl_, optsRaw___] := Module[{pathVar, useParT
   Get["OpticalElements.m", Path -> pathList];
   Get["OpticalModelFunctions.m", Path -> pathList];
   Get["OpticalDispersion.m", Path -> pathList];
+  Get["FSharpHelpers.m", Path -> pathList];
   Print["... completed."];
 
   OutputCopyright[];
@@ -110,6 +111,7 @@ InitializeBM[pathList_, useParallelTbl_, optsRaw___] := Module[{pathVar, useParT
     ParallelEvaluate[Get["OpticalModel.m", Path -> pathList]];
     ParallelEvaluate[Get["OpticalElements.m", Path -> pathList]];
     ParallelEvaluate[Get["OpticalModelFunctions.m", Path -> pathList]];
+    ParallelEvaluate[Get["FSharpHelpers.m", Path -> pathList]];
     Print["... completed"];
     ,
     Options[BerremanInit] = {BerremanInitVersion -> BerremanInitVersionValue, UseParallelTable -> False};

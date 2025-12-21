@@ -274,13 +274,13 @@ deltaZero = DiagonalMatrix[{0, 0, 0, 0}];
 M[epsilon : {{_, _, _}, {_, _, _}, {_, _, _}}, mu : {{_, _, _}, {_, _, _}, {_, _, _}}, ro : {{_, _, _}, {_, _, _}, {_, _, _}}, rotr : {{_, _, _}, {_, _, _}, {_, _, _}}] :=
     BlockMatrix[{{epsilon, ro}, {rotr, mu}}];
 (* ============================================== *)
-(*Optiva Rotation 1-Fi (angle between crystal axis and deposition direction.)-rotation around z*)
+(*Optiva Rotation 1 - Fi (angle between crystal axis and deposition direction.)-rotation around z *)
 fRopt1[fi_] := RotationMatrix3D[fi, 0, 0];
 
-(*Optiva Rotation 2-Psi (angle between crystal axis and substrate plane.)-rotation around y (in the opposite direction!!!)*)
+(*Optiva Rotation 2 - Psi (angle between crystal axis and substrate plane.)-rotation around y (in the opposite direction!!!) *)
 fRopt2[psi_] := RotationMatrix3D[0, -Pi / 2, 0].RotationMatrix3D[0, Pi / 2, -psi];
 
-(*Optiva Rotation 3-Alpha (rotation of crystal around its axis.)-rotation around x*)
+(*Optiva Rotation 3 - Alpha (rotation of crystal around its axis.) - rotation around x *)
 fRopt3[alpha_] := RotationMatrix3D[0, alpha, 0];
 
 (*Optiva Combined Rotation (1,2,3).*)
@@ -471,7 +471,9 @@ IncidentLightNew[lambda_, fita_, beta_, n1_, Ampl_, ellipticity_] :=
 
       ehField = ehField1 + ehField2;
 
-      EHI = {ehField[[1]], ehField[[2]], ehField[[3]], ehField[[4]], ehField[[5]], ehField[[6]], True};
+      EHI = { ehField[[1]], ehField[[2]], ehField[[3]], ehField[[4]], ehField[[5]], ehField[[6]], True };
+
+      Print["E, H = ", N[ehField] // toFSharpEH];
       Return[{lambda, fita, beta, EHI, ellipticity, n1, Ampl}];
     ];
 
@@ -576,7 +578,9 @@ MMM[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_] :=
       MMd = Table[Dld[i, j], {i, 4}, {j, 4}];
       MMdInv = Inverse[MMd];
       retval = {(MMdInv.MM) / (2 * Pi * I / lambda), sol};
-      (*Print["MMM retval = ",N[retval]];*)
+
+      (* Print["MMM retval = ", N[retval]]; *)
+
       Return[retval];
     ];
 (* ============================================== *)
@@ -601,28 +605,43 @@ PPP[eps_, mu_, ro_, rotr_, lambda_, fita_, n1_, h_] :=
       If[bCalcErr === True && BCZEROPPPONCALCERR === True, retval = deltaZero, dummy = 0];
       (*Print["PPP Ended."];*)
       (*Print["Det[MatrixExp[...]] = ",Chop[N[pDet]]];*)
-      (* Print["PPP::retval = ", retval, ", pDet = ", pDet]; *)
+
+      (* Print["PPP::retval = ", retval // toFSharpMatrix, ", pDet = ", pDet]; *)
+
       Return[retval];
     ];
 
 PPPFull[Film_, lambda_, fita_, n1_] :=
-    Module[{len, cnt, PPPhlp, eps, ro, rotr, mu, h, FilmLayer},
+    Module[{len, cnt, retval, eps, ro, rotr, mu, h, FilmLayer},
       len = FilmLength[Film];
-      PPPhlp = II;
-      Do[FilmLayer = Film[[cnt]];
-      h = FilmLayerThickness[FilmLayer];
-      eps = FilmLayerEpsilon[FilmLayer];
-      mu = FilmLayerMu[FilmLayer];
-      ro = FilmLayerRo[FilmLayer];
-      rotr = FilmLayerRoT[FilmLayer];
-      PPPhlp = PPP[eps, mu, ro, rotr, lambda, fita, n1, h].PPPhlp, {cnt, 1, len}];
-      Return[PPPhlp];
+      retval = II;
+
+      Do[
+        FilmLayer = Film[[cnt]];
+        h = FilmLayerThickness[FilmLayer];
+        eps = FilmLayerEpsilon[FilmLayer];
+        mu = FilmLayerMu[FilmLayer];
+        ro = FilmLayerRo[FilmLayer];
+        rotr = FilmLayerRoT[FilmLayer];
+
+        retval = PPP[eps, mu, ro, rotr, lambda, fita, n1, h] . retval
+        , {cnt, 1, len}
+      ];
+
+      pDet = Abs[Det[retval]];
+      (* Print["PPPFull::retval = ", retval // toFSharpMatrix, ", pDet = ", pDet]; *)
+      Return[retval];
     ];
 (* ============================================== *)
 (*Energy Density Vector:P=(c/(16*Pi)*(E+Conj[E]) x (H+Conj[H])) - vecror multiplication - !!! CHECK - THIS MAY BE INCORRECT !!!*)
 (* ============================================== *)
 EGGetOrder[egvl : {_, _, _, _}, egvec_, ehStdRule_, opts___] :=
     Module[{odeg, ODEGhlp, EGValHlpRe, EGValHlpIm, EGUnit, egvReShft, egvRe, egMult, egShft, idxHlp, egvIm, swpev, ehf, pntgS, egMultPng, prec, chpPrec, AddOnSrt, pntgTblX, pntgTblY, pntgTbl},
+      (*
+      Print["EGGetOrder::egvl =", { N[egvl] } // toFSharpMatrix];
+      Print["EGGetOrder::egvec =", N[egvec] // toFSharpMatrix];
+      *)
+
       EGUnit = {1, 1, 1, 1};
       egvReShft = 0;
       egMult = 10^6;
@@ -634,16 +653,20 @@ EGGetOrder[egvl : {_, _, _, _}, egvec_, ehStdRule_, opts___] :=
       pntgTblX = Table[PoyntingS[GetEHFull[egvec[[i]], ehStdRule, True], 1], {i, 4}];
       pntgTblY = Table[PoyntingS[GetEHFull[egvec[[i]], ehStdRule, True], 2], {i, 4}];
       (*Print["egvl = ",MFCN[egvl]];Print["egvec = ",MFCN[egvec]];
-    Print["ehStdRule = ",MFCN[ehStdRule]];
-    Print["pntgTbl = ",MFCN[pntgTbl]];
-    Print["pntgTblX = ",MFCN[pntgTblX]];
-    Print["pntgTblY = ",MFCN[pntgTblY]];*)
+      Print["ehStdRule = ",MFCN[ehStdRule]];
+
+      Print["pntgTblX = ",MFCN[pntgTblX]];
+      Print["pntgTblY = ",MFCN[pntgTblY]];*)
+      (* Print["pntgTbl = ",MFCN[pntgTbl]]; *)
       swpev = SwapEigenValues /. opts /. Options[BerremanCommon];
       AddOnSrt = AddOnEigenValuesSort /. opts /. Options[BerremanCommon];
       EGValHlpRe = Sign[Re[egvl]];
       EGValHlpIm = Sign[Im[egvl]];
       (*Print["EGValHlpRe = ",MFCN[EGValHlpRe]];
-    Print["EGValHlpIm = ",MFCN[EGValHlpIm]];*)ODEGhlp = egMult * SetPrecision[Chop[Im[egvl], chpPrec], prec] + egMultPng * SetPrecision[Chop[pntgTbl, chpPrec], prec] + SetPrecision[Chop[Re[egvl], chpPrec], prec];
+      Print["EGValHlpIm = ",MFCN[EGValHlpIm]];*)
+
+      ODEGhlp = egMult * SetPrecision[Chop[Im[egvl], chpPrec], prec] + egMultPng * SetPrecision[Chop[pntgTbl, chpPrec], prec] + SetPrecision[Chop[Re[egvl], chpPrec], prec];
+
       (*Print["ODEGhlp = ",MFCN[ODEGhlp]];*)
       odeg = {Ordering[ODEGhlp, 2], Ordering[ODEGhlp, -2]};
       egvRe = SetPrecision[Chop[Re[egvl], chpPrec], prec];
@@ -715,6 +738,8 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       useNumEV = UseNumericEigenValues /. opts /. Options[BerremanCommon];
       UseQuietSolveValue = UseQuietSolve /. opts /. Options[BerremanCommon];
 
+      useSolve = False;
+
       kx = (2 * Pi / lambda) * n1 * Sin[fita];
       delta = deltaZero;
       kx = SetAccuracy[kx, 100];
@@ -763,8 +788,11 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       ];
 
       EGVal1Hlp = Chop[N[EGVal1]];
+      (* Print["SolutionNewBase::ODEG1"]; *)
+
       ODEG1 = EGGetOrder[EGVal1Hlp, EGVec1, ehirule, opts];
-      EGVal1Up = EGVal1[[ODEG1[[1]]]];EGVal1Dn := EGVal1[[ODEG1[[2]]]];
+      EGVal1Up = EGVal1[[ODEG1[[1]]]];
+      EGVal1Dn := EGVal1[[ODEG1[[2]]]];
       EGVec1Up := Transpose[(EGVec1[[ODEG1[[1]]]])];
       EGVec1Dn := Transpose[(EGVec1[[ODEG1[[2]]]])];
 
@@ -783,36 +811,47 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       (* Print["MMM2[[1]] = ", MatrixForm[Chop[N[MMM2[[1]]]]]]; Print["EGVec2 = ", MatrixForm[Chop[N[EGVec2]]]]; *)
 
       EGVal2Hlp = Chop[N[EGVal2]];
+      (* Print["SolutionNewBase::ODEG2"]; *)
       ODEG2 = EGGetOrder[EGVal2Hlp, EGVec2, ehtrule, opts];
-      EGVal2Up = EGVal2[[ODEG2[[1]]]];EGVal2Dn = EGVal2[[ODEG2[[2]]]];
+      EGVal2Up = EGVal2[[ODEG2[[1]]]];
+      EGVal2Dn = EGVal2[[ODEG2[[2]]]];
       EGVec2Up = Transpose[(EGVec2[[ODEG2[[1]]]])];
       EGVec2Dn = Transpose[(EGVec2[[ODEG2[[2]]]])];
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
-      If[pdi == True && pdil >= PCDILEVELDETAILED,
-        Print["SolutionNewBase::=================="];
-        Print["MMM1 = ", MatrixForm[Chop[N[MMM1[[1]]]]]];
-        Print["MMM2 = ", MatrixForm[Chop[N[MMM2[[1]]]]]];
-        Print["EGVec1 = ", MFCN[EGVec1]];
-        Print["EGVal1Hlp = ", MatrixForm[EGVal1Hlp]];
-        Print["EGVal1 = ", MatrixForm[EGVal1]];
-        Print["ODEG1 = ", MFCN[ODEG1]];
-        Print["EGVal1Up = ", MFCN[EGVal1Up]];
-        Print["EGVal1Dn = ", MFCN[EGVal1Dn]];
-        Print["EGVec1Up = ", MFCN[EGVec1Up]];
-        Print["EGVec1Dn = ", MFCN[EGVec1Dn]];
-        Print["EGVec2 = ", MFCN[EGVec2]];
-        Print["EGVal2Hlp = ", MatrixForm[EGVal2Hlp]];
-        Print["EGVal2 = ", MatrixForm[EGVal2]];
-        Print["ODEG2hlp", ODEG2hlp];
-        Print["ODEG2 = ", MFCN[ODEG2]];
-        Print["EGVec2Up = ", MFCN[EGVec2Up]];
-        Print["EGVec2Dn = ", MFCN[EGVec2Dn]];
-        Print["EGVec2Up (full) = ", EGVec2Up];
-        Print["EGVec2Dn (full) = ", EGVec2Dn];
-        Print["==================::SolutionNewBase"];
-        Print["   "];
-      ];
+      (* If[pdi == True && pdil >= PCDILEVELDETAILED,
+      Print["SolutionNewBase::=================="];
+      Print["SolutionNewBase::MMM1 = ", MatrixForm[Chop[N[MMM1[[1]]]]]];
+      Print["SolutionNewBase::MMM2 = ", MatrixForm[Chop[N[MMM2[[1]]]]]];
+
+      Print["SolutionNewBase::Eigenvalues[MMM1] = ", MatrixForm[Chop[N[Eigenvalues[MMM1[[1]]]]]]];
+      Print["SolutionNewBase::Eigenvectors[MMM1] = ", MatrixForm[Chop[N[Eigenvectors[MMM1[[1]]]]]]];
+
+      Print["SolutionNewBase::Eigenvalues[MMM2] = ", MatrixForm[Chop[N[Eigenvalues[MMM2[[1]]]]]]];
+      Print["SolutionNewBase::Eigenvectors[MMM2] = ", MatrixForm[Chop[N[Eigenvectors[MMM2[[1]]]]]]];
+
+      Print["SolutionNewBase::EGVec1 = ", MFCN[EGVec1]];
+      Print["SolutionNewBase::EGVal1Hlp = ", MatrixForm[EGVal1Hlp]];
+      Print["SolutionNewBase::EGVal1 = ", MatrixForm[EGVal1]];
+      Print["SolutionNewBase::ODEG1 = ", MFCN[ODEG1]];
+      Print["SolutionNewBase::EGVal1Up = ", MFCN[EGVal1Up]];
+      Print["SolutionNewBase::EGVal1Dn = ", MFCN[EGVal1Dn]];
+      Print["SolutionNewBase::EGVec1Up = ", MFCN[EGVec1Up]];
+      Print["SolutionNewBase::EGVec1Dn = ", MFCN[EGVec1Dn]];
+      Print["SolutionNewBase::EGVec2 = ", MFCN[EGVec2]];
+      Print["SolutionNewBase::EGVal2Hlp = ", MatrixForm[EGVal2Hlp]];
+      Print["SolutionNewBase::EGVal2 = ", MatrixForm[EGVal2]];
+      Print["SolutionNewBase::ODEG2hlp", ODEG2hlp];
+      Print["SolutionNewBase::ODEG2 = ", MFCN[ODEG2]];
+      Print["SolutionNewBase::EGVal2Up = ", MFCN[EGVal2Up]];
+      Print["SolutionNewBase::EGVal2Dn = ", MFCN[EGVal2Dn]];
+      Print["SolutionNewBase::EGVec2Up = ", MFCN[EGVec2Up]];
+      Print["SolutionNewBase::EGVec2Dn = ", MFCN[EGVec2Dn]];
+      Print["SolutionNewBase::EGVec2Up (full) = ", EGVec2Up];
+      Print["SolutionNewBase::EGVec2Dn (full) = ", EGVec2Dn];
+      Print["==================::SolutionNewBase"];
+      Print["   "];
+      ]; *)
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
       If[pdi == True && pdil >= PCDILEVELMEDIUM,
@@ -862,6 +901,9 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
           cfm = Inverse[cf];
           sol = cfm.b;
           ehisol = {ehi1 -> sol[[1, 1]], ehi2 -> sol[[2, 1]]};
+
+          (* Print["cf(2) = ", cf // MatrixForm]; *)
+          (* Print["b(2) = ", b // MatrixForm]; *)
         )
       ];
 
@@ -891,6 +933,15 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       EHRv = EGVec1Up.{{ehr1}, {ehr2}};
       EHTv = EGVec2Dn.{{eht1}, {eht2}};
       ssss = (PPPv.(EHIv + EHRv) - EHTv);
+
+      (*
+      Print["EHIv = ", EHIv // MatrixForm];
+      Print["EHRv = ", EHRv // MatrixForm];
+      Print["EHTv = ", EHTv // MatrixForm];
+
+      Print["EGVec2Dn = ", EGVec2Dn // MatrixForm];
+      Print["ssss = ", ssss // MatrixForm];
+      *)
       (* ============================================== *)
 
       (*
@@ -901,9 +952,15 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
       varLst = {ehr1, ehr2, eht1, eht2};
       coeff[q_, s_] := Coefficient[ssss[[q, 1]], varLst[[s]]];
       free[q_] := (-ssss[[q, 1]] /. ehr1 -> 0 /. ehr2 -> 0 /. eht1 -> 0 /. eht2 -> 0);
-      coeffTbl = Table[coeff[i, j], {i, 4}, {j, 4}];cfm = Inverse[coeffTbl];
+      coeffTbl = Table[coeff[i, j], {i, 4}, {j, 4}];
+      cfm = Inverse[coeffTbl];
       freeTbl = Table[free[i], {i, 4}, {j, 1}];
-      (* Print["coeffTbl = ",MatrixForm[Chop[N[coeffTbl]]]]; *)
+
+      (*
+      Print["SolutionNewBase::coeffTbl = ",MatrixForm[Chop[N[coeffTbl]]]];
+      Print["SolutionNewBase::freeTbl = ",MatrixForm[Chop[N[freeTbl]]]];
+      Print["SolutionNewBase::cfm = ",MatrixForm[Chop[N[cfm]]]];
+      *)
 
       If[useSolve === True,
         (
@@ -980,9 +1037,9 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
 
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
       If[pdi == True && pdil >= PCDILEVELALL,
-        Print["EHIFull = ", Chop[N[EHIFull]]];
-        Print["EHTFull = ", Chop[N[EHTFull]]];
-        Print["EHRFull = ", Chop[N[EHRFull]]];
+        Print["SolutionNewBase::EHIFull = ", Chop[N[EHIFull]]];
+        Print["SolutionNewBase::EHTFull = ", Chop[N[EHTFull]]];
+        Print["SolutionNewBase::EHRFull = ", Chop[N[EHRFull]]];
       ];
 
       If[calcDlt === True && len > 0,
@@ -1021,6 +1078,12 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
 
       retval = {EHIFull, EHRFull, EHTFull, PPPv, delta, Media, IncidentLight, opts, MMM1[[1]], MMM2[[1]], coeffTbl, freeTbl, egs1, egs2};
 
+      (*
+      Print["EHIFull = ", EHIFull // toFSharpEH];
+      Print["EHRFull = ", EHRFull // toFSharpEH];
+      Print["EHTFull = ", EHTFull // toFSharpEH];
+      *)
+
       (* PCDILEVELALL; PCDILEVELDETAILED; PCDILEVELMEDIUM; PCDILEVELSHORT; *)
       If[pdi == True && pdil >= PCDILEVELALL,
         Print["SolutionNewBase::retval = ", retval];
@@ -1030,6 +1093,7 @@ SolutionNewBase[Media_, IncidentLight_, optsRaw___] :=
         Print["SolutionNewBase::end ================================================="];
         Print["   "];
       ];
+
       Return[retval];
     ];
 (* ============================================== *)

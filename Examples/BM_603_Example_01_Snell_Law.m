@@ -13,10 +13,13 @@ InitializeBM[PathList, useParallelTbl];
 (* ============================================== *)
 opts =
     {
-      BDPlotFigures -> True,
-      UseEulerAngles -> False
+      BDPlotFigures -> False,
+      UseEulerAngles -> False,
+      PrintCommonDebugInfo -> False,
+      PrintCommonDebugInfoLevel -> PCDILEVELALL
     };
 (* ============================================== *)
+(*
 FuncList =
     {
       StokesVectorR[1],
@@ -37,6 +40,32 @@ FuncList =
       {Rx, Ry},
       {Tx, Ty}
     };
+*)
+FuncList =
+    {
+      (*
+      PoyntingR[1],
+      PoyntingR[2],
+      PoyntingR[3],
+      PoyntingT[1],
+      PoyntingT[2],
+      PoyntingT[3],
+      *)
+      StokesVectorI[1],
+      StokesVectorI[2],
+      StokesVectorI[3],
+      StokesVectorI[4],
+      StokesVectorR[1],
+      StokesVectorR[2],
+      StokesVectorR[3],
+      StokesVectorR[4],
+      StokesVectorT[1],
+      StokesVectorT[2],
+      StokesVectorT[3],
+      StokesVectorT[4],
+      {Rx, Ry},
+      {Tx, Ty}
+    };
 (* ============================================== *)
 systemDescription = "Snell Law: Two semi-infinite isotropic media, NO film.";
 (* ============================================== *)
@@ -44,16 +73,16 @@ Print["Параметры падающего света..."];
 nUpper = 1;
 
 lambda = {600, 600, 1, "λ", nm};
-fita = {0, 85, 85, "ϕ", Degree};
-beta = {0, 0, 30, "β", Degree};
+fita = {11, 11, 85, "ϕ", Degree};
+beta = {-34, -34, 30, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
-ellipt = {-1, 1, 0.5, "e"};
+ellipt = {0.38, 0.38, 0.5, "e"};
 
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];
 (* ============================================== *)
 Print["Оптические параметры нижней среды..."];
-nLower = 1.5;
+nLower = 1.52;
 lowerMedia = CreateSemiInfiniteMediaFromN[nLower];
 (* ============================================== *)
 Print["Создаем оптическую систему..."];

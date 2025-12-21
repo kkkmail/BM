@@ -15,31 +15,17 @@ opts =
     {
       BDPlotFigures -> True,
       UseEulerAngles -> False,
-      NoOfAveragingPoints -> 3
+      NoOfAveragingPoints -> 5
     };
 (* ============================================== *)
-
 FuncList =
     {
-      EpsComponent[1, 1, 1, 1],
-      {EpsComponent[1, 1, 2, 2], EpsComponent[1, 1, 3, 3]},
-      StokesVectorR[1],
-      StokesVectorR[2],
-      StokesVectorR[3],
-      StokesVectorR[4],
-      RFull,
-      TFull,
-      StokesGammaR,
-      StokesGammaDegreeR,
-      StokesChiR,
-      StokesChiDegreeR,
-      StokesPolarizedR,
+      {Rx, Ry},
+      {Tx, Ty},
       XirDegree,
-      Elr,
       PsiPPDegree,
       DeltaPPDegree,
-      {Rx, Ry},
-      {Tx, Ty}
+      Elr
     };
 (* ============================================== *)
 systemDescription = "Uniaxial slightly absorbing thick substrate plate (La3Ga5SiO14) - dispersion calculations.";
@@ -48,7 +34,7 @@ Print["!!! For absorbing plate I > R + T !!!"];
 Print["Параметры падающего света..."];
 nUpper = 1;
 
-lambda = {200, 800, 100, "λ", nm};
+lambda = {250, 350, 100, "λ", nm};
 fita = {0, 0, 5, "ϕ", Degree};
 beta = {0, 90, 45, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
@@ -60,7 +46,7 @@ OutputIncidentRayInfo[incidentLight];
 (* ============================================== *)
 Print["Оптические параметры толстой пластинки: La3Ga5SiO14."];
 Print["Для расчетов для различных толщин пластинки нужно поменять значение thickness."];
-thickness = 1 mm;
+thickness = 0.1 mm;
 
 fiThickPlate = {0, 0, 30, Subscript["φ", "t"], Degree};
 thetaThickPlate = {0, 0, 30, Subscript["θ", "t"], Degree};

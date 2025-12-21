@@ -22,25 +22,12 @@ opts =
 (* ============================================== *)
 FuncList =
     {
-      EpsComponent[1, 1, 1, 1],
-      {EpsComponent[1, 1, 2, 2], EpsComponent[1, 1, 3, 3]},
-      StokesVectorR[1],
-      StokesVectorR[2],
-      StokesVectorR[3],
-      StokesVectorR[4],
-      RFull,
-      TFull,
-      StokesGammaR,
-      StokesGammaDegreeR,
-      StokesChiR,
-      StokesChiDegreeR,
-      StokesPolarizedR,
+      {Rx, Ry},
+      {Tx, Ty},
       XirDegree,
-      Elr,
       PsiPPDegree,
       DeltaPPDegree,
-      {Rx, Ry},
-      {Tx, Ty}
+      Elr
     };
 (* ============================================== *)
 systemDescription = "Uniaxial slightly absorbing thick substrate plate (La3Ga5SiO14) on Si substrate - dispersion calculations.";

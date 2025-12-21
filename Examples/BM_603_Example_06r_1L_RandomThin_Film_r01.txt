@@ -1,0 +1,267 @@
+In[49]:= (* ============================================== *)
+ClearAll["Global`*"];
+(* ============================================== *)
+BaseDir = "C:\\GitHub\\BM\\";
+PathList = {BaseDir <> "Kernel\\"};
+OutDir = BaseDir <> "Calc\\";
+(* ============================================== *)
+BaseFileName = "Example_06";
+(* ============================================== *)
+useParallelTbl = False;
+Get["BerremanInit.m", Path -> PathList];
+InitializeBM[PathList, useParallelTbl];
+(* ============================================== *)
+opts =
+    {
+      BDPlotFigures -> False,
+      UseEulerAngles -> False
+    };
+(* ============================================== *)
+FuncList =
+    {
+    (*
+    StokesVectorR[1],
+    StokesVectorR[2],
+    StokesVectorR[3],
+    StokesVectorR[4],
+    RFull,
+    TFull,
+    StokesGammaR,
+    StokesGammaDegreeR,
+    StokesChiR,
+    StokesChiDegreeR,
+    StokesPolarizedR,
+    XirDegree,
+    Elr,
+    PsiPPDegree,
+    DeltaPPDegree,
+    *)
+      {Rx, Ry},
+      {Tx, Ty}
+    };
+(* ============================================== *)
+systemDescription = "One Layer biaxial thin film between two semi-infinite media.";
+(* ============================================== *)
+Print["Параметры падающего света..."];
+seedLight = RandomInteger[10^12];
+Print["seedLight = ", seedLight];
+nUpper = 1;
+
+{lmb, ft, bt, el} = randomLightInfo[seedLight];
+lambda = {lmb, lmb, 1, "λ", nm};
+fita = {ft, ft, 85, "ϕ", Degree};
+beta = {bt, bt, 30, "β", Degree};
+ellipt = {el, el, 0.5, "e"};
+gamma = {0, 0, 30, "γ", Degree};
+
+incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
+OutputIncidentRayInfo[incidentLight];
+(* ============================================== *)
+Print["Оптические параметры первого тонкого слоя."];
+seedMedia = RandomInteger[10^12];
+Print["seedMedia = ", seedMedia];
+
+fiLayer1 = {0, 0, 30, Subscript["φ", "1"], Degree};
+thetaLayer1 = {0, 0, 30, Subscript["θ", "1"], Degree};
+psiLayer1 = {0, 0, 30, Subscript["ψ", "1"], Degree};
+rotationAnglesLayer1 = {fiLayer1, thetaLayer1, psiLayer1};
+thk = RandomInteger[{50, 250}];
+thicknessLayer1 = {thk, thk, 10, "h", nm};
+
+useIm = False;
+useMu = False;
+useRho = False;
+{epsLayer1, muLayer1, rhoLayer1} = randomMedia[seedMedia, useIm, useMu, useRho];
+
+Print["epsLayer1 = ", epsLayer1 // MatrixForm];
+Print["muLayer1 = ", muLayer1 // MatrixForm];
+Print["rhoLayer1 = ", rhoLayer1 // MatrixForm];
+
+layer1 = CreateFilm[thicknessLayer1, rotationAnglesLayer1, epsLayer1, muLayer1, rhoLayer1];
+(* ============================================== *)
+Print["Оптические параметры нижней среды..."];
+nLower = 1.52;
+lowerMedia = CreateSemiInfiniteMediaFromN[nLower];
+(* ============================================== *)
+Print["Создаем оптическую систему..."];
+layeredSystem = CreateLayeredSystem[incidentLight, gamma, layer1, lowerMedia];
+OutputLayeredSystem[layeredSystem];
+(* ============================================== *)
+Print["Производим вычисления для различных значений параметров...."];
+allCalc = PerformAllCalculations[layeredSystem, FuncList, systemDescription, opts];
+(* ============================================== *)
+
+During evaluation of In[49]:= Инициализация...
+During evaluation of In[49]:= Mathematica version is 11.1 Assigning RotationMatrix3D and BlockMatrix
+During evaluation of In[49]:= Loading modules ...
+During evaluation of In[49]:= Mathematica version is 11.1 Assigning OFULL via Join.
+During evaluation of In[49]:= Solve::ratnz: Solve was unable to solve the system with inexact coefficients. The answer was obtained by solving a corresponding exact system and numericizing the result.
+During evaluation of In[49]:= ... completed.
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= BM version: 6.03.001
+During evaluation of In[49]:= Release date: 2018/05/05
+During evaluation of In[49]:= Crystal Plate Reflection and Transmission. .
+During evaluation of In[49]:= BerremanInitVersion = 6.03
+BerremanCommonVersion = 6.03
+BerremanDirectVersion = 6.03
+BerremanInverseVersion = 6.03
+FieldAlgebraVersion = 6.03
+FieldIOVersion = 6.03
+FieldIOFormatVersion = 6.03
+During evaluation of In[49]:= Copyright: K^3, 2001 - 2018.
+During evaluation of In[49]:= Email: konstantin.k.konstantinov@gmail.com
+During evaluation of In[49]:= License type: GPL v3 or any later version, see http://www.gnu.org/licenses/
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/ .
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= Инициализация завершена.
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= Параметры падающего света...
+During evaluation of In[49]:= seedLight = 164822886262
+During evaluation of In[49]:= randomLightInfo::retVal{687, 53, 50, -0.802933683069591}
+During evaluation of In[49]:= Upper refractive index Subscript[n, u] = 1, parameters: (687	687	1	λ	1/1000000000
+53	53	85	ϕ	°
+50	50	30	β	°
+-0.802934	-0.802934	0.5	e	
+
+)
+During evaluation of In[49]:= ---------------------------------------------
+During evaluation of In[49]:= Оптические параметры первого тонкого слоя.
+During evaluation of In[49]:= seedMedia = 571358077662
+During evaluation of In[49]:= randomMedia::eps = 
+[
+    [ createComplex 3.2348312413417437 0.0; createComplex -0.13274761403308766 0.0; createComplex -0.46073345815011246 0.0 ]
+    [ createComplex -0.13274761403308766 0.0; createComplex 3.381257622001705 0.0; createComplex -0.6979528788314281 0.0 ]
+    [ createComplex -0.46073345815011235 0.0; createComplex -0.697952878831428 0.0; createComplex 4.5371548045970345 0.0 ]
+]
+
+During evaluation of In[49]:= randomMedia::mu = 
+[
+    [ createComplex 1.0 0.0; createComplex 0.0 0.0; createComplex 0.0 0.0 ]
+    [ createComplex 0.0 0.0; createComplex 1.0 0.0; createComplex 0.0 0.0 ]
+    [ createComplex 0.0 0.0; createComplex 0.0 0.0; createComplex 1.0 0.0 ]
+]
+
+During evaluation of In[49]:= randomMedia::rho = 
+[
+    [ createComplex 0.0 0.0; createComplex 0.0 0.0; createComplex 0.0 0.0 ]
+    [ createComplex 0.0 0.0; createComplex 0.0 0.0; createComplex 0.0 0.0 ]
+    [ createComplex 0.0 0.0; createComplex 0.0 0.0; createComplex 0.0 0.0 ]
+]
+
+During evaluation of In[49]:= randomMedia::retVal = {{{3.23483,-0.132748,-0.460733},{-0.132748,3.38126,-0.697953},{-0.460733,-0.697953,4.53715}},{{1,0,0},{0,1,0},{0,0,1}},{{0,0,0},{0,0,0},{0,0,0}}}
+During evaluation of In[49]:= epsLayer1 = (3.23483	-0.132748	-0.460733
+-0.132748	3.38126	-0.697953
+-0.460733	-0.697953	4.53715
+
+)
+During evaluation of In[49]:= muLayer1 = (1	0	0
+0	1	0
+0	0	1
+
+)
+During evaluation of In[49]:= rhoLayer1 = (0	0	0
+0	0	0
+0	0	0
+
+)
+During evaluation of In[49]:= Оптические параметры нижней среды...
+During evaluation of In[49]:= Создаем оптическую систему...
+During evaluation of In[49]:= ---
+During evaluation of In[49]:= Layered System = {LayeredSystem,{{1,1.52,{0,0,30,γ,°},{{0,{{3.23483,-0.132748,-0.460733},{-0.132748,3.38126,-0.697953},{-0.460733,-0.697953,4.53715}},{{1,0,0},{0,1,0},{0,0,1}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{3.23483,-0.132748,-0.460733},{-0.132748,3.38126,-0.697953},{-0.460733,-0.697953,4.53715}},{{1,0,0},{0,1,0},{0,0,1}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}}}},Layered System,1,0,{{{1,0,0},{0,1,0},{0,0,1}},{{1,0,0},{0,1,0},{0,0,1}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{2.3104,0,0},{0,2.3104,0},{0,0,2.3104}},{{1,0,0},{0,1,0},{0,0,1}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}}}},{{687,687,1,λ,1/1000000000},{53,53,85,ϕ,°},{50,50,30,β,°},{0,0,30,γ,°},{-0.802934,-0.802934,0.5,e},{0,0,1,Subscript[φ, 1],°},{0,0,1,Subscript[θ, 1],°},{0,0,1,Subscript[ψ, 1],°},{0,0,30,Subscript[φ, 1],°},{0,0,30,Subscript[θ, 1],°},{0,0,30,Subscript[ψ, 1],°},{227,227,10,h,1/1000000000}},{UseThickLastLayer->False}}}
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= Производим вычисления для различных значений параметров....
+During evaluation of In[49]:= Using Optiva angles for rotation: 
+Rotation 1: Fi (angle between crystal axis and deposition direction) - rotation around z; 
+Rotation 2: Psi (angle between crystal axis and substrate plane.) - rotation around y (in the opposite direction!!!); 
+Rotation 3: Alpha (rotation of crystal around its axis.) - rotation around x.
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= MMM retval = {{{0.,0.362181 +0. I,0.,0.},{1.,0.,0.,0.},{0.,0.,0.,1.},{0.,0.,0.362181 +0. I,0.}},{Ez0[z]->-0.798636 Hy0[z],Hz0[z]->0.798636 Ey0[z]}}
+During evaluation of In[49]:= MMM retval = {{{0. +0. I,0.723936 +0. I,0. +0. I,0. +0. I},{2.3104 +0. I,0. +0. I,0. +0. I,0. +0. I},{0. +0. I,0. +0. I,0. +0. I,1. +0. I},{0. +0. I,0. +0. I,1.67258 +0. I,0. +0. I}},{Ez0[z]->(-4.73249*10^-8+0. I) ((0. +0. I)+7.30418*10^6 Hy0[z]),Hz0[z]->0.798636 Ey0[z]}}
+During evaluation of In[49]:= MMM retval = {{{0.0810989 +0. I,0.859423 +0. I,0.122855 +0. I,0. +0. I},{3.18805 +0. I,0.0810989 +0. I,-0.203622+0. I,0. +0. I},{0. +0. I,0. +0. I,0. +0. I,1. +0. I},{-0.203622+0. I,0.122855 +0. I,2.63607 +0. I,0. +0. I}},{Ez0[z]->(-2.40987*10^-8+0. I) ((-4.21379*10^6+0. I) Ex0[z]-(6.38336*10^6+0. I) Ey0[z]+7.30418*10^6 Hy0[z]),Hz0[z]->0.798636 Ey0[z]}}
+During evaluation of In[49]:= PPP::retval = 
+[
+    [ createComplex -0.9274014609420038 -0.16759861804121412; createComplex 0.017170207434521613 -0.1456139561785692; createComplex -0.017403663019614386 -0.13060623757618983; createComplex 0.014075507609934673 0.06306021155774927 ]
+    [ createComplex 0.06324527789089204 -0.5351670353761716; createComplex -0.9274014609420037 -0.16759861804121412; createComplex 0.045205165589206765 0.21607199115505854; createComplex -0.0201958480970428 -0.13942823231310325 ]
+    [ createComplex -0.020195848097042807 -0.13942823231310336; createComplex 0.01407550760993468 0.06306021155774927; createComplex -0.9585857675082211 0.0015144028039448532; createComplex -0.009673150258669137 -0.12936024950038505 ]
+    [ createComplex 0.04520516558920681 0.21607199115505868; createComplex -0.0174036630196144 -0.13060623757618986; createComplex -0.03084636619918583 -0.3709728596674446; createComplex -0.9585857675082216 0.0015144028039448393 ]
+]
+, pDet = 1.
+During evaluation of In[49]:= PPPFull::retval = 
+[
+    [ createComplex -0.9274014609420038 -0.16759861804121412; createComplex 0.017170207434521613 -0.1456139561785692; createComplex -0.017403663019614386 -0.13060623757618983; createComplex 0.014075507609934673 0.06306021155774927 ]
+    [ createComplex 0.06324527789089204 -0.5351670353761716; createComplex -0.9274014609420037 -0.16759861804121412; createComplex 0.045205165589206765 0.21607199115505854; createComplex -0.0201958480970428 -0.13942823231310325 ]
+    [ createComplex -0.020195848097042807 -0.13942823231310336; createComplex 0.01407550760993468 0.06306021155774927; createComplex -0.9585857675082211 0.0015144028039448532; createComplex -0.009673150258669137 -0.12936024950038505 ]
+    [ createComplex 0.04520516558920681 0.21607199115505868; createComplex -0.0174036630196144 -0.13060623757618986; createComplex -0.03084636619918583 -0.3709728596674446; createComplex -0.9585857675082216 0.0015144028039448393 ]
+]
+, pDet = 1.
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= Printing Collection...
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= *** Multilayered Thin Film Output File Format Version 6.03 ***																																
+*** Modelling Engine Version 6.03 ***																																
+* Description *																																
+One Layer biaxial thin film between two semi-infinite media.																																
+																																
+*** Begin Options Block ***																																
+		Using Media Orientation Angles.																														
+		Solving for layered film between TWO SEMI-INFINITE isotropic media; nOut is IGNORED !!!																														
+		Rotating all layers simultaneously.																														
+		Using consecutive rotations.																														
+	AbsoluteAzimuth	Using Absolute Azimuth																														
+*** End Options Block ***																																
+																																
+*** Begin Optical Properties Block ***																																
+** Media **																																
+Refraction_Index																																
+	1		1.52		1																											
+** Begin Detailed Substrate Block **																																
+	Epsilon RE				Epsilon IM				Mu RE				Mu IM				Ro RE				Ro IM				RoT RE				RoT IM			
+	2.3104	0	0		0	0	0		1	0	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0	
+	0	2.3104	0		0	0	0		0	1	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0	
+	0	0	2.3104		0	0	0		0	0	1		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0	
+** End Detailed Substrate Block **																																
+Thickness																																
+Nothing to ouput so far...																																
+** Media End **																																
+																																
+** Film **																																
+n																																
+	1.79407	-0.0425118	-0.119669																													
+	-0.0425118	1.82969	-0.178034																													
+	-0.119669	-0.178034	2.11923																													
+																																
+k																																
+	0	0	0																													
+	0	0	0																													
+	0	0	0																													
+																																
+Epsilon_RE																																
+	3.23483	-0.132748	-0.460733																													
+	-0.132748	3.38126	-0.697953																													
+	-0.460733	-0.697953	4.53715																													
+																																
+Epsilon_IM																																
+	0	0	0																													
+	0	0	0																													
+	0	0	0																													
+** Film End **																																
+*** End Optical Properties Block ***																																
+																																
+*** Begin Output Block ***																																
+
+
+During evaluation of In[49]:= (Input	No	λ	ϕ	β	γ	e	Subscript[φ, 1]	Subscript[θ, 1]	Subscript[ψ, 1]	Subscript[φ, 1]	Subscript[θ, 1]	Subscript[ψ, 1]	h	Output	Subscript[R, p]	Subscript[R, s]	Subscript[T, p]	Subscript[T, s]
+	1.	687.	53.	50.	0.	-0.802934	0.	0.	0.	0.	0.	0.	227.		0.00268789	0.0753212	0.495888	0.426103
+
+)
+During evaluation of In[49]:= *** End Output Block ***
+
+
+
+During evaluation of In[49]:= Done.
+During evaluation of In[49]:= ==============================================
+During evaluation of In[49]:= Saving Collection...
+During evaluation of In[49]:= Done.
+During evaluation of In[49]:= Mon 3 Sep 2018 00:45:42, time used: 0.206, total time used: 0.
+---------------------------------------------

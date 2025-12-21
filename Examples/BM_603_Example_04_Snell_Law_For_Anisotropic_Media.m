@@ -13,27 +13,41 @@ InitializeBM[PathList, useParallelTbl];
 (* ============================================== *)
 opts =
     {
-      BDPlotFigures -> True,
+      BDPlotFigures -> False,
       UseEulerAngles -> False
     };
 (* ============================================== *)
 FuncList =
     {
+    (*
+    StokesVectorR[1],
+    StokesVectorR[2],
+    StokesVectorR[3],
+    StokesVectorR[4],
+    RFull,
+    TFull,
+    StokesGammaR,
+    StokesGammaDegreeR,
+    StokesChiR,
+    StokesChiDegreeR,
+    StokesPolarizedR,
+    XirDegree,
+    Elr,
+    PsiPPDegree,
+    DeltaPPDegree,
+    *)
+      StokesVectorI[1],
+      StokesVectorI[2],
+      StokesVectorI[3],
+      StokesVectorI[4],
       StokesVectorR[1],
       StokesVectorR[2],
       StokesVectorR[3],
       StokesVectorR[4],
-      RFull,
-      TFull,
-      StokesGammaR,
-      StokesGammaDegreeR,
-      StokesChiR,
-      StokesChiDegreeR,
-      StokesPolarizedR,
-      XirDegree,
-      Elr,
-      PsiPPDegree,
-      DeltaPPDegree,
+      StokesVectorT[1],
+      StokesVectorT[2],
+      StokesVectorT[3],
+      StokesVectorT[4],
       {Rx, Ry},
       {Tx, Ty}
     };
@@ -45,10 +59,10 @@ Print["Параметры падающего света..."];
 nUpper = 1;
 
 lambda = {600, 600, 1, "λ", nm};
-fita = {0, 85, 5, "ϕ", Degree};
-beta = {0, 90, 45, "β", Degree};
+fita = {5, 5, 85, "ϕ", Degree};
+beta = {15, 15, 30, "β", Degree};
 gamma = {0, 0, 30, "γ", Degree};
-ellipt = {0, 0, 0.5, "e"};
+ellipt = {0.1, 0.1, 0.5, "e"};
 
 incidentLight = CreateIncidentRay[nUpper, lambda, fita, beta, ellipt];
 OutputIncidentRayInfo[incidentLight];
